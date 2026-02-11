@@ -41,7 +41,6 @@ function hexToRgba(hex, alpha = 1) {
     const PRIMARY_LIGHT = cssVar("--clr-primary-light") || "#123d6d"
     const SECONDARY = cssVar("--clr-secondary") || "#1e56a0"
     const GRADIENT_PRIMARY = `linear-gradient(135deg, ${PRIMARY} 0%, ${PRIMARY_LIGHT} 50%, ${SECONDARY} 100%)`
-    const PRIMARY_95 = hexToRgba(PRIMARY, 0.95)
     const PRIMARY_GLOW = hexToRgba(PRIMARY, 0.3)
 
     /* ---------- Hero Slider ---------- */
@@ -61,24 +60,17 @@ function hexToRgba(hex, alpha = 1) {
     const nav = $(".nav")
     const toTopBtn = $("#toTop")
 
-    // İlk yüklemede nav'a lacivert degrade uygula
     if (nav) {
-      nav.style.background = GRADIENT_PRIMARY
+      nav.classList.toggle("is-scrolled", window.scrollY > 100)
     }
 
     if (progressBar || nav || toTopBtn) {
       window.addEventListener("scroll", () => {
         const y = window.scrollY
 
-        // Navbar scroll effect (lacivert tonlar)
+        // Navbar scroll effect
         if (nav) {
-          if (y > 100) {
-            nav.style.background = PRIMARY_95
-            nav.style.backdropFilter = "blur(20px)"
-          } else {
-            nav.style.background = GRADIENT_PRIMARY
-            nav.style.backdropFilter = "none"
-          }
+          nav.classList.toggle("is-scrolled", y > 100)
         }
 
         // Progress bar
@@ -419,13 +411,26 @@ function hexToRgba(hex, alpha = 1) {
           spinLock = true
           card.classList.remove("is-rotating")
           void card.offsetWidth
+
+          const onSpinEnd = (event) => {
+            if (event.animationName !== "card-spin") return
+            card.classList.remove("is-rotating")
+            spinLock = false
+            card.removeEventListener("animationend", onSpinEnd)
+          }
+
+          card.addEventListener("animationend", onSpinEnd)
           card.classList.add("is-rotating")
           detailPanel?.classList.remove("active")
           projectsPanel?.classList.add("active")
+
+          // Bazı tarayıcı senaryolarında animationend gelmezse kilidi aç.
           setTimeout(() => {
+            if (!spinLock) return
             card.classList.remove("is-rotating")
             spinLock = false
-          }, 850)
+            card.removeEventListener("animationend", onSpinEnd)
+          }, 1200)
         })
 
         projectsPanel?.querySelectorAll(".hero-panel__item").forEach((btn) => {
@@ -461,6 +466,89 @@ function hexToRgba(hex, alpha = 1) {
     }
 
     bindHeroPanels()
+
+    /* ---------- Madde Sayfaları Filtreleme ---------- */
+    const bindProjectFilters = () => {
+      const filterBlocks = $$("[data-project-filter]")
+      if (!filterBlocks.length) return
+
+      const normalize = (value = "") => value.toLocaleLowerCase("tr")
+
+      filterBlocks.forEach((filterBlock) => {
+        const sectionRoot = filterBlock.closest(".section") || document
+        const cards = Array.from(sectionRoot.querySelectorAll(".project-card"))
+        const sections = Array.from(sectionRoot.querySelectorAll(".projects-section"))
+        if (!cards.length) return
+
+        const chipsHost = filterBlock.querySelector("[data-filter-chips]")
+        const searchInput = filterBlock.querySelector("[data-filter-search]")
+        const resetBtn = filterBlock.querySelector("[data-filter-reset]")
+
+        const groups = Array.from(
+          new Set(
+            cards
+              .map((card) => card.querySelector(".project-card__badge")?.textContent?.trim())
+              .filter(Boolean),
+          ),
+        )
+
+        let activeGroup = "Tümü"
+        const createChip = (label) => {
+          const chip = document.createElement("button")
+          chip.type = "button"
+          chip.className = "projects-filter__chip"
+          chip.textContent = label
+          chip.dataset.group = label
+          chip.addEventListener("click", () => {
+            activeGroup = label
+            chipsHost?.querySelectorAll(".projects-filter__chip").forEach((item) => {
+              item.classList.toggle("is-active", item.dataset.group === activeGroup)
+            })
+            applyFilter()
+          })
+          return chip
+        }
+
+        chipsHost?.appendChild(createChip("Tümü"))
+        groups.forEach((group) => chipsHost?.appendChild(createChip(group)))
+        chipsHost?.querySelector(".projects-filter__chip")?.classList.add("is-active")
+
+        const applyFilter = () => {
+          const query = normalize(searchInput?.value || "")
+
+          cards.forEach((card) => {
+            const group = card.querySelector(".project-card__badge")?.textContent?.trim() || ""
+            const title = card.querySelector("h3")?.textContent || ""
+            const desc = card.querySelector("p")?.textContent || ""
+            const haystack = normalize(`${group} ${title} ${desc}`)
+            const groupOk = activeGroup === "Tümü" || group === activeGroup
+            const textOk = !query || haystack.includes(query)
+            card.classList.toggle("is-hidden", !(groupOk && textOk))
+          })
+
+          sections.forEach((section) => {
+            const hasVisibleCard = Array.from(section.querySelectorAll(".project-card")).some(
+              (card) => !card.classList.contains("is-hidden"),
+            )
+            section.classList.toggle("is-hidden-section", !hasVisibleCard)
+          })
+        }
+
+        searchInput?.addEventListener("input", applyFilter)
+        resetBtn?.addEventListener("click", () => {
+          activeGroup = "Tümü"
+          if (searchInput) searchInput.value = ""
+          chipsHost?.querySelectorAll(".projects-filter__chip").forEach((item) => {
+            item.classList.toggle("is-active", item.dataset.group === activeGroup)
+          })
+          applyFilter()
+        })
+
+        applyFilter()
+      })
+    }
+
+    bindProjectFilters()
 
     /* ---------- Performance Optimizations ---------- */
     // Debounce scroll events
