@@ -1,82 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="SYCS Insaat">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a2e3f"/>
-      <stop offset="100%" stop-color="#4f7d67"/>
+      <stop offset="0%" stop-color="hsl(34 37% 20%)"/>
+      <stop offset="100%" stop-color="hsl(312 34% 40%)"/>
     </linearGradient>
     <linearGradient id="fog" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#95b9a8" stop-opacity="0.20"/>
+      <stop offset="0%" stop-color="hsl(274 20% 84%)" stop-opacity="0.22"/>
       <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#95b9a8" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="hsl(274 20% 84%)" stop-opacity="0.22"/>
     </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="70%">
+      <stop offset="65%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+    </radialGradient>
   </defs>
 
   <rect width="1600" height="900" fill="url(#bg)"/>
-  <circle cx="1195" cy="133" r="89" fill="#f5f0d6" opacity="0.33"/>
-  <path d="M0,375 C260,305 520,420 810,355 C1110,287 1340,413 1600,357 L1600,900 L0,900 Z" fill="#203f36" opacity="0.46"/>
-  <path d="M0,450 C230,384 520,508 790,438 C1030,378 1320,476 1600,444 L1600,900 L0,900 Z" fill="#2f5848" opacity="0.58"/>
-  <path d="M0,550 C270,490 560,614 850,542 C1120,480 1380,574 1600,552 L1600,900 L0,900 Z" fill="#3f6c57" opacity="0.72"/>
+  <circle cx="1093" cy="233" r="66" fill="#f4efd4" opacity="0.34"/>
 
-  <g opacity="0.9">
-    <polygon points='87,484 58,610 116,610' fill='#d7e8c8' opacity='0,51'/>
-    <rect x='82' y='585' width='9' height='25' fill='#594633' opacity='0.45'/>
-    <polygon points='199,509 173,622 225,622' fill='#d7e8c8' opacity='0,38'/>
-    <rect x='195' y='599' width='8' height='23' fill='#594633' opacity='0.45'/>
-    <polygon points='354,452 314,624 394,624' fill='#d7e8c8' opacity='0,49'/>
-    <rect x='348' y='590' width='12' height='34' fill='#594633' opacity='0.45'/>
-    <polygon points='502,451 468,602 536,602' fill='#d7e8c8' opacity='0,49'/>
-    <rect x='497' y='572' width='10' height='30' fill='#594633' opacity='0.45'/>
-    <polygon points='623,456 584,623 662,623' fill='#d7e8c8' opacity='0,45'/>
-    <rect x='617' y='590' width='12' height='33' fill='#594633' opacity='0.45'/>
-    <polygon points='785,518 761,623 809,623' fill='#d7e8c8' opacity='0,44'/>
-    <rect x='782' y='602' width='7' height='21' fill='#594633' opacity='0.45'/>
-    <polygon points='918,448 883,600 953,600' fill='#d7e8c8' opacity='0,39'/>
-    <rect x='913' y='570' width='10' height='30' fill='#594633' opacity='0.45'/>
-    <polygon points='1046,448 1011,601 1081,601' fill='#d7e8c8' opacity='0,48'/>
-    <rect x='1041' y='570' width='10' height='31' fill='#594633' opacity='0.45'/>
-    <polygon points='1183,493 1155,614 1211,614' fill='#d7e8c8' opacity='0,35'/>
-    <rect x='1179' y='590' width='8' height='24' fill='#594633' opacity='0.45'/>
-    <polygon points='1330,432 1290,609 1370,609' fill='#d7e8c8' opacity='0,35'/>
-    <rect x='1324' y='574' width='12' height='35' fill='#594633' opacity='0.45'/>
-    <polygon points='1473,502 1444,625 1502,625' fill='#d7e8c8' opacity='0,50'/>
-    <rect x='1468' y='600' width='9' height='25' fill='#594633' opacity='0.45'/>
+  <path d="M0 446 Q115 411 229 399 Q343 403 457 342 Q572 404 686 342 Q800 434 914 398 Q1029 424 1143 385 Q1257 406 1371 387 Q1486 393 1600 362 L1600 900 L0 900 Z" fill="hsl(329 28% 26%)" opacity="0.48"/>
+  <path d="M0 530 Q115 479 229 413 Q343 493 457 461 Q572 475 686 403 Q800 502 914 456 Q1029 466 1143 415 Q1257 452 1371 392 Q1486 502 1600 476 L1600 900 L0 900 Z" fill="hsl(316 26% 33%)" opacity="0.62"/>
+  <path d="M0 653 Q115 559 229 466 Q343 614 457 573 Q572 606 686 578 Q800 556 914 456 Q1029 609 1143 549 Q1257 615 1371 579 Q1486 588 1600 512 L1600 900 L0 900 Z" fill="hsl(304 24% 38%)" opacity="0.78"/>
+
+  <g>
+    <polygon points="123,515 105,659 141,659" fill="hsl(294 36% 33%)" opacity="0.69"/>
+    <rect x="121" y="633" width="4" height="33" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="272,470 239,625 305,625" fill="hsl(294 36% 33%)" opacity="0.79"/>
+    <rect x="268" y="597" width="8" height="36" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1095,494 1069,618 1121,618" fill="hsl(294 36% 33%)" opacity="0.79"/>
+    <rect x="1092" y="596" width="6" height="29" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="167,530 134,629 200,629" fill="hsl(294 36% 33%)" opacity="0.79"/>
+    <rect x="163" y="611" width="8" height="23" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="419,524 390,631 448,631" fill="hsl(294 36% 33%)" opacity="0.79"/>
+    <rect x="416" y="612" width="7" height="25" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="682,491 648,648 716,648" fill="hsl(304 38% 30%)" opacity="0.91"/>
+    <rect x="678" y="620" width="8" height="36" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1542,478 1511,603 1573,603" fill="hsl(294 36% 33%)" opacity="0.86"/>
+    <rect x="1538" y="580" width="7" height="29" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="631,511 604,653 658,653" fill="hsl(294 36% 33%)" opacity="0.78"/>
+    <rect x="628" y="627" width="6" height="33" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="593,502 562,632 624,632" fill="hsl(304 38% 30%)" opacity="0.91"/>
+    <rect x="589" y="609" width="7" height="30" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1307,511 1285,631 1329,631" fill="hsl(294 36% 33%)" opacity="0.72"/>
+    <rect x="1304" y="609" width="5" height="28" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="711,521 680,623 742,623" fill="hsl(294 36% 33%)" opacity="0.91"/>
+    <rect x="707" y="605" width="7" height="23" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1562,459 1544,610 1580,610" fill="hsl(304 38% 30%)" opacity="0.75"/>
+    <rect x="1560" y="583" width="4" height="35" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="228,500 203,627 253,627" fill="hsl(294 36% 33%)" opacity="0.92"/>
+    <rect x="225" y="604" width="6" height="29" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="707,527 673,654 741,654" fill="hsl(304 38% 30%)" opacity="0.75"/>
+    <rect x="703" y="631" width="8" height="29" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1494,482 1471,615 1517,615" fill="hsl(304 38% 30%)" opacity="0.84"/>
+    <rect x="1491" y="591" width="6" height="31" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="972,504 946,638 998,638" fill="hsl(294 36% 33%)" opacity="0.76"/>
+    <rect x="969" y="614" width="6" height="31" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1279,449 1253,603 1305,603" fill="hsl(294 36% 33%)" opacity="0.83"/>
+    <rect x="1276" y="575" width="6" height="35" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="934,484 912,614 956,614" fill="hsl(304 38% 30%)" opacity="0.92"/>
+    <rect x="931" y="591" width="5" height="30" fill="hsl(212 26% 24%)" opacity="0.72"/>
   </g>
 
   <rect y="646" width="1600" height="254" fill="url(#fog)"/>
 
   <g>
-    <polygon points='45,542 -12,770 102,770' fill='#284b34' opacity='0.86'/>
-    <rect x='36' y='715' width='18' height='55' fill='#594633' opacity='0.72'/>
-    <polygon points='157,541 101,766 213,766' fill='#315a3e' opacity='0.86'/>
-    <rect x='148' y='712' width='18' height='54' fill='#594633' opacity='0.72'/>
-    <polygon points='279,545 223,769 335,769' fill='#284b34' opacity='0.86'/>
-    <rect x='270' y='715' width='18' height='54' fill='#594633' opacity='0.72'/>
-    <polygon points='371,617 334,766 408,766' fill='#315a3e' opacity='0.86'/>
-    <rect x='365' y='730' width='12' height='36' fill='#594633' opacity='0.72'/>
-    <polygon points='497,617 458,773 536,773' fill='#284b34' opacity='0.86'/>
-    <rect x='491' y='736' width='12' height='37' fill='#594633' opacity='0.72'/>
-    <polygon points='603,530 546,758 660,758' fill='#315a3e' opacity='0.86'/>
-    <rect x='594' y='703' width='18' height='55' fill='#594633' opacity='0.72'/>
-    <polygon points='739,603 698,766 780,766' fill='#284b34' opacity='0.86'/>
-    <rect x='732' y='727' width='13' height='39' fill='#594633' opacity='0.72'/>
-    <polygon points='831,603 790,767 872,767' fill='#315a3e' opacity='0.86'/>
-    <rect x='824' y='728' width='13' height='39' fill='#594633' opacity='0.72'/>
-    <polygon points='973,595 930,767 1016,767' fill='#284b34' opacity='0.86'/>
-    <rect x='966' y='726' width='14' height='41' fill='#594633' opacity='0.72'/>
-    <polygon points='1088,569 1035,780 1141,780' fill='#315a3e' opacity='0.86'/>
-    <rect x='1080' y='729' width='17' height='51' fill='#594633' opacity='0.72'/>
-    <polygon points='1204,550 1154,752 1254,752' fill='#284b34' opacity='0.86'/>
-    <rect x='1196' y='704' width='16' height='48' fill='#594633' opacity='0.72'/>
-    <polygon points='1293,630 1256,777 1330,777' fill='#315a3e' opacity='0.86'/>
-    <rect x='1287' y='742' width='12' height='35' fill='#594633' opacity='0.72'/>
-    <polygon points='1411,534 1356,752 1466,752' fill='#284b34' opacity='0.86'/>
-    <rect x='1402' y='700' width='17' height='52' fill='#594633' opacity='0.72'/>
-    <polygon points='1537,623 1502,761 1572,761' fill='#315a3e' opacity='0.86'/>
-    <rect x='1532' y='728' width='11' height='33' fill='#594633' opacity='0.72'/>
+    <polygon points="483,653 451,791 515,791" fill="hsl(294 36% 33%)" opacity="0.90"/>
+    <rect x="479" y="766" width="8" height="32" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="179,670 136,807 222,807" fill="hsl(304 38% 30%)" opacity="0.85"/>
+    <rect x="174" y="782" width="10" height="32" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="936,679 898,814 974,814" fill="hsl(304 38% 30%)" opacity="0.87"/>
+    <rect x="931" y="790" width="9" height="31" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1157,591 1119,811 1195,811" fill="hsl(294 36% 33%)" opacity="0.88"/>
+    <rect x="1152" y="771" width="9" height="51" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="853,492 800,736 906,736" fill="hsl(294 36% 33%)" opacity="0.72"/>
+    <rect x="847" y="692" width="13" height="56" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1455,522 1420,759 1490,759" fill="hsl(304 38% 30%)" opacity="0.79"/>
+    <rect x="1451" y="716" width="8" height="55" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="948,498 916,731 980,731" fill="hsl(304 38% 30%)" opacity="0.74"/>
+    <rect x="944" y="689" width="8" height="54" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="692,635 647,772 737,772" fill="hsl(304 38% 30%)" opacity="0.69"/>
+    <rect x="687" y="747" width="11" height="32" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1165,626 1125,776 1205,776" fill="hsl(294 36% 33%)" opacity="0.70"/>
+    <rect x="1160" y="749" width="10" height="35" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="990,616 949,814 1031,814" fill="hsl(294 36% 33%)" opacity="0.72"/>
+    <rect x="985" y="778" width="10" height="46" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="633,604 594,774 672,774" fill="hsl(294 36% 33%)" opacity="0.75"/>
+    <rect x="628" y="743" width="9" height="39" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="453,626 404,819 502,819" fill="hsl(294 36% 33%)" opacity="0.89"/>
+    <rect x="447" y="784" width="12" height="44" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="168,580 116,756 220,756" fill="hsl(304 38% 30%)" opacity="0.87"/>
+    <rect x="162" y="724" width="12" height="40" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1120,550 1088,793 1152,793" fill="hsl(304 38% 30%)" opacity="0.70"/>
+    <rect x="1116" y="749" width="8" height="56" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1051,611 1003,754 1099,754" fill="hsl(304 38% 30%)" opacity="0.72"/>
+    <rect x="1045" y="728" width="12" height="33" fill="hsl(212 26% 24%)" opacity="0.72"/>
+    <polygon points="1441,598 1407,762 1475,762" fill="hsl(304 38% 30%)" opacity="0.78"/>
+    <rect x="1437" y="732" width="8" height="38" fill="hsl(212 26% 24%)" opacity="0.72"/>
   </g>
 
-  <rect x="70" y="680" width="1460" height="170" rx="20" fill="#0b1a1a" opacity="0.52"/>
-  <text x="120" y="730" fill="#d9e8c8" font-family="Poppins, Arial, sans-serif" font-size="27" font-weight="700">RES</text>
-  <text x="120" y="792" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="60" font-weight="800">SYCS Insaat</text>
-  <text x="120" y="835" fill="#c3d4b9" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">Lacivert Ormancilik • Ormancilik Proje Gorseli</text>
+  <rect x="64" y="676" width="1472" height="184" rx="22" fill="#081517" opacity="0.54"/>
+  <text x="118" y="726" fill="#d9e8c8" font-family="Poppins, Arial, sans-serif" font-size="28" font-weight="700">RES</text>
+  <text x="118" y="792" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="66.0" font-weight="800">SYCS Insaat</text>
+  
+
+  <rect width="1600" height="900" fill="url(#vignette)"/>
 </svg>

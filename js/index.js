@@ -407,6 +407,7 @@ function hexToRgba(hex, alpha = 1) {
         const detailTitle = card.querySelector(".hero-detail__title")
         const detailText = card.querySelector(".hero-detail__text")
         const showProjectsBtn = card.querySelector(".js-show-projects")
+        let spinLock = false
 
         const closeAllPanels = () => {
           projectsPanel?.classList.remove("active")
@@ -414,12 +415,17 @@ function hexToRgba(hex, alpha = 1) {
         }
 
         showProjectsBtn?.addEventListener("click", () => {
+          if (spinLock) return
+          spinLock = true
           card.classList.remove("is-rotating")
           void card.offsetWidth
           card.classList.add("is-rotating")
-          setTimeout(() => card.classList.remove("is-rotating"), 900)
           detailPanel?.classList.remove("active")
           projectsPanel?.classList.add("active")
+          setTimeout(() => {
+            card.classList.remove("is-rotating")
+            spinLock = false
+          }, 850)
         })
 
         projectsPanel?.querySelectorAll(".hero-panel__item").forEach((btn) => {

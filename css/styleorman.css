@@ -574,18 +574,19 @@ body {
 .hero-btn--ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
 /* Panel görselleri */
-.hero-card--16   { background-image: url('img/batikaradeniz3.jpg'); }
-.hero-card--17   { background-image: url('img/surdurulebilir-orman.jpg'); }
-.hero-card--other{ background-image: url('img/background.jpg'); }
+.hero-card--16   { background-image: url('../img/panel-16-front.jpg'); }
+.hero-card--17   { background-image: url('../img/panel-17-front.jpg'); }
+.hero-card--other{ background-image: url('../img/panel-other-front.jpg'); }
 
 .hero-card.is-rotating {
-  animation: card-spin 0.9s cubic-bezier(.22,.61,.36,1);
+  animation: card-spin 0.82s cubic-bezier(.22,.61,.36,1) 1 both;
+  transition: none;
 }
 
 @keyframes card-spin {
   0%   { transform: rotateY(0deg) scale(1); }
-  45%  { transform: rotateY(170deg) scale(0.96); }
-  100% { transform: rotateY(360deg) scale(1); }
+  48%  { transform: rotateY(104deg) scale(0.95); }
+  100% { transform: rotateY(0deg) scale(1); }
 }
 
 @keyframes bounce {
@@ -1593,6 +1594,23 @@ body {
 .project-card__actions {
   margin-top: auto;
   padding-top: 0.4rem;
+}
+
+.project-card__actions .hero-btn,
+.project-card__actions .hero-btn--ghost {
+  width: 100%;
+  border-color: rgba(10, 31, 68, 0.16);
+  color: var(--clr-primary);
+  background: linear-gradient(135deg, #eef4ff 0%, #ddeaff 100%);
+  box-shadow: 0 8px 20px rgba(10, 31, 68, 0.1);
+  font-weight: 700;
+}
+
+.project-card__actions .hero-btn:hover,
+.project-card__actions .hero-btn--ghost:hover {
+  background: linear-gradient(135deg, #e1edff 0%, #cfe1ff 100%);
+  color: #07204a;
+  transform: translateY(-2px);
 }
 
 /* PROJECT DETAIL PAGE */
