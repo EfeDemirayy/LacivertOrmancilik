@@ -3,29 +3,417 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Madde 16 | Lacivert Ormanc�l�k</title>
+  <title>Madde 16 | Lacivert Ormancılık</title>
+  <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/styleorman.css">
 </head>
-<body class="page">
-  <header class="page-hero" style="background-image:url('img/batikaradeniz3.jpg')">
-    <div class="page-hero__overlay"></div>
-    <div class="page-hero__content">
-      <span class="page-hero__badge">Madde 16</span>
-      <h1>Orman �zinleri</h1>
-      <p>Orman yolu, enerji hatt�, boru hatt� izinleri ve saha kontrolleri i�in dan��manl�k.</p>
-      <a class="hero-btn" href="index.html">Ana sayfa</a>
+<body>
+  <div class="topbar">
+    <div class="topbar__left">
+      <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
+        <i class="fa-solid fa-envelope"></i>
+        <span>omer@lacivert.cc</span>
+      </a>
+      <span class="topbar__divider"></span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+    </div>
+    <div class="topbar__right">
+      <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://maps.app.goo.gl/guTKEB4KyjUwiEB77" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+    </div>
+  </div>
+
+  <div id="progress" class="progress"><div class="progress__bar"></div></div>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" style="height:50px;vertical-align:middle;">
+      </a>
+      <nav aria-label="Ana Menü">
+        <ul id="navLinks" class="nav__links">
+          <li class="nav__dropdown">
+            <a href="hakkimizda.html" class="nav__link">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+            </ul>
+          </li>
+          <li class="nav__dropdown">
+            <a href="ormanizinleri.html" class="nav__link">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
+              <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+              <li><a href="madde16.html">Madde 16</a></li>
+              <li><a href="madde17.html">Madde 17</a></li>
+              <li><a href="diger.html">Diğer</a></li>
+            </ul>
+          </li>
+          <li><a href="galeri.html" class="nav__link">Galeri</a></li>
+          <li><a href="haberler.html" class="nav__link">Blog & Haberler</a></li>
+          <li><a href="iletisim.html" class="nav__link">İletişim</a></li>
+        </ul>
+      </nav>
+      <button id="burger" class="nav__burger" aria-label="Mobil Menü">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
-  <main class="section">
-    <div class="container">
-      <h2>Detaylar</h2>
-      <p>Madde 16 kapsam�ndaki izin, irtifak ve kiralama s�re�leri i�in ba�vuru dosyalar�, ke�if �al��malar�, raporlama ve saha uygulamalar�.</p>
-      <ul>
-        <li>�n/kesin izin dosyalar�</li>
-        <li>G�zerg�h ve aplikasyon</li>
-        <li>Saha kontrol raporlar�</li>
-      </ul>
-    </div>
+
+  <main class="madde-main">
+    <section class="page-hero" style="background-image:url('img/batikaradeniz3.jpg'); background-size:cover; background-position:center;">
+      <div class="page-hero__overlay"></div>
+      <div class="container">
+        <div class="page-hero__content" data-fade>
+          <span class="page-hero__badge">Madde 16</span>
+          <h1 class="page-hero__title">Orman İzinleri</h1>
+          <p class="page-hero__subtitle">Kamu kurumları, su izinleri ve arazi geçiş süreçlerinde uçtan uca teknik yönetim.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="container">
+        <div class="madde-layout__switch" data-fade>
+<a class=" is-active" href="madde16.html"><i class="fa-solid fa-file-lines"></i> Madde 16</a>
+<a class="" href="madde17.html"><i class="fa-solid fa-industry"></i> Madde 17</a>
+<a class="" href="diger.html"><i class="fa-solid fa-briefcase"></i> Diğer</a>
+        </div>
+        <div class="madde-intro" data-fade>
+          <h2>Madde 16 Projeleri</h2>
+          <p>Kağıttaki referans listesine göre tüm proje kayıtları detay sayfalarıyla birlikte bu sayfaya entegre edildi.</p>
+        </div>
+      <section class="projects-section">
+        <div class="projects-section__head" data-fade>
+          <span class="projects-section__tag">Devlet</span>
+          <h2>Devlet</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/aygm-gulermak.html" aria-label="AYGM-GULERMAK proje detayı">
+              <img src="img/project-covers/aygm-gulermak.svg" alt="AYGM-GULERMAK proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>AYGM-GULERMAK</h3>
+              <p>AYGM-GULERMAK projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/aygm-gulermak.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kgm-1-bolge-mudurlugu.html" aria-label="KGM 1. BOLGE MUDURLUGU proje detayı">
+              <img src="img/project-covers/kgm-1-bolge-mudurlugu.svg" alt="KGM 1. BOLGE MUDURLUGU proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>KGM 1. BOLGE MUDURLUGU</h3>
+              <p>KGM 1. BOLGE MUDURLUGU projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kgm-1-bolge-mudurlugu.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kgm-2-bolge-mudurlugu-2m.html" aria-label="KGM 2. BOLGE MUDURLUGU (2M) proje detayı">
+              <img src="img/project-covers/kgm-2-bolge-mudurlugu-2m.svg" alt="KGM 2. BOLGE MUDURLUGU (2M) proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>KGM 2. BOLGE MUDURLUGU (2M)</h3>
+              <p>KGM 2. BOLGE MUDURLUGU (2M) projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kgm-2-bolge-mudurlugu-2m.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kgm-atis.html" aria-label="KGM ATIS proje detayı">
+              <img src="img/project-covers/kgm-atis.svg" alt="KGM ATIS proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>KGM ATIS</h3>
+              <p>KGM ATIS projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kgm-atis.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/dsi.html" aria-label="DSI proje detayı">
+              <img src="img/project-covers/dsi.svg" alt="DSI proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>DSI</h3>
+              <p>DSI projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/dsi.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ibb-istac.html" aria-label="IBB (ISTAC) proje detayı">
+              <img src="img/project-covers/ibb-istac.svg" alt="IBB (ISTAC) proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>IBB (ISTAC)</h3>
+              <p>IBB (ISTAC) projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ibb-istac.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/egm.html" aria-label="EGM proje detayı">
+              <img src="img/project-covers/egm.svg" alt="EGM proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>EGM</h3>
+              <p>EGM projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/egm.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/teias.html" aria-label="TEIAS proje detayı">
+              <img src="img/project-covers/teias.svg" alt="TEIAS proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>TEIAS</h3>
+              <p>TEIAS projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/teias.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/derince-belediye-baskanligi.html" aria-label="Derince Belediye Baskanligi proje detayı">
+              <img src="img/project-covers/derince-belediye-baskanligi.svg" alt="Derince Belediye Baskanligi proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>Derince Belediye Baskanligi</h3>
+              <p>Derince Belediye Baskanligi projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/derince-belediye-baskanligi.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/igdas.html" aria-label="IGDAS proje detayı">
+              <img src="img/project-covers/igdas.svg" alt="IGDAS proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>IGDAS</h3>
+              <p>IGDAS projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/igdas.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kbb.html" aria-label="KBB proje detayı">
+              <img src="img/project-covers/kbb.svg" alt="KBB proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>KBB</h3>
+              <p>KBB projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kbb.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/iski.html" aria-label="ISKI proje detayı">
+              <img src="img/project-covers/iski.svg" alt="ISKI proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>ISKI</h3>
+              <p>ISKI projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/iski.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/istanbul-emniyet-mudurlugu.html" aria-label="Istanbul Emniyet Mudurlugu proje detayı">
+              <img src="img/project-covers/istanbul-emniyet-mudurlugu.svg" alt="Istanbul Emniyet Mudurlugu proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>Istanbul Emniyet Mudurlugu</h3>
+              <p>Istanbul Emniyet Mudurlugu projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/istanbul-emniyet-mudurlugu.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/tedas.html" aria-label="TEDAS proje detayı">
+              <img src="img/project-covers/tedas.svg" alt="TEDAS proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>TEDAS</h3>
+              <p>TEDAS projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/tedas.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/sariyer-belediyesi.html" aria-label="Sariyer Belediyesi proje detayı">
+              <img src="img/project-covers/sariyer-belediyesi.svg" alt="Sariyer Belediyesi proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Devlet</span>
+              <h3>Sariyer Belediyesi</h3>
+              <p>Sariyer Belediyesi projesinde kamu kurumlari ile izin, aplikasyon ve teknik dosya sureci es zamanli yonetildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/sariyer-belediyesi.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="projects-section">
+        <div class="projects-section__head" data-fade>
+          <span class="projects-section__tag">Su Izinleri</span>
+          <h2>Su Izinleri</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/camlibel.html" aria-label="Camlibel proje detayı">
+              <img src="img/project-covers/camlibel.svg" alt="Camlibel proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Camlibel</h3>
+              <p>Camlibel kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/camlibel.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kar-kaynak.html" aria-label="Kar Kaynak proje detayı">
+              <img src="img/project-covers/kar-kaynak.svg" alt="Kar Kaynak proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Kar Kaynak</h3>
+              <p>Kar Kaynak kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kar-kaynak.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/deniz-kaynak.html" aria-label="Deniz Kaynak proje detayı">
+              <img src="img/project-covers/deniz-kaynak.svg" alt="Deniz Kaynak proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Deniz Kaynak</h3>
+              <p>Deniz Kaynak kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/deniz-kaynak.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kizilay-kaynak-sulari.html" aria-label="Kizilay Kaynak Sulari proje detayı">
+              <img src="img/project-covers/kizilay-kaynak-sulari.svg" alt="Kizilay Kaynak Sulari proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Kizilay Kaynak Sulari</h3>
+              <p>Kizilay Kaynak Sulari kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kizilay-kaynak-sulari.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/devin-su.html" aria-label="Devin Su proje detayı">
+              <img src="img/project-covers/devin-su.svg" alt="Devin Su proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Devin Su</h3>
+              <p>Devin Su kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/devin-su.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kaya-turistik-tesisleri-titreyengol-otelcilik-a-s.html" aria-label="Kaya Turistik Tesisleri Titreyengol Otelcilik A.S. proje detayı">
+              <img src="img/project-covers/kaya-turistik-tesisleri-titreyengol-otelcilik-a-s.svg" alt="Kaya Turistik Tesisleri Titreyengol Otelcilik A.S. proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Su Izinleri</span>
+              <h3>Kaya Turistik Tesisleri Titreyengol Otelcilik A.S.</h3>
+              <p>Kaya Turistik Tesisleri Titreyengol Otelcilik A.S. kapsaminda su kaynagi kullanim kriterleri, koruma mesafeleri ve izin eki teknik raporlari hazirlandi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kaya-turistik-tesisleri-titreyengol-otelcilik-a-s.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="footer__background"></div>
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
+        <div class="footer__info">
+          <strong>Lacivert Ormancılık</strong><br>
+          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
+          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
+          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
+        </div>
+      </div>
+      <div class="footer__nav">
+        <h4>Navigasyon</h4>
+        <ul>
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+      <div class="footer__services">
+        <h4>Proje Sayfaları</h4>
+        <ul>
+          <li><a href="madde16.html">Madde 16</a></li>
+          <li><a href="madde17.html">Madde 17</a></li>
+          <li><a href="diger.html">Diğer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">&copy; 2026 • Lacivert Ormancılık • Tüm Hakları Saklıdır.</div>
+    <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
+  </footer>
+
+  <script src="js/index.js" defer></script>
 </body>
 </html>

@@ -406,13 +406,30 @@ function hexToRgba(hex, alpha = 1) {
         const detailPanel = card.querySelector(".hero-detail")
         const detailTitle = card.querySelector(".hero-detail__title")
         const detailText = card.querySelector(".hero-detail__text")
+        const showProjectsBtn = card.querySelector(".js-show-projects")
 
-        card.querySelector(".js-show-projects")?.addEventListener("click", () => {
+        const closeAllPanels = () => {
+          projectsPanel?.classList.remove("active")
+          detailPanel?.classList.remove("active")
+        }
+
+        showProjectsBtn?.addEventListener("click", () => {
+          card.classList.remove("is-rotating")
+          void card.offsetWidth
+          card.classList.add("is-rotating")
+          setTimeout(() => card.classList.remove("is-rotating"), 900)
+          detailPanel?.classList.remove("active")
           projectsPanel?.classList.add("active")
         })
 
         projectsPanel?.querySelectorAll(".hero-panel__item").forEach((btn) => {
           btn.addEventListener("click", () => {
+            const targetUrl = btn.dataset.url
+            if (targetUrl) {
+              window.location.href = targetUrl
+              return
+            }
+
             const title = btn.dataset.title || "Detay"
             const text = btn.dataset.text || ""
             if (detailTitle) detailTitle.textContent = title
@@ -423,12 +440,16 @@ function hexToRgba(hex, alpha = 1) {
         })
 
         projectsPanel?.querySelector(".js-close-panel")?.addEventListener("click", () => {
-          projectsPanel.classList.remove("active")
+          closeAllPanels()
         })
 
         detailPanel?.querySelector(".js-back-projects")?.addEventListener("click", () => {
           detailPanel.classList.remove("active")
           projectsPanel?.classList.add("active")
+        })
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeAllPanels()
         })
       })
     }

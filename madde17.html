@@ -3,29 +3,612 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Madde 17 | Lacivert Ormanc�l�k</title>
+  <title>Madde 17 | Lacivert Ormancılık</title>
+  <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/styleorman.css">
 </head>
-<body class="page">
-  <header class="page-hero" style="background-image:url('img/surdurulebilir-orman.jpg')">
-    <div class="page-hero__overlay"></div>
-    <div class="page-hero__content">
-      <span class="page-hero__badge">Madde 17</span>
-      <h1>Madencilik & Altyap�</h1>
-      <p>Maden izinleri, altyap� hatlar� ve denetim raporlamas�nda kurumsal kontrol.</p>
-      <a class="hero-btn" href="index.html">Ana sayfa</a>
+<body>
+  <div class="topbar">
+    <div class="topbar__left">
+      <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
+        <i class="fa-solid fa-envelope"></i>
+        <span>omer@lacivert.cc</span>
+      </a>
+      <span class="topbar__divider"></span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+    </div>
+    <div class="topbar__right">
+      <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://maps.app.goo.gl/guTKEB4KyjUwiEB77" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+    </div>
+  </div>
+
+  <div id="progress" class="progress"><div class="progress__bar"></div></div>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" style="height:50px;vertical-align:middle;">
+      </a>
+      <nav aria-label="Ana Menü">
+        <ul id="navLinks" class="nav__links">
+          <li class="nav__dropdown">
+            <a href="hakkimizda.html" class="nav__link">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="hakkimizda.html">Hakkımızda</a></li>
+              <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+            </ul>
+          </li>
+          <li class="nav__dropdown">
+            <a href="ormanizinleri.html" class="nav__link">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
+              <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+              <li><a href="madde16.html">Madde 16</a></li>
+              <li><a href="madde17.html">Madde 17</a></li>
+              <li><a href="diger.html">Diğer</a></li>
+            </ul>
+          </li>
+          <li><a href="galeri.html" class="nav__link">Galeri</a></li>
+          <li><a href="haberler.html" class="nav__link">Blog & Haberler</a></li>
+          <li><a href="iletisim.html" class="nav__link">İletişim</a></li>
+        </ul>
+      </nav>
+      <button id="burger" class="nav__burger" aria-label="Mobil Menü">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
-  <main class="section">
-    <div class="container">
-      <h2>Detaylar</h2>
-      <p>Madde 17 kapsam�nda altyap� hatlar�, madencilik ve sanayi yat�r�mlar� i�in izin, denetim ve raporlama s�re�leri.</p>
-      <ul>
-        <li>17/3 ba�vuru dosyalar�</li>
-        <li>Denetim & raporlama</li>
-        <li>Rehabilitasyon ve s�re uzat�m dosyalar�</li>
-      </ul>
-    </div>
+
+  <main class="madde-main">
+    <section class="page-hero" style="background-image:url('img/surdurulebilir-orman.jpg'); background-size:cover; background-position:center;">
+      <div class="page-hero__overlay"></div>
+      <div class="container">
+        <div class="page-hero__content" data-fade>
+          <span class="page-hero__badge">Madde 17</span>
+          <h1 class="page-hero__title">Madencilik ve Altyapı</h1>
+          <p class="page-hero__subtitle">RES ve maden izinlerinde başvuru, denetim ve revizyon süreçlerinde güçlü koordinasyon.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--compact">
+      <div class="container">
+        <div class="madde-layout__switch" data-fade>
+<a class="" href="madde16.html"><i class="fa-solid fa-file-lines"></i> Madde 16</a>
+<a class=" is-active" href="madde17.html"><i class="fa-solid fa-industry"></i> Madde 17</a>
+<a class="" href="diger.html"><i class="fa-solid fa-briefcase"></i> Diğer</a>
+        </div>
+        <div class="madde-intro" data-fade>
+          <h2>Madde 17 Projeleri</h2>
+          <p>Kağıttaki referans listesine göre tüm proje kayıtları detay sayfalarıyla birlikte bu sayfaya entegre edildi.</p>
+        </div>
+      <section class="projects-section">
+        <div class="projects-section__head" data-fade>
+          <span class="projects-section__tag">RES</span>
+          <h2>RES</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/aksantas-agrega-mad-ve-ins-san-tic-ltd-sti.html" aria-label="Aksantas Agrega Mad. ve Ins. San. Tic. Ltd. Sti. proje detayı">
+              <img src="img/project-covers/aksantas-agrega-mad-ve-ins-san-tic-ltd-sti.svg" alt="Aksantas Agrega Mad. ve Ins. San. Tic. Ltd. Sti. proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Aksantas Agrega Mad. ve Ins. San. Tic. Ltd. Sti.</h3>
+              <p>Aksantas Agrega Mad. ve Ins. San. Tic. Ltd. Sti. icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/aksantas-agrega-mad-ve-ins-san-tic-ltd-sti.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/sanko-enerji.html" aria-label="Sanko Enerji proje detayı">
+              <img src="img/project-covers/sanko-enerji.svg" alt="Sanko Enerji proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Sanko Enerji</h3>
+              <p>Sanko Enerji icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/sanko-enerji.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/traktek-enerji.html" aria-label="Traktek Enerji proje detayı">
+              <img src="img/project-covers/traktek-enerji.svg" alt="Traktek Enerji proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Traktek Enerji</h3>
+              <p>Traktek Enerji icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/traktek-enerji.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/milak-enerji.html" aria-label="Milak Enerji proje detayı">
+              <img src="img/project-covers/milak-enerji.svg" alt="Milak Enerji proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Milak Enerji</h3>
+              <p>Milak Enerji icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/milak-enerji.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/maksima-elektrik.html" aria-label="Maksima Elektrik proje detayı">
+              <img src="img/project-covers/maksima-elektrik.svg" alt="Maksima Elektrik proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Maksima Elektrik</h3>
+              <p>Maksima Elektrik icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/maksima-elektrik.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/demir-res.html" aria-label="Demir RES proje detayı">
+              <img src="img/project-covers/demir-res.svg" alt="Demir RES proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>Demir RES</h3>
+              <p>Demir RES icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/demir-res.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/sycs-insaat.html" aria-label="SYCS Insaat proje detayı">
+              <img src="img/project-covers/sycs-insaat.svg" alt="SYCS Insaat proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">RES</span>
+              <h3>SYCS Insaat</h3>
+              <p>SYCS Insaat icin orman gecisli enerji guzergahi, servis yolu ve teknik izin evraklari uctan uca koordine edildi.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/sycs-insaat.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section class="projects-section">
+        <div class="projects-section__head" data-fade>
+          <span class="projects-section__tag">Maden Izinleri</span>
+          <h2>Maden Izinleri</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ento-maden-global.html" aria-label="Ento Maden Global proje detayı">
+              <img src="img/project-covers/ento-maden-global.svg" alt="Ento Maden Global proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ento Maden Global</h3>
+              <p>Ento Maden Global isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ento-maden-global.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ento-madencilik.html" aria-label="Ento Madencilik proje detayı">
+              <img src="img/project-covers/ento-madencilik.svg" alt="Ento Madencilik proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ento Madencilik</h3>
+              <p>Ento Madencilik isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ento-madencilik.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ugur-kartal.html" aria-label="Ugur Kartal proje detayı">
+              <img src="img/project-covers/ugur-kartal.svg" alt="Ugur Kartal proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ugur Kartal</h3>
+              <p>Ugur Kartal isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ugur-kartal.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/karakaya-maden.html" aria-label="Karakaya Maden proje detayı">
+              <img src="img/project-covers/karakaya-maden.svg" alt="Karakaya Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Karakaya Maden</h3>
+              <p>Karakaya Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/karakaya-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kartal-maden.html" aria-label="Kartal Maden proje detayı">
+              <img src="img/project-covers/kartal-maden.svg" alt="Kartal Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Kartal Maden</h3>
+              <p>Kartal Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kartal-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/sengel-madencilik.html" aria-label="Sengel Madencilik proje detayı">
+              <img src="img/project-covers/sengel-madencilik.svg" alt="Sengel Madencilik proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Sengel Madencilik</h3>
+              <p>Sengel Madencilik isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/sengel-madencilik.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/danis-micir.html" aria-label="Danis Micir proje detayı">
+              <img src="img/project-covers/danis-micir.svg" alt="Danis Micir proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Danis Micir</h3>
+              <p>Danis Micir isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/danis-micir.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/bys-maden.html" aria-label="BYS Maden proje detayı">
+              <img src="img/project-covers/bys-maden.svg" alt="BYS Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>BYS Maden</h3>
+              <p>BYS Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/bys-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ustun-gayrimenkul.html" aria-label="Ustun Gayrimenkul proje detayı">
+              <img src="img/project-covers/ustun-gayrimenkul.svg" alt="Ustun Gayrimenkul proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ustun Gayrimenkul</h3>
+              <p>Ustun Gayrimenkul isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ustun-gayrimenkul.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/cavuslu-linyitleri.html" aria-label="Cavuslu Linyitleri proje detayı">
+              <img src="img/project-covers/cavuslu-linyitleri.svg" alt="Cavuslu Linyitleri proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Cavuslu Linyitleri</h3>
+              <p>Cavuslu Linyitleri isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/cavuslu-linyitleri.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/matas.html" aria-label="Matas proje detayı">
+              <img src="img/project-covers/matas.svg" alt="Matas proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Matas</h3>
+              <p>Matas isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/matas.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/mako.html" aria-label="Mako proje detayı">
+              <img src="img/project-covers/mako.svg" alt="Mako proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Mako</h3>
+              <p>Mako isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/mako.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/arda-madencilik.html" aria-label="Arda Madencilik proje detayı">
+              <img src="img/project-covers/arda-madencilik.svg" alt="Arda Madencilik proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Arda Madencilik</h3>
+              <p>Arda Madencilik isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/arda-madencilik.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/karanfil-maden.html" aria-label="Karanfil Maden proje detayı">
+              <img src="img/project-covers/karanfil-maden.svg" alt="Karanfil Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Karanfil Maden</h3>
+              <p>Karanfil Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/karanfil-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/karaborcek-maden.html" aria-label="Karaborcek Maden proje detayı">
+              <img src="img/project-covers/karaborcek-maden.svg" alt="Karaborcek Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Karaborcek Maden</h3>
+              <p>Karaborcek Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/karaborcek-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/kartal-grup.html" aria-label="Kartal Grup proje detayı">
+              <img src="img/project-covers/kartal-grup.svg" alt="Kartal Grup proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Kartal Grup</h3>
+              <p>Kartal Grup isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/kartal-grup.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/traktas.html" aria-label="Traktas proje detayı">
+              <img src="img/project-covers/traktas.svg" alt="Traktas proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Traktas</h3>
+              <p>Traktas isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/traktas.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/oztas.html" aria-label="Oztas proje detayı">
+              <img src="img/project-covers/oztas.svg" alt="Oztas proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Oztas</h3>
+              <p>Oztas isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/oztas.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ilkdal.html" aria-label="Ilkdal proje detayı">
+              <img src="img/project-covers/ilkdal.svg" alt="Ilkdal proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ilkdal</h3>
+              <p>Ilkdal isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ilkdal.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/tracim.html" aria-label="Tracim proje detayı">
+              <img src="img/project-covers/tracim.svg" alt="Tracim proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Tracim</h3>
+              <p>Tracim isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/tracim.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/alp-anadolu.html" aria-label="Alp Anadolu proje detayı">
+              <img src="img/project-covers/alp-anadolu.svg" alt="Alp Anadolu proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Alp Anadolu</h3>
+              <p>Alp Anadolu isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/alp-anadolu.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/aksa-maden.html" aria-label="Aksa Maden proje detayı">
+              <img src="img/project-covers/aksa-maden.svg" alt="Aksa Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Aksa Maden</h3>
+              <p>Aksa Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/aksa-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ekol-maden.html" aria-label="Ekol Maden proje detayı">
+              <img src="img/project-covers/ekol-maden.svg" alt="Ekol Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ekol Maden</h3>
+              <p>Ekol Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ekol-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/yunus-gida.html" aria-label="Yunus Gida proje detayı">
+              <img src="img/project-covers/yunus-gida.svg" alt="Yunus Gida proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Yunus Gida</h3>
+              <p>Yunus Gida isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/yunus-gida.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/varol-beton.html" aria-label="Varol Beton proje detayı">
+              <img src="img/project-covers/varol-beton.svg" alt="Varol Beton proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Varol Beton</h3>
+              <p>Varol Beton isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/varol-beton.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/ali-karaca.html" aria-label="Ali Karaca proje detayı">
+              <img src="img/project-covers/ali-karaca.svg" alt="Ali Karaca proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Ali Karaca</h3>
+              <p>Ali Karaca isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/ali-karaca.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/tastan-maden.html" aria-label="Tastan Maden proje detayı">
+              <img src="img/project-covers/tastan-maden.svg" alt="Tastan Maden proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Tastan Maden</h3>
+              <p>Tastan Maden isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/tastan-maden.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/madkim.html" aria-label="Madkim proje detayı">
+              <img src="img/project-covers/madkim.svg" alt="Madkim proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Madkim</h3>
+              <p>Madkim isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/madkim.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+          <article class="project-card" data-fade>
+            <a class="project-card__image" href="projeler/burhanettin-sogancilar.html" aria-label="Burhanettin Sogancilar proje detayı">
+              <img src="img/project-covers/burhanettin-sogancilar.svg" alt="Burhanettin Sogancilar proje görseli" loading="lazy">
+            </a>
+            <div class="project-card__content">
+              <span class="project-card__badge">Maden Izinleri</span>
+              <h3>Burhanettin Sogancilar</h3>
+              <p>Burhanettin Sogancilar isinde maden saha plani, 17. madde surecleri ve rehabilitasyon odakli teknik kontrol adimlari yurutuldu.</p>
+              <div class="project-card__actions">
+                <a class="hero-btn hero-btn--ghost" href="projeler/burhanettin-sogancilar.html">Detay sayfa</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      </div>
+    </section>
   </main>
+
+  <footer class="footer">
+    <div class="footer__background"></div>
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
+        <div class="footer__info">
+          <strong>Lacivert Ormancılık</strong><br>
+          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
+          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
+          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
+        </div>
+      </div>
+      <div class="footer__nav">
+        <h4>Navigasyon</h4>
+        <ul>
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="hakkimizda.html">Hakkımızda</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+      <div class="footer__services">
+        <h4>Proje Sayfaları</h4>
+        <ul>
+          <li><a href="madde16.html">Madde 16</a></li>
+          <li><a href="madde17.html">Madde 17</a></li>
+          <li><a href="diger.html">Diğer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">&copy; 2026 • Lacivert Ormancılık • Tüm Hakları Saklıdır.</div>
+    <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
+  </footer>
+
+  <script src="js/index.js" defer></script>
 </body>
 </html>
