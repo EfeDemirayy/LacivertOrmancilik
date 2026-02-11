@@ -1,0 +1,419 @@
+<!-- hakkimizda.html (Anasayfa ile birebir: JivoChat ID, favicon, header/logo, tema) -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hakkımızda | Lacivert Ormancılık</title>
+  <meta name="description" content="Lacivert Ormancılık: orman izin projeleri, enerji (RES/HES), ulaşım projeleri ve maden izinlerinde sürdürülebilir, teknolojik ve mevzuata uygun çözümler." />
+
+  <!-- JivoChat (ANASAYFA İLE AYNI) -->
+  <script src="//code.jivosite.com/widget/jLHRdCZAjs" async></script>
+
+  <!-- Favicon (ANASAYFA İLE AYNI) -->
+  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64" />
+
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Swiper CSS (gerektiğinde slider için) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <!-- Proje ana stili (lacivert tema) -->
+  <link rel="stylesheet" href="css/styleorman.css" />
+</head>
+<body>
+
+  <!-- ÜST BAR -->
+  <div class="topbar">
+    <div class="topbar__left">
+      <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
+        <i class="fa-solid fa-envelope"></i>
+        <span>omer@lacivert.cc</span>
+      </a>
+      <span class="topbar__divider"></span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+    </div>
+    <div class="topbar__right">
+      <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://maps.app.goo.gl/guTKEB4KyjUwiEB77" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+    </div>
+  </div>
+
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader__spinner"><i class="fas fa-spinner fa-pulse"></i></div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div id="progress" class="progress"><div class="progress__bar"></div></div>
+
+  <!-- NAVBAR (LOGO/HEADER İKONU ANASAYFADAKİYLE AYNI) -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" style="height:50px;vertical-align:middle;">
+      </a>
+      <nav aria-label="Ana Menü">
+        <ul id="navLinks" class="nav__links">
+          <li class="nav__dropdown">
+            <a href="#kurumsal" class="nav__link">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="hakkimizda.html" aria-current="page">Hakkımızda</a></li>
+              <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+            </ul>
+          </li>
+       
+          <li class="nav__dropdown">
+            <a href="#ormancilik" class="nav__link">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
+              <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+            </ul>
+          </li>
+          <li><a href="galeri.html" class="nav__link">Galeri</a></li>
+          <li><a href="haberler.html" class="nav__link">Blog&Haberler</a></li>
+          <li class="nav__dropdown">
+            <a href="iletisim.html" class="nav__link">İletişim <i class="fa-solid fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="iletisim.html">Bize Ulaşın</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <button id="burger" class="nav__burger" aria-label="Mobil Menü">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- KURUMSAL / HAKKIMIZDA HERO -->
+    <section id="kurumsal" class="service-hero">
+      <div class="container">
+        <div class="service-hero__content" data-fade>
+          <div class="service-hero__badge">
+            <i class="fas fa-users"></i>
+            <span>Kurumsal</span>
+          </div>
+          <h1 class="service-hero__title">Hakkımızda</h1>
+          <p class="service-hero__subtitle">
+            Sürdürülebilir ormancılık alanında uzman kadromuzla, doğayı koruyarak
+            gelecek nesillere sağlıklı ormanlar bırakmak için çalışıyoruz.
+          </p>
+          <div class="service-hero__features">
+            <div class="service-hero__feature">
+              <i class="fas fa-leaf"></i>
+              <span>Sürdürülebilir Ormancılık</span>
+            </div>
+            <div class="service-hero__feature">
+              <i class="fas fa-award"></i>
+              <span>Uzman Kadro</span>
+            </div>
+            <div class="service-hero__feature">
+              <i class="fas fa-handshake"></i>
+              <span>Güvenilir Hizmet</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BİZ KİMİZ -->
+    <section class="content-section">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-text" data-fade>
+            <h2>Biz Kimiz?</h2>
+            <p>
+              <strong>Lacivert Ormancılık</strong>, orman mülkiyetindeki alanlar üzerinde;
+              maden izinleri, RES ve HES gibi enerji izinleri, yol/su/elektrik vb. altyapı izinleri
+              ve mesire yerleri için izin ve irtifak hakkı projelerinin hazırlanması ile süreç takibini
+              uçtan uca yöneten bir danışmanlık şirketidir.
+            </p>
+            <div class="content-features">
+              <!-- İSTEK: "FSC & PEFC Sertifikasyonları" ve "ISO 14001 Çevre Yönetimi" KALDIRILDI -->
+              <div class="content-feature">
+                <div class="content-feature__icon">
+                  <i class="fas fa-plane"></i>
+                </div>
+                <div class="content-feature__text">
+                  <h4>Drone & LiDAR Haritalama</h4>
+                  <p>Hassas haritalama ve analiz için ileri teknolojiler</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-image" data-fade>
+            <img src="img/dijitallesme.png" alt="Lacivert Ormancılık Ekibi" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RAKAMLAR -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="section__header" data-fade>
+          <h2 class="section__title" style="color: white;">Başarı Rakamlarımız</h2>
+          <p class="section__subtitle" style="color: rgba(255,255,255,0.9);">
+            Son 3 yılda tamamladığımız proje sayısı
+          </p>
+        </div>
+        <div class="stats-grid" data-fade>
+          <div class="stat-card" style="grid-column:1/-1; text-align:center;">
+            <span class="stat-card__number">293</span>
+            <span class="stat-card__label">Proje (3 yılda)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VİZYON & MİSYON -->
+    <section class="content-section content-section--alt">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-image" data-fade>
+            <img src="img/vizyon2.png" alt="Sürdürülebilir orman yönetimi" loading="lazy">
+          </div>
+          <div class="content-text" data-fade>
+            <h2>Vizyon & Misyon</h2>
+            <p>
+              Doğayı koruyan, teknoloji ile sürdürülebilirliği birleştiren lider
+              ormancılık çözümleri sunmak ve ekosistemleri güçlendirerek gelecek
+              nesillere sağlıklı ormanlar bırakmak temel hedefimizdir.
+            </p>
+            <div class="content-features">
+              <div class="content-feature">
+                <div class="content-feature__icon">
+                  <i class="fas fa-binoculars"></i>
+                </div>
+                <div class="content-feature__text">
+                  <h4>Vizyonumuz</h4>
+                  <p>Teknoloji ve sürdürülebilirliği birleştiren lider çözümler sunmak</p>
+                </div>
+              </div>
+              <div class="content-feature">
+                <div class="content-feature__icon">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="content-feature__text">
+                  <h4>Misyonumuz</h4>
+                  <p>
+                    Doğaya saygılı, yasalara uygun projeler üreterek; orman varlıklarını koruyan,
+                    kamu yararı ve zaruret ilkesini gözeten, doğal kaynakların verimli kullanımını sağlayan
+                    teknik çözümler geliştirmek.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAALİYETLER -->
+    <section id="faaliyetler" class="process-section">
+      <div class="container">
+        <div class="section__header" data-fade>
+          <div class="section__badge">
+            <i class="fas fa-list-check"></i>
+            <span>Faaliyetlerimiz</span>
+          </div>
+        <h2 class="section__title">Orman İzin Projesi ve Diğer Alanlar</h2>
+          <p class="section__subtitle">
+            Orman izin süreçlerinden enerji ve ulaşım projelerine uzanan kapsamlı danışmanlık
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step" data-fade>
+            <div class="process-step__number"><i class="fas fa-file-signature"></i></div>
+            <h4>Orman İzin Projesi</h4>
+            <ul>
+              <li>Ön izin, kesin izin dosyalarının hazırlanması</li>
+              <li>İrtifak hakkı tescil süreçlerinin yönetimi</li>
+              <li>Mevzuata uygun başvuru ve takip</li>
+            </ul>
+          </div>
+
+          <div class="process-step" data-fade>
+            <div class="process-step__number"><i class="fas fa-bolt"></i></div>
+            <h4>Enerji İzinleri</h4>
+            <ul>
+              <li>Rüzgar Enerji Santrali (RES) projeleri</li>
+              <li>Hidroelektrik Santrali (HES) projeleri</li>
+            </ul>
+          </div>
+
+          <div class="process-step" data-fade>
+            <div class="process-step__number"><i class="fas fa-road"></i></div>
+            <h4>Ulaşım Projeleri</h4>
+            <ul>
+              <li>Karayolu</li>
+              <li>Demiryolu</li>
+              <li>Havalimanı</li>
+              <li>Liman geri hizmet alanı</li>
+            </ul>
+          </div>
+
+          <div class="process-step" data-fade>
+            <div class="process-step__number"><i class="fas fa-mountain"></i></div>
+            <h4>Maden İzinleri</h4>
+            <ul>
+              <li>Maden sahaları için izin ve irtifak danışmanlığı</li>
+              <li>ÇED ve ilgili kurum süreç uyumu</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HİZMET SUNDUĞUMUZ KURUM & KURULUŞLAR -->
+    <section id="kurumlar" class="process-section">
+      <div class="container">
+        <div class="section__header" data-fade>
+          <div class="section__badge">
+            <i class="fas fa-building-columns"></i>
+            <span>Kurum & Kuruluşlar</span>
+          </div>
+          <h2 class="section__title">Hizmet Sunduğumuz Kurum ve Kuruluşlar</h2>
+          <p class="section__subtitle">İş birliği yaptığımız başlıca kamu kurumları ve meslek örgütleri</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-tree"></i></div><h4>OGM</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-water"></i></div><h4>DSİ</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-user-graduate"></i></div><h4>Orman Mühendisleri Odası</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-city"></i></div><h4>Çevre, Şehircilik</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-leaf"></i></div><h4>Milli Parklar</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-flask"></i></div><h4>ÇEM</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-wheat-awn"></i></div><h4>Tarım ve Orman Bakanlığı</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-truck-ramp-box"></i></div><h4>Ulaştırma Bakanlığı</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-mosque"></i></div><h4>Diyanet İşleri Başkanlığı</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-hand-holding-heart"></i></div><h4>Vakıflar Genel Müdürlüğü</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-ship"></i></div><h4>Ulaştırma, Denizcilik ve Altyapı Bakanlığı</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-diagram-project"></i></div><h4>Altyapı Yatırımları Genel Müdürlüğü</h4></div>
+          <div class="process-step" data-fade><div class="process-step__number"><i class="fas fa-train-subway"></i></div><h4>TCDD</h4></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <div class="container">
+        <div class="cta-banner__content" data-fade>
+          <h2>Projeleriniz İçin Uzman Kadromuzla Tanışın</h2>
+          <p>
+            Orman izin projeleri, enerji ve ulaşım yatırımlarınız için mevzuata uygun, hızlı ve güvenilir çözümler.
+          </p>
+          <a href="iletisim.html" class="btn btn--large">
+            <i class="fas fa-phone"></i>
+            <span>Bize Ulaşın</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__background"></div>
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo" loading="lazy">
+        <div class="footer__info">
+          <strong>Lacivert Ormancılık</strong><br>
+          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
+          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
+          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
+        </div>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" aria-label="Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" aria-label="LinkedIn" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" aria-label="Google Maps" rel="noopener"><i class="fa-solid fa-map-location-dot"></i></a>
+        </div>
+      </div>
+      <div class="footer__nav">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="hakkimizda.html" aria-current="page">Hakkımızda</a></li>
+          <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </div>
+      <div class="footer__services">
+        <h4>Hizmetler</h4>
+        <ul>
+          <li><a href="drone-3d-aplikasyon.html">Drone & 3D Modelleme Aplikasyon</a></li>
+          <li><a href="kanunveyonetmelikler.html">Kanun & Yönetmelikler</a></li>
+          <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      © 2025 • Lacivert Ormancılık • Tüm Hakları Saklıdır.
+    </div>
+    <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
+  </footer>
+
+  <!-- Cookie Consent (index.js ile uyumlu) -->
+  <div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" style="display:none">
+    <div class="cookie-consent__content">
+      <p class="cookie-consent__text">
+        Kullanıcı deneyiminizi iyileştirmek için çerez kullanıyoruz.
+      </p>
+      <div>
+        <button id="acceptCookies" class="cookie-consent__button">Kabul Et</button>
+        <button id="cookieDetailsBtn" class="cookie-consent__details-btn" aria-haspopup="dialog">Detaylar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="cookieModal" class="cookie-modal" style="display:none" aria-modal="true" role="dialog" aria-labelledby="cookieModalTitle">
+    <div class="cookie-modal__overlay" tabindex="-1"></div>
+    <div class="cookie-modal__content">
+      <button id="closeCookieModal" class="cookie-modal__close" aria-label="Kapat">&times;</button>
+      <h3 id="cookieModalTitle" class="cookie-modal__title">Çerez Tercihleri</h3>
+      <div class="cookie-modal__body">
+        <p>Gerekli çerezler site güvenliği ve temel işlevler için zorunludur. İstatistik ve pazarlama çerezlerini tarayıcı ayarlarından yönetebilirsiniz.</p>
+        <ul>
+          <li><strong>Gerekli:</strong> Oturum ve güvenlik</li>
+          <li><strong>İstatistik:</strong> Anonim kullanım verileri</li>
+          <li><strong>Pazarlama:</strong> İlgi alanına göre içerik</li>
+        </ul>
+        <p>Daha fazla bilgi için <a href="cerez-politikasi.html">Çerez Politikası</a> sayfamızı ziyaret edin.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp (ANASAYFA İLE AYNI NUMARA/STİL) -->
+  <a href="https://wa.me/905309094108" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Scriptler -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
+  <script src="js/index.js" defer></script>
+
+</body>
+</html>

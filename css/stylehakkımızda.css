@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f4f4f9;
+}
+
+/* Header Styles */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1% 5%;
+    transition: all ease 0.5s;
+    z-index: 99999;
+    height: auto;
+    background-color: #0a1f44; /* koyu lacivert */
+}
+
+header ul li {
+    display: inline-block;
+    margin: 0 1vh;
+    position: relative;
+}
+
+header ul li a {
+    color: #ebebeb;
+    transition: all ease 0.5s;
+    font-weight: 700;
+}
+
+header ul li a:hover {
+    transition: 0.1s;
+}
+
+header ul li:hover {
+    background-color: #1e56a0;
+    padding: 1vh;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+header:hover {
+    background-color: #122b5a;
+}
+
+header:hover a {
+    color: rgb(255, 255, 255);
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #1e56a0;
+    z-index: 10;
+    border-radius: 5px;
+    padding: 10px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-menu li {
+    display: block;
+    padding: 1vh;
+}
+
+.dropdown-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li:hover {
+    background-color: #0a1f44;
+    transition: 0.4s;
+    padding-right: 3vh;
+    border-radius: 15px;
+}
+
+/* Menu Icon Styles */
+.menu-icon,
+.close-menu {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .menu-icon,
+    .close-menu {
+        display: block;
+    }
+
+    .logo img {
+        width: 50%;
+        margin-top: 1vh;
+        height: auto;
+        margin-left: 0.5vh;
+    }
+
+    header {
+        padding: 10px 15px;
+        background-color: #0a1f44;
+        justify-content: space-between;
+    }
+
+    .menu-icon {
+        cursor: pointer;
+        font-size: 2em;
+        color: #fff;
+    }
+
+    header nav > ul {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 70%;
+        background-color: #0a1f44;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 9999;
+    }
+
+    header nav > ul > li {
+        margin: 30px 0;
+        padding-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav > ul > li > a {
+        font-size: 1em;
+    }
+
+    .menu-active {
+        left: 0;
+    }
+
+    .close-menu {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5em;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        position: static;
+        margin-top: 10px;
+        padding: 4%;
+        background-color: #1e56a0;
+    }
+
+    .dropdown-menu li {
+        padding: 1.5vh;
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu li a {
+        padding: 2%;
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo img {
+        width: 60%;
+        margin-top: 1vh;
+        height: auto;
+        margin-left: 0.5vh;
+    }
+
+    header ul li {
+        margin: 10px 0;
+        margin-top: 5vh;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    header ul li a {
+        font-size: 0.8em;
+    }
+
+    .dropdown-menu {
+        position: static;
+        margin-top: 10px;
+        padding: 4%;
+        background-color: #1e56a0;
+    }
+
+    .dropdown-menu li {
+        padding: 1.5vh;
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .dropdown-menu li a {
+        padding: 2%;
+        font-size: 0.8em;
+    }
+}
+
+/* İçerik Bölümü */
+.content-section {
+    padding: 100px 5% 50px 5%;
+    background-color: #f4f4f9;
+}
+
+.content-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background-color: rgba(10, 31, 68, 0.7);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.content-text {
+    flex: 1 1 300px;
+    color: #fff;
+}
+
+.content-text h1,
+.content-text h2,
+.content-text h3 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #d6e4ff;
+}
+
+.content-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    background-color: #1e56a0;
+    padding: 20px;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.content-images {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-images img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.content-images img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .content-text,
+    .content-images {
+        padding: 1rem;
+    }
+
+    .content-images img {
+        max-width: 100%;
+    }
+}
+
+/* Background Image */
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+}
+
+/* Bottom Section */
+.bottom-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 5%;
+    background-color: #0a1f44;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    position: relative;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: #1e56a0;
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 30%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+}
+
+#map iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
+.iletişim {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    margin: 20px;
+    height: auto;
+}
+
+.iletişim h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #0a1f44;
+}
+
+.iletişim p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.iletişim a {
+    color: #1e56a0;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+    .bottom-section {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .box, .iletişim {
+        width: 80%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .box {
+        padding: 1rem;
+    }
+
+    .iletişim {
+        padding: 1rem;
+    }
+
+    #map iframe {
+        height: 200px;
+    }
+
+    .iletişim h2 {
+        font-size: 1.2rem;
+    }
+
+    .iletişim p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: #0a1f44;
+    padding: 20px 5%;
+    position: relative;
+    color: #fff;
+}
+
+/* Contact Info Floating Buttons */
+.contact-info {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.contact-info a {
+    color: #fff;
+    font-size: 2em;
+    background-color: #1e56a0;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-info a:hover {
+    background-color: #0a1f44;
+    color: #d6e4ff;
+}
+
+/* Arka Plan Görseli */
+.background-image img {
+    opacity: 0.78;
+}

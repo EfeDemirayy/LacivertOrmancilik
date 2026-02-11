@@ -1,0 +1,236 @@
+/* ==============================================================
+   styleorman.css – Lacivert Kurumsal
+   TAM & EKSİKSİZ sürüm
+================================================================ */
+
+/* ==============================================================
+   0. DEĞİŞKENLER
+================================================================ */
+:root{
+  --clr-primary:   #0a1f44;   /* koyu lacivert */
+  --clr-secondary: #1e56a0;   /* canlı mavi */
+  --clr-bg:        #ffffff;
+  --clr-alt:       #f4f6f8;
+  --clr-text:      #212121;
+  --radius:        10px;
+  --transition:    .4s ease;
+  --font-heading:  "Poppins",sans-serif;
+  --font-body:     "Inter",sans-serif;
+}
+
+/* ==============================================================
+   1. RESET & TEMEL
+================================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--clr-bg);
+  color:var(--clr-text);
+  overflow-x:hidden;
+}
+img,picture{max-width:100%;display:block}
+ul{list-style:none}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:none;background:none;cursor:pointer}
+
+/* ==============================================================
+   2. GENEL YAPILAR
+================================================================ */
+.container{width:min(90%,1200px);margin-inline:auto;padding-block:2rem}
+
+.btn{
+  position:relative;overflow:hidden;
+  padding:.75rem 1.8rem;border-radius:var(--radius);
+  font-weight:600;display:inline-block;
+  transition:transform var(--transition),background var(--transition),filter .2s;
+}
+.btn--primary{background:var(--clr-primary);color:var(--clr-bg)}
+.btn--secondary{background:var(--clr-secondary);color:var(--clr-bg)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn .ripple{
+  position:absolute;border-radius:50%;background:rgba(255,255,255,.5);
+  transform:scale(0);animation:ripple-effect .6s linear;
+}
+@keyframes ripple-effect{to{transform:scale(4);opacity:0}}
+
+.preloader{position:fixed;inset:0;background:var(--clr-bg);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;transition:opacity .5s,visibility .5s}
+.preloader__spinner i{font-size:3rem;color:var(--clr-primary);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.preloader.hide{opacity:0;visibility:hidden}
+
+.progress{position:fixed;top:0;left:0;width:100%;height:4px;background:var(--clr-alt);z-index:999}
+.progress__bar{width:0;height:100%;background:var(--clr-primary);transition:width .2s linear}
+
+/* ==============================================================
+   3. NAVBAR
+================================================================ */
+.nav{position:fixed;top:0;width:100%;background:var(--clr-bg);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:1000}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;width:min(90%,1200px);margin-inline:auto;padding-block:1rem}
+.nav__logo{font-family:var(--font-heading);font-size:1.5rem;color:var(--clr-primary)}
+.nav__links{display:flex;gap:1.5rem}
+.nav__link{position:relative;font-weight:500;padding-block:.25rem}
+.nav__link::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--clr-primary);transition:width var(--transition)}
+.nav__link:hover::after,.nav__link.active::after{width:100%}
+
+.nav__burger{display:none;flex-direction:column;gap:5px}
+.nav__burger span{width:26px;height:3px;background:var(--clr-primary);border-radius:2px;transition:transform var(--transition),opacity var(--transition)}
+.nav__burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav__burger.open span:nth-child(2){opacity:0}
+.nav__burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+@media(max-width:768px){
+  .nav__burger{display:flex}
+  .nav__links{position:fixed;top:70px;right:0;flex-direction:column;width:70%;background:var(--clr-bg);
+    padding:2rem;transform:translateX(100%);transition:transform var(--transition)}
+  .nav__links.show{transform:translateX(0)}
+}
+
+/* ==============================================================
+   4. HERO
+================================================================ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero__parallax{position:absolute;inset:0;background-size:cover;background-position:center;background-attachment:fixed}
+.hero__overlay{position:absolute;inset:0;background:rgba(255,255,255,.5)}
+.hero__content{position:relative;text-align:center;z-index:1}
+.hero__title{font-family:var(--font-heading);font-size:clamp(2rem,6vw,4rem);color:var(--clr-primary);margin-bottom:1rem;text-transform:uppercase}
+.hero__subtitle{font-size:clamp(1rem,2vw,1.3rem);margin-bottom:2rem}
+.hero__scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:2rem;color:var(--clr-primary);animation:bounce 2s infinite;z-index:1}
+@keyframes bounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ==============================================================
+   5. SECTIONS & UTILITY
+================================================================ */
+.section{padding-block:6rem;background:var(--clr-alt)}
+.section:nth-of-type(even){background:var(--clr-bg)}
+.section__title{text-align:center;font-family:var(--font-heading);font-size:clamp(1.8rem,4vw,2.5rem);color:var(--clr-primary);margin-bottom:2.5rem;position:relative}
+.section__title::after{content:"";display:block;width:60px;height:3px;background:var(--clr-primary);border-radius:2px;margin:.8rem auto 0}
+[data-fade]{opacity:0;transform:translateY(40px)}
+
+/* ==============================================================
+   6. ABOUT
+================================================================ */
+.about__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:center}
+.about__image img{border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.about__info p{margin-bottom:1rem}
+.list li{display:flex;align-items:center;margin-bottom:.75rem}
+.list li i{margin-right:.5rem;color:var(--clr-primary)}
+
+/* ==============================================================
+   7. VISION
+================================================================ */
+.vision__cards{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.vision__card{background:var(--clr-bg);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform var(--transition),box-shadow var(--transition)}
+.vision__icon{font-size:2.5rem;color:var(--clr-secondary);margin-bottom:1rem}
+.vision__card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+
+/* ==============================================================
+   8. SERVICES
+================================================================ */
+.services__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--clr-bg);border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform var(--transition),box-shadow var(--transition)}
+.card__icon{font-size:2.5rem;margin-bottom:1rem;color:var(--clr-primary)}
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+
+/* ==============================================================
+   9. STATISTICS
+================================================================ */
+.stats__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));justify-items:center}
+.counter{font-family:var(--font-heading);font-size:2.8rem;color:var(--clr-primary);margin-bottom:.4rem}
+.stat small{color:var(--clr-text)}
+
+/* ==============================================================
+   10. TEAM
+================================================================ */
+.team__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));text-align:center}
+.team__member{background:var(--clr-bg);padding:1.5rem;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform var(--transition),box-shadow var(--transition)}
+.team__member img{width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:1rem}
+.team__member:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+
+/* ==============================================================
+   11. CASE STUDIES
+================================================================ */
+.cases__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.case-card{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform var(--transition),box-shadow var(--transition)}
+.case-card__overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity var(--transition);padding:1rem;text-align:center}
+.case-card:hover .case-card__overlay{opacity:1}
+.case-card:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+
+/* ==============================================================
+   12. PARTNERS
+================================================================ */
+.partners__swiper{padding:1.5rem 0}
+.partners__swiper img{max-height:60px;filter:grayscale(100%);opacity:.7;transition:filter var(--transition),opacity var(--transition),transform var(--transition)}
+.partners__swiper img:hover{filter:none;opacity:1;transform:scale(1.05)}
+
+/* ==============================================================
+   13. BLOG
+================================================================ */
+.blog__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.blog__post{background:var(--clr-bg);border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform var(--transition),box-shadow var(--transition)}
+.blog__post:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.1)}
+.blog__post h4{margin:1rem;font-family:var(--font-heading);color:var(--clr-primary)}
+.blog__post p{margin:0 1rem 1rem}
+
+/* ==============================================================
+   14. FAQ ACCORDION
+================================================================ */
+.accordion{max-width:800px;margin-inline:auto}
+.accordion__item{margin-bottom:1rem;border-radius:var(--radius);background:var(--clr-bg);box-shadow:0 4px 12px rgba(0,0,0,.05);overflow:hidden}
+.accordion__header{width:100%;padding:1rem 1.5rem;background:var(--clr-alt);font-family:var(--font-heading);color:var(--clr-primary);text-align:left;cursor:pointer;position:relative;transition:background var(--transition)}
+.accordion__header::after{content:"\f078";font-family:"Font Awesome 5 Free";font-weight:900;position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);transition:transform var(--transition),color var(--transition)}
+.accordion__header.active{background:var(--clr-bg)}
+.accordion__header.active::after{transform:translateY(-50%) rotate(-180deg);color:var(--clr-secondary)}
+.accordion__content{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 1.5rem}
+.accordion__content p{margin:1rem 0}
+
+/* ==============================================================
+   15. CONTACT
+================================================================ */
+.contact__inner{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.contact__form{background:var(--clr-alt);padding:2rem;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,.05)}
+.form-group{margin-bottom:1rem}
+.form-group input,.form-group textarea{width:100%;padding:.8rem 1rem;border:none;border-radius:var(--radius);background:var(--clr-bg);transition:box-shadow var(--transition)}
+.form-group input:focus,.form-group textarea:focus{outline:none;box-shadow:0 0 0 3px var(--clr-primary)}
+.form-group textarea{resize:vertical;min-height:120px}
+
+/* ==============================================================
+   16. FOOTER & TO-TOP
+================================================================ */
+.footer{background:var(--clr-alt);padding:2rem 1rem;text-align:center}
+.footer__inner{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;width:min(90%,1200px);margin-inline:auto}
+.footer__social{display:flex;gap:1rem}
+.footer__social a{font-size:1.2rem;transition:color var(--transition)}
+.footer__social a:hover{color:var(--clr-primary)}
+.to-top{position:fixed;bottom:2rem;right:2rem;background:var(--clr-secondary);color:var(--clr-bg);border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:0;visibility:hidden;transition:opacity var(--transition),visibility var(--transition)}
+.to-top.show{opacity:1;visibility:visible}
+
+/* ==============================================================
+   17. COOKIE BANNER
+================================================================ */
+.cookie-consent{position:fixed;bottom:0;width:100%;background:var(--clr-secondary);color:var(--clr-bg);display:flex;justify-content:center;align-items:center;padding:1rem;z-index:1000}
+.cookie-consent button{margin-left:1rem}
+
+/* ==============================================================
+   18. REFERANS KARTLARI – 3D Zoom & Spin
+================================================================ */
+.references__grid{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));perspective:1200px}
+.ref-card{position:relative;cursor:pointer;overflow:hidden;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,.08);transition:transform .6s cubic-bezier(.34,1.56,.64,1),box-shadow .6s;transform-style:preserve-3d}
+.ref-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.ref-card__overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;opacity:0;transition:opacity .4s ease .1s}
+
+/* Hover (masaüstü) */
+.ref-card:hover{transform:rotateY(15deg) rotateX(6deg) scale(1.12);box-shadow:0 20px 40px rgba(0,0,0,.18)}
+.ref-card:hover img{transform:scale(1.25) rotateZ(4deg)}
+.ref-card:hover .ref-card__overlay{opacity:1}
+
+/* Mobil: sade zoom */
+@media(max-width:640px){
+  .references__grid{perspective:none}
+  .ref-card:hover{transform:scale(1.06)}
+  .ref-card:hover img{transform:scale(1.12) rotate(0)}
+}

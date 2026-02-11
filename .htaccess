@@ -1,0 +1,43 @@
+# URL Rewrite ve Giriş Ayarları
+RewriteEngine On
+
+# Anasayfa için index.html'i gizle
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Temiz URL'ler (Clean URLs) için uzantısız sayfa linkleri
+RewriteRule ^calismalarimiz$ calismalarimiz.html [L]
+RewriteRule ^referanslar$ referanslar.html [L]
+RewriteRule ^qdms$ qdms.html [L]
+RewriteRule ^hizmetler$ hizmetler.html [L]
+RewriteRule ^hakkimizda$ hakkimizda.html [L]
+RewriteRule ^ensemble$ ensemble.html [L]
+RewriteRule ^eba$ eba.html [L]
+RewriteRule ^beam$ beam.html [L]
+RewriteRule ^iletisim$ iletisim.php [L]
+RewriteRule ^iletisim-post$ iletisim-post.php [L]
+RewriteRule ^csp$ csp.html [L]
+
+# HTTP'den HTTPS'e Yönlendirme (SSL Yüklüyse)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Tarayıcı Önbellekleme (Caching)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "1 year"
+    ExpiresByType image/jpeg "1 year"
+    ExpiresByType image/gif "1 year"
+    ExpiresByType image/png "1 year"
+    ExpiresByType text/css "1 month"
+    ExpiresByType application/pdf "1 month"
+    ExpiresByType text/x-javascript "1 month"
+    ExpiresByType application/javascript "1 month"
+    ExpiresByType application/x-shockwave-flash "1 month"
+    ExpiresByType image/x-icon "1 year"
+    ExpiresDefault "access plus 1 month"
+</IfModule>
+
+# Gzip Sıkıştırma
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
