@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="KGM 1. BOLGE MUDURLUGU">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#14352d"/>
+      <stop offset="100%" stop-color="#588255"/>
+    </linearGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fc19d" stop-opacity="0.20"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#9fc19d" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1088" cy="162" r="103" fill="#f5f0d6" opacity="0.33"/>
+  <path d="M0,360 C260,290 520,405 810,340 C1110,272 1340,398 1600,342 L1600,900 L0,900 Z" fill="#203f36" opacity="0.46"/>
+  <path d="M0,462 C230,396 520,520 790,450 C1030,390 1320,488 1600,456 L1600,900 L0,900 Z" fill="#2f5848" opacity="0.58"/>
+  <path d="M0,579 C270,519 560,643 850,571 C1120,509 1380,603 1600,581 L1600,900 L0,900 Z" fill="#3f6c57" opacity="0.72"/>
+
+  <g opacity="0.9">
+    <polygon points='56,472 25,607 87,607' fill='#d5e6bc' opacity='0,52'/>
+    <rect x='52' y='580' width='9' height='27' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='226,484 194,622 258,622' fill='#d5e6bc' opacity='0,51'/>
+    <rect x='222' y='594' width='9' height='28' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='355,439 314,615 396,615' fill='#d5e6bc' opacity='0,38'/>
+    <rect x='349' y='580' width='12' height='35' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='496,501 469,619 523,619' fill='#d5e6bc' opacity='0,45'/>
+    <rect x='492' y='595' width='8' height='24' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='631,429 592,598 670,598' fill='#d5e6bc' opacity='0,42'/>
+    <rect x='625' y='564' width='12' height='34' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='782,456 744,623 820,623' fill='#d5e6bc' opacity='0,34'/>
+    <rect x='776' y='590' width='12' height='33' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='892,441 854,608 930,608' fill='#d5e6bc' opacity='0,39'/>
+    <rect x='886' y='575' width='12' height='33' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='1046,459 1009,620 1083,620' fill='#d5e6bc' opacity='0,43'/>
+    <rect x='1040' y='588' width='11' height='32' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='1172,460 1135,621 1209,621' fill='#d5e6bc' opacity='0,38'/>
+    <rect x='1166' y='589' width='11' height='32' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='1322,476 1290,618 1354,618' fill='#d5e6bc' opacity='0,38'/>
+    <rect x='1317' y='590' width='10' height='28' fill='#4f3b2a' opacity='0.45'/>
+    <polygon points='1474,446 1438,601 1510,601' fill='#d5e6bc' opacity='0,50'/>
+    <rect x='1468' y='570' width='11' height='31' fill='#4f3b2a' opacity='0.45'/>
+  </g>
+
+  <rect y="646" width="1600" height="254" fill="url(#fog)"/>
+
+  <g>
+    <polygon points='46,542 -13,778 105,778' fill='#284b34' opacity='0.86'/>
+    <rect x='36' y='721' width='19' height='57' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='155,570 107,762 203,762' fill='#315a3e' opacity='0.86'/>
+    <rect x='148' y='716' width='15' height='46' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='280,586 232,780 328,780' fill='#284b34' opacity='0.86'/>
+    <rect x='272' y='733' width='16' height='47' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='380,614 338,780 422,780' fill='#315a3e' opacity='0.86'/>
+    <rect x='374' y='740' width='13' height='40' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='501,521 440,763 562,763' fill='#284b34' opacity='0.86'/>
+    <rect x='492' y='705' width='19' height='58' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='617,600 579,752 655,752' fill='#315a3e' opacity='0.86'/>
+    <rect x='611' y='716' width='12' height='36' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='730,547 672,778 788,778' fill='#284b34' opacity='0.86'/>
+    <rect x='720' y='723' width='19' height='55' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='842,522 783,757 901,757' fill='#315a3e' opacity='0.86'/>
+    <rect x='832' y='701' width='19' height='56' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='945,608 902,780 988,780' fill='#284b34' opacity='0.86'/>
+    <rect x='938' y='739' width='14' height='41' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='1085,569 1036,767 1134,767' fill='#315a3e' opacity='0.86'/>
+    <rect x='1077' y='719' width='16' height='48' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='1200,615 1160,774 1240,774' fill='#284b34' opacity='0.86'/>
+    <rect x='1194' y='736' width='13' height='38' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='1317,612 1280,760 1354,760' fill='#315a3e' opacity='0.86'/>
+    <rect x='1311' y='724' width='12' height='36' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='1418,523 1359,759 1477,759' fill='#284b34' opacity='0.86'/>
+    <rect x='1408' y='702' width='19' height='57' fill='#4f3b2a' opacity='0.72'/>
+    <polygon points='1546,562 1492,778 1600,778' fill='#315a3e' opacity='0.86'/>
+    <rect x='1538' y='726' width='17' height='52' fill='#4f3b2a' opacity='0.72'/>
+  </g>
+
+  <rect x="70" y="680" width="1460" height="170" rx="20" fill="#0b1a1a" opacity="0.52"/>
+  <text x="120" y="730" fill="#d9e8c8" font-family="Poppins, Arial, sans-serif" font-size="27" font-weight="700">Devlet</text>
+  <text x="120" y="792" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="60" font-weight="800">KGM 1. BOLGE MUDURLUGU</text>
+  <text x="120" y="835" fill="#c3d4b9" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">Lacivert Ormancilik • Ormancilik Proje Gorseli</text>
+</svg>

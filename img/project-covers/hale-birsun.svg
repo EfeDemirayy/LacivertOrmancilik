@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Hale Birsun">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1d3338"/>
+      <stop offset="100%" stop-color="#5f8468"/>
+    </linearGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9fc2ad" stop-opacity="0.20"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#9fc2ad" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1152" cy="164" r="84" fill="#f5f0d6" opacity="0.33"/>
+  <path d="M0,379 C260,309 520,424 810,359 C1110,291 1340,417 1600,361 L1600,900 L0,900 Z" fill="#203f36" opacity="0.46"/>
+  <path d="M0,446 C230,380 520,504 790,434 C1030,374 1320,472 1600,440 L1600,900 L0,900 Z" fill="#2f5848" opacity="0.58"/>
+  <path d="M0,535 C270,475 560,599 850,527 C1120,465 1380,559 1600,537 L1600,900 L0,900 Z" fill="#3f6c57" opacity="0.72"/>
+
+  <g opacity="0.9">
+    <polygon points='69,462 34,616 104,616' fill='#dbe9c9' opacity='0,40'/>
+    <rect x='64' y='585' width='11' height='31' fill='#5d4733' opacity='0.45'/>
+    <polygon points='217,460 180,620 254,620' fill='#dbe9c9' opacity='0,51'/>
+    <rect x='212' y='588' width='11' height='32' fill='#5d4733' opacity='0.45'/>
+    <polygon points='349,468 318,602 380,602' fill='#dbe9c9' opacity='0,39'/>
+    <rect x='344' y='575' width='9' height='27' fill='#5d4733' opacity='0.45'/>
+    <polygon points='494,468 458,627 530,627' fill='#dbe9c9' opacity='0,40'/>
+    <rect x='488' y='595' width='11' height='32' fill='#5d4733' opacity='0.45'/>
+    <polygon points='614,505 589,614 639,614' fill='#dbe9c9' opacity='0,51'/>
+    <rect x='610' y='592' width='8' height='22' fill='#5d4733' opacity='0.45'/>
+    <polygon points='775,513 750,622 800,622' fill='#dbe9c9' opacity='0,48'/>
+    <rect x='771' y='600' width='8' height='22' fill='#5d4733' opacity='0.45'/>
+    <polygon points='916,442 875,621 957,621' fill='#dbe9c9' opacity='0,48'/>
+    <rect x='910' y='585' width='12' height='36' fill='#5d4733' opacity='0.45'/>
+    <polygon points='1035,502 1006,626 1064,626' fill='#dbe9c9' opacity='0,35'/>
+    <rect x='1030' y='601' width='9' height='25' fill='#5d4733' opacity='0.45'/>
+    <polygon points='1203,486 1174,613 1232,613' fill='#dbe9c9' opacity='0,38'/>
+    <rect x='1198' y='588' width='9' height='25' fill='#5d4733' opacity='0.45'/>
+    <polygon points='1339,441 1302,603 1376,603' fill='#dbe9c9' opacity='0,37'/>
+    <rect x='1334' y='571' width='11' height='32' fill='#5d4733' opacity='0.45'/>
+    <polygon points='1461,416 1419,598 1503,598' fill='#dbe9c9' opacity='0,38'/>
+    <rect x='1454' y='562' width='13' height='36' fill='#5d4733' opacity='0.45'/>
+  </g>
+
+  <rect y="646" width="1600" height="254" fill="url(#fog)"/>
+
+  <g>
+    <polygon points='27,562 -27,777 81,777' fill='#284b34' opacity='0.86'/>
+    <rect x='18' y='725' width='17' height='52' fill='#5d4733' opacity='0.72'/>
+    <polygon points='158,631 122,777 194,777' fill='#315a3e' opacity='0.86'/>
+    <rect x='152' y='742' width='12' height='35' fill='#5d4733' opacity='0.72'/>
+    <polygon points='265,572 215,772 315,772' fill='#284b34' opacity='0.86'/>
+    <rect x='257' y='724' width='16' height='48' fill='#5d4733' opacity='0.72'/>
+    <polygon points='389,562 338,768 440,768' fill='#315a3e' opacity='0.86'/>
+    <rect x='381' y='719' width='16' height='49' fill='#5d4733' opacity='0.72'/>
+    <polygon points='501,574 450,777 552,777' fill='#284b34' opacity='0.86'/>
+    <rect x='493' y='728' width='16' height='49' fill='#5d4733' opacity='0.72'/>
+    <polygon points='627,543 569,776 685,776' fill='#315a3e' opacity='0.86'/>
+    <rect x='618' y='720' width='19' height='56' fill='#5d4733' opacity='0.72'/>
+    <polygon points='740,534 682,768 798,768' fill='#284b34' opacity='0.86'/>
+    <rect x='730' y='712' width='19' height='56' fill='#5d4733' opacity='0.72'/>
+    <polygon points='840,620 804,765 876,765' fill='#315a3e' opacity='0.86'/>
+    <rect x='834' y='730' width='12' height='35' fill='#5d4733' opacity='0.72'/>
+    <polygon points='966,565 916,765 1016,765' fill='#284b34' opacity='0.86'/>
+    <rect x='958' y='717' width='16' height='48' fill='#5d4733' opacity='0.72'/>
+    <polygon points='1086,547 1028,777 1144,777' fill='#315a3e' opacity='0.86'/>
+    <rect x='1077' y='722' width='18' height='55' fill='#5d4733' opacity='0.72'/>
+    <polygon points='1195,540 1138,770 1252,770' fill='#284b34' opacity='0.86'/>
+    <rect x='1186' y='715' width='18' height='55' fill='#5d4733' opacity='0.72'/>
+    <polygon points='1315,545 1258,772 1372,772' fill='#315a3e' opacity='0.86'/>
+    <rect x='1306' y='718' width='18' height='54' fill='#5d4733' opacity='0.72'/>
+    <polygon points='1406,522 1346,760 1466,760' fill='#284b34' opacity='0.86'/>
+    <rect x='1396' y='703' width='19' height='57' fill='#5d4733' opacity='0.72'/>
+    <polygon points='1549,573 1500,769 1598,769' fill='#315a3e' opacity='0.86'/>
+    <rect x='1541' y='722' width='16' height='47' fill='#5d4733' opacity='0.72'/>
+  </g>
+
+  <rect x="70" y="680" width="1460" height="170" rx="20" fill="#0b1a1a" opacity="0.52"/>
+  <text x="120" y="730" fill="#d9e8c8" font-family="Poppins, Arial, sans-serif" font-size="27" font-weight="700">Diger Projeler</text>
+  <text x="120" y="792" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="60" font-weight="800">Hale Birsun</text>
+  <text x="120" y="835" fill="#c3d4b9" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">Lacivert Ormancilik • Ormancilik Proje Gorseli</text>
+</svg>

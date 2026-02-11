@@ -120,6 +120,36 @@ function hexToRgba(hex, alpha = 1) {
       }
     })
 
+    /* ---------- Dropdown Stability (Desktop + Mobile Tap) ---------- */
+    const dropdownLinks = $$(".nav__dropdown > .nav__link")
+    const closeAllDropdowns = () => {
+      $$(".nav__dropdown.is-open").forEach((item) => item.classList.remove("is-open"))
+    }
+
+    dropdownLinks.forEach((link) => {
+      const parent = link.parentElement
+      link.addEventListener("click", (e) => {
+        const isTouchLayout =
+          window.matchMedia("(max-width: 768px)").matches ||
+          window.matchMedia("(hover: none)").matches
+
+        if (!isTouchLayout) return
+
+        // İlk dokunuşta menüyü aç, ikinci dokunuşta linke git.
+        if (!parent.classList.contains("is-open")) {
+          e.preventDefault()
+          closeAllDropdowns()
+          parent.classList.add("is-open")
+        }
+      })
+    })
+
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".nav__dropdown")) {
+        closeAllDropdowns()
+      }
+    })
+
     /* ---------- To-Top Button ---------- */
     toTopBtn?.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" })

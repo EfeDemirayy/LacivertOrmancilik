@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Danis Micir">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#163245"/>
+      <stop offset="100%" stop-color="#50785f"/>
+    </linearGradient>
+    <linearGradient id="fog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#81a79a" stop-opacity="0.20"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#81a79a" stop-opacity="0.20"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1146" cy="169" r="103" fill="#f5f0d6" opacity="0.33"/>
+  <path d="M0,389 C260,319 520,434 810,369 C1110,301 1340,427 1600,371 L1600,900 L0,900 Z" fill="#203f36" opacity="0.46"/>
+  <path d="M0,407 C230,341 520,465 790,395 C1030,335 1320,433 1600,401 L1600,900 L0,900 Z" fill="#2f5848" opacity="0.58"/>
+  <path d="M0,587 C270,527 560,651 850,579 C1120,517 1380,611 1600,589 L1600,900 L0,900 Z" fill="#3f6c57" opacity="0.72"/>
+
+  <g opacity="0.9">
+    <polygon points='55,504 28,623 82,623' fill='#c5d8a8' opacity='0,52'/>
+    <rect x='51' y='599' width='8' height='24' fill='#453729' opacity='0.45'/>
+    <polygon points='197,445 161,601 233,601' fill='#c5d8a8' opacity='0,39'/>
+    <rect x='192' y='570' width='11' height='31' fill='#453729' opacity='0.45'/>
+    <polygon points='345,459 306,626 384,626' fill='#c5d8a8' opacity='0,48'/>
+    <rect x='339' y='593' width='12' height='33' fill='#453729' opacity='0.45'/>
+    <polygon points='492,442 454,605 530,605' fill='#c5d8a8' opacity='0,52'/>
+    <rect x='486' y='572' width='11' height='33' fill='#453729' opacity='0.45'/>
+    <polygon points='613,451 576,610 650,610' fill='#c5d8a8' opacity='0,45'/>
+    <rect x='608' y='578' width='11' height='32' fill='#453729' opacity='0.45'/>
+    <polygon points='755,473 720,623 790,623' fill='#c5d8a8' opacity='0,47'/>
+    <rect x='750' y='593' width='10' height='30' fill='#453729' opacity='0.45'/>
+    <polygon points='904,450 868,606 940,606' fill='#c5d8a8' opacity='0,47'/>
+    <rect x='898' y='575' width='11' height='31' fill='#453729' opacity='0.45'/>
+    <polygon points='1061,480 1028,621 1094,621' fill='#c5d8a8' opacity='0,40'/>
+    <rect x='1056' y='593' width='10' height='28' fill='#453729' opacity='0.45'/>
+    <polygon points='1191,449 1156,599 1226,599' fill='#c5d8a8' opacity='0,39'/>
+    <rect x='1186' y='569' width='10' height='30' fill='#453729' opacity='0.45'/>
+    <polygon points='1337,454 1300,612 1374,612' fill='#c5d8a8' opacity='0,43'/>
+    <rect x='1332' y='580' width='11' height='32' fill='#453729' opacity='0.45'/>
+    <polygon points='1486,474 1456,603 1516,603' fill='#c5d8a8' opacity='0,36'/>
+    <rect x='1482' y='577' width='9' height='26' fill='#453729' opacity='0.45'/>
+  </g>
+
+  <rect y="646" width="1600" height="254" fill="url(#fog)"/>
+
+  <g>
+    <polygon points='44,606 5,761 83,761' fill='#284b34' opacity='0.86'/>
+    <rect x='38' y='724' width='12' height='37' fill='#453729' opacity='0.72'/>
+    <polygon points='161,582 115,767 207,767' fill='#315a3e' opacity='0.86'/>
+    <rect x='154' y='723' width='15' height='44' fill='#453729' opacity='0.72'/>
+    <polygon points='267,617 229,768 305,768' fill='#284b34' opacity='0.86'/>
+    <rect x='261' y='732' width='12' height='36' fill='#453729' opacity='0.72'/>
+    <polygon points='383,615 343,775 423,775' fill='#315a3e' opacity='0.86'/>
+    <rect x='376' y='737' width='13' height='38' fill='#453729' opacity='0.72'/>
+    <polygon points='493,560 442,766 544,766' fill='#284b34' opacity='0.86'/>
+    <rect x='485' y='717' width='16' height='49' fill='#453729' opacity='0.72'/>
+    <polygon points='626,530 567,766 685,766' fill='#315a3e' opacity='0.86'/>
+    <rect x='616' y='709' width='19' height='57' fill='#453729' opacity='0.72'/>
+    <polygon points='728,580 681,769 775,769' fill='#284b34' opacity='0.86'/>
+    <rect x='720' y='724' width='15' height='45' fill='#453729' opacity='0.72'/>
+    <polygon points='843,566 795,759 891,759' fill='#315a3e' opacity='0.86'/>
+    <rect x='836' y='713' width='15' height='46' fill='#453729' opacity='0.72'/>
+    <polygon points='965,601 924,765 1006,765' fill='#284b34' opacity='0.86'/>
+    <rect x='958' y='726' width='13' height='39' fill='#453729' opacity='0.72'/>
+    <polygon points='1076,619 1037,774 1115,774' fill='#315a3e' opacity='0.86'/>
+    <rect x='1070' y='737' width='12' height='37' fill='#453729' opacity='0.72'/>
+    <polygon points='1194,585 1145,780 1243,780' fill='#284b34' opacity='0.86'/>
+    <rect x='1186' y='733' width='16' height='47' fill='#453729' opacity='0.72'/>
+    <polygon points='1303,617 1269,753 1337,753' fill='#315a3e' opacity='0.86'/>
+    <rect x='1298' y='720' width='11' height='33' fill='#453729' opacity='0.72'/>
+    <polygon points='1408,621 1368,779 1448,779' fill='#284b34' opacity='0.86'/>
+    <rect x='1402' y='741' width='13' height='38' fill='#453729' opacity='0.72'/>
+    <polygon points='1530,528 1471,763 1589,763' fill='#315a3e' opacity='0.86'/>
+    <rect x='1520' y='707' width='19' height='56' fill='#453729' opacity='0.72'/>
+  </g>
+
+  <rect x="70" y="680" width="1460" height="170" rx="20" fill="#0b1a1a" opacity="0.52"/>
+  <text x="120" y="730" fill="#d9e8c8" font-family="Poppins, Arial, sans-serif" font-size="27" font-weight="700">Maden Izinleri</text>
+  <text x="120" y="792" fill="#ffffff" font-family="Poppins, Arial, sans-serif" font-size="60" font-weight="800">Danis Micir</text>
+  <text x="120" y="835" fill="#c3d4b9" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">Lacivert Ormancilik • Ormancilik Proje Gorseli</text>
+</svg>
