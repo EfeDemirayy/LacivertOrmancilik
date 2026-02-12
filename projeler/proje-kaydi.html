@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cemil Danis | Lacivert Ormancılık</title>
+  <title>Proje Kaydı | Lacivert Ormancılık</title>
   <link rel="icon" type="image/png" href="../img/sekmeikon.png" sizes="64x64">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../css/styleorman.css">
-  <link rel="stylesheet" href="../css/pages/projeler/cemil-danis.css">
+  <link rel="stylesheet" href="../css/pages/projeler/proje-kaydi.css">
 </head>
 <body>
   <div class="topbar">
@@ -69,47 +69,39 @@
     </div>
   </header>
 
-  <main>
-    <section class="page-hero" style="background-image:url('../img/background.jpg'); background-size:cover; background-position:center;">
+  <main class="project-record-main">
+    <section class="page-hero" style="background-image:url('../img/proje-yolu2.jpg'); background-size:cover; background-position:center;">
       <div class="page-hero__overlay"></div>
       <div class="container">
         <div class="page-hero__content" data-fade>
-          <span class="page-hero__badge">Diğer • Diğer Projeler</span>
-          <h1 class="page-hero__title">Cemil Danis</h1>
-          <p class="page-hero__subtitle">Cemil Danis projesinde ozel/kurumsal ihtiyaclara gore izin dosyasi, saha koordinasyonu ve surec takibi birlikte yurutuldu.</p>
+          <span class="page-hero__badge" id="recordBadge">Proje Kaydı</span>
+          <h1 class="page-hero__title" id="recordTitle">Proje Detay Kaydı</h1>
+          <p class="page-hero__subtitle" id="recordSubtitle">Excel tabanlı proje kaydı detayları bu sayfada sunulmaktadır.</p>
         </div>
       </div>
     </section>
 
-    <section class="section project-detail">
+    <section class="section project-record">
       <div class="container">
         <div class="madde-layout__switch" data-fade>
-<a class="" href="../madde16.html"><i class="fa-solid fa-file-lines"></i> Madde 16</a>
-<a class="" href="../madde17.html"><i class="fa-solid fa-industry"></i> Madde 17</a>
-<a class=" is-active" href="../diger.html"><i class="fa-solid fa-briefcase"></i> Diğer</a>
+          <a href="../madde16.html"><i class="fa-solid fa-file-lines"></i> Madde 16</a>
+          <a href="../madde17.html"><i class="fa-solid fa-industry"></i> Madde 17</a>
+          <a href="../diger.html"><i class="fa-solid fa-briefcase"></i> Diğer</a>
         </div>
 
-        <div class="project-detail__grid">
-          <figure class="project-detail__visual" data-fade>
-            <img src="../img/project-covers/cemil-danis.svg" alt="Cemil Danis proje görseli" loading="lazy">
+        <div class="project-record__grid">
+          <figure class="project-record__visual" data-fade>
+            <img id="recordImage" src="../img/background.jpg" alt="Proje görseli" loading="lazy">
           </figure>
-          <div class="project-detail__content" data-fade>
-            <h2>Proje Kapsamı</h2>
-            <p>Cemil Danis projesinde ozel/kurumsal ihtiyaclara gore izin dosyasi, saha koordinasyonu ve surec takibi birlikte yurutuldu.</p>
-            <p><strong>Odak:</strong> Proje tipine ozel saha kontrolu, basvuru hazirligi ve koordinasyon</p>
-            <p><strong>Beklenen Çıktı:</strong> Uygunluk dosyasi, islem takvimi ve sonuc raporu</p>
-            <p><strong>Tahmini Süre:</strong> 3-7 hafta</p>
-            <ul class="project-detail__list">
-              <li>Saha keşfi, ölçüm ve mevzuat uygunluk kontrolü</li>
-              <li>Teknik pafta, koordinat listesi ve başvuru dosyası hazırlışı</li>
-              <li>Kurum revizyonları, süreç takibi ve yerinde denetim</li>
-              <li>Kapanış raporu ve proje teslim dokümantasyonu</li>
-            </ul>
-            <div class="project-detail__actions">
-              <a class="hero-btn hero-btn--ghost" href="../diger.html">Kategoriye dön</a>
+          <article class="project-record__content" data-fade>
+            <h2 id="recordHeading">Excel Kayıt Detayı</h2>
+            <p id="recordKonu">Proje konusu yükleniyor...</p>
+            <ul class="project-record__meta" id="recordMeta"></ul>
+            <div class="project-record__actions">
+              <a class="hero-btn hero-btn--ghost" href="../diger.html" id="recordBackBtn">Listeye dön</a>
               <a class="hero-btn" href="../iletisim.html">Teklif al</a>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -149,10 +141,8 @@
     <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
   </footer>
 
+  <script src="../js/proje-kaydi.js" defer></script>
   <script src="../js/index.js" defer></script>
 </body>
 </html>
-
-
-
 

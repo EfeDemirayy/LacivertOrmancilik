@@ -91,6 +91,55 @@ function hexToRgba(hex, alpha = 1) {
       })
     }
 
+    /* ---------- Unified Header / Navigation ---------- */
+    const normalizeNavStructure = () => {
+      const navLinksEl = $("#navLinks")
+      if (!navLinksEl) return
+
+      const path = (window.location.pathname || "").toLocaleLowerCase("tr")
+      const currentFile = path.split("/").pop() || "index.html"
+      const isProjectFolder = /\/projeler\//.test(path)
+      const base = isProjectFolder ? "../" : ""
+
+      const href = (file) => `${base}${file}`
+      const isCurrent = (file) => currentFile === file.toLocaleLowerCase("tr")
+      const currentAttr = (file) => (isCurrent(file) ? ' aria-current="page"' : "")
+      const inKurumsal = isCurrent("hakkimizda.html") || isCurrent("sss.html")
+      const inOrmancilik = isCurrent("kanunveyonetmelikler.html") || isCurrent("ormanizinleri.html")
+      const inProjeler = isCurrent("madde16.html") || isCurrent("madde17.html") || isCurrent("diger.html") || isProjectFolder
+      const inGaleri = isCurrent("galeri.html")
+      const inIletisim = isCurrent("iletisim.html")
+
+      navLinksEl.innerHTML = `
+        <li class="nav__dropdown">
+          <a href="${href("hakkimizda.html")}" class="nav__link${inKurumsal ? " is-current" : ""}">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="${href("hakkimizda.html")}"${currentAttr("hakkimizda.html")}>Hakkımızda</a></li>
+            <li><a href="${href("sss.html")}"${currentAttr("sss.html")}>Sıkça Sorulan Sorular</a></li>
+          </ul>
+        </li>
+        <li class="nav__dropdown">
+          <a href="${href("ormanizinleri.html")}" class="nav__link${inOrmancilik ? " is-current" : ""}">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="${href("kanunveyonetmelikler.html")}"${currentAttr("kanunveyonetmelikler.html")}>Kanun ve Yönetmelikler</a></li>
+            <li><a href="${href("ormanizinleri.html")}"${currentAttr("ormanizinleri.html")}>Orman İzinleri</a></li>
+          </ul>
+        </li>
+        <li class="nav__dropdown">
+          <a href="${href("madde16.html")}" class="nav__link${inProjeler ? " is-current" : ""}">Projeler <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="${href("madde16.html")}"${currentAttr("madde16.html")}>Madde 16</a></li>
+            <li><a href="${href("madde17.html")}"${currentAttr("madde17.html")}>Madde 17</a></li>
+            <li><a href="${href("diger.html")}"${currentAttr("diger.html")}>Diğer</a></li>
+          </ul>
+        </li>
+        <li><a href="${href("galeri.html")}" class="nav__link${inGaleri ? " is-current" : ""}"${currentAttr("galeri.html")}>Galeri</a></li>
+        <li><a href="${href("iletisim.html")}" class="nav__link${inIletisim ? " is-current" : ""}"${currentAttr("iletisim.html")}>İletişim</a></li>
+      `
+    }
+
+    normalizeNavStructure()
+
     /* ---------- Burger Menu ---------- */
     const burger = $("#burger")
     const navLinks = $("#navLinks")
@@ -204,6 +253,181 @@ function hexToRgba(hex, alpha = 1) {
         })
       })
     }
+
+    /* ---------- Homepage Directional Motion Setup ---------- */
+    const setupHomeMotion = () => {
+      const homeMain = $(".home-main")
+      if (!homeMain) return
+
+      const assignMotion = (selector, direction, delayStart = 0, delayStep = 90) => {
+        const items = Array.from(homeMain.querySelectorAll(selector))
+        if (!items.length) return
+
+        items.forEach((item, index) => {
+          const resolvedDirection = Array.isArray(direction)
+            ? direction[index % direction.length]
+            : direction
+
+          if (!item.dataset.fadeDir) {
+            item.dataset.fadeDir = resolvedDirection
+          }
+
+          if (!item.style.getPropertyValue("--fade-delay")) {
+            item.style.setProperty("--fade-delay", `${delayStart + index * delayStep}ms`)
+          }
+        })
+      }
+
+      assignMotion(".index-overview__content[data-fade]", "left", 90, 0)
+      assignMotion(".index-overview__visual[data-fade]", "right", 180, 0)
+
+      assignMotion(".index-solutions .index-section__head[data-fade]", "up", 60, 0)
+      assignMotion(
+        ".index-solutions__grid .index-solution-card[data-fade]",
+        ["left", "up", "right", "up"],
+        110,
+        90,
+      )
+
+      assignMotion(".index-process .index-section__head[data-fade]", "up", 60, 0)
+      assignMotion(
+        ".index-process__timeline .index-step[data-fade]",
+        ["left", "up", "up", "right"],
+        100,
+        80,
+      )
+
+      assignMotion(".index-project-hub .index-section__head[data-fade]", "up", 60, 0)
+      assignMotion(
+        ".index-project-hub__grid .index-project-card[data-fade]",
+        ["left", "up", "right"],
+        110,
+        75,
+      )
+
+      assignMotion(".index-map-card[data-fade]", "left", 90, 0)
+      assignMotion(".index-contact-card[data-fade]", "right", 140, 0)
+      assignMotion(".index-cta-band__content[data-fade]", "up", 90, 0)
+    }
+
+    setupHomeMotion()
+
+    /* ---------- Global Directional Motion Setup (All Pages) ---------- */
+    const setupGlobalMotion = () => {
+      const fadeElements = Array.from($$("[data-fade]"))
+      if (!fadeElements.length) return
+
+      const directionCycle = ["left", "up", "right", "up"]
+      const delayStep = 65
+      const delayBase = 60
+      const delayWave = 6
+
+      // Keep manually provided direction/delay values and normalize aliases.
+      fadeElements.forEach((el) => {
+        if (!el.dataset.fadeDir && el.dataset.dir) {
+          el.dataset.fadeDir = el.dataset.dir
+        }
+
+        if (!el.style.getPropertyValue("--fade-delay") && el.dataset.delay) {
+          const raw = `${el.dataset.delay}`.trim()
+          const numericDelay = Number.parseFloat(raw)
+          if (Number.isFinite(numericDelay)) {
+            const normalized = Math.max(0, numericDelay - 1)
+            el.style.setProperty("--fade-delay", `${normalized * 90}ms`)
+          } else if (/(ms|s)$/.test(raw)) {
+            el.style.setProperty("--fade-delay", raw)
+          }
+        }
+      })
+
+      // Semantic presets: text from left, visuals from right, section heads from bottom.
+      const presetDirections = [
+        [".index-overview__content[data-fade], .content-text[data-fade], .project-detail__content[data-fade], .project-record__content[data-fade], .gallery-stage__copy[data-fade]", "left"],
+        [".index-overview__visual[data-fade], .content-image[data-fade], .project-detail__visual[data-fade], .project-record__visual[data-fade], .gallery-stage__stack[data-fade], .faq-pro__accordion[data-fade]", "right"],
+        [".index-section__head[data-fade], .section__header[data-fade], .projects-section__head[data-fade], .gallery-strip__head[data-fade], .gallery-console[data-fade], .projects-filter[data-fade]", "up"],
+        [".faq-pro__meta[data-fade]", "down"],
+      ]
+
+      presetDirections.forEach(([selector, direction]) => {
+        Array.from(document.querySelectorAll(selector)).forEach((el) => {
+          if (!el.dataset.fadeDir) {
+            el.dataset.fadeDir = direction
+          }
+        })
+      })
+
+      const groups = new Map()
+      const groupSelector = [
+        ".index-overview__grid",
+        ".content-grid",
+        ".project-detail__grid",
+        ".index-solutions__grid",
+        ".index-project-hub__grid",
+        ".index-process__timeline",
+        ".process-grid",
+        ".stats-grid",
+        ".projects-grid",
+        ".projects-section",
+        ".projects-year-group",
+        ".faq-pro__layout",
+        ".gallery-stage",
+        ".gallery-mosaic",
+        ".gallery-strip__rail",
+        ".contact-pro__grid",
+        ".index-map-wrap__grid",
+      ].join(", ")
+
+      fadeElements.forEach((el) => {
+        const groupRoot = el.closest(groupSelector) || el.parentElement || document.body
+        if (!groups.has(groupRoot)) groups.set(groupRoot, [])
+        groups.get(groupRoot).push(el)
+      })
+
+      groups.forEach((items) => {
+        items.forEach((el, index) => {
+          if (!el.dataset.fadeDir) {
+            el.dataset.fadeDir = directionCycle[index % directionCycle.length]
+          }
+
+          if (!el.style.getPropertyValue("--fade-delay")) {
+            const waveIndex = index % delayWave
+            el.style.setProperty("--fade-delay", `${delayBase + waveIndex * delayStep}ms`)
+          }
+        })
+      })
+    }
+
+    setupGlobalMotion()
+
+    /* ---------- FAQ Left Panel Downward Drift ---------- */
+    const setupFaqMetaDrift = () => {
+      const faqMeta = $(".faq-pro__meta[data-fade]")
+      const faqSection = faqMeta?.closest(".faq-pro")
+      if (!faqMeta || !faqSection) return
+
+      let ticking = false
+      const updateDrift = () => {
+        const rect = faqSection.getBoundingClientRect()
+        const vh = window.innerHeight || 1
+        const total = rect.height + vh
+        const progress = Math.max(0, Math.min(1, (vh - rect.top) / total))
+        const drift = Math.min(34, progress * 40)
+        faqMeta.style.setProperty("--faq-drift", `${drift.toFixed(1)}px`)
+        ticking = false
+      }
+
+      const onScroll = () => {
+        if (ticking) return
+        ticking = true
+        window.requestAnimationFrame(updateDrift)
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true })
+      window.addEventListener("resize", onScroll)
+      updateDrift()
+    }
+
+    setupFaqMetaDrift()
 
     /* ---------- Enhanced Intersection Observer ---------- */
     if (window.IntersectionObserver) {
@@ -542,6 +766,14 @@ function hexToRgba(hex, alpha = 1) {
               (card) => !card.classList.contains("is-hidden"),
             )
             section.classList.toggle("is-hidden-section", !hasVisibleCard)
+          })
+
+          const yearGroups = Array.from(sectionRoot.querySelectorAll(".projects-year-group"))
+          yearGroups.forEach((group) => {
+            const hasVisibleCard = Array.from(group.querySelectorAll(".project-card")).some(
+              (card) => !card.classList.contains("is-hidden"),
+            )
+            group.classList.toggle("is-hidden-group", !hasVisibleCard)
           })
         }
 

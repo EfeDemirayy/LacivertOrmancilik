@@ -11,7 +11,7 @@
       --shadow-lg:     0 4px 24px rgba(10,31,68,0.09);
     }
 
-    /* Sayfa zemini ve tipografi */
+/* Sayfa zemini ve tipografi */
     body{
       background: var(--clr-bg);
       color: var(--clr-text);
@@ -21,10 +21,15 @@
       line-height: 1.65;
     }
 
+    .cookie-policy-main{
+      padding-top: 124px;
+      padding-bottom: 2.2rem;
+    }
+
     /* Kapsayıcı kart */
     .cookie-policy-container{
       max-width: 700px;
-      margin: 2.5rem auto;
+      margin: 1.4rem auto;
       background: var(--clr-surface);
       border-radius: 18px;
       box-shadow: var(--shadow-lg);
@@ -74,6 +79,9 @@
 
     /* Mobil uyarlamalar */
     @media (max-width: 700px){
+      .cookie-policy-main{
+        padding-top: 108px;
+      }
       .cookie-policy-container{
         padding: 1.2rem .5rem;
         border-radius: 10px;
