@@ -83,7 +83,7 @@
   opacity: 1;
   transform:
     perspective(1100px)
-    translate3d(0, 0, 0)
+    translate3d(0, var(--parallax-y, 0px), 0)
     rotateX(0deg)
     rotateY(0deg)
     scale(1);

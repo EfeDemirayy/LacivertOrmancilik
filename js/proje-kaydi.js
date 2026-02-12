@@ -1,12 +1,5 @@
 ﻿(() => {
-  const FALLBACK_IMAGES = [
-    "../img/proje-yolu.jpg",
-    "../img/proje-yolu2.jpg",
-    "../img/surdurulebilir-orman.jpg",
-    "../img/drone-haritalama.jpg",
-    "../img/res-projesi.jpg",
-    "../img/batikaradeniz3.jpg",
-  ];
+  const FOREST_IMAGE_POOL = Array.isArray(window.FOREST_IMAGE_POOL) ? window.FOREST_IMAGE_POOL : [];
 
   const params = new URLSearchParams(window.location.search);
   const get = (key, fallback = "") => String(params.get(key) || fallback).trim();
@@ -78,13 +71,20 @@
     return Math.abs(hash);
   };
 
+  const getForestImage = (seed = "") => {
+    if (FOREST_IMAGE_POOL.length) {
+      const index = hashString(seed) % FOREST_IMAGE_POOL.length;
+      return FOREST_IMAGE_POOL[index];
+    }
+    return "../img/panel-16-front.jpg";
+  };
+
   const resolveImage = () => {
     if (rawImage) {
       if (rawImage.startsWith("http") || rawImage.startsWith("../")) return rawImage;
       if (rawImage.startsWith("img/")) return `../${rawImage}`;
     }
-    const index = hashString(`${firma}-${grup}-${madde}`) % FALLBACK_IMAGES.length;
-    return FALLBACK_IMAGES[index];
+    return getForestImage(`${firma}-${grup}-${madde}`);
   };
 
   const setText = (id, value) => {

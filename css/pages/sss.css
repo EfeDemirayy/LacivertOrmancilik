@@ -9,7 +9,7 @@
 .faq-pro__meta[data-fade].visible {
   transform:
     perspective(1100px)
-    translate3d(0, var(--faq-drift), 0)
+    translate3d(0, calc(var(--faq-drift) + var(--parallax-y, 0px)), 0)
     rotateX(0deg)
     rotateY(0deg)
     scale(1);

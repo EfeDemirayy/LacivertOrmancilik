@@ -1,4 +1,4 @@
-/* index.js – Lacivert Ormancılık (lacivert uyumlu sürüm)
+/* index.js - Lacivert Ormancılık (lacivert uyumlu sürüm)
  * --------------------------------------------------------------
  * Tüm sayfalar için birleştirilmiş ve güncellenmiş JS dosyası.
  * Gerekli tüm fonksiyonlar ve olay dinleyicileri burada yer almaktadır.
@@ -429,6 +429,131 @@ function hexToRgba(hex, alpha = 1) {
 
     setupFaqMetaDrift()
 
+    /* ---------- Cinematic Parallax for Key Blocks ---------- */
+    const setupCinematicParallax = () => {
+      const targets = Array.from(
+        document.querySelectorAll(
+          ".index-section__head[data-fade], .section__header[data-fade], .page-hero__content[data-fade], .gallery-stage__copy[data-fade], .index-cta-band__content[data-fade], .faq-pro__meta[data-fade]",
+        ),
+      )
+      if (!targets.length) return
+
+      let rafId = 0
+      const update = () => {
+        const vh = window.innerHeight || 1
+        targets.forEach((el) => {
+          const rect = el.getBoundingClientRect()
+          if (rect.bottom < 0 || rect.top > vh) return
+          const center = rect.top + rect.height / 2
+          const normalized = (center - vh / 2) / vh
+          const drift = Math.max(-12, Math.min(12, -normalized * 18))
+          el.style.setProperty("--parallax-y", `${drift.toFixed(2)}px`)
+        })
+        rafId = 0
+      }
+
+      const requestUpdate = () => {
+        if (rafId) return
+        rafId = window.requestAnimationFrame(update)
+      }
+
+      window.addEventListener("scroll", requestUpdate, { passive: true })
+      window.addEventListener("resize", requestUpdate)
+      requestUpdate()
+    }
+
+    setupCinematicParallax()
+
+    /* ---------- Interactive Tilt + Spotlight ---------- */
+    const setupTiltSpotlight = () => {
+      if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return
+
+      const tiltSelector = [
+        ".index-solution-card[data-fade]",
+        ".index-project-card[data-fade]",
+        ".project-card[data-fade]",
+        ".permit-card[data-fade]",
+        ".law-card[data-fade]",
+        ".law-alert[data-fade]",
+        ".service-card[data-fade]",
+        ".process-step[data-fade]",
+        ".project-detail__content[data-fade]",
+        ".project-detail__visual[data-fade]",
+        ".project-record__content[data-fade]",
+        ".project-record__visual[data-fade]",
+        ".contact-pro__panel[data-fade]",
+        ".gallery-console[data-fade]",
+        ".index-map-card[data-fade]",
+        ".index-contact-card[data-fade]",
+        ".madde-brief[data-fade]",
+        ".projects-filter[data-fade]",
+      ].join(", ")
+
+      const tiltCards = Array.from(document.querySelectorAll(tiltSelector))
+      if (!tiltCards.length) return
+
+      tiltCards.forEach((card) => {
+        card.classList.add("fx-tilt")
+        if (!card.querySelector(":scope > .fx-spotlight")) {
+          const spot = document.createElement("span")
+          spot.className = "fx-spotlight"
+          card.appendChild(spot)
+        }
+
+        let frame = 0
+        let pointerX = 0
+        let pointerY = 0
+
+        const update = () => {
+          const rect = card.getBoundingClientRect()
+          if (!rect.width || !rect.height) {
+            frame = 0
+            return
+          }
+
+          const px = Math.min(1, Math.max(0, (pointerX - rect.left) / rect.width))
+          const py = Math.min(1, Math.max(0, (pointerY - rect.top) / rect.height))
+          const tiltY = (px - 0.5) * 9.6
+          const tiltX = (0.5 - py) * 8.6
+
+          card.style.setProperty("--fx-mx", `${(px * 100).toFixed(2)}%`)
+          card.style.setProperty("--fx-my", `${(py * 100).toFixed(2)}%`)
+          card.style.setProperty("--fx-rotate-x", `${tiltX.toFixed(2)}deg`)
+          card.style.setProperty("--fx-rotate-y", `${tiltY.toFixed(2)}deg`)
+          frame = 0
+        }
+
+        const requestUpdate = () => {
+          if (frame) return
+          frame = window.requestAnimationFrame(update)
+        }
+
+        card.addEventListener("mouseenter", () => {
+          card.classList.add("fx-tilt-active")
+        })
+
+        card.addEventListener("mousemove", (event) => {
+          pointerX = event.clientX
+          pointerY = event.clientY
+          requestUpdate()
+        })
+
+        card.addEventListener("mouseleave", () => {
+          if (frame) {
+            window.cancelAnimationFrame(frame)
+            frame = 0
+          }
+          card.classList.remove("fx-tilt-active")
+          card.style.setProperty("--fx-rotate-x", "0deg")
+          card.style.setProperty("--fx-rotate-y", "0deg")
+          card.style.setProperty("--fx-mx", "50%")
+          card.style.setProperty("--fx-my", "50%")
+        })
+      })
+    }
+
+    setupTiltSpotlight()
+
     /* ---------- Enhanced Intersection Observer ---------- */
     if (window.IntersectionObserver) {
       const observerOptions = {
@@ -452,6 +577,8 @@ function hexToRgba(hex, alpha = 1) {
               const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 150
               entry.target.style.transitionDelay = `${delay}ms`
             }
+
+            observer.unobserve(entry.target)
           }
         })
       }, observerOptions)
@@ -623,6 +750,34 @@ function hexToRgba(hex, alpha = 1) {
         const detailTitle = card.querySelector(".hero-detail__title")
         const detailText = card.querySelector(".hero-detail__text")
         const showProjectsBtn = card.querySelector(".js-show-projects")
+        const panelItems = Array.from(projectsPanel?.querySelectorAll(".hero-panel__item") || [])
+        const cardTitle = card.querySelector(".hero-card__title")?.textContent?.trim() || "Proje"
+
+        const simplifyProjectsButton = () => {
+          if (!showProjectsBtn) return
+          showProjectsBtn.classList.add("hero-btn--projects")
+          showProjectsBtn.innerHTML = "Projeleri Gör"
+        }
+
+        const simplifyPanelHeader = () => {
+          if (!projectsPanel) return
+
+          const summary = projectsPanel.querySelector(".hero-panel__summary")
+          if (summary) summary.remove()
+
+          const head = projectsPanel.querySelector(".hero-panel__head")
+          if (!head) return
+
+          const meta = head.querySelector(".hero-panel__meta")
+          if (meta) {
+            const basicLabel = document.createElement("span")
+            basicLabel.textContent = `${cardTitle} Projeleri`
+            meta.replaceWith(basicLabel)
+          } else {
+            const basicLabel = head.querySelector("span")
+            if (basicLabel) basicLabel.textContent = `${cardTitle} Projeleri`
+          }
+        }
 
         const closeAllPanels = () => {
           projectsPanel?.classList.remove("active")
@@ -631,11 +786,10 @@ function hexToRgba(hex, alpha = 1) {
         }
 
         const enhanceProjectItem = (btn) => {
-          if (btn.dataset.enhanced === "1") return
           const title = btn.dataset.title || btn.textContent.trim() || "Proje"
           const desc = btn.dataset.text || "Detaylı proje sayfasını görüntüleyin."
 
-          btn.textContent = ""
+          btn.innerHTML = ""
 
           const titleEl = document.createElement("span")
           titleEl.className = "hero-panel__item-title"
@@ -645,13 +799,12 @@ function hexToRgba(hex, alpha = 1) {
           descEl.className = "hero-panel__item-desc"
           descEl.textContent = desc
 
-          const ctaEl = document.createElement("span")
-          ctaEl.className = "hero-panel__item-link"
-          ctaEl.textContent = "Detay sayfaya git"
-
-          btn.append(titleEl, descEl, ctaEl)
-          btn.dataset.enhanced = "1"
+          btn.append(titleEl, descEl)
+          btn.classList.add("is-ready")
         }
+
+        simplifyProjectsButton()
+        simplifyPanelHeader()
 
         showProjectsBtn?.addEventListener("click", () => {
           if (projectsPanel?.classList.contains("active")) return
@@ -661,7 +814,7 @@ function hexToRgba(hex, alpha = 1) {
           requestAnimationFrame(() => projectsPanel?.classList.add("active"))
         })
 
-        projectsPanel?.querySelectorAll(".hero-panel__item").forEach((btn) => {
+        panelItems.forEach((btn) => {
           enhanceProjectItem(btn)
           btn.addEventListener("click", () => {
             const targetUrl = btn.dataset.url
@@ -699,7 +852,6 @@ function hexToRgba(hex, alpha = 1) {
         })
       })
     }
-
     bindHeroPanels()
 
     /* ---------- Madde Sayfaları Filtreleme ---------- */
@@ -901,3 +1053,6 @@ function hexToRgba(hex, alpha = 1) {
   styleSheet.textContent = styles
   document.head.appendChild(styleSheet)
 })()
+
+
+

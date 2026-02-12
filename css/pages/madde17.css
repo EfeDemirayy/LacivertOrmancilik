@@ -189,7 +189,7 @@
   }
 }
 
-/* Sahis/sirket ayirimi ve soyadi blur stilleri */
+/* Yillara gore kayit gruplari */
 .madde-main .projects-year-group {
   margin-top: 0.95rem;
 }
@@ -227,20 +227,6 @@
 
 .madde-main .projects-year-group.is-hidden-group {
   display: none;
-}
-
-.madde-main .project-card__person-name {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  flex-wrap: wrap;
-}
-
-.madde-main .project-card__person-surname {
-  letter-spacing: 0.06em;
-  filter: none;
-  user-select: text;
 }
 
 @media (max-width: 760px) {

@@ -17,16 +17,7 @@
     },
   };
 
-  const FALLBACK_IMAGES = [
-    "img/batikaradeniz3.jpg",
-    "img/surdurulebilir-orman.jpg",
-    "img/proje-yolu.jpg",
-    "img/proje-yolu2.jpg",
-    "img/res-projesi.jpg",
-    "img/drone-haritalama.jpg",
-    "img/fidandikim3.jpg",
-    "img/diger-referanslar.jpeg",
-  ];
+  const FOREST_IMAGE_POOL = Array.isArray(window.FOREST_IMAGE_POOL) ? window.FOREST_IMAGE_POOL : [];
 
   const getCurrentPageName = () => {
     const parts = window.location.pathname.split("/").filter(Boolean);
@@ -54,102 +45,12 @@
     return keywords.some((keyword) => text.includes(keyword));
   };
 
-  const escapeRegExp = (value = "") => String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-
-  const ENTITY_HINTS = [
-    "as",
-    "a s",
-    "anonim",
-    "ltd",
-    "limited",
-    "san",
-    "tic",
-    "ins",
-    "inş",
-    "nak",
-    "maden",
-    "enerji",
-    "res",
-    "belediye",
-    "belediyesi",
-    "mudurlugu",
-    "müdürlüğü",
-    "bakanligi",
-    "genel mudurlugu",
-    "kooperatif",
-    "kooperatifi",
-    "grup",
-    "kurumu",
-    "uygulama",
-    "başkanlığı",
-    "baskanligi",
-  ];
-
-  const isLikelyPersonName = (name = "") => {
-    const normalized = normalizeKey(name);
-    if (!normalized) return false;
-    if (/[0-9]/.test(normalized)) return false;
-    if (containsAny(normalized, ENTITY_HINTS)) return false;
-
-    const words = normalized.split(" ").filter(Boolean);
-    if (words.length < 2 || words.length > 3) return false;
-    return words.every((word) => /^[a-z]+$/.test(word) && word.length >= 2);
-  };
-
-  const maskSurnameWord = (value = "") => {
-    return String(value || "").trim();
-  };
-
   const getNamePresentation = (firma = "") => {
     const fullName = String(firma || "").trim().replace(/\s+/g, " ");
-    if (!fullName) {
-      return {
-        isPerson: false,
-        typeLabel: "Şirket",
-        displayName: "Belirtilmeyen Firma",
-        firstName: "Belirtilmeyen Firma",
-        surnameMasked: "",
-      };
-    }
-
-    const isPerson = isLikelyPersonName(fullName);
-    if (!isPerson) {
-      return {
-        isPerson: false,
-        typeLabel: "Şirket",
-        displayName: fullName,
-        firstName: fullName,
-        surnameMasked: "",
-      };
-    }
-
-    const nameParts = fullName.split(/\s+/).filter(Boolean);
-    const firstName = nameParts[0] || fullName;
-    const surnameMasked = nameParts.slice(1).join(" ");
-    const displayName = fullName;
-
     return {
-      isPerson: true,
-      typeLabel: "Şahıs",
-      displayName,
-      firstName,
-      surnameMasked,
+      typeLabel: "Proje Kaydı",
+      displayName: fullName || "Belirtilmeyen Firma",
     };
-  };
-
-  const anonymizePersonText = (text = "", originalName = "", displayName = "") => {
-    let safeText = String(text || "");
-    const fullName = String(originalName || "").trim();
-    if (!safeText || !fullName) return safeText;
-
-    safeText = safeText.replace(new RegExp(escapeRegExp(fullName), "giu"), displayName);
-
-    const parts = fullName.split(/\s+/).filter(Boolean);
-    parts.slice(1).forEach((surname) => {
-      safeText = safeText.replace(new RegExp(escapeRegExp(surname), "giu"), maskSurnameWord(surname));
-    });
-
-    return safeText;
   };
 
   const classifyRecord = (record = {}) => {
@@ -208,14 +109,16 @@
   };
 
   const getFallbackImage = (seed = "") => {
-    const index = hashString(seed) % FALLBACK_IMAGES.length;
-    return FALLBACK_IMAGES[index];
+    if (FOREST_IMAGE_POOL.length) {
+      const index = hashString(seed) % FOREST_IMAGE_POOL.length;
+      return FOREST_IMAGE_POOL[index];
+    }
+    return "img/panel-16-front.jpg";
   };
 
   const buildResolver = () => {
     const directory = window.PROJE_DIZIN || {};
     const pageSet = new Set(Array.isArray(directory.slugs) ? directory.slugs.map(String) : []);
-    const coverSet = new Set(Array.isArray(directory.coverSlugs) ? directory.coverSlugs.map(String) : []);
 
     const aliasMap = new Map();
     const aliasSource = directory.aliases || {};
@@ -270,10 +173,7 @@
     };
 
     const resolveImage = (slug, firma) => {
-      if (slug && coverSet.has(slug)) {
-        return `img/project-covers/${slug}.svg`;
-      }
-      return getFallbackImage(firma);
+      return getFallbackImage(slug || firma);
     };
 
     return { pageSet, resolveProjectSlug, resolveImage };
@@ -339,22 +239,7 @@
     badge.textContent = grup;
 
     const heading = document.createElement("h3");
-    if (namePresentation.isPerson) {
-      heading.className = "project-card__person-name";
-      const firstName = document.createElement("span");
-      firstName.className = "project-card__person-first";
-      firstName.textContent = namePresentation.firstName;
-
-      const surname = document.createElement("span");
-      surname.className = "project-card__person-surname";
-      surname.textContent = namePresentation.surnameMasked || "•••";
-
-      heading.appendChild(firstName);
-      heading.appendChild(document.createTextNode(" "));
-      heading.appendChild(surname);
-    } else {
-      heading.textContent = displayFirma;
-    }
+    heading.textContent = displayFirma;
 
     const description = document.createElement("p");
     description.textContent = konu;
@@ -364,7 +249,6 @@
     meta.appendChild(createMetaItem("Tarih", tarih));
     meta.appendChild(createMetaItem("Madde", madde));
     meta.appendChild(createMetaItem("Grup", grup));
-    meta.appendChild(createMetaItem("Kayıt Türü", namePresentation.typeLabel));
 
     const actions = document.createElement("div");
     actions.className = "project-card__actions";
@@ -480,8 +364,9 @@
     const resolver = buildResolver();
 
     const years = new Set(filtered.map((item) => item.yil));
-    const personCount = filtered.filter((item) => isLikelyPersonName(item.firma)).length;
-    const companyCount = filtered.length - personCount;
+    const groups = new Set(filtered.map((item) => item.grup || "Belirtilmeyen Grup"));
+    const latestYear = Math.max(...Array.from(years));
+    const latestYearCount = filtered.filter((item) => item.yil === latestYear).length;
 
     const summary = document.createElement("section");
     summary.className = "projects-summary";
@@ -491,8 +376,8 @@
     summaryGrid.className = "projects-summary__grid";
     summaryGrid.appendChild(createSummaryBox("Toplam Kayıt", String(filtered.length)));
     summaryGrid.appendChild(createSummaryBox("Yıl", String(years.size)));
-    summaryGrid.appendChild(createSummaryBox("Şirket", String(companyCount)));
-    summaryGrid.appendChild(createSummaryBox("Şahıs", String(personCount)));
+    summaryGrid.appendChild(createSummaryBox("Grup", String(groups.size)));
+    summaryGrid.appendChild(createSummaryBox(`${latestYear} Kayıt`, String(latestYearCount)));
 
     const note = document.createElement("p");
     note.className = "projects-summary__note";
@@ -514,8 +399,6 @@
       .forEach((year) => {
         const yearRecords = recordsByYear.get(year) || [];
         const yearGroups = Array.from(new Set(yearRecords.map((item) => item.grup || "Belirtilmeyen Grup")));
-        const yearPersonRecords = yearRecords.filter((item) => isLikelyPersonName(item.firma));
-        const yearCompanyRecords = yearRecords.filter((item) => !isLikelyPersonName(item.firma));
 
         const section = document.createElement("section");
         section.className = "projects-section projects-section--year";
@@ -534,19 +417,14 @@
 
         const meta = document.createElement("p");
         meta.className = "projects-section__meta";
-        meta.textContent = `${yearRecords.length} kayıt • ${yearGroups.join(" • ")} • ${yearCompanyRecords.length} şirket • ${yearPersonRecords.length} şahıs`;
+        meta.textContent = `${yearRecords.length} kayıt • ${yearGroups.join(" • ")}`;
 
         head.appendChild(tag);
         head.appendChild(title);
         head.appendChild(meta);
 
         section.appendChild(head);
-        if (yearCompanyRecords.length) {
-          section.appendChild(buildYearTypeGroup("Şirket Projeleri", yearCompanyRecords, resolver, "is-company"));
-        }
-        if (yearPersonRecords.length) {
-          section.appendChild(buildYearTypeGroup("Şahıs Projeleri", yearPersonRecords, resolver, "is-person"));
-        }
+        section.appendChild(buildYearTypeGroup("Kayıtlar", yearRecords, resolver, ""));
         container.appendChild(section);
       });
   };
