@@ -4,37 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Galeri | Lacivert Ormancılık</title>
-  <meta name="description" content="Lacivert Ormancılık'ın gerçekleştirdiği projeler, çalışmalar ve etkinliklerden görüntüler.">
-
-  <!-- JivoChat (anasayfadaki ile aynı) -->
+  <meta name="description" content="Lacivert Ormancılık saha çalışmalarını, izin süreçlerini ve teknik uygulamalarını görsel arşiv formatında keşfedin.">
   <script src="//code.jivosite.com/widget/jLHRdCZAjs" async></script>
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64">
 
-  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  />
+  >
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-  />
+  >
 
-  <!-- Libs -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <!-- Ana tema -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/styleorman.css">
+  <link rel="stylesheet" href="css/pages/galeri.css">
 </head>
 <body>
 
-  <!-- ÜST BAR (anasayfa ile aynı) -->
   <div class="topbar">
     <div class="topbar__left">
       <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
@@ -42,24 +36,17 @@
         <span>omer@lacivert.cc</span>
       </a>
       <span class="topbar__divider"></span>
-      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/KOCAELİ</span>
     </div>
     <div class="topbar__right">
       <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
     </div>
   </div>
 
-  <!-- Preloader -->
-  <div id="preloader" class="preloader">
-    <div class="preloader__spinner"><i class="fas fa-spinner fa-pulse"></i></div>
-  </div>
-
-  <!-- Scroll Progress -->
   <div id="progress" class="progress"><div class="progress__bar"></div></div>
 
-  <!-- HEADER / NAVBAR (anasayfadaki ile birebir) -->
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
@@ -79,10 +66,12 @@
             <ul class="dropdown">
               <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
               <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+              <li><a href="madde16.html">Madde 16</a></li>
+              <li><a href="madde17.html">Madde 17</a></li>
+              <li><a href="diger.html">Diğer</a></li>
             </ul>
           </li>
           <li><a href="galeri.html" class="nav__link" aria-current="page">Galeri</a></li>
-          <li><a href="haberler.html" class="nav__link">Blog&Haberler</a></li>
           <li class="nav__dropdown">
             <a href="iletisim.html" class="nav__link">İletişim <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
@@ -97,560 +86,384 @@
     </div>
   </header>
 
-  <main>
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-      <div class="page-hero__background"></div>
-      <div class="container">
-        <div class="page-hero__content" data-fade>
-          <div class="page-hero__badge">
-            <i class="fas fa-images"></i>
-            <span>Görsel Arşiv</span>
-          </div>
-          <h1 class="page-hero__title">Proje Galerisi</h1>
-          <p class="page-hero__subtitle">
-            Gerçekleştirdiğimiz projeler, çalışmalar ve etkinliklerden öne çıkan görüntüler
+  <main class="gallery-main">
+    <section id="kurumsal" class="gallery-stage">
+      <div class="gallery-stage__ambient"></div>
+      <div class="container gallery-stage__grid">
+        <div class="gallery-stage__copy" data-fade>
+          <p class="gallery-kicker">Saha Günlüğü</p>
+          <h1>Galeri Deneyimi</h1>
+          <p>
+            Bu sayfa klasik bir galeri değil; filtrelenebilir görseller, büyük-küçük dinamik kartlar
+            ve detaylı inceleme penceresiyle saha çalışmalarını daha hızlı keşfetmeniz için yeniden tasarlandı.
           </p>
+          <div class="gallery-stage__actions">
+            <a href="#ormancilik" class="gallery-btn">Arşivi Keşfet</a>
+            <a href="iletisim.html" class="gallery-btn gallery-btn--ghost">Yeni Proje Görüşmesi</a>
+          </div>
+          <div class="gallery-stage__metrics">
+            <article>
+              <strong data-count="12">12</strong>
+              <span>Seçili Görsel</span>
+            </article>
+            <article>
+              <strong data-count="5">5</strong>
+              <span>Filtre Grubu</span>
+            </article>
+            <article>
+              <strong data-count="24">24</strong>
+              <span>Saatte İlk Geri Dönüş</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="gallery-stage__stack" data-fade>
+          <article class="stack-card stack-card--tall">
+            <img src="img/gallery/gal1.jpg" alt="Ağaç tespit ve aynalama çalışması">
+            <div class="stack-card__label">Ağaç Tespit</div>
+          </article>
+          <article class="stack-card">
+            <img src="img/drone-haritalama.jpg" alt="Drone haritalama">
+            <div class="stack-card__label">Teknik Ölçüm</div>
+          </article>
+          <article class="stack-card">
+            <img src="img/gallery/gal6.jpg" alt="Asfalt plenti saha ön incelemesi">
+            <div class="stack-card__label">Saha Ön İnceleme</div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY FILTERS -->
-    <section class="section">
+    <section id="ormancilik" class="gallery-showcase">
       <div class="container">
-        <div class="gallery-filters" data-fade>
-          <button class="filter-btn filter-btn--active" data-filter="all">
-            <i class="fas fa-th"></i>
-            <span>Tümü</span>
-          </button>
-          <button class="filter-btn" data-filter="projects">
-            <i class="fas fa-hammer"></i>
-            <span>Projeler</span>
-          </button>
-          <button class="filter-btn" data-filter="nature">
-            <i class="fas fa-leaf"></i>
-            <span>Doğa</span>
-          </button>
-          <button class="filter-btn" data-filter="technology">
-            <i class="fas fa-drone"></i>
-            <span>Teknoloji</span>
-          </button>
-          <button class="filter-btn" data-filter="team">
-            <i class="fas fa-users"></i>
-            <span>Ekip</span>
-          </button>
+        <div class="gallery-console" data-fade>
+          <div>
+            <p class="gallery-kicker">Akıllı Filtre</p>
+            <h2>Projeleri Kategori Bazlı İnceleyin</h2>
+          </div>
+          <div class="gallery-console__meta">
+            <span>Aktif: <strong data-gallery-active>Tümü</strong></span>
+            <span>Görünen: <strong data-gallery-count>12</strong></span>
+          </div>
         </div>
 
-        <!-- GALLERY GRID -->
-        <div class="gallery-grid" data-fade>
-          <div class="gallery-item" data-category="projects">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal1.jpg" alt="Ağaç tespit çalışması ve aynalama - Kemerburgaz/İstanbul">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Ağaç Tespit Çalışmamız</h3>
-                  <p class="gallery-item__description">Orman dışı alanlarda tapulu kesim izni için ağaç tespit çalışmamız ve aynalama işlemi Kemerburgaz/İSTANBUL</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal1.jpg','Ağaç Tespit Çalışmamız','Orman dışı alanlarda tapulu kesim izni için ağaç tespit çalışmamız ve aynalama işlemi Kemerburgaz/İSTANBUL')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="nature">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal2.jpg" alt="Saraybosna Kent Ormanı">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Saraybosna Kent Ormanı</h3>
-                  <p class="gallery-item__description">Saraybosna Kent Ormanı inceleme gezimiz</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal2.jpg','Saraybosna Kent Ormanı','Saraybosna Kent Ormanı inceleme gezimiz')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="technology">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal3.jpg" alt="Ento Maden Global A.Ş. - Maden izinleri">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Ento Maden Global A.Ş.</h3>
-                  <p class="gallery-item__description">Ento Maden Global A.Ş.’nin Maden İzinleri için tercihi</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal3.jpg','Ento Maden Global A.Ş.','Ento Maden Global A.Ş.’nin Maden İzinleri için tercihi')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="projects">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal4.jpg" alt="Mermer ocakları arazi incelemesi">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Mermer ocakları arazi incelemesi</h3>
-                  <p class="gallery-item__description"></p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal4.jpg','Mermer ocakları arazi incelemesi','Mermer ocakları arazi incelemesi')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="team">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal5.jpg" alt="Rehabilitasyon projesi - saha çalışmaları">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Rehabilitasyon Projemiz</h3>
-                  <p class="gallery-item__description">Madencilik faaliyetleri biten alanların rehabilitasyonu projemiz</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal5.jpg','Rehabilitasyon Projemiz','Uzman ekibimizin sahada gerçekleştirdiği çalışmalar')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="nature">
-            <div class="gallery-item__image">
-              <img src="img/gallery/gal6.jpg" alt="Asfalt plenti tesisi projesi saha ön incelemesi - Silivri/İstanbul">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Asfalt Plenti Tesisi Projemiz</h3>
-                  <p class="gallery-item__description">Karayolları Genel Müdürlüğü asfalt plenti tesisi projemiz için saha ön incelememiz. Silivri/İSTANBUL</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/gallery/gal6.jpg','Asfalt Plenti Tesisi Projemiz','Karayolları Genel Müdürlüğü asfalt plenti tesisi projemiz için saha ön incelememiz. Silivri/İSTANBUL')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="projects">
-            <div class="gallery-item__image">
-              <img src="img/fidandikim.jpg" alt="Fidan dikim çalışması">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Fidan Dikim Çalışması</h3>
-                  <p class="gallery-item__description">Gelecek nesillere yeşil bir dünya bırakma projesi</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/fidandikim.jpg','Fidan Dikim Çalışması','Gelecek nesillere yeşil bir dünya bırakma projesi')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gallery-item" data-category="technology">
-            <div class="gallery-item__image">
-              <img src="img/drone-haritalama.jpg" alt="Drone teknolojisi ile haritalama">
-              <div class="gallery-item__overlay">
-                <div class="gallery-item__content">
-                  <h3 class="gallery-item__title">Drone Teknolojisi</h3>
-                  <p class="gallery-item__description">Modern teknoloji ile hassas veri toplama</p>
-                  <button class="gallery-item__btn" onclick="openLightbox('img/drone-haritalama.jpg','Drone Teknolojisi','Modern teknoloji ile hassas veri toplama')">
-                    <i class="fas fa-expand"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="gallery-chips" data-fade>
+          <button type="button" class="gallery-chip is-active" data-filter="all">Tümü</button>
+          <button type="button" class="gallery-chip" data-filter="madde16">Madde 16</button>
+          <button type="button" class="gallery-chip" data-filter="madde17">Madde 17</button>
+          <button type="button" class="gallery-chip" data-filter="diger">Diğer</button>
+          <button type="button" class="gallery-chip" data-filter="saha">Saha</button>
+          <button type="button" class="gallery-chip" data-filter="teknik">Teknik</button>
         </div>
 
-        <!-- LOAD MORE BUTTON -->
-        <div class="gallery-actions" data-fade>
-          <button class="btn btn--secondary btn--large" id="loadMoreBtn">
-            <i class="fas fa-plus"></i>
-            <span>Daha Fazla Göster</span>
-          </button>
+        <div class="gallery-mosaic" data-fade>
+          <article class="mosaic-card size-xl" data-category="madde16" data-image="img/gallery/gal1.jpg" data-title="Ağaç Tespit ve Aynalama" data-desc="Tapulu kesim izin süreci için saha tespiti ve koordinat bazlı aynalama çalışması.">
+            <img src="img/gallery/gal1.jpg" alt="Ağaç tespit ve aynalama çalışması">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Madde 16</span>
+              <h3>Ağaç Tespit ve Aynalama</h3>
+              <p>İzin dosyasının teknik doğrulama adımı.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="saha" data-image="img/gallery/gal2.jpg" data-title="Saraybosna Kent Ormanı" data-desc="Saha gözlemi ve koruma-kullanma dengesi için yapılan inceleme gezisi.">
+            <img src="img/gallery/gal2.jpg" alt="Saraybosna kent ormanı inceleme görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Saha</span>
+              <h3>Kent Ormanı İncelemesi</h3>
+              <p>Saha kararları için referans gezi notları.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="madde17" data-image="img/gallery/gal3.jpg" data-title="Ento Maden Global" data-desc="Madde 17 kapsamındaki maden izinleri için hazırlanan uygulama ve dosya süreci.">
+            <img src="img/gallery/gal3.jpg" alt="Ento maden global proje görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Madde 17</span>
+              <h3>Ento Maden Global</h3>
+              <p>Maden izin süreç yönetimi.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-lg" data-category="madde17" data-image="img/gallery/gal4.jpg" data-title="Mermer Ocağı Arazi İncelemesi" data-desc="Mermer sahası için yerinde etüt, teknik dosya öncesi veri toplama ve çizim hazırlıkları.">
+            <img src="img/gallery/gal4.jpg" alt="Mermer ocağı arazi inceleme görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Madde 17</span>
+              <h3>Mermer Ocağı Etüdü</h3>
+              <p>Başvuru öncesi teknik veri toplama.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="diger" data-image="img/gallery/gal5.jpg" data-title="Rehabilitasyon Uygulaması" data-desc="Faaliyeti tamamlanan sahalarda doğaya geri kazandırma odaklı rehabilitasyon çalışması.">
+            <img src="img/gallery/gal5.jpg" alt="Rehabilitasyon uygulama görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Diğer</span>
+              <h3>Rehabilitasyon Uygulaması</h3>
+              <p>Doğaya geri kazanım süreci.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="madde16" data-image="img/gallery/gal6.jpg" data-title="Asfalt Plenti Ön İnceleme" data-desc="Karayolları asfalt plenti projesi için saha ön inceleme ve izin haritalama adımı.">
+            <img src="img/gallery/gal6.jpg" alt="Asfalt plenti ön inceleme görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Madde 16</span>
+              <h3>Asfalt Plenti Ön İnceleme</h3>
+              <p>Kurumsal ön değerlendirme sahası.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-wide" data-category="teknik" data-image="img/drone-haritalama.jpg" data-title="Drone Haritalama" data-desc="Yüksek doğrulukta ortofoto ve topoğrafik analiz üretimi ile teknik karar desteği.">
+            <img src="img/drone-haritalama.jpg" alt="Drone haritalama görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Teknik</span>
+              <h3>Drone Haritalama</h3>
+              <p>Hassas ölçüm ve görsel doğrulama.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="saha" data-image="img/proje-yolu2.jpg" data-title="Proje Yolu ve Geçiş" data-desc="Saha erişimi, geçiş planı ve güvenlik kriterleri ile uyumlu proje yolu çalışmaları.">
+            <img src="img/proje-yolu2.jpg" alt="Proje yolu ve geçiş sahası">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Saha</span>
+              <h3>Proje Yolu ve Geçiş</h3>
+              <p>Uygulama sahası erişim tasarımı.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="teknik" data-image="img/ogm2.jpg" data-title="Kurum Süreci Takibi" data-desc="Kurumsal teknik değerlendirme toplantıları ve karar dosyalarının sahaya yansıması.">
+            <img src="img/ogm2.jpg" alt="Kurum süreci takibi görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Teknik</span>
+              <h3>Kurum Süreci Takibi</h3>
+              <p>Dosya ve kurum koordinasyon adımları.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="diger" data-image="img/fidandikim3.jpg" data-title="Fidan Dikim Programı" data-desc="Sürdürülebilir saha kapanışı için yerel türlerle planlanan fidan dikim uygulaması.">
+            <img src="img/fidandikim3.jpg" alt="Fidan dikim programı görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Diğer</span>
+              <h3>Fidan Dikim Programı</h3>
+              <p>Sürdürülebilirlik odaklı kapanış adımı.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="saha" data-image="img/res-projesi.jpg" data-title="RES Projesi Saha Kontrolü" data-desc="Rüzgar enerji yatırımı için saha organizasyonu, koordinat ve sınır kontrol çalışmaları.">
+            <img src="img/res-projesi.jpg" alt="RES projesi saha kontrolü">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Saha</span>
+              <h3>RES Projesi Saha Kontrolü</h3>
+              <p>Enerji yatırımı için arazi doğrulaması.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+
+          <article class="mosaic-card size-md" data-category="diger" data-image="img/surdurulebilir-orman.jpg" data-title="Sürdürülebilir Orman Yaklaşımı" data-desc="Planlı kullanım, rehabilitasyon ve izleme adımlarını bir araya getiren sürdürülebilir orman yönetimi.">
+            <img src="img/surdurulebilir-orman.jpg" alt="Sürdürülebilir orman görseli">
+            <div class="mosaic-card__overlay">
+              <span class="mosaic-card__badge">Diğer</span>
+              <h3>Sürdürülebilir Orman Yaklaşımı</h3>
+              <p>Uzun vadeli çevresel denge modeli.</p>
+              <button type="button" class="mosaic-card__open">Detaylı Gör</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-strip">
+      <div class="container">
+        <div class="gallery-strip__head" data-fade>
+          <p class="gallery-kicker">Proje Akışı</p>
+          <h2>Sahadan Dosyaya, Dosyadan Onaya</h2>
+        </div>
+        <div class="gallery-strip__rail" data-fade>
+          <article class="strip-card">
+            <span>01</span>
+            <h3>Ön Keşif</h3>
+            <p>Alanın mevcut durumu yerinde incelenir, ihtiyaç listesi çıkarılır.</p>
+          </article>
+          <article class="strip-card">
+            <span>02</span>
+            <h3>Teknik Ölçüm</h3>
+            <p>Koordinat, pafta ve metraj verileri teknik doğrulukla hazırlanır.</p>
+          </article>
+          <article class="strip-card">
+            <span>03</span>
+            <h3>Dosya Kurgusu</h3>
+            <p>İzin türüne göre başvuru dosyası ve kurum belgeleri tamamlanır.</p>
+          </article>
+          <article class="strip-card">
+            <span>04</span>
+            <h3>Kurum Takibi</h3>
+            <p>Yazışmalar, revizyonlar ve ara onaylar tek hat üzerinde yürütülür.</p>
+          </article>
+          <article class="strip-card">
+            <span>05</span>
+            <h3>Onay ve Kapanış</h3>
+            <p>Onay sonrası saha yükümlülükleri kontrol edilerek süreç kapatılır.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="index-section index-map-wrap gallery-map">
+      <div class="container index-map-wrap__grid">
+        <div class="index-map-card" data-fade>
+          <div class="index-map-card__head">
+            <p class="index-kicker">Konum</p>
+            <h2>Kurumsal Merkez</h2>
+          </div>
+          <iframe
+            src="https://www.google.com/maps?q=40.714599,29.939178&output=embed"
+            width="100%"
+            height="420"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lacivert Ormancılık Konum"
+          ></iframe>
+        </div>
+        <aside class="index-contact-card" data-fade>
+          <h3>Galeri ve Proje Sunumu</h3>
+          <p>İsterseniz size özel proje sunumu hazırlayıp, benzer saha örneklerini doğrudan paylaşabiliriz.</p>
+          <ul>
+            <li><i class="fa-solid fa-location-dot"></i> Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE<br>Başiskele/KOCAELİ</li>
+            <li><i class="fa-solid fa-envelope"></i> omer@lacivert.cc</li>
+            <li><i class="fa-solid fa-phone"></i> (+90) 530 909 41 08</li>
+          </ul>
+          <div class="index-contact-card__actions">
+            <a href="iletisim.html" class="index-link-btn">İletişim Sayfası</a>
+            <a href="https://wa.me/905309094108" target="_blank" rel="noopener" class="index-link-btn index-link-btn--alt">WhatsApp</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="gallery-cta">
+      <div class="container" data-fade>
+        <div class="gallery-cta__box">
+          <p class="gallery-kicker">Sonraki Adım</p>
+          <h2>Projelerinizi Bizimle Görselleştirip Hızlı İzin Modeline Taşıyın</h2>
+          <a href="iletisim.html" class="gallery-btn">Proje Görüşmesi Başlat</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- LIGHTBOX MODAL -->
-  <div id="lightbox" class="lightbox">
-    <div class="lightbox__overlay" onclick="closeLightbox()"></div>
-    <div class="lightbox__content">
-      <button class="lightbox__close" onclick="closeLightbox()">
-        <i class="fas fa-times"></i>
+  <div id="galleryLightbox" class="gallery-lightbox" aria-hidden="true">
+    <button type="button" class="gallery-lightbox__backdrop" data-lightbox-close aria-label="Kapat"></button>
+    <div class="gallery-lightbox__dialog" role="dialog" aria-modal="true" aria-label="Galeri görsel detayı">
+      <button type="button" class="gallery-lightbox__close" data-lightbox-close aria-label="Kapat">
+        <i class="fa-solid fa-xmark"></i>
       </button>
-      <img id="lightboxImage" src="/placeholder.svg" alt="">
-      <div class="lightbox__info">
-        <h3 id="lightboxTitle"></h3>
-        <p id="lightboxDescription"></p>
+      <img id="galleryLightboxImage" src="" alt="Galeri detayı">
+      <div class="gallery-lightbox__content">
+        <h3 id="galleryLightboxTitle"></h3>
+        <p id="galleryLightboxText"></p>
       </div>
-      <div class="lightbox__nav">
-        <button class="lightbox__nav-btn lightbox__nav-btn--prev" onclick="prevImage()">
-          <i class="fas fa-chevron-left"></i>
+      <div class="gallery-lightbox__nav">
+        <button type="button" class="gallery-lightbox__arrow" data-lightbox-prev aria-label="Önceki görsel">
+          <i class="fa-solid fa-chevron-left"></i>
         </button>
-        <button class="lightbox__nav-btn lightbox__nav-btn--next" onclick="nextImage()">
-          <i class="fas fa-chevron-right"></i>
+        <button type="button" class="gallery-lightbox__arrow" data-lightbox-next aria-label="Sonraki görsel">
+          <i class="fa-solid fa-chevron-right"></i>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__background"></div>
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
-        <div class="footer__info">
-          <strong>Lacivert Ormancılık</strong><br>
-          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
-          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
-          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
-        </div>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
-        </div>
-      </div>
-      <div class="footer__nav">
-        <h4>Navigate</h4>
+  <a href="https://wa.me/905309094108" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-labelledby="cookieConsentText" tabindex="-1" style="display:none;">
+    <div class="cookie-consent__content">
+      <p id="cookieConsentText" class="cookie-consent__text">
+        Web sitemizdeki kullanıcı deneyiminizi geliştirmek için çerezleri kullanıyoruz.
+        <button id="cookieDetailsBtn" class="cookie-consent__details-btn" type="button">Detaylar</button>
+      </p>
+      <button id="acceptCookies" class="cookie-consent__button" aria-label="Çerezleri kabul et">Anladım</button>
+    </div>
+  </div>
+
+  <div id="cookieModal" class="cookie-modal" style="display:none;">
+    <div class="cookie-modal__overlay"></div>
+    <div class="cookie-modal__content">
+      <button class="cookie-modal__close" id="closeCookieModal" aria-label="Kapat">×</button>
+      <h2 class="cookie-modal__title">Çerez Politikası</h2>
+      <div class="cookie-modal__body">
+        <p><strong>Çerezler nedir?</strong><br>Çerezler, web sitelerinin tarayıcınızda depoladığı küçük metin dosyalarıdır. Sitemizdeki deneyiminizi iyileştirmek, site trafiğini analiz etmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz.</p>
         <ul>
-          <li><a href="index.html">Anasayfa</a></li>
-          <li><a href="hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-          <li><a href="galeri.html" aria-current="page">Galeri</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
+          <li><strong>Gerekli Çerezler:</strong> Sitenin temel işlevleri için gereklidir. (Oturum, güvenlik, dil tercihi vb.)</li>
+          <li><strong>İstatistik Çerezler:</strong> Ziyaretçi istatistiklerini anonim olarak toplar.</li>
+          <li><strong>Pazarlama Çerezleri:</strong> İlgi alanlarınıza göre içerik ve reklam sunmak için kullanılır.</li>
         </ul>
-      </div>
-      <div class="footer__services">
-        <h4>Hizmetler</h4>
-        <ul>
-          <li><a href="izinirtifak.html">İzin & İrtifak Danışmanlığı</a></li>
-          <li><a href="surdurulebilirlik.html">Sürdürülebilirlik & Sertifikasyon</a></li>
-          <li><a href="muhendislik.html">Mühendislik & Teknolojik Çözümler</a></li>
-          <li><a href="kanunveyonetmelikler.html">Kanun & Yönetmelikler</a></li>
-          <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
-        </ul>
+        <p>Çerezler hakkında daha fazla bilgi için <a href="/gizlilik-politikasi.html" target="_blank">Gizlilik Politikamızı</a> inceleyebilirsiniz.</p>
       </div>
     </div>
-    <div class="footer__bottom">
-      © 2025 • Lacivert Ormancılık • Tüm Hakları Saklıdır.
+  </div>
+
+  <footer class="site-footer-pro">
+    <div class="site-footer-pro__texture"></div>
+    <div class="container site-footer-pro__grid">
+      <div class="site-footer-pro__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo">
+        <p>
+          Lacivert Ormancılık, ormancılık ve maden izin süreçlerinde teknik planlama, uygulama ve
+          raporlama adımlarını tek merkezde yöneten mühendislik çözüm ortağıdır.
+        </p>
+        <div class="site-footer-pro__social">
+          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+        </div>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>Hızlı Menü</h4>
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="sss.html">Sıkça Sorulan Sorular</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>Proje Grupları</h4>
+        <a href="madde16.html">Madde 16</a>
+        <a href="madde17.html">Madde 17</a>
+        <a href="diger.html">Diğer</a>
+        <a href="projeler/ento-maden-global.html">Örnek Proje</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>İletişim</h4>
+        <span>Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE</span>
+        <span>Başiskele/KOCAELİ</span>
+        <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a>
+        <a href="tel:+905309094108">(+90) 530 909 41 08</a>
+      </div>
+    </div>
+    <div class="site-footer-pro__bottom">
+      <p>&copy; 2026 Lacivert Ormancılık. Tüm hakları saklıdır.</p>
+      <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
     </div>
     <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
   </footer>
 
-  <!-- WhatsApp (diğer sayfalarda kullanılan numarayla) -->
-  <a href="https://wa.me/905334306801" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Lib scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-  <!-- Proje scripti -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
   <script src="js/index.js" defer></script>
-
-  <!-- Galeri stilleri (sayfaya özel) -->
-  <style>
-    /* GALLERY FILTERS */
-    .gallery-filters {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--clr-surface);
-      border: 2px solid rgba(10, 31, 68, 0.1);
-      border-radius: var(--radius);
-      color: var(--clr-text);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .filter-btn:hover,
-    .filter-btn--active {
-      background: var(--clr-primary);
-      color: white;
-      border-color: var(--clr-primary);
-      transform: translateY(-2px);
-    }
-
-    /* GALLERY GRID */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .gallery-item {
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-      transition: all var(--transition);
-      opacity: 1;
-      transform: scale(1);
-      background: var(--clr-surface);
-    }
-    .gallery-item.hidden {
-      opacity: 0;
-      transform: scale(0.8);
-      pointer-events: none;
-    }
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-    }
-    .gallery-item__image {
-      position: relative;
-      height: 250px;
-      overflow: hidden;
-    }
-    .gallery-item__image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition);
-    }
-    .gallery-item:hover .gallery-item__image img { transform: scale(1.1); }
-    .gallery-item__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(10, 31, 68, 0.9), transparent);
-      display: flex;
-      align-items: flex-end;
-      padding: 1.5rem;
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-    .gallery-item:hover .gallery-item__overlay { opacity: 1; }
-    .gallery-item__content { color: white; width: 100%; }
-    .gallery-item__title {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .gallery-item__description {
-      font-size: 0.9rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-    .gallery-item__btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      color: var(--clr-primary);
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all var(--transition);
-      opacity: 0;
-    }
-    .gallery-item:hover .gallery-item__btn { opacity: 1; }
-    .gallery-item__btn:hover { background: white; transform: scale(1.1); }
-
-    /* GALLERY ACTIONS */
-    .gallery-actions { text-align: center; }
-
-    /* LIGHTBOX */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: all var(--transition);
-    }
-    .lightbox.active { opacity: 1; visibility: visible; }
-    .lightbox__overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(10, 31, 68, 0.92);
-      backdrop-filter: blur(10px);
-    }
-    .lightbox__content {
-      position: relative;
-      max-width: 90vw;
-      max-height: 90vh;
-      background: var(--clr-surface);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      transform: scale(0.8);
-      transition: transform var(--transition);
-    }
-    .lightbox.active .lightbox__content { transform: scale(1); }
-    .lightbox__close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 40px;
-      height: 40px;
-      background: rgba(0, 0, 0, 0.7);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 10;
-      transition: all var(--transition);
-    }
-    .lightbox__close:hover { background: rgba(0, 0, 0, 0.9); transform: scale(1.1); }
-    .lightbox__content img {
-      width: 100%;
-      height: 60vh;
-      object-fit: cover;
-      display: block;
-    }
-    .lightbox__info { padding: 2rem; }
-    .lightbox__info h3 {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--clr-primary);
-      margin-bottom: 1rem;
-    }
-    .lightbox__info p { color: var(--clr-text-light); line-height: 1.6; }
-    .lightbox__nav {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1rem;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-    .lightbox__nav-btn {
-      width: 50px;
-      height: 50px;
-      background: rgba(0, 0, 0, 0.7);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all var(--transition);
-      pointer-events: all;
-    }
-    .lightbox__nav-btn:hover { background: rgba(0, 0, 0, 0.9); transform: scale(1.1); }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .gallery-filters { gap: 0.5rem; }
-      .filter-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
-      .gallery-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .gallery-item__image { height: 200px; }
-      .lightbox__content { max-width: 95vw; max-height: 95vh; }
-      .lightbox__content img { height: 50vh; }
-      .lightbox__info { padding: 1.5rem; }
-      .lightbox__nav { padding: 0 0.5rem; }
-      .lightbox__nav-btn { width: 40px; height: 40px; font-size: 1rem; }
-    }
-  </style>
-
-  <script>
-    // Gallery filtering
-    document.addEventListener('DOMContentLoaded', function() {
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const galleryItems = document.querySelectorAll('.gallery-item');
-
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-          const filter = this.dataset.filter;
-          filterBtns.forEach(b => b.classList.remove('filter-btn--active'));
-          this.classList.add('filter-btn--active');
-
-          galleryItems.forEach(item => {
-            if (filter === 'all' || item.dataset.category === filter) {
-              item.classList.remove('hidden');
-            } else {
-              item.classList.add('hidden');
-            }
-          });
-        });
-      });
-    });
-
-    // Lightbox data
-    let currentImageIndex = 0;
-    const images = [
-      { src: 'img/gallery/gal1.jpg', title: 'Ağaç Tespit Çalışmamız', description: 'Orman dışı alanlarda tapulu kesim izni için ağaç tespit çalışmamız ve aynalama işlemi Kemerburgaz/İSTANBUL' },
-      { src: 'img/gallery/gal2.jpg', title: 'Saraybosna Kent Ormanı', description: 'Saraybosna Kent Ormanı inceleme gezimiz' },
-      { src: 'img/gallery/gal3.jpg', title: 'Ento Maden Global A.Ş.', description: 'Ento Maden Global A.Ş.’nin Maden İzinleri için tercihi' },
-      { src: 'img/gallery/gal4.jpg', title: 'Mermer ocakları arazi incelemesi', description: '' },
-      { src: 'img/gallery/gal5.jpg', title: 'Rehabilitasyon Projemiz', description: 'Madencilik faaliyetleri biten alanların rehabilitasyonu projemiz Tekirdağ, Saray, Kavacık, Traktaş' },
-      { src: 'img/gallery/gal6.jpg', title: 'Asfalt Plenti Tesisi Projemiz', description: 'Karayolları Genel Müdürlüğü asfalt plenti tesisi projemiz için saha ön incelememiz. Silivri/İSTANBUL' },
-      { src: 'img/fidandikim.jpg', title: 'Fidan Dikim Çalışması', description: 'Gelecek nesillere yeşil bir dünya bırakma projesi' },
-      { src: 'img/drone-haritalama.jpg', title: 'Drone Teknolojisi', description: 'Modern teknoloji ile hassas veri toplama' },
-    ];
-
-    // Lightbox helpers
-    function openLightbox(src, title = null, description = null) {
-      const foundIndex = images.findIndex(img => img.src === src);
-      currentImageIndex = foundIndex >= 0 ? foundIndex : 0;
-      updateLightboxContent();
-
-      // Eğer başlık/açıklama parametre ile geldiyse, gösterimde onları kullan
-      if (title) document.getElementById('lightboxTitle').textContent = title;
-      if (description !== null) document.getElementById('lightboxDescription').textContent = description;
-
-      document.getElementById('lightbox').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    function nextImage() {
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      updateLightboxContent();
-    }
-    function prevImage() {
-      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      updateLightboxContent();
-    }
-    function updateLightboxContent() {
-      const image = images[currentImageIndex];
-      document.getElementById('lightboxImage').src = image.src;
-      document.getElementById('lightboxTitle').textContent = image.title;
-      document.getElementById('lightboxDescription').textContent = image.description;
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (document.getElementById('lightbox').classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') prevImage();
-        if (e.key === 'ArrowRight') nextImage();
-      }
-    });
-
-    // Load more (placeholder)
-    document.getElementById('loadMoreBtn').addEventListener('click', function() {
-      this.style.display = 'none';
-    });
-  </script>
+  <script src="js/galeri.js" defer></script>
 </body>
 </html>

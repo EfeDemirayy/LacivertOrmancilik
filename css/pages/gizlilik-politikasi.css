@@ -1,0 +1,88 @@
+﻿/* gizlilik-politikasi sayfasi ozel stilleri */
+
+/* === Lacivert kurumsal tonlar === */
+    :root{
+      --clr-primary:   #0a1f44;  /* koyu lacivert */
+      --clr-secondary: #1e56a0;  /* canlı mavi */
+      --clr-accent:    #4a90e2;  /* açık mavi / aksan */
+      --clr-bg:        #f5f9ff;  /* çok açık mavi arka plan */
+      --clr-surface:   #ffffff;
+      --clr-text:      #1a1a1a;
+      --shadow-lg:     0 4px 24px rgba(10,31,68,0.09);
+    }
+
+    /* Sayfa zemini ve tipografi */
+    body{
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: 'Inter','Poppins',Arial,sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.65;
+    }
+
+    /* Kapsayıcı kart */
+    .cookie-policy-container{
+      max-width: 700px;
+      margin: 2.5rem auto;
+      background: var(--clr-surface);
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(10,31,68,0.06);
+    }
+
+    /* Başlıklar */
+    .cookie-policy-container h1{
+      color: var(--clr-primary);
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      font-family: 'Poppins','Inter',Arial,sans-serif;
+      letter-spacing: .2px;
+    }
+
+    .cookie-policy-container h2{
+      color: var(--clr-secondary);
+      font-size: 1.18rem;
+      margin-top: 2.2rem;
+      margin-bottom: .7rem;
+      font-family: 'Poppins','Inter',Arial,sans-serif;
+    }
+
+    /* Metin ve listeler */
+    .cookie-policy-container p,
+    .cookie-policy-container li{
+      font-size: 1.01rem;
+      line-height: 1.7;
+    }
+
+    .cookie-policy-container ul{
+      margin-left: 1.2em;
+      color: #123d6d; /* orta lacivert ton */
+    }
+
+    /* Linkler */
+    .cookie-policy-container a{
+      color: var(--clr-secondary);
+      text-decoration: underline;
+      font-weight: 600;
+      text-underline-offset: 2px;
+    }
+    .cookie-policy-container a:hover{
+      color: var(--clr-primary);
+    }
+
+    /* Mobil uyarlamalar */
+    @media (max-width: 700px){
+      .cookie-policy-container{
+        padding: 1.2rem .5rem;
+        border-radius: 10px;
+      }
+      .cookie-policy-container h1{ font-size: 1.3rem; }
+      .cookie-policy-container h2{ font-size: 1.01rem; }
+      .cookie-policy-container p,
+      .cookie-policy-container li{ font-size: .97rem; }
+    }
+
+
+

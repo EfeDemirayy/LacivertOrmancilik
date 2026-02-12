@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -25,6 +25,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="css/styleorman.css">
+  <link rel="stylesheet" href="css/pages/index.css">
 </head>
 <body>
 
@@ -35,12 +36,12 @@
         <span>omer@lacivert.cc</span>
       </a>
       <span class="topbar__divider"></span>
-      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/KOCAELİ</span>
     </div>
     <div class="topbar__right">
       <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://maps.app.goo.gl/guTKEB4KyjUwiEB77" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
     </div>
   </div>
 
@@ -72,7 +73,6 @@
             </ul>
           </li>
           <li><a href="galeri.html" class="nav__link">Galeri</a></li>
-          <li><a href="haberler.html" class="nav__link">Blog&Haberler</a></li>
           <li class="nav__dropdown">
             <a href="iletisim.html" class="nav__link">İletişim <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
@@ -87,7 +87,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="home-main">
     <!-- HERO SECTION -->
     <section id="hero" class="hero hero--panels">
       <div class="hero-panels">
@@ -112,7 +112,7 @@
             <div class="hero-panel__list">
               <button class="hero-panel__item" data-url="projeler/aygm-gulermak.html" data-title="AYGM-GÜLERMAK" data-text="Kamu kurum süreçleri, aplikasyon ve teknik izin koordinasyonu tamamlandı.">AYGM-GÜLERMAK</button>
               <button class="hero-panel__item" data-url="projeler/camlibel.html" data-title="Çamlıbel" data-text="Su izinleri kapsamında kaynak koruma mesafeleri ve teknik dosya hazırlığı yürütüldü.">Çamlıbel</button>
-              <button class="hero-panel__item" data-url="projeler/kgm-1-bolge-mudurlugu.html" data-title="KGM 1. Bölge Müdürlüğü" data-text="Kurumsal izin akışı, güzergâh doğrulaması ve saha kontrolleri tamamlandı.">KGM 1. Bölge Müdürlüğü</button>
+              <button class="hero-panel__item" data-url="projeler/kgm-1-bolge-mudurlugu.html" data-title="KGM 1. Bölge Müdürlüğü" data-text="Kurumsal izin akisi, güzergâh dogrulamasi ve saha kontrolleri tamamlandi.">KGM 1. Bölge Müdürlüğü</button>
             </div>
           </div>
           <div class="hero-card__panel hero-detail">
@@ -146,7 +146,7 @@
               <button class="hero-panel__back js-close-panel">×</button>
             </div>
             <div class="hero-panel__list">
-              <button class="hero-panel__item" data-url="projeler/aksantas-agrega-mad-ve-ins-san-tic-ltd-sti.html" data-title="Aksantaş Agrega" data-text="RES güzergâhı, servis yolu ve teknik izin evrakları uçtan uca koordine edildi.">Aksantaş Agrega</button>
+              <button class="hero-panel__item" data-url="projeler/aksantas-agrega-mad-ve-ins-san-tic-ltd-sti.html" data-title="Aksantas Agrega" data-text="RES güzergâhi, servis yolu ve teknik izin evraklari utan uca koordine edildi.">Aksantas Agrega</button>
               <button class="hero-panel__item" data-url="projeler/ento-maden-global.html" data-title="Ento Maden Global" data-text="Maden saha planı, 17. madde süreçleri ve rehabilitasyon adımları yürütüldü.">Ento Maden Global</button>
               <button class="hero-panel__item" data-url="projeler/sanko-enerji.html" data-title="Sanko Enerji" data-text="Enerji hattı izinleri, revizyonlar ve denetim raporları tamamlandı.">Sanko Enerji</button>
             </div>
@@ -206,196 +206,242 @@
       </div>
     </section>
 
-    <!-- SERVICES SECTION -->
-    <section id="services" class="section services">
-      <div class="services__background"></div>
-      <div class="container">
-        <div class="section__header" data-fade>
-          <div class="section__badge">
-            <i class="fas fa-tools"></i>
-            <span>Uzman Hizmetlerimiz</span>
-          </div>
-          <h2 class="section__title">Projeleriniz İçin Kapsamlı Çözümler</h2>
-          <p class="section__subtitle">
-            Orman alanlarında drone tabanlı üretim ve veri odaklı analizleri uçtan uca sağlıyoruz
+    <section id="ormancilik" class="index-section index-overview">
+      <div class="container index-overview__grid">
+        <div class="index-overview__content" data-fade>
+          <p class="index-kicker">Operasyon Merkezi</p>
+          <h2>Ormancılık Süreçlerinde Uçtan Uca Teknik Yönetim</h2>
+          <p>
+            İzin, aplikasyon, saha kontrolü ve raporlama adımlarını tek bir teknik akışta yönetiyoruz.
+            Madde 16, Madde 17 ve diğer özel süreçlerde kurumlar arası koordinasyonu hızlandıran
+            uygulanabilir çözümler üretiyoruz.
           </p>
+          <div class="index-overview__chips">
+            <span><i class="fa-solid fa-tree"></i> Orman İzinleri</span>
+            <span><i class="fa-solid fa-mountain-sun"></i> Maden Sahaları</span>
+            <span><i class="fa-solid fa-map-location-dot"></i> Saha Koordinasyonu</span>
+          </div>
+          <div class="index-overview__actions">
+            <a href="madde16.html" class="index-link-btn">Madde 16'ya Git</a>
+            <a href="madde17.html" class="index-link-btn index-link-btn--alt">Madde 17'ye Git</a>
+          </div>
         </div>
-        
-        <!-- Üç hizmet kartı: yanyana -->
-        <div class="services__grid">
-          <!-- Drone LiDARlama -->
-          <div class="service-card" data-fade>
-            <div class="service-card__background"></div>
-            <div class="service-card__icon">
-              <i class="fas fa-tower-broadcast"></i>
-            </div>
-            <div class="service-card__content">
-              <h3>Drone LiDARlama</h3>
-              <p>LiDAR & fotogrametri ile hassas arazi modeli (DSM/DTM), ortomozaik ve yoğun nokta bulutu üretimi</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> LiDAR Haritalama & Nokta Bulutu</li>
-                <li><i class="fas fa-check"></i> Ortomozaik & Yükseklik Modelleri</li>
-                <li><i class="fas fa-check"></i> Hacim/Alan Analizleri</li>
-              </ul>
-            </div>
-            <a href="drone-3d-aplikasyon.html" class="service-card__link">
-              <span>Detayları İncele</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-
-          <!-- 3D Modelleme -->
-          <div class="service-card" data-fade>
-            <div class="service-card__background"></div>
-            <div class="service-card__icon">
-              <i class="fas fa-cubes"></i>
-            </div>
-            <div class="service-card__content">
-              <h3>3D Modelleme</h3>
-              <p>Nokta bulutundan mesh üretimi, doku kaplama, kesit/profil ve sayısallaştırma işlemleri</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> Mesh & Texture</li>
-                <li><i class="fas fa-check"></i> Kesit/Profil Analizleri</li>
-                <li><i class="fas fa-check"></i> CBS Entegrasyonu</li>
-              </ul>
-            </div>
-            <a href="drone-3d-aplikasyon.html" class="service-card__link">
-              <span>Detayları İncele</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-
-          <!-- Aplikasyon -->
-          <div class="service-card" data-fade>
-            <div class="service-card__background"></div>
-            <div class="service-card__icon">
-              <i class="fas fa-code"></i>
-            </div>
-            <div class="service-card__content">
-              <h3>Aplikasyon</h3>
-              <p>Kurumsal web/mobil CBS uygulamaları ile saha-ofis süreçlerinin dijital yönetimi</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> Web & Mobil CBS</li>
-                <li><i class="fas fa-check"></i> Harita Servisleri (WMS/WMTS)</li>
-                <li><i class="fas fa-check"></i> Raporlama & Panolar</li>
-              </ul>
-            </div>
-            <a href="drone-3d-aplikasyon.html" class="service-card__link">
-              <span>Detayları İncele</span>
-              <i class="fas fa-arrow-right"></i>
-            </a>
+        <div class="index-overview__visual" data-fade>
+          <img src="img/proje-yolu2.jpg" alt="Ormancılık saha operasyonları" />
+          <div class="index-overview__stats">
+            <article class="index-metric">
+              <strong data-count="250">250</strong>
+              <span>Tamamlanan Proje</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="81">81</strong>
+              <span>Aktif Referans</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="3">3</strong>
+              <span>Ana Proje Grubu</span>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
-    <section id="about" class="section about">
-      <div class="about__background"></div>
+    <section id="kurumsal" class="index-section index-solutions">
       <div class="container">
-        <div class="about__grid">
-          <div class="about__content" data-fade>
-            <div class="section__badge">
-              <i class="fas fa-award"></i>
-              <span>Neden Bizi Seçmelisiniz?</span>
-            </div>
-            <h2 class="section__title text-left">Deneyim ve Teknolojinin Buluştuğu Nokta</h2>
-            <p class="about__text">
-              Orman mülkiyetindeki alanlar üzerinde gerçekleştirilen projelerin başarısı, doğru veri üretimi ve teknik uzmanlık gerektirir. 
-              <strong>Lacivert Ormancılık</strong> olarak, sektördeki deneyimimiz ve teknolojik altyapımızla projelerinizin her aşamasında yanınızdayız.
-            </p>
-            
-            <div class="about__features">
-              <div class="feature-item">
-                <div class="feature-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="feature-content">
-                  <h4>Hızlı Süreç Yönetimi</h4>
-                  <p>Deneyimli ekibimizle teslim sürelerini kısaltıyoruz</p>
-                </div>
-              </div>
-              
-              <div class="feature-item">
-                <div class="feature-icon">
-                  <i class="fas fa-shield-alt"></i>
-                </div>
-                <div class="feature-content">
-                  <h4>Güvenilir Veri</h4>
-                  <p>Standartlara uygun veri üretimi ve doğrulama</p>
-                </div>
-              </div>
-              
-              <div class="feature-item">
-                <div class="feature-icon">
-                  <i class="fas fa-satellite"></i>
-                </div>
-                <div class="feature-content">
-                  <h4>İleri Teknoloji</h4>
-                  <p>Drone, LiDAR ve CBS teknolojileriyle hassas analizler</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="about__visual" data-fade>
-            <div class="about__image">
-              <img src="img/drone-haritalama.jpg" alt="Teknolojik çözümler" />
-              <div class="about__image-overlay">
-                <div class="play-button">
-                  <i class="fas fa-play"></i>
-                </div>
-              </div>
-            </div>
-            <div class="about__stats">
-              <div class="stat-item">
-                <span class="stat-number" data-count="250">250+</span>
-                <span class="stat-label">Tamamlanan Proje</span>
-              </div>
-              <!-- İSTENEN: Müşteri Memnuniyeti ve Yıllık Deneyim kaldırıldı -->
-            </div>
-          </div>
+        <div class="index-section__head" data-fade>
+          <p class="index-kicker">Hizmet Katmanları</p>
+          <h2>İşinize Uyumlu Mühendislik Çözümleri</h2>
+        </div>
+        <div class="index-solutions__grid">
+          <article class="index-solution-card" data-fade>
+            <div class="index-solution-card__icon"><i class="fa-solid fa-route"></i></div>
+            <h3>İzin Güzergah Tasarımı</h3>
+            <p>Enerji, yol ve hat projelerinde izin süreçlerine uygun sahaya inen güzergah planlaması.</p>
+            <a href="madde16.html" class="index-text-link">Madde 16 süreçleri <i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="index-solution-card" data-fade>
+            <div class="index-solution-card__icon"><i class="fa-solid fa-industry"></i></div>
+            <h3>Maden Saha Yönetimi</h3>
+            <p>Ruhsat ve izin adımlarında saha verilerini teknik rapora dönüştüren kapsamlı akış.</p>
+            <a href="madde17.html" class="index-text-link">Madde 17 süreçleri <i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="index-solution-card" data-fade>
+            <div class="index-solution-card__icon"><i class="fa-solid fa-water"></i></div>
+            <h3>Su ve Kaynak İzinleri</h3>
+            <p>Kaynak koruma, tesis izinleri ve altyapı uygulamalarında proje dosyası optimizasyonu.</p>
+            <a href="diger.html" class="index-text-link">Diğer süreçler <i class="fa-solid fa-arrow-right"></i></a>
+          </article>
+          <article class="index-solution-card" data-fade>
+            <div class="index-solution-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Dijital Raporlama</h3>
+            <p>Saha verisini karar aldıran rapora dönüştüren, yönetilebilir ve denetlenebilir çıktı setleri.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- CTA SECTION -->
-    <section class="section cta">
-      <div class="cta__background"></div>
+    <section class="index-section index-process">
       <div class="container">
-        <div class="cta__content" data-fade>
-          <div class="cta__badge">
-            <i class="fas fa-rocket"></i>
-            <span>Hemen Başlayın</span>
-          </div>
-          <h2>Projeniz İçin Hemen Harekete Geçin</h2>
-          <p>Uzman ekibimizle projenizin ihtiyaçlarını değerlendirin ve en uygun çözümleri keşfedin</p>
-          <div class="cta__actions">
-            <a href="iletisim.html" class="btn btn--primary btn--large">
-              <i class="fas fa-phone"></i>
-              <span>Ücretsiz Danışmanlık</span>
-            </a>
-            <a href="tel:+905309094108" class="btn btn--outline btn--large">
-              <i class="fas fa-phone-alt"></i>
-              <span>(+90) 530 909 41 08</span>
-            </a>
-          </div>
+        <div class="index-section__head" data-fade>
+          <p class="index-kicker">Çalışma Modeli</p>
+          <h2>Proje Akışı Şeffaf, Süreçler Ölçülebilir</h2>
+        </div>
+        <div class="index-process__timeline">
+          <article class="index-step" data-fade>
+            <span class="index-step__no">01</span>
+            <h3>Ön Analiz</h3>
+            <p>Mevzuat, saha gereksinimi ve kurum beklentileri birlikte değerlendirilir.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">02</span>
+            <h3>Saha Planı</h3>
+            <p>Koordinat, aplikasyon ve teknik belge kurgusu proje ölçeğine göre hazırlanır.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">03</span>
+            <h3>Uygulama</h3>
+            <p>İzin başvuru dosyaları ve kurum koordinasyonu disiplinli bir takvimle yönetilir.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">04</span>
+            <h3>Teslim ve İzleme</h3>
+            <p>Onay sonrası saha kontrolü ve raporlama adımları düzenli şekilde tamamlanır.</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- MAP SECTION -->
-    <section class="section map-section">
-      <div class="map-container">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2138.4614296291134!2d29.92717092723415!3d40.71270741083421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cb45134ea6e31f%3A0x3a14eef4e4140b1a!2sLacivert%20Ormanc%C4%B1l%C4%B1k%20M%C3%BChendislik!5e0!3m2!1str!2str!4v1753185354620!5m2!1str!2str" 
-          width="100%" 
-          height="400" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+    <section id="services" class="index-section index-project-hub">
+      <div class="container">
+        <div class="index-section__head" data-fade>
+          <p class="index-kicker">Seçili Projeler</p>
+          <h2>Her Proje İçin Ayrı Sayfa, Ayrı Teknik İçerik</h2>
+        </div>
+        <div class="index-project-hub__grid">
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/aygm-gulermak.svg" alt="AYGM-GÜLERMAK proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Madde 16</span>
+              <h3>AYGM-GÜLERMAK</h3>
+              <p>Kamu altyapı sürecinde aplikasyon ve teknik izin yönetimi tamamlandı.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/aygm-gulermak.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="madde16.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/ento-maden-global.svg" alt="Ento Maden Global proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Madde 17</span>
+              <h3>Ento Maden Global</h3>
+              <p>Maden izin adımları, saha planı ve rehabilitasyon süreci birlikte yürütüldü.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/ento-maden-global.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="madde17.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/sanko-enerji.svg" alt="Sanko Enerji proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Madde 17</span>
+              <h3>Sanko Enerji</h3>
+              <p>Enerji hattı izin ve revizyon süreçleri kurumsal takvimle yönetildi.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/sanko-enerji.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="madde17.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/camlibel.svg" alt="Çamlıbel proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Madde 16</span>
+              <h3>Çamlıbel</h3>
+              <p>Su izinleri kapsamında teknik dosya hazırlığı ve saha doğrulama yapıldı.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/camlibel.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="madde16.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/turknet-a-s.svg" alt="Türknet A.Ş. proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Diğer</span>
+              <h3>Türknet A.Ş.</h3>
+              <p>Altyapı proje dosyaları, teknik uygunluk kontrolüyle teslim edildi.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/turknet-a-s.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="diger.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+          <article class="index-project-card" data-fade>
+            <img src="img/project-covers/mehmet-ali-meral.svg" alt="Mehmet Ali Meral proje kapağı" />
+            <div class="index-project-card__content">
+              <span>Diğer</span>
+              <h3>Mehmet Ali Meral</h3>
+              <p>Saha kontrolleri ve izin başvuru planlaması eş zamanlı yönetildi.</p>
+              <div class="index-project-card__actions">
+                <a href="projeler/mehmet-ali-meral.html" class="index-link-btn">Projeyi Aç</a>
+                <a href="diger.html" class="index-text-link">Kategori</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="index-section index-map-wrap">
+      <div class="container index-map-wrap__grid">
+        <div class="index-map-card" data-fade>
+          <div class="index-map-card__head">
+            <p class="index-kicker">Konum</p>
+            <h2>Saha Merkezimiz</h2>
+          </div>
+          <iframe
+            src="https://www.google.com/maps?q=40.714599,29.939178&output=embed"
+            width="100%"
+            height="420"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lacivert Ormancılık Konum">
+          </iframe>
+        </div>
+        <aside class="index-contact-card" data-fade>
+          <h3>İletişim ve Proje Başlangıcı</h3>
+          <p>
+            Yeni bir proje planlıyorsanız, teknik gereksinimlerinizi değerlendirip size özel yol haritasını
+            ilk görüşmede çıkarıyoruz.
+          </p>
+          <ul>
+            <li><i class="fa-solid fa-location-dot"></i> Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE<br>Başiskele/KOCAELİ</li>
+            <li><i class="fa-solid fa-envelope"></i> omer@lacivert.cc</li>
+            <li><i class="fa-solid fa-phone"></i> (+90) 530 909 41 08</li>
+          </ul>
+          <div class="index-contact-card__actions">
+            <a href="iletisim.html" class="index-link-btn">İletişim Sayfası</a>
+            <a href="https://wa.me/905309094108" target="_blank" rel="noopener" class="index-link-btn index-link-btn--alt">WhatsApp</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="index-section index-cta-band">
+      <div class="container">
+        <div class="index-cta-band__content" data-fade>
+          <p class="index-kicker">Hızlı Başlangıç</p>
+          <h2>Projeniz İçin Teknik Ön Değerlendirmeyi Hemen Başlatalım</h2>
+          <p>Madde 16, Madde 17 veya diğer süreçler için uygun yol haritasını birlikte belirleyelim.</p>
+          <div class="index-cta-band__actions">
+            <a href="iletisim.html" class="index-link-btn">Ücretsiz Görüşme Planla</a>
+            <a href="tel:+905309094108" class="index-link-btn index-link-btn--alt">Telefonla Ulaş</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -431,44 +477,46 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer__background"></div>
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
-        <div class="footer__info">
-          <strong>Lacivert Ormancılık</strong><br>
-          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
-          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
-          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
-        </div>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+  <footer class="site-footer-pro">
+    <div class="site-footer-pro__texture"></div>
+    <div class="container site-footer-pro__grid">
+      <div class="site-footer-pro__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo">
+        <p>
+          Lacivert Ormancılık, ormancılık ve maden izin süreçlerinde teknik planlama, uygulama ve
+          raporlama adımlarını tek merkezde yöneten mühendislik çözüm ortağıdır.
+        </p>
+        <div class="site-footer-pro__social">
+          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
         </div>
       </div>
-      <div class="footer__nav">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="index.html">Anasayfa</a></li>
-          <li><a href="hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-          <li><a href="galeri.html">Galeri</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
-        </ul>
+      <div class="site-footer-pro__col">
+        <h4>Hızlı Menü</h4>
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
       </div>
-      <div class="footer__services">
-        <h4>Proje Sayfaları</h4>
-        <ul>
-          <li><a href="madde16.html">Madde 16</a></li>
-          <li><a href="madde17.html">Madde 17</a></li>
-          <li><a href="diger.html">Diğer</a></li>
-        </ul>
+      <div class="site-footer-pro__col">
+        <h4>Proje Grupları</h4>
+        <a href="madde16.html">Madde 16</a>
+        <a href="madde17.html">Madde 17</a>
+        <a href="diger.html">Diğer</a>
+        <a href="projeler/ento-maden-global.html">Örnek Proje</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>İletişim</h4>
+        <span>Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE</span>
+        <span>Başiskele/KOCAELİ</span>
+        <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a>
+        <a href="tel:+905309094108">(+90) 530 909 41 08</a>
       </div>
     </div>
-    <div class="footer__bottom">
-      &copy; 2026 • Lacivert Ormancılık • Tüm Hakları Saklıdır.
+    <div class="site-footer-pro__bottom">
+      <p>&copy; 2026 Lacivert Ormancılık. Tüm hakları saklıdır.</p>
+      <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
     </div>
     <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
   </footer>
@@ -481,4 +529,7 @@
 
 </body>
 </html>
+
+
+
 

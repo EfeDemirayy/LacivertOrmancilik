@@ -1,0 +1,167 @@
+/* ormanizinleri sayfasi ozel stilleri */
+
+.permit-main .index-overview--permit {
+  margin-top: 132px;
+}
+
+.permit-main .index-overview--permit .index-overview__visual img {
+  min-height: 410px;
+  object-fit: cover;
+}
+
+.permit-main .permit-types {
+  background: linear-gradient(180deg, #eef4fb 0%, #f7f2ea 100%);
+}
+
+.permit-main .permit-types__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.permit-main .permit-card {
+  border-radius: 20px;
+  border: 1px solid rgba(10, 31, 68, 0.12);
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(8, 20, 42, 0.09);
+  padding: 1.15rem 1.05rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.62rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.permit-main .permit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 34px rgba(8, 20, 42, 0.14);
+}
+
+.permit-main .permit-card__tag {
+  align-self: flex-start;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e9f2ff 0%, #d6e6ff 100%);
+  color: #0c2d59;
+  border: 1px solid rgba(10, 31, 68, 0.12);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.2px;
+  padding: 0.26rem 0.72rem;
+}
+
+.permit-main .permit-card h3 {
+  font-family: var(--font-heading);
+  color: var(--home-navy-900);
+  font-size: 1.12rem;
+  line-height: 1.32;
+}
+
+.permit-main .permit-card p {
+  color: #3f5373;
+  font-size: 0.92rem;
+}
+
+.permit-main .permit-card ul {
+  margin-top: 0.15rem;
+  display: grid;
+  gap: 0.42rem;
+}
+
+.permit-main .permit-card li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #173865;
+  font-size: 0.87rem;
+}
+
+.permit-main .permit-card li i {
+  color: #1d57a1;
+  font-size: 0.78rem;
+}
+
+.permit-main .permit-process {
+  background:
+    linear-gradient(120deg, rgba(8, 20, 42, 0.95) 0%, rgba(14, 43, 82, 0.97) 65%),
+    radial-gradient(circle at 84% 10%, rgba(185, 143, 96, 0.34) 0%, transparent 44%);
+}
+
+.permit-main .permit-process .index-kicker,
+.permit-main .permit-process .index-section__head h2 {
+  color: #f3f8ff;
+}
+
+.permit-main .permit-process .index-step {
+  border-color: rgba(220, 231, 255, 0.28);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.permit-main .permit-process .index-step p {
+  color: rgba(238, 245, 255, 0.9);
+}
+
+.permit-main .permit-panels {
+  background: linear-gradient(180deg, #f8f2e9 0%, #edf3fb 100%);
+}
+
+.permit-main .permit-panels__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.permit-main .permit-panel {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(9, 30, 64, 0.1);
+  background: #ffffff;
+  box-shadow: 0 16px 30px rgba(7, 20, 43, 0.11);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.permit-main .permit-panel:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 22px 34px rgba(7, 20, 43, 0.15);
+}
+
+.permit-main .permit-panel img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.permit-main .permit-panel__body {
+  padding: 0.95rem 1rem 1.05rem;
+}
+
+.permit-main .permit-panel__body h3 {
+  font-family: var(--font-heading);
+  color: var(--home-navy-900);
+  font-size: 1.05rem;
+  margin-bottom: 0.34rem;
+}
+
+.permit-main .permit-panel__body p {
+  color: #425978;
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 1180px) {
+  .permit-main .permit-types__grid,
+  .permit-main .permit-panels__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .permit-main .index-overview--permit {
+    margin-top: 92px;
+  }
+}
+
+@media (max-width: 640px) {
+  .permit-main .permit-types__grid,
+  .permit-main .permit-panels__grid {
+    grid-template-columns: 1fr;
+  }
+}

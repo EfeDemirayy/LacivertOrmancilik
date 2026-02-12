@@ -1,0 +1,158 @@
+﻿/* kanunveyonetmelikler sayfasi ozel stilleri */
+
+.law-main .index-overview--law {
+  margin-top: 132px;
+}
+
+.law-main .index-overview--law .index-overview__visual img {
+  min-height: 410px;
+  object-fit: cover;
+}
+
+.law-main .law-matrix {
+  background: linear-gradient(180deg, #eef4fb 0%, #f8f2e9 100%);
+}
+
+.law-main .law-matrix__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.law-main .law-card {
+  border-radius: 20px;
+  border: 1px solid rgba(10, 31, 68, 0.12);
+  background: #fff;
+  box-shadow: 0 14px 28px rgba(8, 20, 42, 0.09);
+  padding: 1.15rem 1.05rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.law-main .law-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 34px rgba(8, 20, 42, 0.14);
+}
+
+.law-main .law-card__tag {
+  align-self: flex-start;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e9f2ff 0%, #d6e6ff 100%);
+  color: #0c2d59;
+  border: 1px solid rgba(10, 31, 68, 0.12);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.2px;
+  padding: 0.26rem 0.72rem;
+}
+
+.law-main .law-card h3 {
+  font-family: var(--font-heading);
+  color: var(--home-navy-900);
+  font-size: 1.12rem;
+  line-height: 1.32;
+}
+
+.law-main .law-card p {
+  color: #3f5373;
+  font-size: 0.92rem;
+}
+
+.law-main .law-card ul {
+  margin-top: 0.15rem;
+  display: grid;
+  gap: 0.42rem;
+}
+
+.law-main .law-card li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #173865;
+  font-size: 0.87rem;
+}
+
+.law-main .law-card li i {
+  color: #1d57a1;
+  font-size: 0.78rem;
+}
+
+.law-main .law-process {
+  background:
+    linear-gradient(120deg, rgba(8, 20, 42, 0.95) 0%, rgba(14, 43, 82, 0.97) 65%),
+    radial-gradient(circle at 86% 12%, rgba(185, 143, 96, 0.34) 0%, transparent 44%);
+}
+
+.law-main .law-process .index-kicker,
+.law-main .law-process .index-section__head h2 {
+  color: #f3f8ff;
+}
+
+.law-main .law-process .index-step {
+  border-color: rgba(220, 231, 255, 0.28);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.law-main .law-process .index-step p {
+  color: rgba(238, 245, 255, 0.9);
+}
+
+.law-main .law-alerts {
+  background: linear-gradient(180deg, #f8f3eb 0%, #edf3fb 100%);
+}
+
+.law-main .law-alerts__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.law-main .law-alert {
+  border-radius: 18px;
+  border: 1px solid rgba(123, 53, 32, 0.2);
+  background: linear-gradient(145deg, rgba(255, 249, 244, 0.95) 0%, rgba(255, 239, 231, 0.96) 100%);
+  box-shadow: 0 12px 24px rgba(115, 54, 34, 0.12);
+  padding: 1rem;
+}
+
+.law-main .law-alert h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #7a3523;
+  font-family: var(--font-heading);
+  font-size: 1.03rem;
+  margin-bottom: 0.4rem;
+}
+
+.law-main .law-alert h3 i {
+  color: #b3563d;
+}
+
+.law-main .law-alert p {
+  color: #6b3f33;
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 1180px) {
+  .law-main .law-matrix__grid,
+  .law-main .law-alerts__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .law-main .index-overview--law {
+    margin-top: 92px;
+  }
+}
+
+@media (max-width: 640px) {
+  .law-main .law-matrix__grid,
+  .law-main .law-alerts__grid {
+    grid-template-columns: 1fr;
+  }
+}

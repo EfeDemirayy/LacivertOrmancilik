@@ -1,24 +1,18 @@
-<!-- index.html (Lacivert temaya %100 UYUMLU — header/logo/Jivochat anasayfayla AYNI) -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lacivert Ormancılık | Sıkça Sorulan Sorular</title>
-  <meta name="description" content="Lacivert Ormancılık: Ağaçlandırma, orman bakımı, karbon dengeleme ve risk analizleri hakkında SSS." />
-
-  <!-- Jivochat (ANASAYFA İLE AYNI WIDGET) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sıkça Sorulan Sorular | Lacivert Ormancılık</title>
+  <meta name="description" content="Lacivert Ormancılık hakkında sık sorulan sorular: teklif, proje süreci, hizmet kapsamı ve teknik raporlama yanıtları.">
   <script src="//code.jivosite.com/widget/jLHRdCZAjs" async></script>
 
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" />
-  <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64" />
+  <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64">
 
-  <!-- Google Fonts & FontAwesome -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <link
@@ -29,29 +23,12 @@
     referrerpolicy="no-referrer"
   />
 
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-  <!-- Proje Ana CSS (TÜM TASARIM BURADAN GELİR) -->
-  <link rel="stylesheet" href="css/styleorman.css" />
-
-  <!-- Sayfaya özel ufak ekler (tema yapısını BOZMADAN) -->
-  <style>
-    .faq__title{
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      text-align: center;
-      margin: 2rem 0 2.5rem;
-      background: linear-gradient(135deg, #7ab3ff, #2d6cdf);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-  </style>
+  <link rel="stylesheet" href="css/styleorman.css">
+  <link rel="stylesheet" href="css/pages/sss.css">
 </head>
 <body>
 
-  <!-- ÜST BAR (ANASAYFA İLE AYNI HTML YAPISI) -->
   <div class="topbar">
     <div class="topbar__left">
       <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
@@ -59,24 +36,17 @@
         <span>omer@lacivert.cc</span>
       </a>
       <span class="topbar__divider"></span>
-      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/KOCAELİ</span>
     </div>
     <div class="topbar__right">
       <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://maps.app.goo.gl/guTKEB4KyjUwiEB77" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
     </div>
   </div>
 
-  <!-- PRELOADER -->
-  <div id="preloader" class="preloader">
-    <div class="preloader__spinner"><i class="fas fa-spinner fa-pulse"></i></div>
-  </div>
-
-  <!-- SCROLL PROGRESS -->
   <div id="progress" class="progress"><div class="progress__bar"></div></div>
 
-  <!-- HEADER / NAV (ANASAYFA İLE AYNI YAPI + LOGO BOYUTU) -->
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
@@ -88,30 +58,20 @@
             <a href="#kurumsal" class="nav__link">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
               <li><a href="hakkimizda.html">Hakkımızda</a></li>
-              <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+              <li><a href="sss.html" aria-current="page">Sıkça Sorulan Sorular</a></li>
             </ul>
           </li>
-
-          <!-- <li class="nav__dropdown">
-            <a href="#services" class="nav__link">Hizmetlerimiz <i class="fa-solid fa-chevron-down"></i></a>
-            <ul class="dropdown">
-              <li><a href="izinirtifak.html">İzin ve İrtifak Danışmanlığı</a></li>
-              <li><a href="surdurulebilirlik.html">Sürdürülebilirlik ve Sertifikasyon</a></li>
-              <li><a href="muhendislik.html">Mühendislik ve Teknolojik Çözümler</a></li>
-            </ul>
-          </li> -->
-
           <li class="nav__dropdown">
             <a href="#ormancilik" class="nav__link">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
               <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
               <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+              <li><a href="madde16.html">Madde 16</a></li>
+              <li><a href="madde17.html">Madde 17</a></li>
+              <li><a href="diger.html">Diğer</a></li>
             </ul>
           </li>
-
           <li><a href="galeri.html" class="nav__link">Galeri</a></li>
-          <li><a href="haberler.html" class="nav__link">Blog&Haberler</a></li>
-
           <li class="nav__dropdown">
             <a href="iletisim.html" class="nav__link">İletişim <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
@@ -120,96 +80,130 @@
           </li>
         </ul>
       </nav>
-
       <button id="burger" class="nav__burger" aria-label="Mobil Menü">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
-    <!-- PAGE HERO (tema ile uyumlu basit başlık) -->
-    <section class="page-hero" role="banner" aria-label="Sıkça Sorulan Sorular">
-      <div class="page-hero__background"></div>
-      <div class="page-hero__content container">
-        <div class="page-hero__badge"><i class="fa-regular fa-circle-question"></i><span>Bilmek İstedikleriniz</span></div>
-        <h1 class="page-hero__title">Sıkça Sorulan Sorular</h1>
-        <p class="page-hero__subtitle">Hizmet kapsamlarımız, teklif süreçleri ve proje işleyişi hakkında yanıtlar.</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section faq">
-      <div class="container">
-        <h2 class="faq__title">Sıkça Sorulan Sorular</h2>
-
-        <div class="accordion">
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Hizmet alanlarımız nelerdir?</button>
-            <div class="accordion__content"><p>Ağaçlandırma, orman bakımı, karbon dengeleme ve yangın risk analizi gibi uçtan uca ormancılık danışmanlığı.</p></div>
+  <main class="home-main faq-main">
+    <section id="kurumsal" class="index-section index-overview index-overview--faq">
+      <div class="container index-overview__grid">
+        <div class="index-overview__content" data-fade>
+          <p class="index-kicker">Yardım Merkezi</p>
+          <h1>Sıkça Sorulan Sorular</h1>
+          <p>
+            Hizmet kapsamı, teklif süreci, saha uygulaması ve raporlama adımlarıyla ilgili en çok
+            sorulan konuları tek sayfada topladık. Aradığınız yanıtı bulamazsanız ekibimizle direkt iletişime geçebilirsiniz.
+          </p>
+          <div class="index-overview__chips">
+            <span><i class="fa-solid fa-circle-question"></i> Süreç Soruları</span>
+            <span><i class="fa-solid fa-file-signature"></i> Teklif Bilgisi</span>
+            <span><i class="fa-solid fa-satellite-dish"></i> Teknik Çıktılar</span>
           </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Teklif nasıl alırım?</button>
-            <div class="accordion__content"><p><a href="iletisim.html">İletişim</a> sayfasındaki formu doldurun; proje kapsamınıza göre uzman ekip dönüş sağlar.</p></div>
+          <div class="index-overview__actions">
+            <a href="#faq-list" class="index-link-btn">Sorulara Git</a>
+            <a href="iletisim.html" class="index-link-btn index-link-btn--alt">Bize Sorun</a>
           </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Projeleriniz nerede?</button>
-            <div class="accordion__content"><p>Türkiye genelinde; ihtiyaç hâlinde uluslararası lokasyonlarda da hizmet veriyoruz.</p></div>
-          </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Sürdürülebilir ormancılık nedir?</button>
-            <div class="accordion__content"><p>Ekolojik, ekonomik ve sosyal faydaları koruyarak ormanların geleceğe aktarılmasını hedefleyen yönetim yaklaşımıdır.</p></div>
-          </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Ağaçlandırmada hangi türler kullanılıyor?</button>
-            <div class="accordion__content"><p>Lokasyona ve iklime uygun yerli türler (meşe, çam, sedir, ıhlamur vb.) ve mümkünse endemik türler.</p></div>
-          </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Kurumsal müşteriler için raporlama var mı?</button>
-            <div class="accordion__content"><p>Evet. Karbon dengeleme, büyüme takibi ve sosyal etki raporlarını görsel panolarla sunuyoruz.</p></div>
-          </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Dikim sonrası bakım süreçleriniz neler?</button>
-            <div class="accordion__content"><p>İlk 3 yıl düzenli bakım-sulama-koruma; tutma oranı ve sağlık durumu periyodik raporlanır.</p></div>
-          </div>
-
-          <div class="accordion__item" data-fade>
-            <button class="accordion__header">Gönüllü olarak yer alabilir miyim?</button>
-            <div class="accordion__content"><p>Evet. Dönemsel etkinlik ve saha çalışmalarına <a href="iletisim.html">iletişim</a> sayfasından başvurabilirsiniz.</p></div>
+        </div>
+        <div class="index-overview__visual" data-fade>
+          <img src="img/ogm.jpg" alt="Sıkça sorulan sorular görseli">
+          <div class="index-overview__stats">
+            <article class="index-metric">
+              <strong data-count="8">8</strong>
+              <span>Temel Soru</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="3">3</strong>
+              <span>Ana Başlık</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="24">24</strong>
+              <span>Saat İçinde Dönüş</span>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA (temanın hazır CTA bölümü) -->
-    <section class="section cta">
-      <div class="cta__background"></div>
+    <section id="faq-list" class="index-section faq-pro">
+      <div class="container faq-pro__layout">
+        <aside class="faq-pro__meta" data-fade>
+          <h2>Konu Başlıkları</h2>
+          <p>Sorularımızı üç ana kategori altında topladık:</p>
+          <ul>
+            <li><i class="fa-solid fa-arrow-right"></i> Hizmet Kapsamı</li>
+            <li><i class="fa-solid fa-arrow-right"></i> Teklif ve Çalışma Süreci</li>
+            <li><i class="fa-solid fa-arrow-right"></i> Raporlama ve Uygulama</li>
+          </ul>
+          <a href="iletisim.html" class="index-link-btn">Yanıt Bulamadım</a>
+        </aside>
+
+        <div class="faq-pro__accordion" data-fade>
+          <div class="accordion">
+            <div class="accordion__item">
+              <button class="accordion__header">Hizmet alanlarınız nelerdir?</button>
+              <div class="accordion__content"><p>Ağaçlandırma, orman bakımı, karbon dengeleme ve yangın risk analizi gibi uçtan uca ormancılık danışmanlışı sunuyoruz.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Teklif nasıl alırım?</button>
+              <div class="accordion__content"><p><a href="iletisim.html">İletişim</a> sayfasındaki formu doldurduŞunuzda proje kapsamınıza göre uzman ekip kısa sürede dönüş sağlar.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Projeleriniz hangi bölgelerde yürütülüyor?</button>
+              <div class="accordion__content"><p>Türkiye genelinde hizmet veriyoruz. İhtiyaç halinde uluslararası lokasyonlarda da proje desteği sağlıyoruz.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Sürdürülebilir ormancılık yaklaşımınız nedir?</button>
+              <div class="accordion__content"><p>Ekolojik, ekonomik ve sosyal dengeyi koruyarak orman kaynaklarının gelecek nesillere aktarımını temel alan bir yönetim yaklaşımı izliyoruz.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Ağaçlandırmada hangi türler kullanılıyor?</button>
+              <div class="accordion__content"><p>Lokasyon ve iklim koŞullarına uygun yerli türler (meşe, çam, sedir, ıhlamur vb.) ve mümkünse endemik türler tercih edilir.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Kurumsal müşteriler için raporlama var mı?</button>
+              <div class="accordion__content"><p>Evet. Karbon dengeleme, büyüme takibi ve sosyal etki raporlarını yönetim panoları ve görsel çıktılarla sunuyoruz.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Dikim sonrası bakım süreçleriniz neler?</button>
+              <div class="accordion__content"><p>İlk 3 yıl düzenli bakım, sulama ve koruma uygulanır. Tutma oranı ile sağlık durumu periyodik olarak raporlanır.</p></div>
+            </div>
+
+            <div class="accordion__item">
+              <button class="accordion__header">Gönüllü olarak yer alabilir miyim?</button>
+              <div class="accordion__content"><p>Evet. Dönemsel etkinlik ve saha çalışmalarına <a href="iletisim.html">iletişim</a> sayfasından başvurarak dahil olabilirsiniz.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="index-section index-cta-band">
       <div class="container">
-        <div class="cta__content" data-fade>
-          <div class="cta__badge"><i class="fas fa-rocket"></i><span>Hemen Başlayın</span></div>
-          <h2>Projeniz İçin Hemen Harekete Geçin</h2>
-          <p>Uzman ekibimiz ihtiyacınızı değerlendirsin, en uygun çözümü birlikte planlayalım.</p>
-          <div class="cta__actions">
-            <a href="iletisim.html" class="btn btn--primary btn--large"><i class="fas fa-phone"></i><span>Ücretsiz Danışmanlık</span></a>
-            <a href="tel:+905309094108" class="btn btn--outline btn--large"><i class="fas fa-phone-alt"></i><span>(+90) 530 909 41 08</span></a>
+        <div class="index-cta-band__content" data-fade>
+          <p class="index-kicker">Destek</p>
+          <h2>Sorunuz Varsa Ekibimizle Hemen İletişime Geçin</h2>
+          <p>Projenize özel detaylar için teknik ekipten doğrudan bilgi alabilirsiniz.</p>
+          <div class="index-cta-band__actions">
+            <a href="iletisim.html" class="index-link-btn">İletişim Formu</a>
+            <a href="tel:+905309094108" class="index-link-btn index-link-btn--alt">Telefonla Ulaş</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- WhatsApp (ANASAYFADAKİ NUMARA İLE AYNI) -->
   <a href="https://wa.me/905309094108" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- Cookie Consent (tema ile aynı yapı) -->
   <div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-labelledby="cookieConsentText" tabindex="-1" style="display:none;">
     <div class="cookie-consent__content">
       <p id="cookieConsentText" class="cookie-consent__text">
@@ -226,7 +220,7 @@
       <button class="cookie-modal__close" id="closeCookieModal" aria-label="Kapat">×</button>
       <h2 class="cookie-modal__title">Çerez Politikası</h2>
       <div class="cookie-modal__body">
-        <p><strong>Çerezler nedir?</strong><br>Çerezler, web sitelerinin tarayıcınızda depoladığı küçük metin dosyalarıdır. Sitemizdeki deneyiminizi iyileştirmek, site trafiğini analiz etmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz.</p>
+        <p><strong>Çerezler nedir?</strong><br>Çerezler, web sitelerinin tarayıcınızda depoladışı küçük metin dosyalarıdır. Sitemizdeki deneyiminizi iyileştirmek, site trafişini analiz etmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz.</p>
         <ul>
           <li><strong>Gerekli Çerezler:</strong> Sitenin temel işlevleri için gereklidir. (Oturum, güvenlik, dil tercihi vb.)</li>
           <li><strong>İstatistik Çerezler:</strong> Ziyaretçi istatistiklerini anonim olarak toplar.</li>
@@ -237,160 +231,59 @@
     </div>
   </div>
 
-  <!-- FOOTER (ANASAYFA İLE AYNI BİLEŞEN YAPISI) -->
-  <footer class="footer">
-    <div class="footer__background"></div>
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
-        <div class="footer__info">
-          <strong>Lacivert Ormancılık</strong><br>
-          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
-          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
-          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
-        </div>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+  <footer class="site-footer-pro">
+    <div class="site-footer-pro__texture"></div>
+    <div class="container site-footer-pro__grid">
+      <div class="site-footer-pro__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo">
+        <p>
+          Lacivert Ormancılık, ormancılık ve maden izin süreçlerinde teknik planlama, uygulama ve
+          raporlama adımlarını tek merkezde yöneten mühendislik çözüm ortağıdır.
+        </p>
+        <div class="site-footer-pro__social">
+          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
         </div>
       </div>
-
-      <div class="footer__nav">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="index.html">Anasayfa</a></li>
-          <li><a href="hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-          <li><a href="galeri.html">Galeri</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
-        </ul>
+      <div class="site-footer-pro__col">
+        <h4>Hızlı Menü</h4>
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="sss.html" aria-current="page">Sıkça Sorulan Sorular</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
       </div>
-
-   
-
-    <div class="footer__bottom">
-      &copy; 2025 • Lacivert Ormancılık • Tüm Hakları Saklıdır.
+      <div class="site-footer-pro__col">
+        <h4>Proje Grupları</h4>
+        <a href="madde16.html">Madde 16</a>
+        <a href="madde17.html">Madde 17</a>
+        <a href="diger.html">Diğer</a>
+        <a href="projeler/ento-maden-global.html">Örnek Proje</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>İletişim</h4>
+        <span>Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE</span>
+        <span>Başiskele/KOCAELİ</span>
+        <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a>
+        <a href="tel:+905309094108">(+90) 530 909 41 08</a>
+      </div>
     </div>
-
+    <div class="site-footer-pro__bottom">
+      <p>&copy; 2026 Lacivert Ormancılık. Tüm hakları saklıdır.</p>
+      <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
+    </div>
     <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
   </footer>
 
-  <!-- Vendor JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
-
-  <!-- Proje JS -->
   <script src="js/index.js" defer></script>
-
-  <!-- Sayfa içi küçük davranışlar (tema class’larını KULLANARAK) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Preloader
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        window.addEventListener('load', function () {
-          preloader.classList.add('hide');
-        });
-      }
-
-      // Scroll Progress
-      const progressBar = document.querySelector('.progress__bar');
-      if (progressBar) {
-        window.addEventListener('scroll', function () {
-          const max = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = Math.min(100, (window.scrollY / max) * 100);
-          progressBar.style.width = pct + '%';
-        });
-      }
-
-      // Back to top (tema: .to-top.show)
-      const toTopBtn = document.getElementById('toTop');
-      if (toTopBtn) {
-        const onScroll = () => {
-          if (window.scrollY > 300) toTopBtn.classList.add('show');
-          else toTopBtn.classList.remove('show');
-        };
-        window.addEventListener('scroll', onScroll);
-        onScroll();
-        toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      // Mobile menu (tema: .nav__links.show)
-      const burger = document.getElementById('burger');
-      const navLinks = document.getElementById('navLinks');
-      if (burger && navLinks) {
-        burger.addEventListener('click', function () {
-          burger.classList.toggle('active');
-          navLinks.classList.toggle('show');
-        });
-      }
-
-      // Accordion
-      const headers = document.querySelectorAll('.accordion__header');
-      headers.forEach(h => {
-        h.addEventListener('click', function () {
-          const content = this.nextElementSibling;
-          const isOpen = this.classList.contains('active');
-
-          headers.forEach(x => {
-            x.classList.remove('active');
-            if (x.nextElementSibling) {
-              x.nextElementSibling.style.maxHeight = '0';
-            }
-          });
-
-          if (!isOpen) {
-            this.classList.add('active');
-            content.style.maxHeight = content.scrollHeight + 'px';
-          }
-        });
-      });
-
-      // Reveal on scroll (data-fade)
-      const faders = document.querySelectorAll('[data-fade]');
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      faders.forEach(el => io.observe(el));
-
-      // Cookie consent + modal
-      const cc = document.getElementById('cookieConsent');
-      const accept = document.getElementById('acceptCookies');
-      const detailsBtn = document.getElementById('cookieDetailsBtn');
-      const modal = document.getElementById('cookieModal');
-      const closeModal = document.getElementById('closeCookieModal');
-
-      try {
-        if (cc && !localStorage.getItem('cookiesAccepted')) {
-          cc.style.display = 'block';
-        }
-        if (accept) {
-          accept.addEventListener('click', () => {
-            localStorage.setItem('cookiesAccepted', '1');
-            cc.style.display = 'none';
-          });
-        }
-        if (detailsBtn && modal) {
-          detailsBtn.addEventListener('click', () => { modal.style.display = 'flex'; });
-        }
-        if (closeModal && modal) {
-          closeModal.addEventListener('click', () => { modal.style.display = 'none'; });
-          modal.addEventListener('click', e => {
-            if (e.target.classList.contains('cookie-modal__overlay')) modal.style.display = 'none';
-          });
-        }
-      } catch (e) {
-        /* localStorage kapalıysa sessiz geç */
-      }
-    });
-  </script>
 </body>
 </html>
+
+
+
+

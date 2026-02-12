@@ -399,41 +399,46 @@ function hexToRgba(hex, alpha = 1) {
         const detailTitle = card.querySelector(".hero-detail__title")
         const detailText = card.querySelector(".hero-detail__text")
         const showProjectsBtn = card.querySelector(".js-show-projects")
-        let spinLock = false
 
         const closeAllPanels = () => {
           projectsPanel?.classList.remove("active")
           detailPanel?.classList.remove("active")
+          card.classList.remove("is-panel-open")
+        }
+
+        const enhanceProjectItem = (btn) => {
+          if (btn.dataset.enhanced === "1") return
+          const title = btn.dataset.title || btn.textContent.trim() || "Proje"
+          const desc = btn.dataset.text || "Detaylı proje sayfasını görüntüleyin."
+
+          btn.textContent = ""
+
+          const titleEl = document.createElement("span")
+          titleEl.className = "hero-panel__item-title"
+          titleEl.textContent = title
+
+          const descEl = document.createElement("span")
+          descEl.className = "hero-panel__item-desc"
+          descEl.textContent = desc
+
+          const ctaEl = document.createElement("span")
+          ctaEl.className = "hero-panel__item-link"
+          ctaEl.textContent = "Detay sayfaya git"
+
+          btn.append(titleEl, descEl, ctaEl)
+          btn.dataset.enhanced = "1"
         }
 
         showProjectsBtn?.addEventListener("click", () => {
-          if (spinLock) return
-          spinLock = true
-          card.classList.remove("is-rotating")
-          void card.offsetWidth
-
-          const onSpinEnd = (event) => {
-            if (event.animationName !== "card-spin") return
-            card.classList.remove("is-rotating")
-            spinLock = false
-            card.removeEventListener("animationend", onSpinEnd)
-          }
-
-          card.addEventListener("animationend", onSpinEnd)
-          card.classList.add("is-rotating")
+          if (projectsPanel?.classList.contains("active")) return
+          closeAllPanels()
+          card.classList.add("is-panel-open")
           detailPanel?.classList.remove("active")
-          projectsPanel?.classList.add("active")
-
-          // Bazı tarayıcı senaryolarında animationend gelmezse kilidi aç.
-          setTimeout(() => {
-            if (!spinLock) return
-            card.classList.remove("is-rotating")
-            spinLock = false
-            card.removeEventListener("animationend", onSpinEnd)
-          }, 1200)
+          requestAnimationFrame(() => projectsPanel?.classList.add("active"))
         })
 
         projectsPanel?.querySelectorAll(".hero-panel__item").forEach((btn) => {
+          enhanceProjectItem(btn)
           btn.addEventListener("click", () => {
             const targetUrl = btn.dataset.url
             if (targetUrl) {
@@ -452,6 +457,12 @@ function hexToRgba(hex, alpha = 1) {
 
         projectsPanel?.querySelector(".js-close-panel")?.addEventListener("click", () => {
           closeAllPanels()
+        })
+
+        projectsPanel?.addEventListener("click", (event) => {
+          if (event.target === projectsPanel) {
+            closeAllPanels()
+          }
         })
 
         detailPanel?.querySelector(".js-back-projects")?.addEventListener("click", () => {

@@ -3,35 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Orman İzinleri Danışmanlığı | Lacivert Ormancılık</title>
-  <meta name="description" content="Orman arazilerindeki projeleriniz için ön izin, kesin izin, irtifak hakkı ve kiralama süreçlerinde uzman danışmanlık. Projelerinizi güvence altına alın.">
-
-  <!-- Jivochat (anasayfadakiyle aynı) -->
+  <title>Orman İzinleri | Lacivert Ormancılık</title>
+  <meta name="description" content="Orman izin süreçlerinde ön izin, kesin izin, irtifak ve kullanım izinleri için hızlı, eksiksiz ve proje odaklı danışmanlık.">
   <script src="//code.jivosite.com/widget/jLHRdCZAjs" async></script>
 
   <link rel="icon" type="image/png" href="img/sekmeikon.png" sizes="64x64">
 
-  <!-- Fontlar & ikonlar -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet"
-  />
+  >
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-  />
+  >
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="css/styleorman.css">
+  <link rel="stylesheet" href="css/pages/ormanizinleri.css">
 </head>
 <body>
 
-  <!-- ÜST BAR (anasayfadakiyle aynı yapı) -->
   <div class="topbar">
     <div class="topbar__left">
       <a href="mailto:omer@lacivert.cc" class="topbar__mail" target="_blank" rel="noopener">
@@ -39,24 +36,17 @@
         <span>omer@lacivert.cc</span>
       </a>
       <span class="topbar__divider"></span>
-      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/Kocaeli</span>
+      <span class="topbar__location"><i class="fa-solid fa-location-dot"></i> Başiskele/KOCAELİ</span>
     </div>
     <div class="topbar__right">
       <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
     </div>
   </div>
 
-  <!-- Preloader -->
-  <div id="preloader" class="preloader">
-    <div class="preloader__spinner"><i class="fas fa-spinner fa-pulse"></i></div>
-  </div>
-
-  <!-- Scroll Progress -->
   <div id="progress" class="progress"><div class="progress__bar"></div></div>
 
-  <!-- NAVBAR (anasayfadakiyle aynı yapı) -->
   <header class="nav">
     <div class="container nav__inner">
       <a href="index.html" class="nav__logo" aria-label="Lacivert Ormancılık">
@@ -75,11 +65,13 @@
             <a href="#ormancilik" class="nav__link">Ormancılık <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
               <li><a href="kanunveyonetmelikler.html">Kanun ve Yönetmelikler</a></li>
-              <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
+              <li><a href="ormanizinleri.html" aria-current="page">Orman İzinleri</a></li>
+              <li><a href="madde16.html">Madde 16</a></li>
+              <li><a href="madde17.html">Madde 17</a></li>
+              <li><a href="diger.html">Diğer</a></li>
             </ul>
           </li>
           <li><a href="galeri.html" class="nav__link">Galeri</a></li>
-          <li><a href="haberler.html" class="nav__link">Blog&Haberler</a></li>
           <li class="nav__dropdown">
             <a href="iletisim.html" class="nav__link">İletişim <i class="fa-solid fa-chevron-down"></i></a>
             <ul class="dropdown">
@@ -94,331 +86,279 @@
     </div>
   </header>
 
-  <main>
-    <!-- SERVICE HERO -->
-    <section class="service-hero">
-      <div class="container">
-        <div class="service-hero__content" data-fade>
-          <div class="service-hero__badge">
-            <i class="fas fa-key"></i>
-            <span>Orman İzinleri</span>
-          </div>
-          <h1 class="service-hero__title">Orman İzinleri Danışmanlığı</h1>
-          <p class="service-hero__subtitle">
-            Orman sayılan alanlarda projelerinizin hayata geçiş anahtarı olan izin süreçlerini
-            başından sonuna kadar yönetiyor, yasal güvence sağlıyoruz.
-          </p>
-          <div class="service-hero__features">
-            <div class="service-hero__feature">
-              <i class="fas fa-file-signature"></i>
-              <span>Doğru Başvuru</span>
-            </div>
-            <div class="service-hero__feature">
-              <i class="fas fa-clock"></i>
-              <span>Zamanında Takip</span>
-            </div>
-            <div class="service-hero__feature">
-              <i class="fas fa-check-double"></i>
-              <span>Proje Onayı</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTENT SECTION 1 -->
-    <section class="content-section">
-      <div class="container">
-        <div class="content-grid">
-          <div class="content-text" data-fade>
-            <h2>Projelerinizin Hayata Geçiş Anahtarı</h2>
-            <p>
-              Orman sayılan alanlarda madencilik, enerji, turizm veya altyapı gibi ormancılık dışı
-              herhangi bir faaliyetin yapılabilmesi, kanunlar çerçevesinde belirlenmiş özel izinlerin
-              alınmasına bağlıdır. Bu kritik ve detaylı süreçte size rehberlik ediyoruz.
-            </p>
-            <div class="content-features">
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-file-signature"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>Doğru ve Eksiksiz Başvuru</h4>
-                  <p>Tüm gerekli belgeleri eksiksiz hazırlayarak başvuru sürecinizi hızlandırıyoruz</p>
-                </div>
-              </div>
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>Zamanında ve Etkin Süreç Takibi</h4>
-                  <p>İlgili kurumlardaki her adımı proaktif olarak takip ederek gecikmeleri önlüyoruz</p>
-                </div>
-              </div>
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-check-double"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>Proje Onayı ve Yasal Güvence</h4>
-                  <p>İzin sürecinin başarıyla tamamlanması ve yasal güvencenin sağlanması</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="content-image" data-fade>
-            <img src="img/proje-yolu.jpg" alt="Ormanlık alanda yapılmış bir proje yolu">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTENT SECTION 2 -->
-    <section class="content-section content-section--alt">
-      <div class="container">
-        <div class="content-grid">
-          <div class="content-image" data-fade>
-            <img src="img/fidandikim.jpg" alt="Fidan dikim çalışmaları">
-          </div>
-          <div class="content-text" data-fade>
-            <h2>Başlıca Orman İzin Türleri</h2>
-            <p>
-              Her proje türünün kendine özgü izin gereksinimleri vardır. Uzman kadromuzla,
-              projenizin niteliğine en uygun izin türünü belirliyor ve süreçleri yönetiyoruz.
-            </p>
-            <div class="content-features">
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-magnifying-glass"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>Ön İzin</h4>
-                  <p>Projenin ön uygunluğunun değerlendirildiği, detaylı çalışmalara başlamadan önceki ilk ve en önemli aşama</p>
-                </div>
-              </div>
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-stamp"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>Kesin İzin</h4>
-                  <p>Ön izin sonrası, projenin uygulanabilmesi için gerekli olan ve yatırımın başlamasını sağlayan nihai izin</p>
-                </div>
-              </div>
-              <div class="content-feature">
-                <div class="content-feature__icon">
-                  <i class="fas fa-key"></i>
-                </div>
-                <div class="content-feature__text">
-                  <h4>İrtifak Hakkı</h4>
-                  <p>Genellikle uzun süreli ve büyük projeler için orman arazisi üzerinde kullanım hakkı tesis edilmesini kapsar</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROCESS SECTION -->
-    <section class="process-section">
-      <div class="container">
-        <div class="section__header" data-fade>
-          <div class="section__badge">
-            <i class="fas fa-cogs"></i>
-            <span>İzin Süreci</span>
-          </div>
-          <h2 class="section__title">4 Adımda Orman İzni Süreci</h2>
-          <p class="section__subtitle">
-            Sistematik yaklaşımımızla izin süreçlerinizi başarıyla yönetiyoruz
-          </p>
-        </div>
-        <div class="process-grid">
-          <div class="process-step" data-fade>
-            <div class="process-step__number">1</div>
-            <h4>Proje Analizi ve Strateji</h4>
-            <p>Yatırımınızın hedeflerini anlar, araziyi değerlendirir ve en doğru izin türü için strateji oluştururuz.</p>
-          </div>
-          <div class="process-step" data-fade>
-            <div class="process-step__number">2</div>
-            <h4>Başvuru Dosyası Hazırlığı</h4>
-            <p>Gerekli tüm teknik raporları, haritaları ve hukuki belgeleri içeren kapsamlı başvuru dosyanızı hazırlarız.</p>
-          </div>
-          <div class="process-step" data-fade>
-            <div class="process-step__number">3</div>
-            <h4>Kurumsal Takip ve Koordinasyon</h4>
-            <p>Başvurunuzu yapar ve Orman Genel Müdürlüğü ile diğer ilgili kurumlardaki tüm süreci sizin adınıza yürütürüz.</p>
-          </div>
-          <div class="process-step" data-fade>
-            <div class="process-step__number">4</div>
-            <h4>Onay ve Tescil İşlemleri</h4>
-            <p>İzninizin onaylanmasını takiben, irtifak hakkı gibi hakların tapuya tescil edilme işlemlerini tamamlarız.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STATS SECTION -->
-    <section class="stats-section">
-      <div class="container">
-        <div class="section__header" data-fade>
-          <h2 class="section__title" style="color: white;">İzin Süreçlerindeki Başarımız</h2>
-          <p class="section__subtitle" style="color: rgba(255,255,255,0.9);">
-            Uzman yaklaşımımızın somut sonuçları
-          </p>
-        </div>
-        <div class="stats-grid" data-fade>
-          <div class="stat-card">
-            <span class="stat-card__number">200+</span>
-            <span class="stat-card__label">Başarılı İzin Süreci</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">%95</span>
-            <span class="stat-card__label">İlk Başvuruda Onay</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">6-18</span>
-            <span class="stat-card__label">Ay Ortalama Süre</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-card__number">%100</span>
-            <span class="stat-card__label">Yasal Uyumluluk</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA BANNER -->
-    <section class="cta-banner">
-      <div class="container">
-        <div class="cta-banner__content" data-fade>
-          <h2>İzin Süreçlerinizi Güvence Altına Alın</h2>
+  <main class="home-main permit-main">
+    <section id="kurumsal" class="index-section index-overview index-overview--permit">
+      <div class="container index-overview__grid">
+        <div class="index-overview__content" data-fade>
+          <p class="index-kicker">Süreç Yönetimi</p>
+          <h1>Orman İzin Süreçlerini Uçtan Uca Güvenli Yönetin</h1>
           <p>
-            Orman izinleri konusunda uzman ekibimizle çalışarak projenizin önündeki
-            yasal engelleri aşın. Başarılı bir süreç için hemen iletişime geçin.
+            Orman alanlarında yatırım projelerinde ön izin, kesin izin, irtifak ve kullanım izinlerinin
+            teknik kurgusunu proje takvimiyle uyumlu hale getiriyoruz. Süreç boyunca kurum yazışmaları,
+            dosya revizyonları ve saha eşleştirmelerini tek koordinasyonda yürütüyoruz.
           </p>
-          <a href="iletisim.html" class="btn btn--large">
-            <i class="fas fa-envelope"></i>
-            <span>İzin Danışmanlığı Al</span>
-          </a>
+          <div class="index-overview__chips">
+            <span><i class="fa-solid fa-file-circle-check"></i> Ön İzin</span>
+            <span><i class="fa-solid fa-stamp"></i> Kesin İzin</span>
+            <span><i class="fa-solid fa-key"></i> İrtifak ve Kullanım</span>
+          </div>
+          <div class="index-overview__actions">
+            <a href="#izin-turleri" class="index-link-btn">İzin Türleri</a>
+            <a href="iletisim.html" class="index-link-btn index-link-btn--alt">Dosya Ön Analizi Al</a>
+          </div>
+        </div>
+        <div class="index-overview__visual" data-fade>
+          <img src="img/proje-yolu2.jpg" alt="Orman izin süreçlerinde saha planlaması">
+          <div class="index-overview__stats">
+            <article class="index-metric">
+              <strong data-count="4">4</strong>
+              <span>Temel Süreç Adımı</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="200">200+</strong>
+              <span>Yönetilen İzin Dosyası</span>
+            </article>
+            <article class="index-metric">
+              <strong data-count="24">24</strong>
+              <span>Saatte İlk Değerlendirme</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="izin-turleri" class="index-section permit-types">
+      <div class="container">
+        <div class="index-section__head" data-fade>
+          <p class="index-kicker">İzin Modelleri</p>
+          <h2>Proje Tipine Göre Planlanan Başlıca Orman İzinleri</h2>
+        </div>
+
+        <div class="permit-types__grid">
+          <article class="permit-card" data-fade>
+            <span class="permit-card__tag">İlk Aşama</span>
+            <h3>Ön İzin Süreci</h3>
+            <p>Proje alanının uygunluğu, kurum görüşleri ve teknik çerçevenin hazırlanmasıyla başlar.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Alan ve statü doğrulaması</li>
+              <li><i class="fa-solid fa-check"></i> Ön dosya teknik seti</li>
+              <li><i class="fa-solid fa-check"></i> Başvuru planı oluşturma</li>
+            </ul>
+          </article>
+
+          <article class="permit-card" data-fade>
+            <span class="permit-card__tag">Yatırım Başlangıcı</span>
+            <h3>Kesin İzin ve Revizyon</h3>
+            <p>Ön izin sonrası kesin izne geçişte teknik pafta ve kurum talepleri eksiksiz yönetilir.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Nihai başvuru dosyası</li>
+              <li><i class="fa-solid fa-check"></i> Revizyon takibi</li>
+              <li><i class="fa-solid fa-check"></i> Saha/pafta uyumu</li>
+            </ul>
+          </article>
+
+          <article class="permit-card" data-fade>
+            <span class="permit-card__tag">Uzun Dönem Kullanım</span>
+            <h3>İrtifak ve Kullanma İzni</h3>
+            <p>Madencilik, enerji ve altyapı projelerinde uzun süreli kullanım hakkı süreçleri kurgulanır.</p>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Sözleşme ve yükümlülük analizi</li>
+              <li><i class="fa-solid fa-check"></i> Kurum koordinasyonu</li>
+              <li><i class="fa-solid fa-check"></i> İşletme dönemi takibi</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="index-section index-process permit-process">
+      <div class="container">
+        <div class="index-section__head" data-fade>
+          <p class="index-kicker">Çalışma Modeli</p>
+          <h2>Orman İzin Dosyasını Nasıl Yönetiyoruz?</h2>
+        </div>
+        <div class="index-process__timeline">
+          <article class="index-step" data-fade>
+            <span class="index-step__no">01</span>
+            <h3>Ön Değerlendirme</h3>
+            <p>Proje amacı, alan bilgisi ve zaman planı üzerinden izin yol haritası çıkarılır.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">02</span>
+            <h3>Teknik Dosya Kurulumu</h3>
+            <p>Pafta, koordinat, metraj ve kurum formatına uygun başvuru seti oluşturulur.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">03</span>
+            <h3>Kurum Takibi</h3>
+            <p>İl/merkez müdürlük yazışmaları ve ek belge talepleri tek hat üzerinden yönetilir.</p>
+          </article>
+          <article class="index-step" data-fade>
+            <span class="index-step__no">04</span>
+            <h3>Onay ve Kapanış</h3>
+            <p>Onay sonrası saha yükümlülükleri ve resmi kapanış raporları eksiksiz teslim edilir.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="index-section permit-panels">
+      <div class="container permit-panels__grid">
+        <article class="permit-panel" data-fade>
+          <img src="img/ogm2.jpg" alt="Orman kurumu süreç takibi">
+          <div class="permit-panel__body">
+            <h3>Kurum Entegrasyonu</h3>
+            <p>OGM ve ilgili kamu kurumlarıyla yürütülen yazışmaları zaman kaybı olmadan takip ediyoruz.</p>
+          </div>
+        </article>
+
+        <article class="permit-panel" data-fade>
+          <img src="img/fidandikim3.jpg" alt="Sahada uygulama ve kontrol">
+          <div class="permit-panel__body">
+            <h3>Saha ve Uygulama Kontrolü</h3>
+            <p>İzin kararlarının sahadaki uygulamayla birebir örtüşmesi için düzenli teknik kontrol sağlıyoruz.</p>
+          </div>
+        </article>
+
+        <article class="permit-panel" data-fade>
+          <img src="img/drone-haritalama.jpg" alt="Teknik harita ve koordinat doğrulama">
+          <div class="permit-panel__body">
+            <h3>Teknik Doğruluk</h3>
+            <p>Koordinat, pafta ve metraj uyuşmazlıklarını baştan engelleyerek revizyon riskini azaltıyoruz.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="index-section index-map-wrap">
+      <div class="container index-map-wrap__grid">
+        <div class="index-map-card" data-fade>
+          <div class="index-map-card__head">
+            <p class="index-kicker">Konum</p>
+            <h2>Kurumsal Merkez</h2>
+          </div>
+          <iframe
+            src="https://www.google.com/maps?q=40.714599,29.939178&output=embed"
+            width="100%"
+            height="420"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lacivert Ormancılık Konum"
+          ></iframe>
+        </div>
+        <aside class="index-contact-card" data-fade>
+          <h3>Orman İzinleri İletişim</h3>
+          <p>Proje türünüze göre hangi izin tipinin uygulanması gerektiğini hızlıca birlikte netleştirelim.</p>
+          <ul>
+            <li><i class="fa-solid fa-location-dot"></i> Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE<br>Başiskele/KOCAELİ</li>
+            <li><i class="fa-solid fa-envelope"></i> omer@lacivert.cc</li>
+            <li><i class="fa-solid fa-phone"></i> (+90) 530 909 41 08</li>
+          </ul>
+          <div class="index-contact-card__actions">
+            <a href="iletisim.html" class="index-link-btn">İletişim Sayfası</a>
+            <a href="https://wa.me/905309094108" target="_blank" rel="noopener" class="index-link-btn index-link-btn--alt">WhatsApp</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="index-section index-cta-band">
+      <div class="container">
+        <div class="index-cta-band__content" data-fade>
+          <p class="index-kicker">Hazır Mısınız?</p>
+          <h2>İzin Sürecinizi Takvime Uygun ve Kontrol Edilebilir Hale Getirelim</h2>
+          <p>Doğru başvuru yapısı ve güçlü kurum takibiyle projenizin onay hızını artırın.</p>
+          <div class="index-cta-band__actions">
+            <a href="iletisim.html" class="index-link-btn">Ön Analiz Talep Et</a>
+            <a href="tel:+905309094108" class="index-link-btn index-link-btn--alt">Telefonla Ulaş</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER (değiştirilmedi) -->
-  <footer class="footer">
-    <div class="footer__background"></div>
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img src="img/logo.png" alt="Lacivert Ormancılık Logo" class="footer__logo">
-        <div class="footer__info">
-          <strong>Lacivert Ormancılık</strong><br>
-          Sahil, Güvenlik Cd. No:26/A, 41090 Başiskele/Kocaeli<br>
-          <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a><br>
-          <span class="footer__phone">Bizi arayın: (+90) 530 909 41 08</span>
-        </div>
-        <div class="footer__social">
-          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://maps.app.goo.gl/9wR8y2K9kzKp7j9c9" target="_blank" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
-        </div>
-      </div>
-      <div class="footer__nav">
-        <h4>Navigate</h4>
+  <a href="https://wa.me/905309094108" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <div id="cookieConsent" class="cookie-consent" role="dialog" aria-live="polite" aria-labelledby="cookieConsentText" tabindex="-1" style="display:none;">
+    <div class="cookie-consent__content">
+      <p id="cookieConsentText" class="cookie-consent__text">
+        Web sitemizdeki kullanıcı deneyiminizi geliştirmek için çerezleri kullanıyoruz.
+        <button id="cookieDetailsBtn" class="cookie-consent__details-btn" type="button">Detaylar</button>
+      </p>
+      <button id="acceptCookies" class="cookie-consent__button" aria-label="Çerezleri kabul et">Anladım</button>
+    </div>
+  </div>
+
+  <div id="cookieModal" class="cookie-modal" style="display:none;">
+    <div class="cookie-modal__overlay"></div>
+    <div class="cookie-modal__content">
+      <button class="cookie-modal__close" id="closeCookieModal" aria-label="Kapat">×</button>
+      <h2 class="cookie-modal__title">Çerez Politikası</h2>
+      <div class="cookie-modal__body">
+        <p><strong>Çerezler nedir?</strong><br>Çerezler, web sitelerinin tarayıcınızda depoladığı küçük metin dosyalarıdır. Sitemizdeki deneyiminizi iyileştirmek, site trafiğini analiz etmek ve hizmetlerimizi geliştirmek için çerezler kullanıyoruz.</p>
         <ul>
-          <li><a href="index.html">Anasayfa</a></li>
-          <li><a href="hakkimizda.html">Hakkımızda</a></li>
-          <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-          <li><a href="galeri.html">Galeri</a></li>
-          <li><a href="iletisim.html">İletişim</a></li>
+          <li><strong>Gerekli Çerezler:</strong> Sitenin temel işlevleri için gereklidir. (Oturum, güvenlik, dil tercihi vb.)</li>
+          <li><strong>İstatistik Çerezler:</strong> Ziyaretçi istatistiklerini anonim olarak toplar.</li>
+          <li><strong>Pazarlama Çerezleri:</strong> İlgi alanlarınıza göre içerik ve reklam sunmak için kullanılır.</li>
         </ul>
-      </div>
-      <div class="footer__services">
-        <h4>Hizmetler</h4>
-        <ul>
-          <li><a href="izinirtifak.html">İzin &amp; İrtifak Danışmanlığı</a></li>
-          <li><a href="surdurulebilirlik.html">Sürdürülebilirlik &amp; Sertifikasyon</a></li>
-          <li><a href="muhendislik.html">Mühendislik &amp; Teknolojik Çözümler</a></li>
-          <li><a href="kanunveyonetmelikler.html">Kanun &amp; Yönetmelikler</a></li>
-          <li><a href="ormanizinleri.html">Orman İzinleri</a></li>
-        </ul>
+        <p>Çerezler hakkında daha fazla bilgi için <a href="/gizlilik-politikasi.html" target="_blank">Gizlilik Politikamızı</a> inceleyebilirsiniz.</p>
       </div>
     </div>
-    <div class="footer__bottom">
-      © 2025 • Lacivert Ormancılık • Tüm Hakları Saklıdır.
+  </div>
+
+  <footer class="site-footer-pro">
+    <div class="site-footer-pro__texture"></div>
+    <div class="container site-footer-pro__grid">
+      <div class="site-footer-pro__brand">
+        <img src="img/logo.png" alt="Lacivert Ormancılık Logo">
+        <p>
+          Lacivert Ormancılık, ormancılık ve maden izin süreçlerinde teknik planlama, uygulama ve
+          raporlama adımlarını tek merkezde yöneten mühendislik çözüm ortağıdır.
+        </p>
+        <div class="site-footer-pro__social">
+          <a href="https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.google.com/maps/search/?api=1&query=40.714599,29.939178" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+        </div>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>Hızlı Menü</h4>
+        <a href="index.html">Anasayfa</a>
+        <a href="hakkimizda.html">Hakkımızda</a>
+        <a href="sss.html">Sıkça Sorulan Sorular</a>
+        <a href="galeri.html">Galeri</a>
+        <a href="iletisim.html">İletişim</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>Proje Grupları</h4>
+        <a href="madde16.html">Madde 16</a>
+        <a href="madde17.html">Madde 17</a>
+        <a href="diger.html">Diğer</a>
+        <a href="projeler/ento-maden-global.html">Örnek Proje</a>
+      </div>
+      <div class="site-footer-pro__col">
+        <h4>İletişim</h4>
+        <span>Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE</span>
+        <span>Başiskele/KOCAELİ</span>
+        <a href="mailto:omer@lacivert.cc">omer@lacivert.cc</a>
+        <a href="tel:+905309094108">(+90) 530 909 41 08</a>
+      </div>
+    </div>
+    <div class="site-footer-pro__bottom">
+      <p>&copy; 2026 Lacivert Ormancılık. Tüm hakları saklıdır.</p>
+      <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
     </div>
     <button id="toTop" class="to-top" aria-label="Yukarı Çık"><i class="fa-solid fa-angle-up"></i></button>
   </footer>
 
-  <!-- WhatsApp (solda yüzen) -->
-  <a href="https://wa.me/905334306801" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp ile iletişime geç">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <!-- Vendor JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
   <script src="js/index.js" defer></script>
-
-  <!-- Küçük davranışlar (anasayfadakiyle aynı mantık) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Preloader
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        window.addEventListener('load', function () {
-          preloader.style.opacity = '0';
-          setTimeout(() => preloader.style.display = 'none', 500);
-        });
-      }
-
-      // Scroll Progress
-      const progressBar = document.querySelector('.progress__bar');
-      if (progressBar) {
-        window.addEventListener('scroll', function () {
-          const max = document.documentElement.scrollHeight - window.innerHeight;
-          const pct = Math.min(100, (window.scrollY / max) * 100);
-          progressBar.style.width = pct + '%';
-        });
-      }
-
-      // Back to top
-      const toTopBtn = document.getElementById('toTop');
-      if (toTopBtn) {
-        const onScroll = () => {
-          if (window.scrollY > 300) toTopBtn.classList.add('show');
-          else toTopBtn.classList.remove('show');
-        };
-        window.addEventListener('scroll', onScroll);
-        onScroll();
-        toTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      // Mobile menu
-      const burger = document.getElementById('burger');
-      const navLinks = document.getElementById('navLinks');
-      if (burger && navLinks) {
-        burger.addEventListener('click', function () {
-          burger.classList.toggle('active');
-          navLinks.classList.toggle('show');
-        });
-      }
-
-      // Reveal on scroll
-      const faders = document.querySelectorAll('[data-fade]');
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-      faders.forEach(el => io.observe(el));
-    });
-  </script>
 </body>
 </html>

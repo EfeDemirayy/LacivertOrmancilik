@@ -1,0 +1,82 @@
+﻿/* madde17 sayfasi ozel stilleri */
+
+/* Bu dosya yalnizca madde17.html icin kullanilir. */
+
+.madde-main .madde-brief {
+  margin: 1rem 0 1.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(23, 43, 71, 0.18);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98), rgba(245, 243, 238, 0.96));
+  box-shadow: 0 16px 32px rgba(8, 24, 49, 0.12);
+  overflow: hidden;
+}
+
+.madde-main .madde-brief--m17 {
+  border-top: 4px solid #7f5a38;
+}
+
+.madde-main .madde-brief__head {
+  padding: 1rem 1rem 0.85rem;
+  background: linear-gradient(130deg, rgba(12, 33, 60, 0.95), rgba(78, 57, 39, 0.92));
+}
+
+.madde-main .madde-brief__head span {
+  display: inline-block;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #e7d2bd;
+}
+
+.madde-main .madde-brief__head h3 {
+  margin: 0.3rem 0 0;
+  color: #fff;
+  font-size: 1.28rem;
+  font-family: var(--font-heading);
+}
+
+.madde-main .madde-brief__head p {
+  margin: 0.52rem 0 0;
+  color: rgba(244, 247, 255, 0.92);
+  line-height: 1.65;
+}
+
+.madde-main .madde-brief__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  padding: 0.95rem 1rem 1rem;
+}
+
+.madde-main .madde-brief__col {
+  border-radius: 14px;
+  border: 1px solid rgba(19, 42, 68, 0.16);
+  background: rgba(255, 255, 255, 0.94);
+  padding: 0.9rem 0.95rem;
+}
+
+.madde-main .madde-brief__col h4 {
+  margin: 0;
+  color: #183962;
+  font-size: 1rem;
+  font-family: var(--font-heading);
+}
+
+.madde-main .madde-brief__col ul {
+  margin: 0.7rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.42rem;
+  color: #374f6c;
+}
+
+.madde-main .madde-brief__col li {
+  line-height: 1.52;
+}
+
+@media (max-width: 860px) {
+  .madde-main .madde-brief__grid {
+    grid-template-columns: 1fr;
+  }
+}
