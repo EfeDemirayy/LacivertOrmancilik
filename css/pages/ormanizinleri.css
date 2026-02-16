@@ -164,4 +164,32 @@
   .permit-main .permit-panels__grid {
     grid-template-columns: 1fr;
   }
+
+  .permit-main .permit-card,
+  .permit-main .permit-panel {
+    border-radius: 16px;
+  }
+
+  .permit-main .permit-panel__body {
+    padding: 0.82rem 0.86rem 0.9rem;
+  }
+
+  .permit-main .permit-panel img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .permit-main .index-overview--permit {
+    margin-top: 84px;
+  }
+
+  .permit-main .index-overview--permit .index-overview__visual img {
+    min-height: 280px;
+  }
+
+  .permit-main .permit-card h3,
+  .permit-main .permit-panel__body h3 {
+    font-size: 0.98rem;
+  }
 }

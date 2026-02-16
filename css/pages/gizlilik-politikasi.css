@@ -92,5 +92,22 @@
       .cookie-policy-container li{ font-size: .97rem; }
     }
 
+    @media (max-width: 480px){
+      .cookie-policy-main{
+        padding-top: 92px;
+      }
+      .cookie-policy-container{
+        margin: 0.8rem auto;
+        padding: 1rem .72rem;
+      }
+      .cookie-policy-container h1{ font-size: 1.12rem; }
+      .cookie-policy-container h2{ font-size: .95rem; }
+      .cookie-policy-container p,
+      .cookie-policy-container li{
+        font-size: .9rem;
+        overflow-wrap: anywhere;
+      }
+    }
+
 
 

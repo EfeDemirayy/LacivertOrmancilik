@@ -82,11 +82,19 @@ function hexToRgba(hex, alpha = 1) {
         // To-top button
         toTopBtn?.classList.toggle("show", y > 600)
 
-        // Parallax effect for hero
+        // Parallax effect for hero (panel hero'da kapali; mobilde kapali)
         const hero = $(".hero")
-        if (hero && y < window.innerHeight) {
-          const parallaxSpeed = y * 0.3
+        const canUseHeroParallax =
+          hero &&
+          !hero.classList.contains("hero--panels") &&
+          window.matchMedia("(min-width: 901px)").matches &&
+          !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+        if (canUseHeroParallax && y < window.innerHeight) {
+          const parallaxSpeed = y * 0.22
           hero.style.transform = `translateY(${parallaxSpeed}px)`
+        } else if (hero) {
+          hero.style.transform = ""
         }
       })
     }
@@ -807,6 +815,16 @@ function hexToRgba(hex, alpha = 1) {
         simplifyPanelHeader()
 
         showProjectsBtn?.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 900px)").matches) {
+            const mobileHref = card
+              .querySelector(".hero-card__actions .hero-btn--ghost")
+              ?.getAttribute("href")
+            if (mobileHref) {
+              window.location.href = mobileHref
+              return
+            }
+          }
+
           if (projectsPanel?.classList.contains("active")) return
           closeAllPanels()
           card.classList.add("is-panel-open")

@@ -1,4 +1,24 @@
-﻿/* hakkimizda sayfasi ozel stilleri */
+/* hakkimizda sayfasi ozel stilleri */
 
 /* Bu dosya yalnizca hakkimizda.html icin kullanilir. */
 
+@media (max-width: 860px) {
+  .about-main .index-overview--about {
+    margin-top: 92px;
+  }
+
+  .about-main .index-overview__chips {
+    gap: 0.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-main .index-overview--about {
+    margin-top: 84px;
+  }
+
+  .about-main .index-overview__content h1,
+  .about-main .index-overview__content h2 {
+    font-size: clamp(1.5rem, 8vw, 1.95rem);
+  }
+}

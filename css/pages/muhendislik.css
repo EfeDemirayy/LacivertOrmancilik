@@ -1,4 +1,46 @@
-﻿/* muhendislik sayfasi ozel stilleri */
+/* muhendislik sayfasi ozel stilleri */
 
 /* Bu dosya yalnizca muhendislik.html icin kullanilir. */
 
+@media (max-width: 760px) {
+  .service-hero {
+    margin-top: 84px;
+    padding: 5.2rem 0 2.6rem;
+  }
+
+  .service-hero__features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.68rem;
+    justify-items: stretch;
+  }
+
+  .service-hero__feature {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .content-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.78rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .service-hero {
+    margin-top: 78px;
+    padding: 4.8rem 0 2.2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

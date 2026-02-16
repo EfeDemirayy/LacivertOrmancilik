@@ -235,3 +235,45 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 640px) {
+  .madde-main .madde-brief__head {
+    padding: 0.85rem 0.85rem 0.75rem;
+  }
+
+  .madde-main .madde-brief__grid {
+    padding: 0.82rem 0.85rem 0.9rem;
+    gap: 0.7rem;
+  }
+
+  .madde-main .madde-brief__col {
+    padding: 0.72rem 0.78rem;
+  }
+
+  .madde-main .projects-summary {
+    padding: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .madde-main .projects-year-group__title {
+    font-size: 0.96rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .madde-main .madde-brief__head h3 {
+    font-size: 1.08rem;
+  }
+
+  .madde-main .madde-brief__head p {
+    font-size: 0.9rem;
+  }
+
+  .madde-main .projects-summary__item strong {
+    font-size: 1.02rem;
+  }
+
+  .madde-main .projects-summary__item span {
+    font-size: 0.74rem;
+  }
+}

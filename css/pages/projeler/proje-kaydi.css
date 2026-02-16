@@ -79,3 +79,29 @@
     min-height: 250px;
   }
 }
+
+@media (max-width: 640px) {
+  .project-record-main .project-record__content {
+    border-radius: 16px;
+    padding: 0.86rem;
+  }
+
+  .project-record-main .project-record__meta li {
+    padding: 0.5rem 0.62rem;
+    font-size: 0.88rem;
+  }
+
+  .project-record-main .project-record__visual img {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-record-main .project-record__content h2 {
+    font-size: 1.16rem;
+  }
+
+  .project-record-main .project-record__content > p {
+    font-size: 0.9rem;
+  }
+}

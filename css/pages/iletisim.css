@@ -226,3 +226,47 @@
     padding: 1rem 0.9rem;
   }
 }
+
+@media (max-width: 640px) {
+  .contact-main .index-overview--contact {
+    margin-top: 84px;
+    padding-top: 1.2rem;
+  }
+
+  .contact-main .index-overview--contact .index-overview__visual img {
+    min-height: 280px;
+  }
+
+  .contact-pro__panel {
+    border-radius: 16px;
+  }
+
+  .contact-pro__panel--form,
+  .contact-pro__panel--card {
+    padding: 0.9rem 0.82rem;
+  }
+
+  .contact-pro__field input,
+  .contact-pro__field select,
+  .contact-pro__field textarea {
+    padding: 0.68rem 0.72rem;
+  }
+
+  .contact-pro__head p {
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-pro__head h2 {
+    font-size: 1.24rem;
+  }
+
+  .contact-pro__field label {
+    font-size: 0.83rem;
+  }
+
+  .contact-pro__check {
+    font-size: 0.81rem;
+  }
+}

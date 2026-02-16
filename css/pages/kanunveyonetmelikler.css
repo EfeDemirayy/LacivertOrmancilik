@@ -155,4 +155,30 @@
   .law-main .law-alerts__grid {
     grid-template-columns: 1fr;
   }
+
+  .law-main .law-card,
+  .law-main .law-alert {
+    border-radius: 16px;
+    padding: 0.9rem 0.85rem 0.95rem;
+  }
+
+  .law-main .law-card h3,
+  .law-main .law-alert h3 {
+    font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .law-main .index-overview--law {
+    margin-top: 84px;
+  }
+
+  .law-main .index-overview--law .index-overview__visual img {
+    min-height: 280px;
+  }
+
+  .law-main .law-card p,
+  .law-main .law-alert p {
+    font-size: 0.86rem;
+  }
 }

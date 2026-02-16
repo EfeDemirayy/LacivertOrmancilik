@@ -7,7 +7,7 @@ const BRAND = 'Lacivert Ormancılık';
 const COMPANY_NAME = 'Lacivert Ormancılık Mühendislik San. Tic. Ltd. Şti.';
 const PHONE = '+90 530 909 41 08';
 const EMAIL = 'omer@lacivert.cc';
-const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=40.714599,29.939178';
+const MAPS_URL = 'https://www.google.com/maps/place/Lacivert+Ormanc%C4%B1l%C4%B1k+M%C3%BChendislik/@40.7145355,29.9389795,19z';
 const ADDRESS = {
   streetAddress: 'Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE',
   addressLocality: 'Başiskele',
@@ -490,11 +490,6 @@ function buildStructuredData(relPath, canonical, meta, pageData) {
           'Ağaç röleve planı',
           'Tapulu kesim işlemleri',
         ],
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: 40.714599,
-          longitude: 29.939178,
-        },
       },
     );
   }
