@@ -1,49 +1,74 @@
-# UTF-8 karakter setini zorla
 AddDefaultCharset UTF-8
 <IfModule mod_mime.c>
-    AddCharset UTF-8 .html .css .js .json .txt .xml
+  AddCharset UTF-8 .html .css .js .json .txt .xml
 </IfModule>
 
-# URL Rewrite ve Giriş Ayarları
-RewriteEngine On
+<IfModule mod_rewrite.c>
+  RewriteEngine On
 
-# Anasayfa için index.html'i gizle
-RewriteRule ^index\.html$ / [R=301,L]
+  # Force HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# Temiz URL'ler (Clean URLs) için uzantısız sayfa linkleri
-RewriteRule ^calismalarimiz$ calismalarimiz.html [L]
-RewriteRule ^referanslar$ referanslar.html [L]
-RewriteRule ^qdms$ qdms.html [L]
-RewriteRule ^hizmetler$ hizmetler.html [L]
-RewriteRule ^hakkimizda$ hakkimizda.html [L]
-RewriteRule ^ensemble$ ensemble.html [L]
-RewriteRule ^eba$ eba.html [L]
-RewriteRule ^beam$ beam.html [L]
-RewriteRule ^iletisim$ iletisim.php [L]
-RewriteRule ^iletisim-post$ iletisim-post.php [L]
-RewriteRule ^csp$ csp.html [L]
+  # Home URL: do not show /index or /index.html
+  RewriteRule ^$ /anasayfa [R=301,L]
+  RewriteRule ^index(?:\.html)?/?$ /anasayfa [R=301,L,NC]
 
-# HTTP'den HTTPS'e Yönlendirme (SSL Yüklüyse)
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+  # Redirect legacy top-level filenames to clean slugs
+  RewriteRule ^hakkimizda\.html$ /hakkimizda [R=301,L,NC]
+  RewriteRule ^sss\.html$ /sss [R=301,L,NC]
+  RewriteRule ^kanunveyonetmelikler\.html$ /kanun-ve-yonetmelikler [R=301,L,NC]
+  RewriteRule ^ormanizinleri\.html$ /orman-izinleri [R=301,L,NC]
+  RewriteRule ^madde16\.html$ /madde-16 [R=301,L,NC]
+  RewriteRule ^madde17\.html$ /madde-17 [R=301,L,NC]
+  RewriteRule ^diger\.html$ /diger [R=301,L,NC]
+  RewriteRule ^galeri\.html$ /galeri [R=301,L,NC]
+  RewriteRule ^iletisim\.html$ /iletisim [R=301,L,NC]
+  RewriteRule ^gizlilik-politikasi\.html$ /gizlilik-politikasi [R=301,L,NC]
+  RewriteRule ^muhendislik\.html$ /muhendislik [R=301,L,NC]
+  RewriteRule ^izinirtifak\.html$ /izin-irtifak [R=301,L,NC]
+  RewriteRule ^surdurulebilirlik\.html$ /surdurulebilirlik [R=301,L,NC]
 
-# Tarayıcı Önbellekleme (Caching)
+  # Redirect project detail URLs to extensionless form
+  RewriteRule ^projeler/(.+)\.html$ /projeler/$1 [R=301,L,NC]
+
+  # Serve clean top-level slugs
+  RewriteRule ^anasayfa/?$ /index.html [L]
+  RewriteRule ^hakkimizda/?$ /hakkimizda.html [L]
+  RewriteRule ^sss/?$ /sss.html [L]
+  RewriteRule ^kanun-ve-yonetmelikler/?$ /kanunveyonetmelikler.html [L]
+  RewriteRule ^orman-izinleri/?$ /ormanizinleri.html [L]
+  RewriteRule ^madde-16/?$ /madde16.html [L]
+  RewriteRule ^madde-17/?$ /madde17.html [L]
+  RewriteRule ^diger/?$ /diger.html [L]
+  RewriteRule ^galeri/?$ /galeri.html [L]
+  RewriteRule ^iletisim/?$ /iletisim.html [L]
+  RewriteRule ^gizlilik-politikasi/?$ /gizlilik-politikasi.html [L]
+  RewriteRule ^muhendislik/?$ /muhendislik.html [L]
+  RewriteRule ^izin-irtifak/?$ /izinirtifak.html [L]
+  RewriteRule ^surdurulebilirlik/?$ /surdurulebilirlik.html [L]
+
+  # Serve extensionless project detail URLs
+  RewriteRule ^projeler/([a-z0-9-]+)/?$ /projeler/$1.html [L,NC]
+</IfModule>
+
+# Browser caching
 <IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg "1 year"
-    ExpiresByType image/jpeg "1 year"
-    ExpiresByType image/gif "1 year"
-    ExpiresByType image/png "1 year"
-    ExpiresByType text/css "1 month"
-    ExpiresByType application/pdf "1 month"
-    ExpiresByType text/x-javascript "1 month"
-    ExpiresByType application/javascript "1 month"
-    ExpiresByType application/x-shockwave-flash "1 month"
-    ExpiresByType image/x-icon "1 year"
-    ExpiresDefault "access plus 1 month"
+  ExpiresActive On
+  ExpiresByType image/jpg "1 year"
+  ExpiresByType image/jpeg "1 year"
+  ExpiresByType image/gif "1 year"
+  ExpiresByType image/png "1 year"
+  ExpiresByType text/css "1 month"
+  ExpiresByType application/pdf "1 month"
+  ExpiresByType text/x-javascript "1 month"
+  ExpiresByType application/javascript "1 month"
+  ExpiresByType application/x-shockwave-flash "1 month"
+  ExpiresByType image/x-icon "1 year"
+  ExpiresDefault "access plus 1 month"
 </IfModule>
 
-# Gzip Sıkıştırma
+# Gzip
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
 </IfModule>

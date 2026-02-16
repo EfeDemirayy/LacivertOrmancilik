@@ -21,7 +21,15 @@
 
   const getCurrentPageName = () => {
     const parts = window.location.pathname.split("/").filter(Boolean);
-    return (parts.pop() || "index.html").toLowerCase();
+    const rawName = (parts.pop() || "index.html").toLowerCase();
+    const routeAlias = {
+      "madde-16": "madde16.html",
+      "madde16": "madde16.html",
+      "madde-17": "madde17.html",
+      "madde17": "madde17.html",
+      "diger": "diger.html",
+    };
+    return routeAlias[rawName] || rawName;
   };
 
   const normalizeKey = (value = "") => {
@@ -203,8 +211,8 @@
     const hasDedicatedPage = Boolean(slug && resolver.pageSet.has(slug));
     const imageSrc = resolver.resolveImage(slug, `${firma}-${grup}-${tarih}`);
     const detailHref = hasDedicatedPage
-      ? `projeler/${slug}.html`
-      : `projeler/proje-kaydi.html?${new URLSearchParams({
+      ? `/projeler/${slug}`
+      : `/projeler/proje-kaydi?${new URLSearchParams({
           firma: displayFirma,
           konu,
           grup,

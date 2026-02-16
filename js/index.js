@@ -109,8 +109,39 @@ function hexToRgba(hex, alpha = 1) {
       const isProjectFolder = /\/projeler\//.test(path)
       const base = isProjectFolder ? "../" : ""
 
-      const href = (file) => `${base}${file}`
-      const isCurrent = (file) => currentFile === file.toLocaleLowerCase("tr")
+      const routeByFile = {
+        "index.html": "/anasayfa",
+        "hakkimizda.html": "/hakkimizda",
+        "sss.html": "/sss",
+        "kanunveyonetmelikler.html": "/kanun-ve-yonetmelikler",
+        "ormanizinleri.html": "/orman-izinleri",
+        "madde16.html": "/madde-16",
+        "madde17.html": "/madde-17",
+        "diger.html": "/diger",
+        "galeri.html": "/galeri",
+        "iletisim.html": "/iletisim",
+      }
+
+      const currentSlug = currentFile.replace(/\.html$/i, "")
+      const aliasBySlug = {
+        index: ["", "index", "anasayfa"],
+        hakkimizda: ["hakkimizda"],
+        sss: ["sss", "sikca-sorulan-sorular"],
+        kanunveyonetmelikler: ["kanunveyonetmelikler", "kanun-ve-yonetmelikler"],
+        ormanizinleri: ["ormanizinleri", "orman-izinleri"],
+        madde16: ["madde16", "madde-16"],
+        madde17: ["madde17", "madde-17"],
+        diger: ["diger"],
+        galeri: ["galeri"],
+        iletisim: ["iletisim"],
+      }
+
+      const href = (file) => routeByFile[file] || `${base}${file}`
+      const isCurrent = (file) => {
+        const targetSlug = file.toLocaleLowerCase("tr").replace(/\.html$/i, "")
+        if (currentSlug === targetSlug) return true
+        return (aliasBySlug[targetSlug] || []).includes(currentSlug)
+      }
       const currentAttr = (file) => (isCurrent(file) ? ' aria-current="page"' : "")
       const inKurumsal = isCurrent("hakkimizda.html") || isCurrent("sss.html")
       const inOrmancilik = isCurrent("kanunveyonetmelikler.html") || isCurrent("ormanizinleri.html")
