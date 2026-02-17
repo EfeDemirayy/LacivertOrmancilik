@@ -15,30 +15,14 @@ AddDefaultCharset UTF-8
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # Home URL: do not show /index or /index.html
-  RewriteRule ^$ /anasayfa [R=301,L]
-  RewriteRule ^index(?:\.html)?/?$ /anasayfa [R=301,L,NC]
+  # Home URL: keep "/" clean, hide /index(.html) and /anasayfa
+  RewriteRule ^index(?:\.html)?/?$ / [R=301,L,NC]
+  RewriteRule ^anasayfa/?$ / [R=301,L,NC]
+  RewriteRule ^$ /index.html [L]
 
-  # Redirect legacy top-level filenames to clean slugs
-  RewriteRule ^hakkimizda\.html$ /hakkimizda [R=301,L,NC]
-  RewriteRule ^sss\.html$ /sss [R=301,L,NC]
-  RewriteRule ^kanunveyonetmelikler\.html$ /kanun-ve-yonetmelikler [R=301,L,NC]
-  RewriteRule ^ormanizinleri\.html$ /orman-izinleri [R=301,L,NC]
-  RewriteRule ^madde16\.html$ /madde-16 [R=301,L,NC]
-  RewriteRule ^madde17\.html$ /madde-17 [R=301,L,NC]
-  RewriteRule ^diger\.html$ /diger [R=301,L,NC]
-  RewriteRule ^galeri\.html$ /galeri [R=301,L,NC]
-  RewriteRule ^iletisim\.html$ /iletisim [R=301,L,NC]
-  RewriteRule ^gizlilik-politikasi\.html$ /gizlilik-politikasi [R=301,L,NC]
-  RewriteRule ^muhendislik\.html$ /muhendislik [R=301,L,NC]
-  RewriteRule ^izinirtifak\.html$ /izin-irtifak [R=301,L,NC]
-  RewriteRule ^surdurulebilirlik\.html$ /surdurulebilirlik [R=301,L,NC]
-
-  # Redirect project detail URLs to extensionless form
-  RewriteRule ^projeler/(.+)\.html$ /projeler/$1 [R=301,L,NC]
+  # Keep direct .html URLs (some hosting setups do not support extensionless routing reliably)
 
   # Serve clean top-level slugs
-  RewriteRule ^anasayfa/?$ /index.html [L]
   RewriteRule ^hakkimizda/?$ /hakkimizda.html [L]
   RewriteRule ^sss/?$ /sss.html [L]
   RewriteRule ^kanun-ve-yonetmelikler/?$ /kanunveyonetmelikler.html [L]

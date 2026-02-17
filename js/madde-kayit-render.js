@@ -211,8 +211,8 @@
     const hasDedicatedPage = Boolean(slug && resolver.pageSet.has(slug));
     const imageSrc = resolver.resolveImage(slug, `${firma}-${grup}-${tarih}`);
     const detailHref = hasDedicatedPage
-      ? `/projeler/${slug}`
-      : `/projeler/proje-kaydi?${new URLSearchParams({
+      ? `projeler/${slug}.html`
+      : `projeler/proje-kaydi.html?${new URLSearchParams({
           firma: displayFirma,
           konu,
           grup,
@@ -443,3 +443,4 @@
     render();
   }
 })();
+

@@ -35,6 +35,15 @@ function hexToRgba(hex, alpha = 1) {
 ;(() => {
   /* -------------- DOM Hazır Olduğunda Çalışacak Kodlar --------------- */
   document.addEventListener("DOMContentLoaded", () => {
+    const normalizeHomepagePath = () => {
+      const { pathname, search, hash } = window.location
+      if (!/\/index\.html?$/i.test(pathname)) return
+      const strippedPath = pathname.replace(/index\.html?$/i, "")
+      const cleanPath = strippedPath.endsWith("/") ? strippedPath : `${strippedPath}/`
+      window.history.replaceState(null, "", `${cleanPath}${search}${hash}`)
+    }
+    normalizeHomepagePath()
+
     // CSS değişkenlerini oku (lacivert palet)
     const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
     const PRIMARY = cssVar("--clr-primary") || "#0a1f44"       // koyu lacivert
@@ -110,16 +119,16 @@ function hexToRgba(hex, alpha = 1) {
       const base = isProjectFolder ? "../" : ""
 
       const routeByFile = {
-        "index.html": "/anasayfa",
-        "hakkimizda.html": "/hakkimizda",
-        "sss.html": "/sss",
-        "kanunveyonetmelikler.html": "/kanun-ve-yonetmelikler",
-        "ormanizinleri.html": "/orman-izinleri",
-        "madde16.html": "/madde-16",
-        "madde17.html": "/madde-17",
-        "diger.html": "/diger",
-        "galeri.html": "/galeri",
-        "iletisim.html": "/iletisim",
+        "index.html": "index.html",
+        "hakkimizda.html": "hakkimizda.html",
+        "sss.html": "sss.html",
+        "kanunveyonetmelikler.html": "kanunveyonetmelikler.html",
+        "ormanizinleri.html": "ormanizinleri.html",
+        "madde16.html": "madde16.html",
+        "madde17.html": "madde17.html",
+        "diger.html": "diger.html",
+        "galeri.html": "galeri.html",
+        "iletisim.html": "iletisim.html",
       }
 
       const currentSlug = currentFile.replace(/\.html$/i, "")
@@ -136,13 +145,17 @@ function hexToRgba(hex, alpha = 1) {
         iletisim: ["iletisim"],
       }
 
-      const href = (file) => routeByFile[file] || `${base}${file}`
+      const href = (file) => {
+        if (file === "index.html") return isProjectFolder ? "../" : "/"
+        return `${base}${routeByFile[file] || file}`
+      }
       const isCurrent = (file) => {
         const targetSlug = file.toLocaleLowerCase("tr").replace(/\.html$/i, "")
         if (currentSlug === targetSlug) return true
         return (aliasBySlug[targetSlug] || []).includes(currentSlug)
       }
       const currentAttr = (file) => (isCurrent(file) ? ' aria-current="page"' : "")
+      const inHome = isCurrent("index.html")
       const inKurumsal = isCurrent("hakkimizda.html") || isCurrent("sss.html")
       const inOrmancilik = isCurrent("kanunveyonetmelikler.html") || isCurrent("ormanizinleri.html")
       const inProjeler = isCurrent("madde16.html") || isCurrent("madde17.html") || isCurrent("diger.html") || isProjectFolder
@@ -150,6 +163,7 @@ function hexToRgba(hex, alpha = 1) {
       const inIletisim = isCurrent("iletisim.html")
 
       navLinksEl.innerHTML = `
+        <li><a href="${href("index.html")}" class="nav__link${inHome ? " is-current" : ""}"${currentAttr("index.html")}>Anasayfa</a></li>
         <li class="nav__dropdown">
           <a href="${href("hakkimizda.html")}" class="nav__link${inKurumsal ? " is-current" : ""}">Kurumsal <i class="fa-solid fa-chevron-down"></i></a>
           <ul class="dropdown">
@@ -214,6 +228,15 @@ function hexToRgba(hex, alpha = 1) {
           window.matchMedia("(hover: none)").matches
 
         if (!isTouchLayout) return
+
+        const hrefValue = (link.getAttribute("href") || "").trim()
+        const isJumpOnly =
+          !hrefValue ||
+          hrefValue === "#" ||
+          hrefValue.startsWith("#") ||
+          hrefValue.toLowerCase().startsWith("javascript:")
+
+        if (!isJumpOnly) return
 
         // İlk dokunuşta menüyü aç, ikinci dokunuşta linke git.
         if (!parent.classList.contains("is-open")) {
@@ -1102,6 +1125,4 @@ function hexToRgba(hex, alpha = 1) {
   styleSheet.textContent = styles
   document.head.appendChild(styleSheet)
 })()
-
-
 
