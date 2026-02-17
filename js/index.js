@@ -50,32 +50,56 @@ function hexToRgba(hex, alpha = 1) {
         "#jivo-iframe-container",
         "jdiv#jivo-iframe-container",
         "div#jivo-iframe-container",
+        "#jivo-container",
+        "jdiv#jivo-container",
+        "div#jivo-container",
         ".jivo-iframe-container",
         "#jvlabelWrap",
         "jdiv#jvlabelWrap",
         "div#jvlabelWrap",
+        "[id*='jivo-widget']",
+        "[id*='jivo-container']",
+        "[id*='jvlabel']",
       ]
 
       const applyPosition = () => {
         if (!mobileQuery.matches) return
         document.querySelectorAll(selectors.join(",")).forEach((node) => {
+          const computed = window.getComputedStyle(node)
+          const position = computed.position
+          if (position !== "fixed" && position !== "absolute") return
+
           node.style.setProperty("left", "auto", "important")
           node.style.setProperty("right", "10px", "important")
           node.style.setProperty("inset-inline-start", "auto", "important")
           node.style.setProperty("inset-inline-end", "10px", "important")
-          node.style.setProperty("bottom", "16px", "important")
+          node.style.setProperty("bottom", "14px", "important")
+          node.style.setProperty("transform", "none", "important")
+          node.style.setProperty("z-index", "9998", "important")
+
+          const nodeName = `${node.id || ""} ${node.className || ""}`.toLowerCase()
+          if (nodeName.includes("jvlabel")) {
+            node.style.setProperty("max-width", "62px", "important")
+            node.style.setProperty("overflow", "hidden", "important")
+          }
         })
       }
 
       applyPosition()
       window.addEventListener("resize", applyPosition, { passive: true })
 
+      const observer = new MutationObserver(() => {
+        applyPosition()
+      })
+      observer.observe(document.documentElement, { childList: true, subtree: true })
+
       let attempts = 0
       const intervalId = window.setInterval(() => {
         applyPosition()
         attempts += 1
-        if (attempts >= 40) {
+        if (attempts >= 60) {
           window.clearInterval(intervalId)
+          observer.disconnect()
         }
       }, 500)
     }
