@@ -9,7 +9,7 @@
 
 .gallery-stage {
   position: relative;
-  margin-top: 132px;
+  margin-top: var(--site-header-offset);
   padding: 1.8rem 0 2.8rem;
   overflow: hidden;
 }
@@ -515,7 +515,7 @@
 
 @media (max-width: 980px) {
   .gallery-stage {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 
   .gallery-stage__stack {
@@ -618,7 +618,7 @@
 
 @media (max-width: 480px) {
   .gallery-stage {
-    margin-top: 86px;
+    margin-top: var(--site-header-offset);
     padding: 1.25rem 0 2rem;
   }
 

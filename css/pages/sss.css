@@ -42,7 +42,7 @@
 
 @media (max-width: 640px) {
   .faq-main .index-overview--faq {
-    margin-top: 84px;
+    margin-top: var(--site-header-offset);
   }
 
   .faq-pro__meta,

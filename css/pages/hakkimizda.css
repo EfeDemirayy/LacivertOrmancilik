@@ -4,7 +4,7 @@
 
 @media (max-width: 860px) {
   .about-main .index-overview--about {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 
   .about-main .index-overview__chips {
@@ -14,7 +14,7 @@
 
 @media (max-width: 480px) {
   .about-main .index-overview--about {
-    margin-top: 84px;
+    margin-top: var(--site-header-offset);
   }
 
   .about-main .index-overview__content h1,

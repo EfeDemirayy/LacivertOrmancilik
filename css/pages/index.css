@@ -1,6 +1,16 @@
 ﻿/* index page motion and entrance styles */
 
 /* Hero cards enter once from different directions on page load */
+.home-main .hero {
+  margin-top: var(--site-header-offset);
+  min-height: calc(100vh - var(--site-header-offset));
+}
+
+.home-main .hero-panels,
+.home-main .hero-panels .hero-card {
+  min-height: calc(100vh - var(--site-header-offset));
+}
+
 .home-main .hero-panels .hero-card {
   opacity: 0;
   will-change: transform, opacity, filter;
@@ -286,7 +296,7 @@
   .home-main .hero {
     min-height: unset;
     overflow: visible;
-    margin-top: 126px;
+    margin-top: var(--site-header-offset);
     padding: 0 0 0.5rem;
   }
 
@@ -406,7 +416,7 @@
 
 @media (max-width: 480px) {
   .home-main .hero {
-    margin-top: 110px;
+    margin-top: var(--site-header-offset);
   }
 
   .home-main .index-overview__content h1,

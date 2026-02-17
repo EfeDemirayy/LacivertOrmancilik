@@ -22,7 +22,7 @@
     }
 
     .cookie-policy-main{
-      padding-top: 124px;
+      padding-top: calc(var(--site-header-offset) + 10px);
       padding-bottom: 2.2rem;
     }
 
@@ -80,7 +80,7 @@
     /* Mobil uyarlamalar */
     @media (max-width: 700px){
       .cookie-policy-main{
-        padding-top: 108px;
+        padding-top: calc(var(--site-header-offset) + 10px);
       }
       .cookie-policy-container{
         padding: 1.2rem .5rem;
@@ -94,7 +94,7 @@
 
     @media (max-width: 480px){
       .cookie-policy-main{
-        padding-top: 92px;
+        padding-top: calc(var(--site-header-offset) + 10px);
       }
       .cookie-policy-container{
         margin: 0.8rem auto;

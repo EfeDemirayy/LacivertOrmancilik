@@ -32,6 +32,8 @@
   --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --font-heading: "Poppins", sans-serif;
   --font-body:    "Inter",   sans-serif;
+  --site-topbar-offset: 34px;
+  --site-header-offset: 182px;
 }
 
 /* RESET & BASE */
@@ -54,6 +56,20 @@ body {
   color: var(--clr-text);
   overflow-x: hidden;
   line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --site-topbar-offset: 30px;
+    --site-header-offset: 148px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --site-topbar-offset: 28px;
+    --site-header-offset: 126px;
+  }
 }
 
 /* CONTAINER */
@@ -260,7 +276,7 @@ body {
 /* NAVBAR */
 .nav {
   position: fixed;
-  top: 34px;
+  top: var(--site-topbar-offset);
   width: 100%;
   background: linear-gradient(130deg, rgba(255, 255, 255, 0.6) 0%, rgba(235, 245, 255, 0.56) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
@@ -285,8 +301,10 @@ body {
 }
 
 .nav__logo img {
-  height: 88px !important;
-  filter: none;
+  height: 118px !important;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(5, 22, 52, 0.35)) contrast(1.08) saturate(1.05);
   transition: all var(--transition);
 }
 
@@ -1710,7 +1728,7 @@ body {
 }
 
 .footer__logo {
-  height: 50px;
+  height: 74px;
   width: auto;
   object-fit: contain;
   filter: none;
@@ -1861,7 +1879,7 @@ body {
   position: relative;
   height: 60vh; min-height: 400px;
   display: flex; align-items: center;
-  overflow: hidden; margin-top: 95px;
+  overflow: hidden; margin-top: var(--site-header-offset);
   background: var(--gradient-primary);
 }
 
@@ -2296,7 +2314,7 @@ body {
 .service-hero {
   background: var(--gradient-primary);
   color: white; padding: 8rem 0 4rem;
-  margin-top: 95px; position: relative; overflow: hidden;
+  margin-top: var(--site-header-offset); position: relative; overflow: hidden;
 }
 
 .service-hero::before {
@@ -2925,9 +2943,9 @@ body {
   .topbar { font-size: 0.7rem; padding: 0.2rem 0; min-height: 30px; }
   .topbar__left, .topbar__right { margin: 0 1rem; gap: 0.6rem; }
 
-  .nav { top: 30px; }
+  .nav { top: var(--site-topbar-offset); }
   .nav__inner { padding: 1rem 0; }
-  .nav__logo img { height: 70px !important; }
+  .nav__logo img { height: 86px !important; }
   .nav__logo { margin-left: -46px; }
   .nav__burger { display: flex; }
 
@@ -2985,8 +3003,8 @@ body {
   .reference-item { width: 80px; height: 80px; }
   .references__track { gap: 2rem; }
 
-  .page-hero { margin-top: 70px; height: 50vh; min-height: 300px; }
-  .service-hero { padding: 6rem 0 3rem; margin-top: 70px; }
+  .page-hero { margin-top: var(--site-header-offset); height: 50vh; min-height: 300px; }
+  .service-hero { padding: 6rem 0 3rem; margin-top: var(--site-header-offset); }
   .service-hero__features { flex-direction: column; align-items: center; gap: 1rem; }
 
   .process-grid { grid-template-columns: 1fr; }
@@ -3308,11 +3326,11 @@ ul, li { list-style: none; }
 }
 
 .about-main .index-overview--about {
-  margin-top: 112px;
+  margin-top: var(--site-header-offset);
 }
 
 .faq-main .index-overview--faq {
-  margin-top: 112px;
+  margin-top: var(--site-header-offset);
 }
 
 .faq-pro {
@@ -4086,11 +4104,11 @@ ul, li { list-style: none; }
   }
 
   .about-main .index-overview--about {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 
   .faq-main .index-overview--faq {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 
   .faq-pro__layout {
@@ -4150,7 +4168,7 @@ ul, li { list-style: none; }
   }
 
   .nav__links {
-    max-height: calc(100dvh - 86px);
+    max-height: calc(100dvh - var(--site-header-offset));
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -4191,7 +4209,7 @@ ul, li { list-style: none; }
   }
 
   .nav__logo img {
-    height: 64px !important;
+    height: 82px !important;
   }
 
   .home-main .index-map-card iframe,
@@ -4246,7 +4264,7 @@ ul, li { list-style: none; }
   }
 
   .footer__logo {
-    height: 44px;
+    height: 60px;
   }
 
   .site-footer-pro {
@@ -4299,7 +4317,7 @@ ul, li { list-style: none; }
   }
 
   .nav {
-    top: 28px;
+    top: var(--site-topbar-offset);
   }
 
   .nav__inner {
@@ -4311,7 +4329,7 @@ ul, li { list-style: none; }
   }
 
   .nav__logo img {
-    height: 56px !important;
+    height: 72px !important;
   }
 
   .nav__links {

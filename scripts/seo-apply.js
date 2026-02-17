@@ -123,7 +123,7 @@ const PAGE_META = {
     title: 'Gizlilik Politikası | Lacivert Ormancılık',
     description: 'Lacivert Ormancılık gizlilik politikası, veri işleme ilkeleri ve kullanıcı haklarına dair bilgilendirme metni.',
     keywords: ['gizlilik politikası', 'veri güvenliği', 'Lacivert Ormancılık'],
-    image: '/img/logo.png',
+    image: '/img/logo-yeni.png',
   },
 };
 
@@ -454,8 +454,8 @@ function buildStructuredData(relPath, canonical, meta, pageData) {
         '@id': orgId,
         name: COMPANY_NAME,
         url: `${SITE_URL}/`,
-        logo: `${SITE_URL}/img/logo.png`,
-        image: `${SITE_URL}/img/logo.png`,
+        logo: `${SITE_URL}/img/logo-yeni.png`,
+        image: `${SITE_URL}/img/logo-yeni.png`,
         telephone: PHONE,
         email: EMAIL,
         address: {

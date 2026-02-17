@@ -1,7 +1,7 @@
 ﻿/* kanunveyonetmelikler sayfasi ozel stilleri */
 
 .law-main .index-overview--law {
-  margin-top: 132px;
+  margin-top: var(--site-header-offset);
 }
 
 .law-main .index-overview--law .index-overview__visual img {
@@ -146,7 +146,7 @@
 
 @media (max-width: 860px) {
   .law-main .index-overview--law {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 }
 
@@ -170,7 +170,7 @@
 
 @media (max-width: 480px) {
   .law-main .index-overview--law {
-    margin-top: 84px;
+    margin-top: var(--site-header-offset);
   }
 
   .law-main .index-overview--law .index-overview__visual img {

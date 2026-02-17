@@ -1,7 +1,7 @@
 /* ormanizinleri sayfasi ozel stilleri */
 
 .permit-main .index-overview--permit {
-  margin-top: 132px;
+  margin-top: var(--site-header-offset);
 }
 
 .permit-main .index-overview--permit .index-overview__visual img {
@@ -155,7 +155,7 @@
 
 @media (max-width: 860px) {
   .permit-main .index-overview--permit {
-    margin-top: 92px;
+    margin-top: var(--site-header-offset);
   }
 }
 
@@ -181,7 +181,7 @@
 
 @media (max-width: 480px) {
   .permit-main .index-overview--permit {
-    margin-top: 84px;
+    margin-top: var(--site-header-offset);
   }
 
   .permit-main .index-overview--permit .index-overview__visual img {

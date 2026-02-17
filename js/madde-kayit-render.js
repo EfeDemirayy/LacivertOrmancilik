@@ -3,12 +3,12 @@
     "madde16.html": {
       id: "16",
       title: "Madde 16 Projeleri",
-      intro: "Orman Kanunu 16. madde kapsamındaki izin süreçleri, Excel kayıtlarına göre yıllık bazda listelenmektedir.",
+      intro: "Madde 16 kapsamındaki maden izin süreçleri; teknik dosya, kurum başvuru ve uygulama adımlarıyla birlikte yıllık bazda listelenmektedir.",
     },
     "madde17.html": {
       id: "17",
       title: "Madde 17 Projeleri",
-      intro: "Orman Kanunu 17. madde kapsamındaki izin süreçleri, Excel kayıtlarına göre yıllık bazda listelenmektedir.",
+      intro: "Madde 17/3 kapsamındaki enerji ve altyapı izin süreçleri; güzergah, teknik rapor ve kurum onay adımlarıyla birlikte yıllık bazda listelenmektedir.",
     },
     "diger.html": {
       id: "DIGER",
@@ -62,10 +62,17 @@
   };
 
   const classifyRecord = (record = {}) => {
+    const firmaText = String(record.firma || "");
     const maddeText = String(record.madde || "");
     const konuText = String(record.konu || "");
     const grupText = String(record.grup || "");
     const maddeCompact = compactText(maddeText);
+
+    // Business rule: Ento maden kayitlari Madde 16'da listelenir.
+    const isEntoRecord =
+      containsAny(firmaText, ["ento"]) ||
+      containsAny(konuText, ["ento"]);
+    if (isEntoRecord) return "16";
 
     if (maddeCompact.startsWith("17")) return "17";
 
@@ -199,13 +206,18 @@
 
   const buildProjectCard = (record, resolver) => {
     const firma = String(record.firma || "").trim() || "Belirtilmeyen Firma";
-    const rawKonu = String(record.konu || "").trim() || `${firma} için yürütülen proje kaydı.`;
+    const rawKonu = String(record.konu || "").trim();
     const grup = String(record.grup || "").trim() || "Belirtilmeyen Grup";
     const madde = String(record.madde || "").trim() || "Belirtilmeyen Madde";
     const tarih = formatDate(record.tarih);
     const namePresentation = getNamePresentation(firma);
     const displayFirma = namePresentation.displayName;
-    const konu = rawKonu;
+    const recordType = classifyRecord(record);
+    const konuByType = {
+      "16": "Maden izin başvuruları, teknik rapor hazırlığı ve kurum onay süreçleri koordineli şekilde yürütüldü.",
+      "17": "Enerji ve altyapı izin süreçlerinde güzergah planı, teknik dosya hazırlığı ve kurum onay adımları uçtan uca yönetildi.",
+    };
+    const konu = konuByType[recordType] || rawKonu || `${displayFirma} için yürütülen proje kaydı.`;
 
     const slug = resolver.resolveProjectSlug(firma);
     const hasDedicatedPage = Boolean(slug && resolver.pageSet.has(slug));
@@ -390,7 +402,7 @@
     const note = document.createElement("p");
     note.className = "projects-summary__note";
     note.textContent =
-      "Sınıflandırma kuralı: 17. madde kayıtları Madde 17, maden/teknik rapor kayıtları Madde 16, tapulu kesim ve ağaç röleve kayıtları Diğer sayfasında listelenir.";
+      "Sınıflandırma kuralı: Ento maden kayıtları Madde 16'da, 17. madde kayıtları Madde 17'de, maden/teknik rapor kayıtları Madde 16'da, tapulu kesim ve ağaç röleve kayıtları Diğer sayfasında listelenir.";
 
     summary.appendChild(summaryGrid);
     summary.appendChild(note);
