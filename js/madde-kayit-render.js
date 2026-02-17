@@ -68,11 +68,11 @@
     const grupText = String(record.grup || "");
     const maddeCompact = compactText(maddeText);
 
-    // Business rule: Ento maden kayitlari Madde 16'da listelenir.
-    const isEntoRecord =
-      containsAny(firmaText, ["ento"]) ||
-      containsAny(konuText, ["ento"]);
-    if (isEntoRecord) return "16";
+    // Business rule: Sadece "Ento Maden Global" kaydi Madde 16'da listelenir.
+    const isEntoMadenGlobal =
+      containsAny(firmaText, ["ento maden global"]) ||
+      containsAny(konuText, ["ento maden global"]);
+    if (isEntoMadenGlobal) return "16";
 
     if (maddeCompact.startsWith("17")) return "17";
 
@@ -402,7 +402,7 @@
     const note = document.createElement("p");
     note.className = "projects-summary__note";
     note.textContent =
-      "Sınıflandırma kuralı: Ento maden kayıtları Madde 16'da, 17. madde kayıtları Madde 17'de, maden/teknik rapor kayıtları Madde 16'da, tapulu kesim ve ağaç röleve kayıtları Diğer sayfasında listelenir.";
+      "Sınıflandırma kuralı: Ento Maden Global kaydı Madde 16'da, 17. madde kayıtları Madde 17'de, maden/teknik rapor kayıtları Madde 16'da, tapulu kesim ve ağaç röleve kayıtları Diğer sayfasında listelenir.";
 
     summary.appendChild(summaryGrid);
     summary.appendChild(note);
