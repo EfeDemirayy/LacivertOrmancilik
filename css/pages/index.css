@@ -2,13 +2,13 @@
 
 /* Hero cards enter once from different directions on page load */
 .home-main .hero {
-  margin-top: var(--site-header-offset);
-  min-height: calc(100vh - var(--site-header-offset));
+  margin-top: 0;
+  min-height: 100vh;
 }
 
 .home-main .hero-panels,
 .home-main .hero-panels .hero-card {
-  min-height: calc(100vh - var(--site-header-offset));
+  min-height: 100vh;
 }
 
 .home-main .hero-panels .hero-card {
@@ -296,7 +296,7 @@
   .home-main .hero {
     min-height: unset;
     overflow: visible;
-    margin-top: var(--site-header-offset);
+    margin-top: 0;
     padding: 0 0 0.5rem;
   }
 
@@ -416,7 +416,7 @@
 
 @media (max-width: 480px) {
   .home-main .hero {
-    margin-top: var(--site-header-offset);
+    margin-top: 0;
   }
 
   .home-main .index-overview__content h1,
