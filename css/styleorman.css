@@ -4407,4 +4407,230 @@ ul, li { list-style: none; }
   }
 }
 
+/* GLOBAL RESPONSIVE HARDENING (ALL PAGES) */
+:where(img, video, canvas, svg) {
+  max-width: 100%;
+  height: auto;
+}
+
+:where(iframe) {
+  max-width: 100%;
+}
+
+:where(
+  .container,
+  .section,
+  .index-section,
+  .gallery-stage__grid,
+  .gallery-mosaic,
+  .project-detail__grid,
+  .project-record__grid,
+  .projects-filter,
+  .projects-filter__left,
+  .projects-filter__right,
+  .project-card__actions,
+  .project-detail__actions,
+  .project-record__actions,
+  .hero-card__actions,
+  .contact-grid,
+  .form-row,
+  .site-footer-pro__grid,
+  .site-footer-pro__bottom
+) {
+  min-width: 0;
+}
+
+:where(
+  .site-footer-pro__col,
+  .site-footer-pro__brand,
+  .project-record__content,
+  .project-detail__content,
+  .faq-pro__item,
+  .gallery-console__meta
+) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --site-topbar-offset: 32px;
+    --site-header-offset: 164px;
+  }
+
+  .container {
+    width: min(96%, 1400px);
+    padding-inline: 0.82rem;
+  }
+
+  .gallery-stage__grid,
+  .gallery-console,
+  .content-grid,
+  .project-detail__grid,
+  .project-record-main .project-record__grid,
+  .faq-pro__layout,
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gallery-console {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gallery-console__meta {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.55rem;
+  }
+
+  .gallery-stage__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-stage__stack,
+  .gallery-stage__metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gallery-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 120px;
+  }
+
+  .gallery-mosaic .mosaic-card {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+    min-height: 0;
+  }
+
+  .hero-card__actions,
+  .project-card__actions,
+  .project-detail__actions,
+  .project-record__actions,
+  .gallery-stage__actions,
+  .cta__actions,
+  .index-cta-band__actions,
+  .projects-filter__right {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch;
+  }
+
+  .hero-btn,
+  .btn,
+  .gallery-btn,
+  .index-link-btn,
+  .project-card__actions .hero-btn,
+  .project-detail__actions .hero-btn,
+  .project-record__actions .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --site-topbar-offset: 26px;
+    --site-header-offset: 132px;
+  }
+
+  .container {
+    width: min(100%, 1400px);
+    padding-inline: 0.62rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .nav__links {
+    padding: 1rem 0.9rem;
+  }
+
+  .hero-card__title {
+    font-size: clamp(1.7rem, 9vw, 2.1rem);
+  }
+
+  .hero-card__text,
+  .project-card p,
+  .project-record__content p,
+  .project-detail__content p {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --site-topbar-offset: 24px;
+    --site-header-offset: 124px;
+  }
+
+  .topbar__left {
+    margin-left: 0.3rem;
+    gap: 0.25rem;
+  }
+
+  .topbar__right {
+    margin-right: 0.3rem;
+    gap: 0.22rem;
+  }
+
+  .topbar__mail,
+  .topbar__right a {
+    width: 23px;
+    height: 23px;
+  }
+
+  .nav__inner {
+    padding: 0.7rem 0;
+  }
+
+  .nav__logo {
+    margin-left: 4px;
+  }
+
+  .nav__logo img {
+    height: 64px !important;
+  }
+
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    left: 8px;
+    bottom: 12px;
+  }
+
+  #jivo-iframe-container,
+  jdiv#jivo-iframe-container,
+  div#jivo-iframe-container,
+  .jivo-iframe-container,
+  #jvlabelWrap,
+  jdiv#jvlabelWrap,
+  div#jvlabelWrap {
+    right: 8px !important;
+    inset-inline-end: 8px !important;
+    bottom: 12px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    width: min(92%, 1520px);
+  }
+
+  .home-main .index-overview__grid,
+  .home-main .index-project-hub__grid,
+  .home-main .index-map-wrap__grid,
+  .gallery-stage__grid {
+    gap: clamp(1rem, 1.4vw, 1.8rem);
+  }
+}
+
 

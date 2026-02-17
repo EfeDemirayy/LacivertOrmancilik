@@ -6,6 +6,18 @@
   --site-header-offset: 190px;
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --site-header-offset: 182px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --site-header-offset: 176px;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --site-header-offset: 172px;
@@ -21,6 +33,12 @@
 @media (max-width: 480px) {
   :root {
     --site-header-offset: 146px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --site-header-offset: 138px;
   }
 }
 
