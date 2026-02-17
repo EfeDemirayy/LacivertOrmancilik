@@ -954,9 +954,9 @@ body {
 .hero-btn--ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
 /* Panel görselleri */
-.hero-card--16   { background-image: url('../img/panel-16-front.jpg'); }
-.hero-card--17   { background-image: url('../img/panel-17-front.jpg'); }
-.hero-card--other{ background-image: url('../img/panel-other-front.jpg'); }
+.hero-card--16   { background-image: url('../img/panel-16-front-opt.jpg'); }
+.hero-card--17   { background-image: url('../img/panel-17-front-opt.jpg'); }
+.hero-card--other{ background-image: url('../img/panel-other-front-opt.jpg'); }
 
 .hero-card.is-rotating {
   animation: card-spin 0.95s cubic-bezier(.22,.61,.36,1) 1 both;

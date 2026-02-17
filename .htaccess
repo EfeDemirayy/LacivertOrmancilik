@@ -1,6 +1,11 @@
 AddDefaultCharset UTF-8
 <IfModule mod_mime.c>
   AddCharset UTF-8 .html .css .js .json .txt .xml
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType image/svg+xml .svg .svgz
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -55,20 +60,40 @@ AddDefaultCharset UTF-8
 # Browser caching
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpg "1 year"
-  ExpiresByType image/jpeg "1 year"
-  ExpiresByType image/gif "1 year"
-  ExpiresByType image/png "1 year"
-  ExpiresByType text/css "1 month"
-  ExpiresByType application/pdf "1 month"
-  ExpiresByType text/x-javascript "1 month"
-  ExpiresByType application/javascript "1 month"
-  ExpiresByType application/x-shockwave-flash "1 month"
-  ExpiresByType image/x-icon "1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
   ExpiresDefault "access plus 1 month"
 </IfModule>
 
-# Gzip
+<IfModule mod_headers.c>
+  <FilesMatch "\.(?:avif|gif|ico|jpe?g|png|svg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(?:css|js)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(?:html|htm)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Compression
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
 </IfModule>

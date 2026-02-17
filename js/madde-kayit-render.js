@@ -121,7 +121,7 @@
       const index = hashString(seed) % FOREST_IMAGE_POOL.length;
       return FOREST_IMAGE_POOL[index];
     }
-    return "img/panel-16-front.jpg";
+    return "img/panel-16-front-opt.jpg";
   };
 
   const buildResolver = () => {
