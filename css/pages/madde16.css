@@ -8,19 +8,19 @@
 
 @media (max-width: 768px) {
   :root {
-    --site-header-offset: 160px;
+    --site-header-offset: 172px;
   }
 }
 
 @media (max-width: 640px) {
   :root {
-    --site-header-offset: 146px;
+    --site-header-offset: 158px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --site-header-offset: 138px;
+    --site-header-offset: 146px;
   }
 }
 
@@ -339,4 +339,16 @@
 /* Header/topbar altindan temiz baslangic */
 .madde-main .page-hero {
   margin-top: var(--site-header-offset);
+}
+
+@media (max-width: 768px) {
+  .madde-main .page-hero {
+    margin-top: calc(var(--site-header-offset) + 16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .madde-main .page-hero {
+    margin-top: calc(var(--site-header-offset) + 18px);
+  }
 }

@@ -44,6 +44,43 @@ function hexToRgba(hex, alpha = 1) {
     }
     normalizeHomepagePath()
 
+    const pinJivoToRightOnMobile = () => {
+      const mobileQuery = window.matchMedia("(max-width: 900px)")
+      const selectors = [
+        "#jivo-iframe-container",
+        "jdiv#jivo-iframe-container",
+        "div#jivo-iframe-container",
+        ".jivo-iframe-container",
+        "#jvlabelWrap",
+        "jdiv#jvlabelWrap",
+        "div#jvlabelWrap",
+      ]
+
+      const applyPosition = () => {
+        if (!mobileQuery.matches) return
+        document.querySelectorAll(selectors.join(",")).forEach((node) => {
+          node.style.setProperty("left", "auto", "important")
+          node.style.setProperty("right", "10px", "important")
+          node.style.setProperty("inset-inline-start", "auto", "important")
+          node.style.setProperty("inset-inline-end", "10px", "important")
+          node.style.setProperty("bottom", "16px", "important")
+        })
+      }
+
+      applyPosition()
+      window.addEventListener("resize", applyPosition, { passive: true })
+
+      let attempts = 0
+      const intervalId = window.setInterval(() => {
+        applyPosition()
+        attempts += 1
+        if (attempts >= 40) {
+          window.clearInterval(intervalId)
+        }
+      }, 500)
+    }
+    pinJivoToRightOnMobile()
+
     // CSS değişkenlerini oku (lacivert palet)
     const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
     const PRIMARY = cssVar("--clr-primary") || "#0a1f44"       // koyu lacivert

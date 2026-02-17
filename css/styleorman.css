@@ -1489,8 +1489,8 @@ body {
 /* WHATSAPP FLOAT (marka rengi korunur) */
 .whatsapp-float {
   position: fixed;
-  left: 22px;
-  bottom: 86px;
+  left: 10px;
+  bottom: 18px;
   z-index: 9999;
   width: 62px;
   height: 62px;
@@ -1508,6 +1508,18 @@ body {
     0 0 0 1px rgba(14, 92, 45, 0.14);
   transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
   animation: whatsappPulse 2.4s infinite;
+}
+
+/* JIVO CHAT - mobilde sağ köşe */
+#jivo-iframe-container,
+jdiv#jivo-iframe-container,
+.jivo-iframe-container,
+#jvlabelWrap,
+jdiv#jvlabelWrap {
+  left: auto !important;
+  right: 12px !important;
+  inset-inline-start: auto !important;
+  inset-inline-end: 12px !important;
 }
 
 .whatsapp-float::before {
@@ -2946,7 +2958,7 @@ body {
   .nav { top: var(--site-topbar-offset); }
   .nav__inner { padding: 1rem 0; }
   .nav__logo img { height: 86px !important; }
-  .nav__logo { margin-left: -46px; }
+  .nav__logo { margin-left: -8px; }
   .nav__burger { display: flex; }
 
   .nav__links {
@@ -2987,8 +2999,8 @@ body {
     height: 52px;
     border-radius: 14px;
     font-size: 1.32rem;
-    left: 14px;
-    bottom: 72px;
+    left: 10px;
+    bottom: 16px;
   }
   .whatsapp-float::after { display: none; }
 
@@ -4184,6 +4196,19 @@ ul, li { list-style: none; }
   .project-record__actions .hero-btn {
     width: 100%;
   }
+
+  #jivo-iframe-container,
+  jdiv#jivo-iframe-container,
+  div#jivo-iframe-container,
+  .jivo-iframe-container,
+  #jvlabelWrap,
+  jdiv#jvlabelWrap,
+  div#jvlabelWrap {
+    left: auto !important;
+    right: 10px !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: 10px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -4205,7 +4230,7 @@ ul, li { list-style: none; }
   }
 
   .nav__logo {
-    margin-left: -32px;
+    margin-left: 4px;
   }
 
   .nav__logo img {
@@ -4325,11 +4350,29 @@ ul, li { list-style: none; }
   }
 
   .nav__logo {
-    margin-left: -20px;
+    margin-left: 6px;
   }
 
   .nav__logo img {
     height: 72px !important;
+  }
+
+  .whatsapp-float {
+    left: 10px;
+    bottom: 16px;
+  }
+
+  #jivo-iframe-container,
+  jdiv#jivo-iframe-container,
+  div#jivo-iframe-container,
+  .jivo-iframe-container,
+  #jvlabelWrap,
+  jdiv#jvlabelWrap,
+  div#jvlabelWrap {
+    left: auto !important;
+    right: 10px !important;
+    inset-inline-start: auto !important;
+    inset-inline-end: 10px !important;
   }
 
   .nav__links {
