@@ -1,0 +1,26 @@
+﻿html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+.legacy-not-found {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: Arial, sans-serif;
+  color: #0a1f44;
+  background: #f6f8fb;
+}
+
+.legacy-not-found__card {
+  text-align: center;
+  padding: 2rem;
+}
+
+.legacy-not-found a {
+  color: #1e56a0;
+}
