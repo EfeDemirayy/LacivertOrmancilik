@@ -13,6 +13,128 @@ body {
   color: #17365b;
 }
 
+body.legacy-menu-open {
+  overflow: hidden;
+}
+
+/* Legacy first paint: disable JS-dependent hidden states */
+.legacy-page-content [data-fade] {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+.legacy-page-content .hero-panels .hero-card {
+  opacity: 1 !important;
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.legacy-page-content .hero-panel__item {
+  opacity: 1 !important;
+  animation: none !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.legacy-page-content .index-solution-card[data-fade]::after,
+.legacy-page-content .index-project-card[data-fade]::after,
+.legacy-page-content .index-map-card[data-fade]::after,
+.legacy-page-content .index-contact-card[data-fade]::after,
+.legacy-page-content .index-cta-band__content[data-fade]::after {
+  animation: none !important;
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* Legacy dropdown stabilization: keep closed by default */
+.legacy-page-content .nav__dropdown > .dropdown {
+  position: absolute !important;
+  top: calc(100% + 12px) !important;
+  left: 0 !important;
+  display: block !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-8px) !important;
+}
+
+.legacy-page-content .nav__dropdown:hover > .dropdown,
+.legacy-page-content .nav__dropdown.is-open > .dropdown {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+/* Legacy pages mobile hardening */
+@media (max-width: 900px) {
+  .nav__links {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav__links .nav__link {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav__dropdown > .dropdown a {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .home-main img,
+  .home-main iframe,
+  .service-main img,
+  .service-main iframe,
+  .page-main img,
+  .page-main iframe,
+  .gallery-main img,
+  .gallery-main iframe,
+  .project-detail-main img,
+  .project-detail-main iframe,
+  .project-record-main img,
+  .project-record-main iframe {
+    max-width: 100%;
+  }
+
+  .services__grid,
+  .content-grid,
+  .contact-grid,
+  .project-detail__grid,
+  .project-record-main .project-record__grid,
+  .home-main .index-map-wrap__grid,
+  .gallery-main .index-map-wrap__grid,
+  .site-footer-pro__grid,
+  .footer__grid {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .legacy-page-content .nav__dropdown > .dropdown {
+    position: static !important;
+    display: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .legacy-page-content .nav__dropdown.is-open > .dropdown {
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav__links {
+    max-height: calc(100dvh - var(--site-header-offset) - 8px);
+  }
+}
+
 .legacy-not-found {
   min-height: 100vh;
   display: grid;
@@ -28,6 +150,75 @@ body {
 
 .legacy-not-found a {
   color: #1e56a0;
+}
+
+.legacy-seo-h1 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.legacy-seo-support {
+  padding-top: 1rem;
+  padding-bottom: 2.1rem;
+}
+
+.legacy-seo-support__inner {
+  display: grid;
+  gap: 0.72rem;
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(18, 61, 109, 0.18);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(231, 241, 252, 0.84));
+  box-shadow: 0 10px 22px rgba(10, 31, 68, 0.08);
+}
+
+.legacy-seo-support__inner h2,
+.legacy-seo-support__inner h3 {
+  margin: 0;
+  color: #0f2f56;
+  line-height: 1.25;
+}
+
+.legacy-seo-support__inner h2 {
+  font-size: clamp(1.16rem, 2.4vw, 1.5rem);
+}
+
+.legacy-seo-support__inner h3 {
+  margin-top: 0.25rem;
+  font-size: clamp(1rem, 2.05vw, 1.18rem);
+  color: #17426f;
+}
+
+.legacy-seo-support__inner p {
+  margin: 0;
+  color: #324f6f;
+  line-height: 1.68;
+}
+
+.legacy-seo-support__links {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.34rem;
+}
+
+.legacy-seo-support__links li {
+  color: #22496f;
+}
+
+.legacy-seo-support__links a {
+  color: #1d56a3;
+  text-decoration: none;
+}
+
+.legacy-seo-support__links a:hover {
+  text-decoration: underline;
 }
 
 .tools-main {
@@ -72,38 +263,145 @@ body {
 }
 
 .tool-card {
+  --card-base-1: #fcfeff;
+  --card-base-2: #eaf3fd;
+  --card-tint-rgb: 30, 86, 160;
+  --card-contrast: #15456f;
   position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.72rem;
   min-height: 214px;
+  padding: 0.98rem;
   border-radius: 16px;
-  overflow: hidden;
   text-decoration: none;
   color: #163d66;
-  border: 1px solid rgba(17, 61, 105, 0.18);
-  background: linear-gradient(160deg, rgba(250, 252, 255, 0.96), rgba(233, 242, 251, 0.9));
-  box-shadow: 0 10px 20px rgba(10, 31, 68, 0.1);
+  border: 1px solid rgba(var(--card-tint-rgb), 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 48%),
+    radial-gradient(128% 132% at 0% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.76) 44%, rgba(255, 255, 255, 0) 72%),
+    radial-gradient(128% 184% at 100% 0%, rgba(var(--card-tint-rgb), 0.22) 0%, rgba(var(--card-tint-rgb), 0.08) 34%, rgba(var(--card-tint-rgb), 0) 62%),
+    linear-gradient(160deg, var(--card-base-1), var(--card-base-2));
+  box-shadow:
+    0 12px 24px rgba(10, 31, 68, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62);
   isolation: isolate;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tool-card::before {
+  content: "";
+  position: absolute;
+  top: -32%;
+  right: -18%;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 34%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 44%),
+    radial-gradient(circle, rgba(var(--card-tint-rgb), 0.34), rgba(var(--card-tint-rgb), 0));
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.tool-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 100%, rgba(var(--card-tint-rgb), 0.12) 0%, rgba(var(--card-tint-rgb), 0) 65%),
+    linear-gradient(118deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0) 46%),
+    repeating-linear-gradient(-32deg, rgba(var(--card-tint-rgb), 0.1) 0 2px, rgba(var(--card-tint-rgb), 0) 2px 12px);
+  opacity: 0.42;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .tool-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 24px rgba(10, 31, 68, 0.14);
+  transform: translateY(-6px);
+  box-shadow:
+    0 22px 36px rgba(10, 31, 68, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border-color: rgba(var(--card-tint-rgb), 0.38);
 }
 
-.tool-card > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.2;
-  filter: saturate(0.7) contrast(0.95);
+.tool-card:hover::before {
+  transform: scale(1.05);
+  opacity: 0.95;
 }
 
-.tool-card__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(247, 251, 255, 0.25) 0%, rgba(241, 248, 255, 0.92) 78%);
+.tool-card:hover::after {
+  opacity: 0.58;
+  transform: translateX(-2%);
+}
+
+.tool-card__head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-card__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, rgba(var(--card-tint-rgb), 0.2), rgba(var(--card-tint-rgb), 0.09));
+  border: 1px solid rgba(var(--card-tint-rgb), 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  color: var(--card-contrast);
+}
+
+.tool-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.tool-card__icon--mining {
+  color: #0f4a84;
+}
+
+.tool-card__icon--energy {
+  color: #1165aa;
+}
+
+.tool-card__icon--geo {
+  color: #176798;
+}
+
+.tool-card__icon--finance {
+  color: #0f5e76;
+}
+
+.tool-card__icon--docs {
+  color: #285b8c;
+}
+
+.tool-card__icon--planning {
+  color: #235785;
+}
+
+.tool-card__icon--photo {
+  color: #145c86;
+}
+
+.tool-card__cta {
+  display: inline-flex;
+  padding: 0.24rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--card-contrast);
+  border: 1px solid rgba(var(--card-tint-rgb), 0.24);
+  background: rgba(255, 255, 255, 0.86);
 }
 
 .tool-card__body {
@@ -111,9 +409,8 @@ body {
   z-index: 1;
   display: grid;
   align-content: end;
-  height: 100%;
-  padding: 1rem;
-  gap: 0.56rem;
+  min-height: 0;
+  gap: 0.62rem;
 }
 
 .tool-card__tags {
@@ -126,20 +423,20 @@ body {
   display: inline-flex;
   padding: 0.24rem 0.56rem;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.69rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.94);
-  color: #19486f;
-  border: 1px solid rgba(25, 72, 111, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--card-contrast);
+  border: 1px solid rgba(var(--card-tint-rgb), 0.22);
 }
 
 .tool-card h2 {
   margin: 0;
-  font-size: 1.22rem;
+  font-size: 1.15rem;
   line-height: 1.24;
-  color: #17436b;
+  color: var(--card-contrast);
 }
 
 .tools-services {
@@ -191,7 +488,130 @@ body {
 
 .tool-detail {
   display: grid;
-  gap: 0.9rem;
+  gap: 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.calc-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.95fr);
+  gap: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(18, 61, 109, 0.17);
+  background:
+    radial-gradient(160% 140% at 100% 0%, rgba(30, 86, 160, 0.14) 0%, rgba(30, 86, 160, 0) 48%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(237, 245, 254, 0.94));
+  box-shadow: 0 14px 30px rgba(10, 31, 68, 0.11);
+  padding: 1rem;
+}
+
+.calc-lead__main {
+  display: grid;
+  gap: 0.66rem;
+  align-content: start;
+}
+
+.calc-lead__eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 69, 122, 0.18);
+  background: rgba(255, 255, 255, 0.85);
+  color: #1b4f84;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.24rem 0.56rem;
+}
+
+.calc-lead__main h1 {
+  margin: 0;
+  color: #123d6d;
+  font-size: clamp(1.35rem, 2.25vw, 2rem);
+  line-height: 1.2;
+}
+
+.calc-lead__main p {
+  margin: 0;
+  color: #365675;
+  line-height: 1.72;
+  max-width: 70ch;
+}
+
+.calc-lead__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.44rem;
+}
+
+.calc-lead__tags span {
+  border-radius: 999px;
+  border: 1px solid rgba(18, 61, 109, 0.18);
+  background: #fff;
+  color: #1f4e7c;
+  font-size: 0.73rem;
+  font-weight: 700;
+  padding: 0.24rem 0.58rem;
+}
+
+.calc-lead__panel {
+  border-radius: 14px;
+  border: 1px solid rgba(18, 61, 109, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.86rem 0.92rem;
+  display: grid;
+  gap: 0.52rem;
+  align-content: start;
+}
+
+.calc-lead__panel h2 {
+  margin: 0;
+  color: #1d4c80;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.calc-lead__panel ul {
+  margin: 0;
+  padding-left: 1.06rem;
+  color: #355676;
+  line-height: 1.62;
+}
+
+.calc-lead__panel li + li {
+  margin-top: 0.28rem;
+}
+
+.calc-lead__sources {
+  margin-top: 0.4rem;
+  border-top: 1px dashed rgba(20, 61, 109, 0.2);
+  padding-top: 0.55rem;
+}
+
+.calc-lead__sources h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #1c4b80;
+}
+
+.calc-lead__sources ul {
+  margin: 0.45rem 0 0;
+  padding-left: 1rem;
+}
+
+.calc-lead__sources li + li {
+  margin-top: 0.22rem;
+}
+
+.calc-lead__sources a {
+  color: #114f96;
+  text-decoration: none;
+}
+
+.calc-lead__sources a:hover {
+  text-decoration: underline;
 }
 
 .tool-detail .tool-calc,
@@ -532,48 +952,13 @@ body {
   font-weight: 700;
 }
 
-.mining-calc__totals span:last-child {
+.mining-calc__totals span:last-of-type {
   color: #123d6d;
 }
 
 .tool-detail--energy {
   display: grid;
   gap: 1rem;
-}
-
-.energy-hero {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  min-height: 260px;
-  box-shadow: 0 18px 32px rgba(10, 31, 68, 0.2);
-}
-
-.energy-hero img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.energy-hero__overlay {
-  position: relative;
-  z-index: 1;
-  min-height: 260px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 1.2rem;
-  background: linear-gradient(180deg, rgba(9, 34, 73, 0.66), rgba(8, 27, 55, 0.28));
-}
-
-.energy-hero__overlay h1 {
-  margin: 0;
-  color: #fff;
-  max-width: 30ch;
-  font-size: clamp(1.7rem, 3.3vw, 3rem);
-  line-height: 1.14;
 }
 
 .tool-detail__layout--energy {
@@ -627,7 +1012,7 @@ body {
   font-weight: 700;
 }
 
-.energy-calc__totals span:last-child {
+.energy-calc__totals span:last-of-type {
   color: #123d6d;
 }
 
@@ -1113,21 +1498,6 @@ body {
 .tool-detail--carbon {
   display: grid;
   gap: 0.95rem;
-}
-
-.carbon-stock-hero {
-  border-radius: 22px;
-  overflow: hidden;
-  min-height: 250px;
-  box-shadow: 0 16px 30px rgba(10, 31, 68, 0.16);
-}
-
-.carbon-stock-hero img {
-  width: 100%;
-  height: 100%;
-  min-height: 250px;
-  object-fit: cover;
-  display: block;
 }
 
 .carbon-stock-layout {
@@ -1644,41 +2014,6 @@ body {
   gap: 0.95rem;
 }
 
-.pano-hero {
-  position: relative;
-  border-radius: 22px;
-  overflow: hidden;
-  min-height: 260px;
-  box-shadow: 0 16px 30px rgba(10, 31, 68, 0.16);
-}
-
-.pano-hero img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pano-hero__overlay {
-  position: relative;
-  z-index: 1;
-  min-height: 260px;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-  text-align: center;
-  background: linear-gradient(180deg, rgba(10, 31, 68, 0.36), rgba(10, 31, 68, 0.58));
-}
-
-.pano-hero__overlay h1 {
-  margin: 0;
-  color: #fff;
-  max-width: 30ch;
-  font-size: clamp(1.8rem, 3.2vw, 3rem);
-  line-height: 1.12;
-}
-
 .pano-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(430px, 560px);
@@ -1696,14 +2031,14 @@ body {
 
 .pano-info h2 {
   margin: 0;
-  color: #1f6f2f;
+  color: #123d6d;
   font-size: clamp(1.34rem, 2.2vw, 1.92rem);
   line-height: 1.22;
 }
 
 .pano-info h3 {
   margin: 1rem 0 0;
-  color: #1f6f2f;
+  color: #1c4b80;
   font-size: 1.18rem;
 }
 
@@ -1732,6 +2067,7 @@ body {
   color: #fff;
   font-size: clamp(1.2rem, 1.8vw, 1.5rem);
   line-height: 1.2;
+  letter-spacing: 0.01em;
 }
 
 .pano-panel__head p {
@@ -2631,17 +2967,23 @@ body {
 
 .fidan-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
   align-items: start;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.fidan-grid > * {
+  width: 100%;
 }
 
 .fidan-note {
   border-radius: 14px;
   border: 1px solid #d6e3ee;
-  border-left: 4px solid #1fb35e;
-  background: #f9fcff;
-  box-shadow: 0 8px 20px rgba(10, 31, 68, 0.08);
+  border-left: 4px solid #1e56a0;
+  background: #f6fbff;
+  box-shadow: 0 10px 22px rgba(10, 31, 68, 0.1);
   padding: 0.95rem 1rem;
 }
 
@@ -2691,6 +3033,7 @@ body {
   padding: 0.88rem;
   display: grid;
   gap: 0.58rem;
+  grid-auto-rows: min-content;
 }
 
 .fidan-card__body label {
@@ -2740,7 +3083,7 @@ body {
   background: #f7fbff;
   padding: 0.66rem;
   display: grid;
-  gap: 0.28rem;
+  gap: 0.34rem;
 }
 
 .fidan-card__result span {
@@ -3187,7 +3530,638 @@ body {
   font-weight: 700;
 }
 
-@media (max-width: 1260px) {
+/* Unified calculator theme based on the mining tool-calc panel */
+.tool-detail :is(
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) {
+  border-radius: 16px;
+  border: 1px solid rgba(18, 61, 109, 0.15);
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(10, 31, 68, 0.14);
+  overflow: hidden;
+}
+
+.tool-detail :is(
+  .coord-panel__head,
+  .cad-panel__head,
+  .carbon-stock-panel__head,
+  .temdit-panel__head,
+  .noter-panel__head,
+  .pano-panel__head,
+  .ydo-panel__head,
+  .finance-kdv__head,
+  .finance-percent__head,
+  .epdk-panel__head,
+  .pdfkit-head,
+  .fidan-card__head,
+  .photocrop-head,
+  .photo-coord-head
+) {
+  padding: 1rem 1.1rem;
+  background: linear-gradient(135deg, #0a1f44 0%, #123d6d 55%, #1e56a0 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: left;
+}
+
+.tool-detail :is(
+  .coord-panel__head h1,
+  .coord-panel__head h2,
+  .cad-panel__head h1,
+  .cad-panel__head h2,
+  .carbon-stock-panel__head h2,
+  .temdit-panel__head h2,
+  .noter-panel__head h2,
+  .pano-panel__head h2,
+  .ydo-panel__head h2,
+  .finance-kdv__head h2,
+  .finance-percent__head h2,
+  .epdk-panel__head h2,
+  .pdfkit-head h1,
+  .fidan-card__head h2,
+  .photocrop-head h1,
+  .photo-coord-head h1
+) {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.tool-detail :is(
+  .coord-panel__head p,
+  .cad-panel__head p,
+  .carbon-stock-panel__head p,
+  .temdit-panel__head p,
+  .noter-panel__head p,
+  .pano-panel__head p,
+  .ydo-panel__head p,
+  .finance-kdv__head p,
+  .finance-percent__head p,
+  .epdk-panel__head p,
+  .pdfkit-head p,
+  .fidan-card__head p,
+  .photocrop-head p
+) {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tool-detail :is(
+  .coord-card,
+  .temdit-form,
+  .noter-form,
+  .pano-panel__controls,
+  .pano-panel__row-input,
+  .ydo-form,
+  .finance-kdv__body,
+  .finance-percent__body,
+  .fidan-card__body,
+  .photocrop-controls,
+  .photo-coord-card
+) {
+  background: rgba(232, 241, 252, 0.9);
+}
+
+.tool-detail :is(
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) :is(label) {
+  color: #365a84;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tool-detail :is(
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) :is(input:not([type="checkbox"]):not([type="range"]):not([type="file"]), select, textarea) {
+  border-radius: 10px;
+  border: 1px solid #c8d8ea;
+  background: #fff;
+  color: #17365b;
+  font-family: inherit;
+}
+
+.tool-detail :is(
+  .coord-btn,
+  .coord-btn--dark,
+  .coord-btn--blue,
+  .coord-btn--muted,
+  .coord-add,
+  .kist-calc__body button,
+  .carbon-stock-panel__button,
+  .temdit-form button,
+  .noter-form button,
+  .pano-panel__row-input button,
+  .ydo-form button,
+  .epdk-btn,
+  .epdk-btn--blue,
+  .epdk-btn--green,
+  .epdk-btn--gray,
+  .pdfkit-process,
+  .fidan-card__body button,
+  .photocrop-controls button,
+  .photo-coord-card button
+) {
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(130deg, #0a1f44, #1e56a0);
+  color: #fff;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.tool-detail :is(
+  .coord-btn,
+  .coord-add,
+  .kist-calc__body button,
+  .carbon-stock-panel__button,
+  .temdit-form button,
+  .noter-form button,
+  .pano-panel__row-input button,
+  .ydo-form button,
+  .epdk-btn,
+  .pdfkit-process,
+  .fidan-card__body button,
+  .photocrop-controls button,
+  .photo-coord-card button
+):disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Hard sync: enforce the same control and table visual system across all calculator pages */
+.tool-detail :is(
+  .tool-calc,
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) {
+  border-radius: 16px !important;
+  border: 1px solid rgba(18, 61, 109, 0.15) !important;
+  box-shadow: 0 14px 30px rgba(10, 31, 68, 0.14) !important;
+}
+
+.tool-detail :is(
+  .tool-calc__head,
+  .coord-panel__head,
+  .cad-panel__head,
+  .carbon-stock-panel__head,
+  .temdit-panel__head,
+  .noter-panel__head,
+  .pano-panel__head,
+  .ydo-panel__head,
+  .finance-kdv__head,
+  .finance-percent__head,
+  .epdk-panel__head,
+  .pdfkit-head,
+  .fidan-card__head,
+  .photocrop-head,
+  .photo-coord-head
+) {
+  background: linear-gradient(135deg, #0a1f44 0%, #123d6d 55%, #1e56a0 100%) !important;
+  color: #fff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+.tool-detail :is(
+  .tool-calc__controls,
+  .tool-calc__row-input,
+  .coord-card,
+  .kist-calc__body,
+  .carbon-stock-panel__body,
+  .temdit-form,
+  .noter-form,
+  .pano-panel__controls,
+  .pano-panel__row-input,
+  .ydo-form,
+  .finance-kdv__body,
+  .finance-percent__body,
+  .epdk-info-row,
+  .pdfkit-tabs,
+  .pdfkit-dropzone,
+  .pdfkit-filelist,
+  .fidan-card__body,
+  .photocrop-controls,
+  .photo-coord-card,
+  .photo-coord-list
+) {
+  background: rgba(232, 241, 252, 0.9) !important;
+}
+
+.tool-detail button {
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: linear-gradient(130deg, #0a1f44, #1e56a0) !important;
+  color: #fff !important;
+  font-family: inherit !important;
+  font-size: 0.86rem !important;
+  font-weight: 700 !important;
+  min-height: 38px;
+  padding: 0.3rem 0.85rem;
+}
+
+.tool-detail button:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.tool-detail table {
+  border-collapse: collapse;
+  border: 1px solid #d4e0ed !important;
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.tool-detail table th {
+  background: #123d6d !important;
+  color: #fff !important;
+  text-align: left;
+  font-size: 0.81rem;
+  padding: 0.62rem 0.52rem;
+}
+
+.tool-detail table td {
+  background: #fff !important;
+  color: #2d4e74 !important;
+  border-top: 1px solid #e2ebf5;
+  padding: 0.58rem 0.52rem;
+  font-size: 0.86rem;
+}
+
+/* Global calculator page layout cleanup */
+.tool-detail-globalnav {
+  max-width: 1120px;
+  margin: 0 auto 0.5rem;
+}
+
+.tool-detail .tool-detail__back {
+  display: none !important;
+}
+
+.tool-detail__back--global {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid rgba(18, 61, 109, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f4f83;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.34rem 0.76rem;
+}
+
+.calc-lead {
+  grid-template-columns: 1fr !important;
+  max-width: 1120px;
+  margin: 0 auto;
+  gap: 0.72rem;
+  padding: 0.9rem 0.9rem 1.24rem;
+}
+
+.calc-lead__main p {
+  max-width: 88ch;
+}
+
+.calc-lead__panel {
+  border-left: 3px solid #1e56a0;
+}
+
+.tool-detail {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0.08rem auto 0;
+  gap: 0.85rem;
+  --calc-sticky-top: calc(var(--site-header-offset, 124px) + 0.6rem);
+}
+
+.tool-detail__layout,
+.tool-detail__layout--energy,
+.tool-detail__layout--cad,
+.tool-detail__layout--kist,
+.coord-tool__layout,
+.carbon-stock-layout,
+.temdit-layout,
+.noter-layout,
+.pano-layout,
+.ydo-layout,
+.epdk-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.finance-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  grid-template-areas:
+    "finance-info finance-kdv"
+    "finance-note finance-percent";
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.finance-grid > .finance-note:not(.finance-note--quick) {
+  grid-area: finance-info;
+}
+
+.finance-grid > .finance-note--quick {
+  grid-area: finance-note;
+}
+
+.finance-grid > .finance-kdv {
+  grid-area: finance-kdv;
+}
+
+.finance-grid > .finance-percent {
+  grid-area: finance-percent;
+}
+
+.fidan-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+  grid-template-areas:
+    "fidan-info-main fidan-calc-main"
+    "fidan-info-side fidan-calc-side";
+  gap: 1rem;
+  align-items: stretch;
+  max-width: none;
+  margin: 0;
+}
+
+.tool-detail :is(
+  .tool-detail__layout,
+  .tool-detail__layout--energy,
+  .tool-detail__layout--cad,
+  .tool-detail__layout--kist,
+  .coord-tool__layout,
+  .carbon-stock-layout,
+  .temdit-layout,
+  .noter-layout,
+  .pano-layout,
+  .ydo-layout,
+  .finance-grid,
+  .epdk-layout,
+  .fidan-grid
+) > article {
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+}
+
+.tool-detail :is(
+  .tool-detail__content,
+  .coord-content,
+  .cad-content,
+  .kist-content,
+  .carbon-stock-info,
+  .temdit-info,
+  .noter-info,
+  .pano-info,
+  .ydo-info,
+  .finance-note,
+  .epdk-content,
+  .fidan-note
+)::after {
+  content: "Lacivert Ormancilik Uygulama Notu: Hesaplama sonuclarini saha olculeri ve guncel mevzuat belgeleri ile birlikte degerlendirmeniz onerilir. Proje dosyalamasi, izin turu, katsayi dogrulamasi ve yil bazli birim bedel kontrolleri son asamada tekrar yapilmalidir.";
+  display: block;
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px dashed rgba(20, 61, 109, 0.24);
+  color: #4a6786;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.fidan-grid > .fidan-note:first-of-type {
+  grid-area: fidan-info-main;
+}
+
+.fidan-grid > .fidan-note:last-of-type {
+  grid-area: fidan-info-side;
+}
+
+.fidan-grid > .fidan-card:first-of-type {
+  grid-area: fidan-calc-main;
+}
+
+.fidan-grid > .fidan-card:last-of-type {
+  grid-area: fidan-calc-side;
+}
+
+.tool-calc,
+.coord-panel,
+.cad-panel,
+.kist-calc,
+.carbon-stock-panel,
+.temdit-panel,
+.noter-panel,
+.pano-panel,
+.ydo-panel,
+.finance-kdv,
+.finance-percent,
+.epdk-panel,
+.fidan-card {
+  position: sticky;
+  top: var(--calc-sticky-top);
+  align-self: start;
+}
+
+/* Finance page has two calculator cards, so keep them in normal flow to avoid overlap on scroll */
+.tool-detail--finance .finance-kdv,
+.tool-detail--finance .finance-percent {
+  position: static;
+  top: auto;
+}
+
+.tool-detail :is(
+  .tool-detail__layout,
+  .tool-detail__layout--energy,
+  .tool-detail__layout--cad,
+  .tool-detail__layout--kist,
+  .coord-tool__layout,
+  .carbon-stock-layout,
+  .temdit-layout,
+  .noter-layout,
+  .pano-layout,
+  .ydo-layout,
+  .finance-grid,
+  .epdk-layout,
+  .fidan-grid
+) {
+  width: 100%;
+}
+
+.tool-detail :is(
+  .tool-calc,
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell,
+  .tool-detail__content,
+  .coord-content,
+  .cad-content,
+  .kist-info,
+  .carbon-stock-card,
+  .temdit-info,
+  .noter-info,
+  .pano-info,
+  .finance-note,
+  .epdk-content,
+  .fidan-note
+) {
+  width: 100%;
+  max-width: none !important;
+  margin: 0;
+}
+
+.tool-detail :is(
+  .tool-detail__content,
+  .coord-content,
+  .cad-content,
+  .kist-info,
+  .carbon-stock-card,
+  .temdit-info,
+  .noter-info,
+  .pano-info,
+  .finance-note,
+  .epdk-content,
+  .fidan-note
+) {
+  padding: 1rem !important;
+}
+
+.tool-detail :is(
+  .tool-detail__content,
+  .coord-content,
+  .cad-content,
+  .kist-info,
+  .carbon-stock-card,
+  .temdit-info,
+  .noter-info,
+  .pano-info,
+  .finance-note,
+  .epdk-content,
+  .fidan-note
+) :is(h1, h2, h3) {
+  margin-top: 0.2rem;
+  margin-bottom: 0.48rem;
+  line-height: 1.24;
+}
+
+.tool-detail :is(
+  .tool-detail__content,
+  .coord-content,
+  .cad-content,
+  .kist-info,
+  .carbon-stock-card,
+  .temdit-info,
+  .noter-info,
+  .pano-info,
+  .finance-note,
+  .epdk-content,
+  .fidan-note
+) :is(p, li, span) {
+  line-height: 1.65;
+}
+
+.tool-detail :is(
+  .tool-calc__controls,
+  .tool-calc__row-input,
+  .kist-calc__body,
+  .carbon-stock-panel__body,
+  .temdit-form,
+  .noter-form,
+  .pano-panel__controls,
+  .pano-panel__row-input,
+  .ydo-form,
+  .finance-kdv__body,
+  .finance-percent__body,
+  .fidan-card__body,
+  .photo-coord-card,
+  .photocrop-controls
+) {
+  padding: 0.88rem !important;
+  gap: 0.58rem !important;
+}
+
+@media (max-width: 960px) {
+  .calc-lead {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-lead__panel {
+    padding: 0.74rem 0.8rem;
+  }
+
   .tool-detail__layout--energy {
     grid-template-columns: 1fr;
   }
@@ -3220,11 +4194,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .carbon-stock-hero,
-  .carbon-stock-hero img {
-    min-height: 220px;
-  }
-
   .temdit-layout {
     grid-template-columns: 1fr;
   }
@@ -3255,6 +4224,11 @@ body {
 
   .finance-grid {
     grid-template-columns: 1fr;
+    grid-template-areas: none;
+  }
+
+  .finance-grid > * {
+    grid-area: auto;
   }
 
   .epdk-layout {
@@ -3263,6 +4237,30 @@ body {
 
   .fidan-grid {
     grid-template-columns: 1fr;
+    grid-template-areas: none;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .fidan-grid > * {
+    grid-area: auto;
+  }
+
+  .tool-calc,
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .fidan-card {
+    position: static;
+    top: auto;
   }
 
   .photocrop-body {
@@ -3284,19 +4282,9 @@ body {
   }
 }
 
-@media (max-width: 1300px) {
-  .tool-detail--mining .tool-detail__layout {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 1150px) {
   .tools-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .tool-detail__layout {
-    grid-template-columns: 1fr;
   }
 
   .tools-services__grid {
@@ -3305,6 +4293,14 @@ body {
 }
 
 @media (max-width: 820px) {
+  .calc-lead {
+    padding: 0.8rem 0.8rem 1.06rem;
+  }
+
+  .calc-lead__main h1 {
+    font-size: 1.2rem;
+  }
+
   .tools-main {
     padding-top: calc(var(--site-header-offset, 148px) + 1rem);
   }
@@ -3326,11 +4322,6 @@ body {
   .mining-calc .tool-calc__row-input > label:first-child,
   .mining-calc .tool-calc__row-input > button {
     grid-column: auto;
-  }
-
-  .energy-hero,
-  .energy-hero__overlay {
-    min-height: 210px;
   }
 
   .energy-calc .tool-calc__row-input > label:first-child,
@@ -3357,11 +4348,6 @@ body {
 
   .noter-form__grid {
     grid-template-columns: 1fr;
-  }
-
-  .pano-hero,
-  .pano-hero__overlay {
-    min-height: 210px;
   }
 
   .pano-panel__controls,
@@ -3414,4 +4400,409 @@ body {
     align-items: flex-start;
     flex-direction: column;
   }
+}
+
+/* Fidan calculator cards: keep fixed in normal flow and colorize cards */
+.tool-detail--fidan .fidan-card {
+  position: static !important;
+  top: auto !important;
+  align-self: stretch !important;
+}
+
+.tool-detail--fidan .fidan-card--seedling {
+  border-top: 3px solid rgba(25, 138, 95, 0.82) !important;
+  border-color: rgba(21, 119, 83, 0.26) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #eefbf4 100%) !important;
+}
+
+.tool-detail--fidan .fidan-card--seedling .fidan-card__head {
+  background: linear-gradient(135deg, #0f7b58 0%, #24aa73 100%) !important;
+}
+
+.tool-detail--fidan .fidan-card--fence {
+  border-top: 3px solid rgba(217, 123, 33, 0.82) !important;
+  border-color: rgba(184, 113, 28, 0.28) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #fff6ea 100%) !important;
+}
+
+.tool-detail--fidan .fidan-card--fence .fidan-card__head {
+  background: linear-gradient(135deg, #b86b1a 0%, #d58a2c 100%) !important;
+}
+
+/* Color accents for all calculator panels */
+.tool-detail :is(
+  .tool-calc,
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) {
+  border-top: 3px solid rgba(30, 86, 160, 0.72) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8fe 100%) !important;
+}
+
+/* Color accents for calculator list cards */
+.tools-grid .tool-card:nth-child(4n + 1) {
+  --card-tint-rgb: 33, 144, 112;
+  --card-base-1: #fbfffd;
+  --card-base-2: #e8f7f0;
+  --card-contrast: #125343;
+}
+
+.tools-grid .tool-card:nth-child(4n + 2) {
+  --card-tint-rgb: 32, 116, 188;
+  --card-base-1: #fbfeff;
+  --card-base-2: #e9f3fe;
+  --card-contrast: #12466f;
+}
+
+.tools-grid .tool-card:nth-child(4n + 3) {
+  --card-tint-rgb: 206, 133, 36;
+  --card-base-1: #fffcf8;
+  --card-base-2: #fdf2e3;
+  --card-contrast: #6f4a14;
+}
+
+.tools-grid .tool-card:nth-child(4n + 4) {
+  --card-tint-rgb: 108, 112, 194;
+  --card-base-1: #fcfcff;
+  --card-base-2: #edf0ff;
+  --card-contrast: #3d4284;
+}
+
+@media (max-width: 960px) {
+  .tool-detail--fidan .fidan-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    gap: 0.82rem;
+  }
+
+  .tool-detail--fidan .fidan-grid > * {
+    grid-area: auto;
+  }
+}
+
+@media (max-width: 820px) {
+  .tool-detail :is(
+    .tool-calc,
+    .coord-panel,
+    .cad-panel,
+    .kist-calc,
+    .carbon-stock-panel,
+    .temdit-panel,
+    .noter-panel,
+    .pano-panel,
+    .ydo-panel,
+    .finance-kdv,
+    .finance-percent,
+    .epdk-panel,
+    .pdfkit-shell,
+    .fidan-card,
+    .photocrop-shell,
+    .photo-coord-shell
+  ) {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .tool-detail :is(input:not([type="checkbox"]):not([type="range"]):not([type="file"]), select, textarea) {
+    font-size: 16px !important;
+  }
+
+  .tool-detail :is(.tool-calc__table-wrap, .pano-table-wrap, .photo-coord-table-wrap) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tools-grid .tool-card {
+    min-height: 192px;
+  }
+}
+
+/* Tool card theme by category */
+.tools-grid .tool-card.tool-card--mining {
+  --card-tint-rgb: 28, 138, 107;
+  --card-base-1: #fbfffd;
+  --card-base-2: #e7f6f0;
+  --card-contrast: #0f5042;
+}
+
+.tools-grid .tool-card.tool-card--energy {
+  --card-tint-rgb: 25, 126, 200;
+  --card-base-1: #fbfeff;
+  --card-base-2: #e8f3ff;
+  --card-contrast: #134a76;
+}
+
+.tools-grid .tool-card.tool-card--geo {
+  --card-tint-rgb: 94, 118, 198;
+  --card-base-1: #fcfdff;
+  --card-base-2: #edf1ff;
+  --card-contrast: #324579;
+}
+
+.tools-grid .tool-card.tool-card--convert {
+  --card-tint-rgb: 33, 140, 164;
+  --card-base-1: #fbfeff;
+  --card-base-2: #e7f4f8;
+  --card-contrast: #124f66;
+}
+
+.tools-grid .tool-card.tool-card--finance {
+  --card-tint-rgb: 201, 136, 42;
+  --card-base-1: #fffdf9;
+  --card-base-2: #fdf3e5;
+  --card-contrast: #734d18;
+}
+
+.tools-grid .tool-card.tool-card--docs {
+  --card-tint-rgb: 142, 118, 198;
+  --card-base-1: #fdfdff;
+  --card-base-2: #f1ebff;
+  --card-contrast: #4f3d80;
+}
+
+.tools-grid .tool-card.tool-card--planning {
+  --card-tint-rgb: 31, 154, 126;
+  --card-base-1: #fbfffd;
+  --card-base-2: #e5f6ef;
+  --card-contrast: #0f5547;
+}
+
+.tools-grid .tool-card.tool-card--photo {
+  --card-tint-rgb: 214, 128, 76;
+  --card-base-1: #fffdfb;
+  --card-base-2: #faeee8;
+  --card-contrast: #7b4023;
+}
+
+/* Shared action row inside result/summary sections */
+.tool-detail :is(.mining-calc__totals, .energy-calc__totals, .pano-summary, .tool-calc__summary) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.44rem;
+  align-items: center;
+}
+
+.tool-detail :is(.mining-calc__totals, .energy-calc__totals, .pano-summary, .tool-calc__summary) span {
+  border: 1px solid rgba(22, 74, 125, 0.2);
+  background: rgba(255, 255, 255, 0.84);
+  color: #244f7a;
+}
+
+.tool-detail .calc-action-btn {
+  margin-left: auto;
+  min-height: 34px !important;
+  padding: 0.24rem 0.68rem !important;
+  font-size: 0.77rem !important;
+  border-radius: 999px !important;
+}
+
+.tool-detail .calc-action-btn--muted {
+  background: linear-gradient(135deg, #5d7390, #7f95ad) !important;
+}
+
+/* Per-page calculator palette */
+.tool-detail {
+  --calc-accent-1: #0a1f44;
+  --calc-accent-2: #1e56a0;
+  --calc-soft-1: #edf3fc;
+  --calc-soft-2: #f8fbff;
+}
+
+.tool-detail--mining {
+  --calc-accent-1: #0c3f72;
+  --calc-accent-2: #1b6db5;
+  --calc-soft-1: #ecf4ff;
+  --calc-soft-2: #f8fbff;
+}
+
+.tool-detail--energy {
+  --calc-accent-1: #0f4968;
+  --calc-accent-2: #1a87a9;
+  --calc-soft-1: #eaf7fb;
+  --calc-soft-2: #f7fdff;
+}
+
+.tool-detail--coord,
+.tool-detail--epdk,
+.tool-detail--photo-coordinate {
+  --calc-accent-1: #274277;
+  --calc-accent-2: #4f6eb3;
+  --calc-soft-1: #eef2ff;
+  --calc-soft-2: #f9faff;
+}
+
+.tool-detail--cad,
+.tool-detail--pdfkit,
+.tool-detail--photocrop {
+  --calc-accent-1: #1f4f74;
+  --calc-accent-2: #2f7ba8;
+  --calc-soft-1: #eaf5fc;
+  --calc-soft-2: #f8fcff;
+}
+
+.tool-detail--kist,
+.tool-detail--ydo,
+.tool-detail--finance {
+  --calc-accent-1: #9a6318;
+  --calc-accent-2: #cc8b2e;
+  --calc-soft-1: #fff3e5;
+  --calc-soft-2: #fffaf3;
+}
+
+.tool-detail--carbon {
+  --calc-accent-1: #0f6b58;
+  --calc-accent-2: #21a27f;
+  --calc-soft-1: #e9f8f2;
+  --calc-soft-2: #f7fefa;
+}
+
+.tool-detail--temdit,
+.tool-detail--noter {
+  --calc-accent-1: #5a436f;
+  --calc-accent-2: #7f61a0;
+  --calc-soft-1: #f3eefb;
+  --calc-soft-2: #faf8ff;
+}
+
+.tool-detail--pano {
+  --calc-accent-1: #885221;
+  --calc-accent-2: #bc7a2f;
+  --calc-soft-1: #fff3e9;
+  --calc-soft-2: #fffaf5;
+}
+
+.tool-detail--fidan {
+  --calc-accent-1: #0f7b58;
+  --calc-accent-2: #24aa73;
+  --calc-soft-1: #eaf9f1;
+  --calc-soft-2: #f7fdf9;
+}
+
+.tool-detail--afforestation-budget {
+  --calc-accent-1: #126243;
+  --calc-accent-2: #25a875;
+  --calc-soft-1: #e9f8f0;
+  --calc-soft-2: #f7fdfa;
+}
+
+.tool-detail--forest-road {
+  --calc-accent-1: #1f5274;
+  --calc-accent-2: #2f87b8;
+  --calc-soft-1: #eaf6fd;
+  --calc-soft-2: #f8fcff;
+}
+
+.tool-detail--province-compare,
+.tool-detail--permit-compare {
+  --calc-accent-1: #0c3f72;
+  --calc-accent-2: #1b6db5;
+  --calc-soft-1: #ecf4ff;
+  --calc-soft-2: #f8fbff;
+}
+
+.tool-detail :is(
+  .tool-calc,
+  .coord-panel,
+  .cad-panel,
+  .kist-calc,
+  .carbon-stock-panel,
+  .temdit-panel,
+  .noter-panel,
+  .pano-panel,
+  .ydo-panel,
+  .finance-kdv,
+  .finance-percent,
+  .epdk-panel,
+  .pdfkit-shell,
+  .fidan-card,
+  .photocrop-shell,
+  .photo-coord-shell
+) {
+  border-top: 3px solid var(--calc-accent-2) !important;
+  background: linear-gradient(180deg, #ffffff 0%, var(--calc-soft-1) 100%) !important;
+}
+
+.tool-detail :is(
+  .tool-calc__head,
+  .coord-panel__head,
+  .cad-panel__head,
+  .carbon-stock-panel__head,
+  .temdit-panel__head,
+  .noter-panel__head,
+  .pano-panel__head,
+  .ydo-panel__head,
+  .finance-kdv__head,
+  .finance-percent__head,
+  .epdk-panel__head,
+  .pdfkit-head,
+  .fidan-card__head,
+  .photocrop-head,
+  .photo-coord-head
+) {
+  background: linear-gradient(135deg, var(--calc-accent-1) 0%, var(--calc-accent-2) 100%) !important;
+}
+
+.tool-detail :is(
+  .tool-calc__controls,
+  .tool-calc__row-input,
+  .coord-card,
+  .kist-calc__body,
+  .carbon-stock-panel__body,
+  .temdit-form,
+  .noter-form,
+  .pano-panel__controls,
+  .pano-panel__row-input,
+  .ydo-form,
+  .finance-kdv__body,
+  .finance-percent__body,
+  .epdk-info-row,
+  .pdfkit-tabs,
+  .pdfkit-dropzone,
+  .pdfkit-filelist,
+  .fidan-card__body,
+  .photocrop-controls,
+  .photo-coord-card,
+  .photo-coord-list
+) {
+  background: linear-gradient(180deg, var(--calc-soft-1), var(--calc-soft-2)) !important;
+}
+
+.tool-detail button {
+  background: linear-gradient(130deg, var(--calc-accent-1), var(--calc-accent-2)) !important;
+}
+
+.aff-budget-calc .tool-calc__controls,
+.forest-road-calc .tool-calc__controls {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aff-budget-calc__actions,
+.forest-road-calc__actions {
+  justify-content: flex-end;
+}
+
+.aff-budget-calc__summary,
+.forest-road-calc__summary {
+  border-top: 1px solid #dce7f3;
+  padding-top: 0.82rem;
+}
+
+.aff-budget-calc__summary span:last-of-type,
+.forest-road-calc__summary span:last-of-type {
+  border-color: rgba(21, 98, 67, 0.3);
+  background: rgba(231, 247, 238, 0.85);
+  color: #135f40;
 }

@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /page-data/
 Disallow: /.vs/
 
 Sitemap: https://lacivert.cc/sitemap.xml
+Host: lacivert.cc

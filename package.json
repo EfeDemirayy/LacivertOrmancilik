@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run build:data && vite",
+    "dev": "npm run build:data && npm run build:seo && vite",
     "build:data": "node scripts/build-page-data.mjs",
-    "build": "npm run build:data && tsc -b && vite build",
+    "build:seo": "node scripts/build-seo-assets.mjs",
+    "build": "npm run build:data && npm run build:seo && tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -37,6 +37,27 @@ type ToolItem = {
   bullets: string[];
 };
 
+type ToolSourceLink = {
+  label: string;
+  url: string;
+};
+
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+type SeoInternalLink = {
+  href: string;
+  label: string;
+};
+
+type LegacySeoProfile = {
+  heading: string;
+  paragraphs: string[];
+  links: SeoInternalLink[];
+};
+
 type GenericCalcRow = {
   id: number;
   permitType: string;
@@ -48,6 +69,7 @@ type MiningYearOption = {
   year: number;
   afforestationPerHectare: number;
   sourceUrl: string;
+  isEstimated?: boolean;
 };
 
 type MiningPermitOption = {
@@ -108,6 +130,18 @@ type CustomRoute =
   | null;
 
 const MANAGED_HEAD_ATTR = "data-react-page-head";
+const LOADED_STYLESHEET_HREFS = new Set<string>();
+
+type ToolCardIconName =
+  | "mining"
+  | "energy"
+  | "geo"
+  | "convert"
+  | "finance"
+  | "docs"
+  | "planning"
+  | "photo"
+  | "default";
 
 const TOOL_ITEMS: ToolItem[] = [
   {
@@ -116,7 +150,7 @@ const TOOL_ITEMS: ToolItem[] = [
     summary: "Madencilik izin süreçlerinde arazi bedeli, ağaçlandırma ve katsayı etkisini birlikte görün.",
     tags: ["Hesap Araçları", "Madencilik", "Orman İzinleri"],
     image: "/img/panel-16-front.jpg",
-    sectionTitle: "Neden Doğru Orman İzni Hesaplaması Yapmalısınız?",
+    sectionTitle: "Neden Doğru Orman İzni Hesaplaması Yapmalısınız",
     sectionText:
       "Madencilik ve altyapı faaliyetlerinde orman izin süreçleri proje maliyetini doğrudan etkiler. Bu yüzden izin bedellerini planlama aşamasında net görmek, sürecin fizibilitesini ve nakit akışını güvenceye alır.",
     bullets: [
@@ -365,7 +399,168 @@ const TOOL_ITEMS: ToolItem[] = [
       "Saha kayıt listesinden satır bazlı indirme ve silme.",
     ],
   },
+  {
+    slug: "agaclandirma-bakim-butce-hesaplama",
+    title: "Ağaçlandırma ve Bakım Bütçesi Hesaplama Aracı",
+    summary: "Fidan adedi, dikim işçiliği ve çok yıllı bakım giderlerini tek panelde hesaplayın.",
+    tags: ["Hesap Araçları", "Ormancılık", "Saha Planlama"],
+    image: "/img/fidandikim3.jpg",
+    sectionTitle: "Ağaçlandırma Maliyetini Önceden Planlayın",
+    sectionText:
+      "Ağaçlandırma projelerinde ilk yatırım ve bakım dönemindeki maliyetleri birlikte görmek, bütçe doğruluğunu ciddi ölçüde artırır.",
+    bullets: [
+      "Hektar bazında fidan ihtiyacı ve kayıp oranı etkisini birlikte hesaplar.",
+      "Dikim işçiliği ve bakım maliyetini ayrı kalemler halinde sunar.",
+      "Ara toplam, KDV ve genel toplamı aynı ekranda üretir.",
+    ],
+  },
+  {
+    slug: "orman-yolu-metraj-kesif",
+    title: "Orman Yolu Metraj ve Keşif Hesaplama Aracı",
+    summary: "Yol platformu için kazı, dolgu, stabilize hacmi ve maliyetleri hızlıca çıkarın.",
+    tags: ["Hesap Araçları", "Ormancılık", "Mühendislik"],
+    image: "/img/proje-yolu2.jpg",
+    sectionTitle: "Yol Projelerinde Metraj ve Keşif Netliği",
+    sectionText:
+      "Yol uzunluğu, platform genişliği ve birim fiyatlara bağlı metraj hesabını standartlaştırarak ihale ve saha planlamasını kolaylaştırır.",
+    bullets: [
+      "Kazı, dolgu ve stabilize hacmini otomatik hesaplar.",
+      "Birim fiyatlara göre maliyet kırılımı verir.",
+      "Drenaj/yardımcı işler için yüzdesel ek payı dahil eder.",
+    ],
+  },
+  {
+    slug: "il-katsayisi-karsilastirma",
+    title: "İl Katsayısı Karşılaştırma Aracı (Ek-3)",
+    summary: "Aynı izin senaryosunda iki ilin katsayı etkisini resmi Ek-3 verisine göre kıyaslayın.",
+    tags: ["Hesap Araçları", "Ormancılık", "Orman İzinleri"],
+    image: "/img/ogm2.jpg",
+    sectionTitle: "İl Katsayısı Etkisini Net Görün",
+    sectionText:
+      "İl katsayıları izin bedelinde doğrudan çarpan etkisi oluşturur. Bu araç, aynı alan ve aynı izin türünde farklı illerin maliyet etkisini tek ekranda karşılaştırır.",
+    bullets: [
+      "Ek-3 il katsayılarını resmi liste üzerinden kullanır.",
+      "Aynı alan için iki il arasındaki maliyet farkını tutar ve yüzde olarak verir.",
+      "Yıl, izin türü ve kapalılık parametrelerini birlikte analiz eder.",
+    ],
+  },
+  {
+    slug: "izin-katsayi-karsilastirma",
+    title: "İzin Türü Katsayı Karşılaştırma Aracı (Ek-1)",
+    summary: "Seçilen alan ve yılda tüm izin türlerini resmi Ek-1 katsayılarına göre karşılaştırın.",
+    tags: ["Hesap Araçları", "Ormancılık", "Orman İzinleri"],
+    image: "/img/kanunlar.jpg",
+    sectionTitle: "İzin Türleri Arasındaki Bedel Farkını Ölçün",
+    sectionText:
+      "İzin türüne bağlı katsayı farklılıkları maliyeti önemli ölçüde değiştirir. Bu araç, aynı saha verisinde tüm izin türlerini tablo halinde kıyaslayarak hızlı karar desteği sağlar.",
+    bullets: [
+      "Ek-1 katsayılarıyla tüm izin türleri tek tabloda.",
+      "Alan, il katsayısı ve kapalılık etkisini birlikte uygular.",
+      "En düşük ve en yüksek bedelli izin türlerini anında gösterir.",
+    ],
+  },
 ];
+
+const TOOL_CARD_ICON_BY_SLUG: Record<string, ToolCardIconName> = {
+  "madencilik-orman-izin-bedeli": "mining",
+  "madde-17-3-res-ges-yol": "energy",
+  "koordinattan-kml-dxf-uretim": "geo",
+  "gelismis-ed50-donusum-kml-indirme": "geo",
+  "cad-gis-donusum-dxf-kml": "convert",
+  "kistele-yevmiye-hesaplama": "finance",
+  "karbon-su-emisyon-analiz": "planning",
+  "temdit-mahsup-hesaplama": "finance",
+  "damga-vergi-noter-bedeli": "docs",
+  "iletisim-panolari-bedel": "planning",
+  "ydo-bak-guncel-deger-hesaplama": "finance",
+  "epdk-izinlerinde-kml-olusturma": "geo",
+  "kdv-ayirma-ekleme-yuzde-degisim": "finance",
+  "pdf-donustur-birlestir-ayir-gorsel": "docs",
+  "fidan-cit-kazik-hesaplama": "planning",
+  "ucretsiz-fotograf-kirpma-araci": "photo",
+  "fotograf-koordinatlandirma-araci": "photo",
+  "agaclandirma-bakim-butce-hesaplama": "planning",
+  "orman-yolu-metraj-kesif": "convert",
+  "il-katsayisi-karsilastirma": "mining",
+  "izin-katsayi-karsilastirma": "mining",
+};
+
+const ToolCardIcon = ({ name }: { name: ToolCardIconName }) => {
+  switch (name) {
+    case "mining":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="M4 6h16" />
+          <path d="M9 6l3 5 3-5" />
+          <path d="M12 11v9" />
+          <path d="M8 20h8" />
+        </svg>
+      );
+    case "energy":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="M13 2 5 13h6l-1 9 9-12h-6l1-8Z" />
+        </svg>
+      );
+    case "geo":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="m3 7 6-3 6 3 6-3v13l-6 3-6-3-6 3V7Z" />
+          <path d="M9 4v13" />
+          <path d="M15 7v13" />
+        </svg>
+      );
+    case "convert":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="M4 6h11" />
+          <path d="m12 3 3 3-3 3" />
+          <path d="M20 18H9" />
+          <path d="m12 15-3 3 3 3" />
+        </svg>
+      );
+    case "finance":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="M4 19h16" />
+          <path d="M7 15v-3" />
+          <path d="M12 15V9" />
+          <path d="M17 15V6" />
+        </svg>
+      );
+    case "docs":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <path d="M8 3h6l5 5v13H8z" />
+          <path d="M14 3v5h5" />
+          <path d="M11 13h5M11 17h5" />
+        </svg>
+      );
+    case "planning":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="3" />
+          <path d="M8 8h8M8 12h8M8 16h5" />
+        </svg>
+      );
+    case "photo":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <rect x="3" y="6" width="18" height="14" rx="2" />
+          <circle cx="12" cy="13" r="3.2" />
+          <path d="M8 6l1.5-2h5L16 6" />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+          <rect x="5" y="3" width="14" height="18" rx="2" />
+          <path d="M8 8h8M8 12h3M13 12h3M8 16h3M13 16h3" />
+        </svg>
+      );
+  }
+};
+
 const TOOL_INDEX = new Map(TOOL_ITEMS.map((item) => [item.slug, item]));
 const MINING_TOOL_SLUG = "madencilik-orman-izin-bedeli";
 const ENERGY_TOOL_SLUG = "madde-17-3-res-ges-yol";
@@ -384,6 +579,10 @@ const PDF_TOOL_SLUG = "pdf-donustur-birlestir-ayir-gorsel";
 const FIDAN_CIT_TOOL_SLUG = "fidan-cit-kazik-hesaplama";
 const PHOTO_CROP_TOOL_SLUG = "ucretsiz-fotograf-kirpma-araci";
 const PHOTO_COORD_TOOL_SLUG = "fotograf-koordinatlandirma-araci";
+const AGACLANDIRMA_BAKIM_BUTCE_TOOL_SLUG = "agaclandirma-bakim-butce-hesaplama";
+const ORMAN_YOLU_METRAJ_TOOL_SLUG = "orman-yolu-metraj-kesif";
+const IL_KATSAYI_KARSILASTIRMA_TOOL_SLUG = "il-katsayisi-karsilastirma";
+const IZIN_KATSAYI_KARSILASTIRMA_TOOL_SLUG = "izin-katsayi-karsilastirma";
 const M2_PER_HECTARE = 10_000;
 const FIVE_HECTARES_M2 = 5 * M2_PER_HECTARE;
 
@@ -446,7 +645,7 @@ const polygonAreaFromPoints = (points: CoordPoint[]): number => {
   return Math.abs(sum / 2);
 };
 
-const MINING_APPLICATION_YEARS: MiningYearOption[] = [
+const OFFICIAL_MINING_APPLICATION_YEARS: MiningYearOption[] = [
   {
     year: 2026,
     afforestationPerHectare: 323_694,
@@ -604,54 +803,50 @@ const MINING_PROVINCES: MiningProvinceOption[] = [
   { name: "Yozgat", coefficient: 1.2 },
   { name: "Zonguldak", coefficient: 2.0 },
 ].sort((a, b) => a.name.localeCompare(b.name, "tr"));
-const MINING_YEAR_INDEX = new Map(MINING_APPLICATION_YEARS.map((item) => [item.year, item]));
-const MINING_OPERATION_INDEX = new Map(MINING_OPERATION_TYPES.map((item) => [item.id, item]));
-const MINING_PERMIT_INDEX = new Map(MINING_PERMIT_TYPES.map((item) => [item.id, item]));
-const MINING_CLOSURE_INDEX = new Map(MINING_CLOSURE_LEVELS.map((item) => [item.id, item]));
-const MINING_PROVINCE_INDEX = new Map(MINING_PROVINCES.map((item) => [item.name, item.coefficient]));
-
-const ENERGY_APPLICATION_YEARS: MiningYearOption[] = [...MINING_APPLICATION_YEARS];
-
-const ENERGY_PROVINCES: MiningProvinceOption[] = [
-  { name: "Ankara", coefficient: 2.4 },
-  { name: "Antalya", coefficient: 2.4 },
-  { name: "Bursa", coefficient: 2.0 },
-  { name: "Istanbul", coefficient: 3.0 },
-  { name: "Izmir", coefficient: 2.8 },
-  { name: "Kocaeli", coefficient: 2.8 },
-  { name: "Konya", coefficient: 1.6 },
-  { name: "Sakarya", coefficient: 2.4 },
-  { name: "Tekirdag", coefficient: 1.6 },
-].sort((a, b) => a.name.localeCompare(b.name, "tr"));
 
 const ENERGY_PERMIT_TYPES: MiningPermitOption[] = [
   { id: "enh", label: "ENH", coefficient: 0.05 },
   { id: "res", label: "RES", coefficient: 0.08 },
   { id: "ges", label: "GES", coefficient: 0.1 },
   { id: "yol", label: "Yol", coefficient: 0.06 },
-  { id: "rod", label: "Ruzgar Olcum Diregi", coefficient: 0.04 },
+  { id: "rod", label: "Rüzgar ölçüm Diregi", coefficient: 0.04 },
 ];
 
 const ENERGY_CLOSURE_LEVELS: MiningClosureOption[] = [
-  { id: "closure_10", label: "Dusuk kapalilik", coefficient: 1.0 },
-  { id: "closure_11_40", label: "Orta kapalilik", coefficient: 1.2 },
-  { id: "closure_41_70", label: "Yuksek kapalilik", coefficient: 1.4 },
+  { id: "closure_10", label: "Düşük kapalılık", coefficient: 1.0 },
+  { id: "closure_11_40", label: "Orta kapalılık", coefficient: 1.2 },
+  { id: "closure_41_70", label: "Yüksek kapalılık", coefficient: 1.4 },
 ];
 
 const PANO_PERMIT_TYPES: MiningPermitOption[] = [
-  { id: "non_lit_panel", label: "Isiksiz Iletisim Panosu", coefficient: 0.875 },
-  { id: "lit_panel", label: "Isikli Iletisim Panosu", coefficient: 1.0 },
-  { id: "totem_panel", label: "Totem / Yuksek Pano", coefficient: 1.15 },
+  { id: "non_lit_panel", label: "Işıksız İletişim Panosu", coefficient: 0.875 },
+  { id: "lit_panel", label: "Işıklı İletişim Panosu", coefficient: 1.0 },
+  { id: "totem_panel", label: "Totem / Yüksek Pano", coefficient: 1.15 },
   { id: "digital_panel", label: "Dijital / Led Pano", coefficient: 1.3 },
 ];
 
-const ENERGY_YEAR_INDEX = new Map(ENERGY_APPLICATION_YEARS.map((item) => [item.year, item]));
-const ENERGY_PROVINCE_INDEX = new Map(ENERGY_PROVINCES.map((item) => [item.name, item.coefficient]));
-const ENERGY_PERMIT_INDEX = new Map(ENERGY_PERMIT_TYPES.map((item) => [item.id, item]));
-const ENERGY_CLOSURE_INDEX = new Map(ENERGY_CLOSURE_LEVELS.map((item) => [item.id, item]));
-const PANO_PERMIT_INDEX = new Map(PANO_PERMIT_TYPES.map((item) => [item.id, item]));
-
+const YDO_PRIMARY_SOURCE_URL = "https://www.gib.gov.tr/node/177112";
 const YDO_RATE_BY_TARGET_YEAR: Array<{ year: number; rate: number }> = [
+  { year: 2001, rate: 56 },
+  { year: 2002, rate: 53.2 },
+  { year: 2003, rate: 59 },
+  { year: 2004, rate: 28.5 },
+  { year: 2005, rate: 11.2 },
+  { year: 2006, rate: 9.8 },
+  { year: 2007, rate: 7.8 },
+  { year: 2008, rate: 7.2 },
+  { year: 2009, rate: 12 },
+  { year: 2010, rate: 2.2 },
+  { year: 2011, rate: 7.7 },
+  { year: 2012, rate: 10.26 },
+  { year: 2013, rate: 7.8 },
+  { year: 2014, rate: 3.93 },
+  { year: 2015, rate: 10.11 },
+  { year: 2016, rate: 5.58 },
+  { year: 2017, rate: 3.83 },
+  { year: 2018, rate: 14.47 },
+  { year: 2019, rate: 21.25 },
+  { year: 2020, rate: 23.73 },
   { year: 2021, rate: 9.11 },
   { year: 2022, rate: 36.2 },
   { year: 2023, rate: 122.93 },
@@ -660,14 +855,509 @@ const YDO_RATE_BY_TARGET_YEAR: Array<{ year: number; rate: number }> = [
   { year: 2026, rate: 25.49 },
 ];
 const YDO_RATE_INDEX = new Map(YDO_RATE_BY_TARGET_YEAR.map((item) => [item.year, item.rate]));
+const MINING_APPLICATION_YEARS: MiningYearOption[] = [...OFFICIAL_MINING_APPLICATION_YEARS].sort(
+  (a, b) => b.year - a.year,
+);
 
-const CUSTOM_ROUTE_HEAD_NODES = [
+const MINING_YEAR_INDEX = new Map(MINING_APPLICATION_YEARS.map((item) => [item.year, item]));
+const MINING_OPERATION_INDEX = new Map(MINING_OPERATION_TYPES.map((item) => [item.id, item]));
+const MINING_PERMIT_INDEX = new Map(MINING_PERMIT_TYPES.map((item) => [item.id, item]));
+const MINING_CLOSURE_INDEX = new Map(MINING_CLOSURE_LEVELS.map((item) => [item.id, item]));
+const MINING_PROVINCE_INDEX = new Map(MINING_PROVINCES.map((item) => [item.name, item.coefficient]));
+
+const ENERGY_APPLICATION_YEARS: MiningYearOption[] = [...MINING_APPLICATION_YEARS];
+const ENERGY_PROVINCES: MiningProvinceOption[] = [...MINING_PROVINCES];
+const ENERGY_YEAR_INDEX = new Map(ENERGY_APPLICATION_YEARS.map((item) => [item.year, item]));
+const ENERGY_PROVINCE_INDEX = new Map(ENERGY_PROVINCES.map((item) => [item.name, item.coefficient]));
+const ENERGY_PERMIT_INDEX = new Map(ENERGY_PERMIT_TYPES.map((item) => [item.id, item]));
+const ENERGY_CLOSURE_INDEX = new Map(ENERGY_CLOSURE_LEVELS.map((item) => [item.id, item]));
+const PANO_PERMIT_INDEX = new Map(PANO_PERMIT_TYPES.map((item) => [item.id, item]));
+
+const MINING_REFERENCE_LINKS: ToolSourceLink[] = [
+  {
+    label: "Orman Kanununun 16 ncı Maddesi Uygulama Yönetmeliği (22.08.2025 / 32994 RG)",
+    url: "https://www.ogm.gov.tr/tr/e-kutuphane-sitesi/mevzuat-sitesi/Yonetmelikler/Orman%20Kanununun%2016%20nc%C4%B1%20Madde%20Y%C3%B6netmeli%C4%9Fi%2022.08.2025%20tarih%20ve%2032994%20R.G.%20De%C4%9Fi%C5%9Fiklikleri%20%C4%B0%C5%9Flenmi%C5%9F%20Son%20Hali.pdf",
+  },
+  ...OFFICIAL_MINING_APPLICATION_YEARS.map((item) => ({
+    label: `${item.year} Yılı OGM Birim Bedelleri`,
+    url: item.sourceUrl,
+  })),
+];
+
+const YDO_REFERENCE_LINKS: ToolSourceLink[] = [
+  {
+    label: "2025 Yılı İçin Yeniden Değerleme Oranı (%25,49) - VUK Genel Tebliği (Sıra No: 585)",
+    url: "https://cdn.gib.gov.tr/api/gibportal-file/file/getFile?objectKey=DUYURU%2FUNIVERSAL%2F2025%2F213_Teblig_585_not.pdf",
+  },
+  {
+    label: "2024 Yılı İçin Yeniden Değerleme Oranı (%43,93) - VUK Genel Tebliği (Sıra No: 574)",
+    url: "https://www.gib.gov.tr/node/176158",
+  },
+  {
+    label: "2023 Yılı İçin Yeniden Değerleme Oranı (%58,46) - VUK Genel Tebliği (Sıra No: 561)",
+    url: "https://www.gib.gov.tr/node/174730",
+  },
+  {
+    label: "GİB Duyuruları (Yeniden Değerleme Oranı)",
+    url: YDO_PRIMARY_SOURCE_URL,
+  },
+];
+
+const TOOL_SOURCE_LINKS: Record<string, ToolSourceLink[]> = {
+  [MINING_TOOL_SLUG]: MINING_REFERENCE_LINKS,
+  [ENERGY_TOOL_SLUG]: MINING_REFERENCE_LINKS,
+  [ILETISIM_PANO_TOOL_SLUG]: MINING_REFERENCE_LINKS,
+  [IL_KATSAYI_KARSILASTIRMA_TOOL_SLUG]: MINING_REFERENCE_LINKS,
+  [IZIN_KATSAYI_KARSILASTIRMA_TOOL_SLUG]: MINING_REFERENCE_LINKS,
+  [YDO_BAK_TOOL_SLUG]: YDO_REFERENCE_LINKS,
+  [DAMGA_NOTER_TOOL_SLUG]: [
+    {
+      label: "Damga Vergisi Kanunu Genel Tebliği (Seri No: 71) - 2025",
+      url: "https://cdn.gib.gov.tr/api/gibportal-file/file/getFile?objectKey=MEVZUAT_TEBLIGLER%2FUNIVERSAL%2F2025%2F488_Teblig71.pdf",
+    },
+    {
+      label: "Damga Vergisi Kanunu (1) Sayılı Tablo - 01.10.2025",
+      url: "https://cdn.gib.gov.tr/api/gibportal-file/file/getFile?objectKey=MEVZUAT_TEBLIGLER%2FUNIVERSAL%2F2025%2F488_Tablo1_01102025.pdf",
+    },
+    {
+      label: "Türkiye Noterler Birliği - Noterlik Ücret Tarifesi",
+      url: "https://www.tnb.org.tr/tr/mevzuat/noterlik-ucret-tarifesi",
+    },
+  ],
+  [KDV_YUZDE_TOOL_SLUG]: [
+    {
+      label: "GİB KDV Sirküleri / Tebliğ Duyuruları",
+      url: "https://cdn.gib.gov.tr/api/gibportal-file/file/getFile?objectKey=DUYURU%2FUNIVERSAL%2F2025%2FKDVSerno55Teb_abn.pdf",
+    },
+  ],
+  [CARBON_TOOL_SLUG]: [
+    {
+      label: "IPCC 2006 Guidelines for National Greenhouse Gas Inventories",
+      url: "https://www.ipcc-nggip.iges.or.jp/public/2006gl/",
+    },
+  ],
+  [AGACLANDIRMA_BAKIM_BUTCE_TOOL_SLUG]: [
+    {
+      label: "OGM e-Kütüphane (resmi talimat, teknik esas ve birim bedeller)",
+      url: "https://www.ogm.gov.tr/tr/e-kutuphane-sitesi",
+    },
+  ],
+  [ORMAN_YOLU_METRAJ_TOOL_SLUG]: [
+    {
+      label: "OGM e-Kütüphane (resmi talimat, teknik esas ve birim bedeller)",
+      url: "https://www.ogm.gov.tr/tr/e-kutuphane-sitesi",
+    },
+  ],
+  [FIDAN_CIT_TOOL_SLUG]: [
+    {
+      label: "OGM e-Kütüphane (resmi talimat, teknik esas ve birim bedeller)",
+      url: "https://www.ogm.gov.tr/tr/e-kutuphane-sitesi",
+    },
+  ],
+};
+
+const SITE_ORIGIN = "https://lacivert.cc";
+const TOOLS_ROUTE_PATH = "/hesap-araclari";
+const DEFAULT_TOOL_OG_IMAGE = "/img/panel-16-front.jpg";
+const ORGANIZATION_ID = `${SITE_ORIGIN}/#organization`;
+const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
+
+const CUSTOM_ROUTE_BASE_HEAD_NODES = [
   '<link rel="preconnect" href="https://fonts.googleapis.com">',
   '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
   '<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
   '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">',
   '<link rel="stylesheet" href="/css/styleorman.css">',
 ];
+
+type CustomRouteSeoConfig = {
+  title: string;
+  headNodes: string[];
+};
+
+const toAbsoluteSiteUrl = (pathOrUrl: string): string => {
+  if (!pathOrUrl) return SITE_ORIGIN;
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+  const normalized = pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`;
+  return `${SITE_ORIGIN}${normalized}`;
+};
+
+const ORGANIZATION_SCHEMA = {
+  "@type": "Organization",
+  "@id": ORGANIZATION_ID,
+  name: "Lacivert Ormancılık Mühendislik San. Tic. Ltd. Şti.",
+  url: `${SITE_ORIGIN}/`,
+  logo: toAbsoluteSiteUrl("/img/logo-yeni.png"),
+  image: toAbsoluteSiteUrl("/img/logo-yeni.png"),
+  telephone: "+90 530 909 41 08",
+  email: "omer@lacivert.cc",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Selahattin Eyyübi Caddesi, Serdar Mahallesi, No:36, İç Kapı No: 11, 41 OFFİCE",
+    addressLocality: "Başiskele",
+    addressRegion: "Kocaeli",
+    postalCode: "41000",
+    addressCountry: "TR",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Türkiye",
+  },
+  sameAs: [
+    "https://www.instagram.com/lacivertormancilik?igsh=MWw0b2pmcm9ib2ZmMw==",
+    "https://www.linkedin.com/company/laci%CC%87vert-ormancilik-m%C3%BChendi%CC%87sli%CC%87k-san-ti%CC%87c-ltd-%C5%9Fti%CC%87/?viewAsMember=true",
+    "https://www.google.com/maps/place/Lacivert+Ormanc%C4%B1l%C4%B1k+M%C3%BChendislik/@40.7145355,29.9389795,19z",
+  ],
+} as const;
+
+const LOCAL_SERVICE_SCHEMA = {
+  "@type": "ProfessionalService",
+  "@id": `${SITE_ORIGIN}/#professional-service`,
+  name: "Lacivert Ormancılık",
+  url: `${SITE_ORIGIN}/`,
+  provider: { "@id": ORGANIZATION_ID },
+  areaServed: "TR",
+  serviceType: [
+    "Orman izin süreç yönetimi",
+    "Madde 16 ormancılık izin hizmetleri",
+    "Madde 17 ormancılık izin hizmetleri",
+    "Madencilikte orman izin bedeli danışmanlığı",
+    "Teknik evrak ve rapor hazırlama",
+  ],
+} as const;
+
+const TOOLS_LIST_FAQ_ITEMS: FaqItem[] = [
+  {
+    question: "Madencilikte orman izin bedeli hesaplama nasıl yapılır?",
+    answer:
+      "Hesaplama, izin türü katsayısı, il katsayısı, kapalılık oranı, alan ve yıl birim bedelleri birlikte değerlendirilerek yapılır.",
+  },
+  {
+    question: "17/3 kapsamındaki RES ve GES izinlerinde hangi veriler gerekir?",
+    answer:
+      "İzin türü, toplam alan, uygulama yılı, il ve kapalılık verileri girilerek arazi bedeli ile ağaçlandırma bedeli ayrı ayrı hesaplanır.",
+  },
+  {
+    question: "Hesaplama araçları resmi mevzuata uygun mu?",
+    answer:
+      "Araçlarda kullanılan katsayı ve açıklamalar, ilgili OGM mevzuatı ve resmi kaynak bağlantıları referans alınarak düzenlenmiştir.",
+  },
+];
+
+const escapeHtmlAttribute = (value: string): string => {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+};
+
+const trimText = (value: string, maxLength: number): string => {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+  return `${normalized.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
+};
+
+const buildSeoHeadNodes = ({
+  title,
+  description,
+  keywords,
+  canonicalUrl,
+  imageUrl,
+  robots,
+  ogType,
+  jsonLd,
+}: {
+  title: string;
+  description: string;
+  keywords: string;
+  canonicalUrl: string;
+  imageUrl: string;
+  robots: string;
+  ogType: "website" | "article";
+  jsonLd: Record<string, unknown>;
+}): string[] => {
+  const escapedTitle = escapeHtmlAttribute(title);
+  const escapedDescription = escapeHtmlAttribute(description);
+  const escapedKeywords = escapeHtmlAttribute(keywords);
+  const escapedCanonical = escapeHtmlAttribute(canonicalUrl);
+  const escapedImage = escapeHtmlAttribute(imageUrl);
+  const escapedRobots = escapeHtmlAttribute(robots);
+
+  return [
+    ...CUSTOM_ROUTE_BASE_HEAD_NODES,
+    `<meta name="description" content="${escapedDescription}">`,
+    `<meta name="keywords" content="${escapedKeywords}">`,
+    `<meta name="robots" content="${escapedRobots}">`,
+    '<meta name="author" content="Lacivert Ormancılık">',
+    '<meta name="language" content="tr-TR">',
+    '<meta name="theme-color" content="#0a1f44">',
+    `<link rel="canonical" href="${escapedCanonical}">`,
+    `<link rel="alternate" hreflang="tr-TR" href="${escapedCanonical}">`,
+    `<link rel="alternate" hreflang="x-default" href="${escapedCanonical}">`,
+    '<meta property="og:locale" content="tr_TR">',
+    '<meta property="og:locale:alternate" content="tr_TR">',
+    '<meta property="og:site_name" content="Lacivert Ormancılık">',
+    `<meta property="og:type" content="${ogType}">`,
+    `<meta property="og:title" content="${escapedTitle}">`,
+    `<meta property="og:description" content="${escapedDescription}">`,
+    `<meta property="og:url" content="${escapedCanonical}">`,
+    `<meta property="og:image" content="${escapedImage}">`,
+    `<meta property="og:image:alt" content="${escapedTitle}">`,
+    '<meta name="twitter:card" content="summary_large_image">',
+    `<meta name="twitter:title" content="${escapedTitle}">`,
+    `<meta name="twitter:description" content="${escapedDescription}">`,
+    `<meta name="twitter:url" content="${escapedCanonical}">`,
+    `<meta name="twitter:image" content="${escapedImage}">`,
+    `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`,
+  ];
+};
+
+const buildFaqSchema = (id: string, items: FaqItem[]) => ({
+  "@type": "FAQPage",
+  "@id": id,
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+});
+
+const getToolFaqItems = (tool: ToolItem): FaqItem[] => [
+  {
+    question: `${tool.title} ne işe yarar?`,
+    answer: `${tool.summary} Araç, proje planlama aşamasında hızlı ve karşılaştırmalı sonuç üretmek için kullanılır.`,
+  },
+  {
+    question: `${tool.title} için hangi veriler gerekir?`,
+    answer:
+      "Araç türüne göre alan, katsayı, yıl ve işlem parametreleri girilir. Formdaki tüm zorunlu alanlar doldurulduğunda sonuç otomatik üretilir.",
+  },
+  {
+    question: "Hesaplama sonuçları resmi başvuruda nasıl kullanılır?",
+    answer:
+      "Sonuçlar ön fizibilite ve maliyet öngörüsü amacıyla kullanılır. Resmi başvurularda güncel mevzuat ve kurum değerlendirmesi esas alınmalıdır.",
+  },
+];
+
+const buildCustomRouteSeoConfig = (route: Exclude<CustomRoute, null>, tool: ToolItem | null): CustomRouteSeoConfig => {
+  const websiteSchema = {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    url: `${SITE_ORIGIN}/`,
+    name: "Lacivert Ormancılık",
+    inLanguage: "tr-TR",
+    publisher: { "@id": ORGANIZATION_ID },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${SITE_ORIGIN}/hesap-araclari?ara={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  if (route.kind === "list") {
+    const canonicalUrl = toAbsoluteSiteUrl(TOOLS_ROUTE_PATH);
+    const title = "Hesaplama Araçları | Ormancılık ve Madencilik Hesaplama Merkezi | Lacivert Ormancılık";
+    const description = trimText(
+      "Madencilikte orman izin bedeli, 17/3 izin bedeli, kıstelyevm, KDV ve diğer ormancılık hesaplama araçlarını Lacivert Ormancılık hesaplama merkezinde ücretsiz kullanın.",
+      170,
+    );
+    const keywords = [
+      "hesaplama araçları",
+      "orman izin bedeli hesaplama",
+      "madencilikte orman izin bedelleri",
+      "17/3 izin bedeli hesaplama",
+      "kıstelyevm hesaplama",
+      "KDV hesaplama aracı",
+      "Lacivert Ormancılık",
+    ].join(", ");
+    const imageUrl = toAbsoluteSiteUrl(DEFAULT_TOOL_OG_IMAGE);
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        websiteSchema,
+        ORGANIZATION_SCHEMA,
+        LOCAL_SERVICE_SCHEMA,
+        {
+          "@type": "CollectionPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          inLanguage: "tr-TR",
+          isPartOf: { "@id": WEBSITE_ID },
+          breadcrumb: { "@id": `${canonicalUrl}#breadcrumb` },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${canonicalUrl}#breadcrumb`,
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Anasayfa", item: `${SITE_ORIGIN}/` },
+            { "@type": "ListItem", position: 2, name: "Hesaplama Araçları", item: canonicalUrl },
+          ],
+        },
+        {
+          "@type": "ItemList",
+          "@id": `${canonicalUrl}#itemlist`,
+          name: "Lacivert Ormancılık Hesaplama Araçları",
+          numberOfItems: TOOL_ITEMS.length,
+          itemListElement: TOOL_ITEMS.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.title,
+            url: toAbsoluteSiteUrl(`${TOOLS_ROUTE_PATH}/${item.slug}`),
+          })),
+        },
+        buildFaqSchema(`${canonicalUrl}#faq`, TOOLS_LIST_FAQ_ITEMS),
+      ],
+    };
+
+    return {
+      title,
+      headNodes: buildSeoHeadNodes({
+        title,
+        description,
+        keywords,
+        canonicalUrl,
+        imageUrl,
+        robots: "index, follow, max-image-preview:large",
+        ogType: "website",
+        jsonLd,
+      }),
+    };
+  }
+
+  if (!tool) {
+    const canonicalUrl = toAbsoluteSiteUrl(TOOLS_ROUTE_PATH);
+    const title = "Hesap Aracı Bulunamadı | Lacivert Ormancılık";
+    const description = "Aradığınız hesaplama aracı bulunamadı. Güncel hesaplama araçları listesine geri dönebilirsiniz.";
+    const keywords = "hesaplama aracı, Lacivert Ormancılık, ormancılık hesaplama";
+    const imageUrl = toAbsoluteSiteUrl(DEFAULT_TOOL_OG_IMAGE);
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        websiteSchema,
+        ORGANIZATION_SCHEMA,
+        {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          inLanguage: "tr-TR",
+          isPartOf: { "@id": WEBSITE_ID },
+        },
+      ],
+    };
+
+    return {
+      title,
+      headNodes: buildSeoHeadNodes({
+        title,
+        description,
+        keywords,
+        canonicalUrl,
+        imageUrl,
+        robots: "noindex, follow",
+        ogType: "website",
+        jsonLd,
+      }),
+    };
+  }
+
+  const canonicalUrl = toAbsoluteSiteUrl(`${TOOLS_ROUTE_PATH}/${tool.slug}`);
+  const title = `${tool.title} | Lacivert Ormancılık`;
+  const description = trimText(`${tool.summary} ${tool.sectionText}`, 170);
+  const keywords = Array.from(
+    new Set([
+      tool.title,
+      ...tool.tags,
+      "hesaplama aracı",
+      "ormancılık hesaplama",
+      "madencilik hesaplama",
+      "Lacivert Ormancılık",
+    ]),
+  ).join(", ");
+  const imageUrl = toAbsoluteSiteUrl(tool.image || DEFAULT_TOOL_OG_IMAGE);
+  const faqItems = getToolFaqItems(tool);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      websiteSchema,
+      ORGANIZATION_SCHEMA,
+      LOCAL_SERVICE_SCHEMA,
+      {
+        "@type": "WebPage",
+        "@id": `${canonicalUrl}#webpage`,
+        url: canonicalUrl,
+        name: title,
+        description,
+        inLanguage: "tr-TR",
+        isPartOf: { "@id": WEBSITE_ID },
+        breadcrumb: { "@id": `${canonicalUrl}#breadcrumb` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Anasayfa", item: `${SITE_ORIGIN}/` },
+          { "@type": "ListItem", position: 2, name: "Hesaplama Araçları", item: toAbsoluteSiteUrl(TOOLS_ROUTE_PATH) },
+          { "@type": "ListItem", position: 3, name: tool.title, item: canonicalUrl },
+        ],
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${canonicalUrl}#application`,
+        name: tool.title,
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        url: canonicalUrl,
+        image: imageUrl,
+        description,
+        featureList: tool.bullets,
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "TRY",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Lacivert Ormancılık",
+          url: `${SITE_ORIGIN}/`,
+        },
+      },
+      {
+        "@type": "Service",
+        "@id": `${canonicalUrl}#service`,
+        name: tool.title,
+        description,
+        provider: { "@id": ORGANIZATION_ID },
+        areaServed: "TR",
+        url: canonicalUrl,
+      },
+      buildFaqSchema(`${canonicalUrl}#faq`, faqItems),
+    ],
+  };
+
+  return {
+    title,
+    headNodes: buildSeoHeadNodes({
+      title,
+      description,
+      keywords,
+      canonicalUrl,
+      imageUrl,
+      robots: "index, follow, max-image-preview:large",
+      ogType: "article",
+      jsonLd,
+    }),
+  };
+};
 
 const removeTrailingSlash = (value: string): string => {
   if (value.length > 1 && value.endsWith("/")) return value.slice(0, -1);
@@ -708,14 +1398,6 @@ const resolveCustomRoute = (pathname: string): CustomRoute => {
   return null;
 };
 
-const isLocalStylesheetHref = (href: string): boolean => {
-  const normalized = href.trim();
-  if (!normalized) return false;
-  if (normalized.startsWith("//")) return false;
-  if (/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(normalized)) return false;
-  return true;
-};
-
 const resolvePageId = (pathname: string): number | null => {
   const normalized = normalizePath(pathname);
   const candidates = new Set<string>();
@@ -740,6 +1422,214 @@ const resolvePageId = (pathname: string): number | null => {
   }
 
   return null;
+};
+
+const BASE_LEGACY_INTERNAL_LINKS: SeoInternalLink[] = [
+  { href: "/hesap-araclari", label: "Ormancılık Hesaplama Araçları" },
+  { href: "/madde16.html", label: "Madde 16 Orman İzin Süreçleri" },
+  { href: "/madde17.html", label: "Madde 17 Orman İzin Süreçleri" },
+  { href: "/ormanizinleri.html", label: "Orman İzinleri Hizmetleri" },
+  { href: "/kanunveyonetmelikler.html", label: "Kanun ve Yönetmelikler Rehberi" },
+  { href: "/iletisim.html", label: "Teklif ve İletişim" },
+];
+
+const LEGACY_ROUTE_SEO_PROFILES: Record<string, LegacySeoProfile> = {
+  "/madde16": {
+    heading: "Madde 16 Orman İzin Süreçlerinde Teknik Planlama",
+    paragraphs: [
+      "Orman Kanunu Madde 16 kapsamındaki maden arama, işletme ve altyapı süreçlerinde doğru teknik planlama, başvuru dosyasının onay süresini doğrudan etkiler.",
+      "Lacivert Ormancılık; saha ölçümü, koordinat kontrolü, teknik rapor tanzimi ve kurum revizyon takibini aynı süreç yönetim modeli içinde yürütür.",
+      "Başvuru öncesinde risk analizi ve maliyet öngörüsü yapılması, proje yatırım takvimini korumak ve izin sürecini hızlandırmak için kritik önemdedir.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/madde17": {
+    heading: "Madde 17 Kapsamında Madencilik ve Altyapı İzin Yönetimi",
+    paragraphs: [
+      "Madde 17 süreçlerinde maden, enerji ve ulaşım yatırımları için güzergâh, alan ve teknik dosya uyumu birlikte değerlendirilmelidir.",
+      "Proje dosyasında kullanılan koordinat, aplikasyon ve raporlama verilerinin mevzuata uygun hazırlanması, tekrar revizyon riskini düşürür.",
+      "Sahaya özel planlama ve mevzuat kontrollü dokümantasyon, proje süresini ve toplam izin maliyetini daha öngörülebilir hale getirir.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/ormanizinleri": {
+    heading: "Orman İzinleri İçin Uygulanabilir Süreç Kurgusu",
+    paragraphs: [
+      "Orman izin süreçlerinde ön izin, kesin izin, ek talep ve revizyon adımlarının her biri farklı teknik belge ve zaman planı gerektirir.",
+      "Lacivert Ormancılık, proje türüne göre uygun belge setini oluşturarak kurum süreçlerinde uyumlu bir başvuru akışı sağlar.",
+      "Doğru hazırlanan evrak ve ölçüm altyapısı, izin sürecinde gecikmeye neden olan eksik belge ve uyumsuz veri risklerini azaltır.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/kanunveyonetmelikler": {
+    heading: "Orman Mevzuatının Projeye Doğru Uyarlanması",
+    paragraphs: [
+      "Orman Kanunu ve ilgili yönetmeliklerin proje özelinde doğru yorumlanması, uygulama aşamasında hukuki ve teknik uyumluluğu güçlendirir.",
+      "Madde 16 ve Madde 17 uygulamalarında mevzuat değişikliklerinin düzenli takibi, proje bütçesi ve izin takvimi açısından stratejik değer taşır.",
+      "Kurum beklentisine uygun evrak dili ve teknik içerik standardı, dosyanın değerlendirme süresini optimize eder.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/izinirtifak": {
+    heading: "İzin ve İrtifak Süreçlerinde Belgelerin Teknik Tutarlılığı",
+    paragraphs: [
+      "İzin ve irtifak süreçlerinde saha verileri ile idari dosya arasında tutarlılık sağlanması, başvuru güvenilirliğinin temel unsurudur.",
+      "Güzergâh, alan ve kullanım amacı verilerinin doğru eşleştirilmesi, kurum aşamalarında tekrar çalışma ihtiyacını düşürür.",
+      "Planlı süreç yönetimi ile teknik denetim adımları birlikte yürütüldüğünde izin/irtifak kararları daha hızlı sonuçlanır.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/diger": {
+    heading: "Diğer Ormancılık İşlerinde Proje Bazlı Çözüm",
+    paragraphs: [
+      "Madde 16 ve Madde 17 dışındaki özel ormancılık işlerinde teknik dosya kurgusu proje türüne göre farklılaşır.",
+      "Tapulu kesim, ağaç röleve planı ve benzeri süreçlerde saha gerçekliği ile mevzuat uyumunu aynı çerçevede ele almak gerekir.",
+      "Lacivert Ormancılık, kurum süreçlerine uygun raporlama ve başvuru planlaması ile proje sahibine operasyonel netlik sağlar.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/muhendislik": {
+    heading: "Ormancılık Mühendislik Hizmetlerinde Uçtan Uca Yönetim",
+    paragraphs: [
+      "Ormancılık mühendislik hizmetlerinde ölçüm, raporlama, mevzuat uyumu ve kurum takibi adımlarının tek bir planla ilerlemesi gerekir.",
+      "Sahadan ofise veri standardı kurulması, revizyon sayısını azaltarak proje teslim süresini daha istikrarlı hale getirir.",
+      "Teknik ekip, doğru evrak kurgusu ve iç süreç disiplini ile yatırım kararlarını destekleyen güvenilir çıktı üretir.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/hakkimizda": {
+    heading: "Lacivert Ormancılık Yaklaşımı ve Hizmet Modeli",
+    paragraphs: [
+      "Lacivert Ormancılık, ormancılık ve madencilik izin süreçlerinde teknik doğruluk, mevzuat uyumu ve zaman yönetimini birlikte ele alır.",
+      "Her projede saha verisi, evrak kurgusu ve kurum takibi aynı standartla yönetilerek başvurunun sürdürülebilirliği güçlendirilir.",
+      "Hizmet modelimiz; başvuru öncesi hazırlık, uygulama yönetimi ve dosya kapanış süreçlerini tek çatı altında birleştirir.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/iletisim": {
+    heading: "Orman İzin Projeleriniz İçin Hızlı Ön Değerlendirme",
+    paragraphs: [
+      "Madde 16, Madde 17 ve diğer ormancılık süreçlerinde doğru başlangıç kurgusu, proje süresini doğrudan etkiler.",
+      "İletişim aşamasında proje türü, lokasyon ve izin hedeflerinin netleştirilmesi, teklif ve iş planı doğruluğunu artırır.",
+      "Teknik ekibimiz, süreç kapsamına göre uygulanabilir yol haritasını kısa sürede paylaşarak proje kararlarını hızlandırır.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+  "/surdurulebilirlik": {
+    heading: "Sürdürülebilir Ormancılık İçin Ölçülebilir Teknik Yaklaşım",
+    paragraphs: [
+      "Sürdürülebilirlik odaklı ormancılık uygulamalarında çevresel etki, süreç verimliliği ve mevzuat uyumu birlikte değerlendirilmelidir.",
+      "Proje planlamasında ölçülebilir hedefler kullanmak, saha uygulamalarının uzun vadeli performansını güçlendirir.",
+      "Doğru teknik raporlama, kurumsal sürdürülebilirlik hedeflerini somut veri ile destekleyen bir karar altyapısı sunar.",
+    ],
+    links: BASE_LEGACY_INTERNAL_LINKS,
+  },
+};
+
+const resolveLegacySeoProfile = (routePath: string, pageTitle: string): LegacySeoProfile | null => {
+  const normalized = normalizePath(routePath || "/");
+
+  if (LEGACY_ROUTE_SEO_PROFILES[normalized]) {
+    return LEGACY_ROUTE_SEO_PROFILES[normalized];
+  }
+
+  if (normalized.startsWith("/projeler/")) {
+    return {
+      heading: "Proje Uygulamasında Teknik Süreç ve Mevzuat Uyumu",
+      paragraphs: [
+        `${pageTitle} kapsamında yapılan ormancılık çalışmaları; saha verisi, teknik rapor ve kurum koordinasyonu adımlarıyla birlikte yürütülür.`,
+        "Proje dosyasının teknik doğruluğu ve mevzuat uyumu, izin sürecinin kesintisiz ilerlemesi için temel kriterdir.",
+        "Kategori bazlı referans projeler ve hesaplama araçları, benzer süreçlerde ön planlama yapmayı kolaylaştırır.",
+      ],
+      links: [
+        { href: "/madde16.html", label: "Madde 16 Projeleri" },
+        { href: "/madde17.html", label: "Madde 17 Projeleri" },
+        { href: "/diger.html", label: "Diğer Projeler" },
+        { href: "/hesap-araclari", label: "Hesaplama Araçları Merkezi" },
+        { href: "/iletisim.html", label: "Proje İçin Teklif Alın" },
+      ],
+    };
+  }
+
+  return null;
+};
+
+const ensurePrimaryHeading = (doc: Document, fallbackTitle: string): void => {
+  const main = doc.querySelector("main") || doc.body;
+  if (!main) return;
+  if (main.querySelector("h1")) return;
+
+  const sourceHeading = main.querySelector<HTMLElement>(".page-hero__title, .hero-card__title, h2, h3");
+  const text = (sourceHeading?.textContent || fallbackTitle).replace(/\s+/g, " ").trim();
+  if (!text) return;
+
+  const h1 = doc.createElement("h1");
+  h1.className = "legacy-seo-h1";
+  h1.textContent = text;
+  main.prepend(h1);
+};
+
+const ensureImageAltTexts = (doc: Document, fallbackTitle: string): void => {
+  let imageIndex = 1;
+
+  doc.querySelectorAll("img").forEach((node) => {
+    if (!(node instanceof HTMLImageElement)) return;
+    const currentAlt = (node.getAttribute("alt") || "").trim();
+    if (currentAlt.length > 0) return;
+
+    node.setAttribute("alt", `${fallbackTitle} görseli ${imageIndex}`);
+    imageIndex += 1;
+  });
+};
+
+const injectLegacySeoContent = (doc: Document, routePath: string, pageTitle: string): void => {
+  const profile = resolveLegacySeoProfile(routePath, pageTitle);
+  if (!profile) return;
+
+  const main = doc.querySelector("main");
+  if (!(main instanceof HTMLElement)) return;
+  if (main.querySelector(".legacy-seo-support")) return;
+
+  const section = doc.createElement("section");
+  section.className = "legacy-seo-support section section--compact";
+
+  const container = doc.createElement("div");
+  container.className = "container legacy-seo-support__inner";
+
+  const heading = doc.createElement("h2");
+  heading.textContent = profile.heading;
+  container.appendChild(heading);
+
+  profile.paragraphs.forEach((text) => {
+    const paragraph = doc.createElement("p");
+    paragraph.textContent = text;
+    container.appendChild(paragraph);
+  });
+
+  const linksHeading = doc.createElement("h3");
+  linksHeading.textContent = "İlgili Sayfalar ve İç Linkler";
+  container.appendChild(linksHeading);
+
+  const linksList = doc.createElement("ul");
+  linksList.className = "legacy-seo-support__links";
+
+  const uniqueLinks = new Set<string>();
+  profile.links.forEach((link) => {
+    const key = `${link.href}|${link.label}`;
+    if (uniqueLinks.has(key)) return;
+    uniqueLinks.add(key);
+
+    const item = doc.createElement("li");
+    const anchor = doc.createElement("a");
+    anchor.href = link.href;
+    anchor.textContent = link.label;
+    item.appendChild(anchor);
+    linksList.appendChild(item);
+  });
+
+  container.appendChild(linksList);
+  section.appendChild(container);
+  main.appendChild(section);
 };
 
 const ensureToolsMenuLink = (doc: Document): void => {
@@ -791,7 +1681,7 @@ const ensureToolsMenuLink = (doc: Document): void => {
   });
 };
 
-const parsePage = (rawHtml: string): ParsedPage => {
+const parsePage = (rawHtml: string, routePath: string): ParsedPage => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHtml, "text/html");
 
@@ -808,7 +1698,8 @@ const parsePage = (rawHtml: string): ParsedPage => {
     if (tag === "meta") {
       const charset = node.getAttribute("charset");
       const name = (node.getAttribute("name") || "").toLowerCase();
-      if (charset || name === "viewport") return;
+      const httpEquiv = (node.getAttribute("http-equiv") || "").toLowerCase();
+      if (charset || name === "viewport" || httpEquiv === "refresh") return;
     }
 
     headNodes.push(node.outerHTML);
@@ -818,6 +1709,16 @@ const parsePage = (rawHtml: string): ParsedPage => {
     scriptNode.remove();
   });
 
+  // Legacy sayfalarda ilk açılışta soluk görünümü engellemek için
+  // fade bileşenlerini başlangıçta görünür işaretle.
+  doc.querySelectorAll<HTMLElement>("[data-fade]").forEach((node) => {
+    node.classList.add("visible");
+  });
+
+  ensurePrimaryHeading(doc, title);
+  ensureImageAltTexts(doc, title);
+  injectLegacySeoContent(doc, routePath, title);
+
   return {
     title,
     headNodes,
@@ -825,10 +1726,133 @@ const parsePage = (rawHtml: string): ParsedPage => {
   };
 };
 
+const resolveLegacyRedirectPath = (payload: LazyPagePayload): string | null => {
+  if (!payload.html) return null;
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(payload.html, "text/html");
+
+  let target = "";
+
+  const refreshMeta = doc.querySelector<HTMLMetaElement>('meta[http-equiv="refresh" i]');
+  if (refreshMeta) {
+    const content = refreshMeta.getAttribute("content") || "";
+    const refreshMatch = content.match(/url\s*=\s*([^;]+)/i);
+    if (refreshMatch?.[1]) {
+      target = refreshMatch[1].trim();
+    }
+  }
+
+  if (!target) {
+    const scripts = Array.from(doc.querySelectorAll("script"));
+    for (const script of scripts) {
+      const text = script.textContent || "";
+      const scriptMatch =
+        text.match(/window\.location\.replace\((['"])(.*?)\1\)/i) ||
+        text.match(/window\.location\.href\s*=\s*(['"])(.*?)\1/i) ||
+        text.match(/window\.location\.assign\((['"])(.*?)\1\)/i);
+
+      if (scriptMatch?.[2]) {
+        target = scriptMatch[2].trim();
+        break;
+      }
+    }
+  }
+
+  if (!target) return null;
+
+  const sanitized = target.replace(/^['"]|['"]$/g, "");
+  if (!sanitized || sanitized.startsWith("#")) return null;
+
+  try {
+    const sourcePath = payload.source.startsWith("/") ? payload.source : `/${payload.source}`;
+    const baseUrl = new URL(sourcePath, window.location.origin);
+    const resolved = new URL(sanitized, baseUrl);
+
+    if (resolved.origin !== window.location.origin) return null;
+
+    const resolvedPath = normalizePath(resolved.pathname);
+    const currentRoute = normalizePath(payload.route);
+
+    if (resolvedPath === currentRoute) return null;
+    return resolvedPath;
+  } catch {
+    return null;
+  }
+};
+
 const createElementFromHtml = (html: string): Element | null => {
   const template = document.createElement("template");
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
+};
+
+const normalizeHref = (href: string): string => {
+  try {
+    return new URL(href, window.location.origin).href;
+  } catch {
+    return href;
+  }
+};
+
+const isLocalStylesheetHref = (href: string): boolean => {
+  if (!href || href.startsWith("data:")) return false;
+
+  try {
+    const url = new URL(href, window.location.origin);
+    return url.origin === window.location.origin;
+  } catch {
+    return false;
+  }
+};
+
+const hasStylesheetInHead = (href: string): boolean => {
+  const normalized = normalizeHref(href);
+  return Array.from(document.querySelectorAll<HTMLLinkElement>('link[rel~="stylesheet"]')).some((link) => {
+    const existingHref = link.getAttribute("href");
+    if (!existingHref) return false;
+    return normalizeHref(existingHref) === normalized;
+  });
+};
+
+const waitForStylesheet = (link: HTMLLinkElement): Promise<void> => {
+  const rawHref = link.getAttribute("href") || "";
+  const hrefKey = normalizeHref(rawHref);
+  if (hrefKey && LOADED_STYLESHEET_HREFS.has(hrefKey)) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    let settled = false;
+    let fallbackTimer = 0;
+
+    const done = () => {
+      if (settled) return;
+      settled = true;
+      if (hrefKey) {
+        LOADED_STYLESHEET_HREFS.add(hrefKey);
+      }
+      window.clearTimeout(fallbackTimer);
+      resolve();
+    };
+
+    if (link.sheet) {
+      done();
+      return;
+    }
+
+    link.addEventListener("load", done, { once: true });
+    link.addEventListener("error", done, { once: true });
+
+    // Sonsuz bekleme engeli: yerel stil için kısa güvenlik zamanlayıcı.
+    fallbackTimer = window.setTimeout(done, 1200);
+  });
+};
+
+const runAfterNextPaint = (callback: () => void): void => {
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(callback);
+  });
 };
 
 const isInternalNavigableLink = (anchor: HTMLAnchorElement): boolean => {
@@ -847,10 +1871,140 @@ const isInternalNavigableLink = (anchor: HTMLAnchorElement): boolean => {
   return true;
 };
 
-const revealFadeElements = (): void => {
-  document.querySelectorAll<HTMLElement>("[data-fade]").forEach((node) => {
-    node.classList.add("visible");
+const setupLegacyMobileNavigation = (): (() => void) => {
+  const nav = document.querySelector<HTMLElement>("header.nav");
+  const burger = document.getElementById("burger");
+  const navLinks = document.getElementById("navLinks");
+
+  if (!(burger instanceof HTMLButtonElement) || !(navLinks instanceof HTMLElement) || !nav) {
+    return () => undefined;
+  }
+
+  const dropdownItems = Array.from(navLinks.querySelectorAll<HTMLElement>(".nav__dropdown"));
+  const dropdownTriggers: HTMLAnchorElement[] = [];
+
+  const isMobileViewport = () => window.matchMedia("(max-width: 768px)").matches;
+
+  dropdownItems.forEach((item) => {
+    const trigger = item.querySelector<HTMLAnchorElement>(":scope > a");
+    const panel = item.querySelector<HTMLElement>(":scope > .dropdown");
+    if (!trigger || !panel) return;
+
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+    panel.setAttribute("aria-hidden", "true");
+    dropdownTriggers.push(trigger);
   });
+
+  const closeDropdowns = () => {
+    dropdownItems.forEach((item) => {
+      item.classList.remove("is-open");
+      const trigger = item.querySelector<HTMLAnchorElement>(":scope > a");
+      const panel = item.querySelector<HTMLElement>(":scope > .dropdown");
+      if (trigger) trigger.setAttribute("aria-expanded", "false");
+      if (panel) panel.setAttribute("aria-hidden", "true");
+    });
+  };
+
+  const closeMenu = () => {
+    navLinks.classList.remove("show");
+    burger.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("legacy-menu-open");
+    closeDropdowns();
+  };
+
+  const openMenu = () => {
+    navLinks.classList.add("show");
+    burger.setAttribute("aria-expanded", "true");
+    if (isMobileViewport()) {
+      document.body.classList.add("legacy-menu-open");
+    }
+  };
+
+  const handleBurgerClick = (event: MouseEvent) => {
+    event.preventDefault();
+    if (navLinks.classList.contains("show")) {
+      closeMenu();
+      return;
+    }
+    openMenu();
+  };
+
+  const handleDropdownTriggerClick = (event: MouseEvent) => {
+    if (!isMobileViewport()) return;
+
+    const trigger = event.currentTarget;
+    if (!(trigger instanceof HTMLAnchorElement)) return;
+
+    const parent = trigger.closest<HTMLElement>(".nav__dropdown");
+    const panel = parent?.querySelector<HTMLElement>(":scope > .dropdown");
+    if (!parent || !panel) return;
+
+    event.preventDefault();
+
+    const shouldOpen = !parent.classList.contains("is-open");
+    closeDropdowns();
+
+    if (shouldOpen) {
+      parent.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      panel.setAttribute("aria-hidden", "false");
+    }
+  };
+
+  const handleDocumentClick = (event: MouseEvent) => {
+    if (!isMobileViewport()) return;
+
+    const target = event.target as Element | null;
+    if (!target) return;
+
+    if (!nav.contains(target)) {
+      closeMenu();
+      return;
+    }
+
+    const clickedLink = target.closest("a");
+    if (!clickedLink) return;
+
+    const parentDropdown = clickedLink.closest<HTMLElement>(".nav__dropdown");
+    const parentTrigger = parentDropdown?.querySelector<HTMLAnchorElement>(":scope > a");
+    if (parentTrigger === clickedLink) return;
+
+    closeMenu();
+  };
+
+  const handleEscape = (event: KeyboardEvent) => {
+    if (event.key !== "Escape") return;
+    closeMenu();
+  };
+
+  const handleResize = () => {
+    if (!isMobileViewport()) {
+      closeMenu();
+    }
+  };
+
+  burger.setAttribute("aria-expanded", "false");
+  burger.setAttribute("aria-controls", navLinks.id || "navLinks");
+  closeMenu();
+  burger.addEventListener("click", handleBurgerClick);
+  dropdownTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", handleDropdownTriggerClick);
+  });
+  document.addEventListener("click", handleDocumentClick);
+  document.addEventListener("keydown", handleEscape);
+  window.addEventListener("resize", handleResize);
+
+  return () => {
+    burger.removeEventListener("click", handleBurgerClick);
+    dropdownTriggers.forEach((trigger) => {
+      trigger.removeEventListener("click", handleDropdownTriggerClick);
+    });
+    document.removeEventListener("click", handleDocumentClick);
+    document.removeEventListener("keydown", handleEscape);
+    window.removeEventListener("resize", handleResize);
+    closeMenu();
+  };
 };
 
 type ToolsShellProps = {
@@ -1095,20 +2249,27 @@ const ToolsListPage = () => {
       </div>
 
       <div className="tools-grid">
-        {TOOL_ITEMS.map((tool) => (
-          <a key={tool.slug} href={`/hesap-araclari/${tool.slug}`} className="tool-card">
-            <img src={tool.image} alt={tool.title} loading="lazy" decoding="async" />
-            <div className="tool-card__overlay" />
-            <div className="tool-card__body">
-              <div className="tool-card__tags">
-                {tool.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
+        {TOOL_ITEMS.map((tool) => {
+          const iconName = TOOL_CARD_ICON_BY_SLUG[tool.slug] ?? "default";
+          return (
+            <a key={tool.slug} href={`/hesap-araclari/${tool.slug}`} className={`tool-card tool-card--${iconName}`}>
+              <div className="tool-card__head">
+                <span className={`tool-card__icon tool-card__icon--${iconName}`}>
+                  <ToolCardIcon name={iconName} />
+                </span>
+                <span className="tool-card__cta">Aracı Aç</span>
               </div>
-              <h2>{tool.title}</h2>
-            </div>
-          </a>
-        ))}
+              <div className="tool-card__body">
+                <div className="tool-card__tags">
+                  {tool.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+                <h2>{tool.title}</h2>
+              </div>
+            </a>
+          );
+        })}
       </div>
 
       <section className="tools-services">
@@ -1213,9 +2374,11 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     [calculatedRows],
   );
 
+  const parsedAreaInput = parseLocaleNumber(areaValue);
+  const canAddRow = Number.isFinite(parsedAreaInput) && parsedAreaInput > 0;
+
   const handleAddRow = () => {
-    const normalized = areaValue.replace(",", ".").trim();
-    const areaM2 = Number.parseFloat(normalized);
+    const areaM2 = parsedAreaInput;
     if (!Number.isFinite(areaM2) || areaM2 <= 0) return;
 
     setRows((prev) => [
@@ -1230,6 +2393,10 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     setAreaValue("");
   };
 
+  const handleClearRows = () => {
+    setRows([]);
+  };
+
   const handleDeleteRow = (id: number) => {
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
@@ -1241,44 +2408,44 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
       <div className="tool-detail__layout">
         <article className="tool-detail__content tool-detail__content--mining">
-          <h1>Neden Dogru Orman Izni Hesaplamasi Yapmalisiniz?</h1>
+          <h1>Neden Doğru Orman İzni Hesaplaması Yapmalısınız</h1>
           <p>
-            Madencilik ve altyapi faaliyetlerinde orman izin surecleri, proje maliyetlerini dogrudan etkiler.
-            6831 sayili Kanun kapsaminda tahakkuk eden bedellerin dogru planlanmasi, nakit akisinda ve
-            fizibilite calismalarinda kritik avantaj saglar.
+            Madencilik ve altyapı faaliyetlerinde orman izin süreçleri, proje maliyetlerini doğrudan etkiler.
+            6831 sayılı Kanun kapsamında tahakkuk eden bedellerin doğru planlanması, nakit akışında ve
+            fizibilite çalışmalarında kritik avantaj sağlar.
           </p>
 
-          <h2>Izin Bedellerini Belirleyen Temel Kriterler</h2>
-          <p>Hesaplamada dogrudan etkili ana parametreler asagidadir:</p>
+          <h2>İzin Bedellerini Belirleyen Temel Kriterler</h2>
+          <p>Hesaplamada doğrudan etkili ana parametreler aşağıdadır:</p>
           <ol>
             <li>
-              <strong>Il katsayisi:</strong> Ek-3'e gore 1.0 ile 3.0 araliginda degisir.
+              <strong>İl katsayısı:</strong> Ek-3'e göre 1.0 ile 3.0 aralığında değişir.
             </li>
             <li>
-              <strong>Ekolojik denge (kapalilik) katsayisi:</strong> Ek-2'ye gore 1.0 ile 2.0 araligindadir.
+              <strong>Ekolojik denge (kapalılık) katsayısı:</strong> Ek-2'ye göre 1.0 ile 2.0 aralığındadır.
             </li>
             <li>
-              <strong>Izin turu katsayisi:</strong> Ek-1'e gore izin turune bagli olarak 0.2 ile 2.0 araliginda
-              uygulanir.
+              <strong>İzin türü katsayısı:</strong> Ek-1'e göre izin türüne bağlı olarak 0.2 ile 2.0 aralığında
+              uygulanır.
             </li>
             <li>
-              <strong>Cari yil agaclandirma birim bedeli:</strong> OGM tarafindan yil bazinda ilan edilen
-              TL/hektar degeri kullanilir.
+              <strong>Cari yıl ağaçlandırma birim bedeli:</strong> OGM tarafından yıl bazında ilan edilen
+              TL/hektar değeri kullanılır.
             </li>
           </ol>
 
           <div className="tool-detail__sources">
-            <h3>Veri Kaynaklari</h3>
+            <h3>Veri Kaynakları</h3>
             <ul>
               <li>
                 <a href={MINING_REGULATION_URL} target="_blank" rel="noopener">
-                  Orman Kanununun 16 nci Maddesi Uygulama Yonetmeligi (son hali, Ek-1/Ek-2/Ek-3)
+                  Orman Kanununun 16 nci Maddesi Uygulama Yönetmeliği (son hali, Ek-1/Ek-2/Ek-3)
                 </a>
               </li>
               {MINING_APPLICATION_YEARS.map((option) => (
                 <li key={option.year}>
                   <a href={option.sourceUrl} target="_blank" rel="noopener">
-                    {option.year} Yili Birim Bedelleri (OGM Talimatlar)
+                    {option.year} Yılı Birim Bedelleri (OGM Talimatlar)
                   </a>
                 </li>
               ))}
@@ -1290,14 +2457,14 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           <div className="tool-calc__head mining-calc__head">
             <h2>{tool.title}</h2>
             <p>
-              5 hektarlik arazi bedeli muafiyeti ve ilk isletme izinlerindeki %50 arazi bedeli indirimi
-              secilen islem turune gore uygulanir.
+              5 hektarlık arazi bedeli muafiyeti ve ilk işletme izinlerindeki %50 arazi bedeli indirimi
+              seçilen işlem türüne göre uygulanır.
             </p>
           </div>
 
           <div className="tool-calc__controls mining-calc__controls">
             <label>
-              Islem Turu
+              İşlem Türü
               <select value={operationId} onChange={(event) => setOperationId(event.target.value)}>
                 {MINING_OPERATION_TYPES.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -1307,7 +2474,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
             <label>
-              Uygulama Yili
+              Uygulama Yılı
               <select
                 value={applicationYear}
                 onChange={(event) => setApplicationYear(Number.parseInt(event.target.value, 10))}
@@ -1320,7 +2487,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
             <label>
-              Il Katsayisi
+              İl Katsayısı
               <select value={province} onChange={(event) => setProvince(event.target.value)}>
                 {MINING_PROVINCES.map((option) => (
                   <option key={option.name} value={option.name}>
@@ -1333,7 +2500,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
           <div className="tool-calc__row-input mining-calc__row-input">
             <label>
-              Izin Turu (Madencilik)
+              İzin Türü (Madencilik)
               <select value={permitId} onChange={(event) => setPermitId(event.target.value)}>
                 {MINING_PERMIT_TYPES.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -1343,17 +2510,23 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
             <label>
-              Alan (mÂ²)
+              Alan (m²)
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder="0,00"
                 value={areaValue}
                 onChange={(event) => setAreaValue(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && canAddRow) {
+                    event.preventDefault();
+                    handleAddRow();
+                  }
+                }}
               />
             </label>
             <label>
-              Kapalilik
+              Kapalılık
               <select value={closureId} onChange={(event) => setClosureId(event.target.value)}>
                 {MINING_CLOSURE_LEVELS.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -1362,7 +2535,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 ))}
               </select>
             </label>
-            <button type="button" onClick={handleAddRow}>EKLE</button>
+            <button type="button" onClick={handleAddRow} disabled={!canAddRow}>EKLE</button>
           </div>
 
           <div className="tool-calc__table-wrap">
@@ -1370,7 +2543,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               <thead>
                 <tr>
                   <th>Madencilik Kalemi</th>
-                  <th>Alan (mÂ²)</th>
+                  <th>Alan (m²)</th>
                   <th>Arazi Bedeli</th>
                   <th>Ağaçlandırma</th>
                   <th>Sil</th>
@@ -1379,7 +2552,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               <tbody>
                 {calculatedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={5}>Henuz kalem eklenmedi.</td>
+                    <td colSpan={5}>Henüz kalem eklenmedi.</td>
                   </tr>
                 ) : (
                   calculatedRows.map((row) => (
@@ -1387,14 +2560,14 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                       <td>
                         <strong>{row.permitLabel}</strong>
                         <small>
-                          Izin katsayisi {formatNumber(row.permitCoefficient)} | Kapalilik{" "}
+                          İzin katsayısı {formatNumber(row.permitCoefficient)} | Kapalılık{" "}
                           {formatNumber(row.closureCoefficient)}
                         </small>
                       </td>
                       <td>
-                        {formatAreaM2(row.areaM2)} mÂ²
+                        {formatAreaM2(row.areaM2)} m²
                         {row.exemptedAreaM2 > 0 ? (
-                          <small>{formatAreaM2(row.exemptedAreaM2)} mÂ² muaf</small>
+                          <small>{formatAreaM2(row.exemptedAreaM2)} m² muaf</small>
                         ) : null}
                       </td>
                       <td>{formatTry(row.landAmount)}</td>
@@ -1410,9 +2583,19 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </div>
 
           <div className="mining-calc__totals">
-            <span>Arazi Bedeli Toplami: {formatTry(totals.landAmount)}</span>
+            <span>Kalem Sayısı: {calculatedRows.length}</span>
+            <span>Toplam Alan: {formatAreaM2(totals.areaM2)} m²</span>
+            <span>Arazi Bedeli Toplamı: {formatTry(totals.landAmount)}</span>
             <span>Ağaçlandırma Toplamı: {formatTry(totals.afforestationAmount)}</span>
             <span>Genel Toplam: {formatTry(grandTotal)}</span>
+            <button
+              type="button"
+              className="calc-action-btn calc-action-btn--muted"
+              onClick={handleClearRows}
+              disabled={calculatedRows.length === 0}
+            >
+              Tümünü Temizle
+            </button>
           </div>
         </aside>
       </div>
@@ -1420,7 +2603,7 @@ const MiningToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   );
 };
 
-const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+const EnergyToolDetailPage = (_props: ToolDetailPageProps) => {
   const [applicationYear, setApplicationYear] = useState<number>(ENERGY_APPLICATION_YEARS[0].year);
   const [province, setProvince] = useState<string>("Ankara");
   const [permitId, setPermitId] = useState<string>(ENERGY_PERMIT_TYPES[0].id);
@@ -1473,9 +2656,11 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     [calculatedRows],
   );
 
+  const parsedAreaInput = parseLocaleNumber(areaValue);
+  const canAddRow = Number.isFinite(parsedAreaInput) && parsedAreaInput > 0;
+
   const handleAddRow = () => {
-    const normalized = areaValue.replace(",", ".").trim();
-    const areaM2 = Number.parseFloat(normalized);
+    const areaM2 = parsedAreaInput;
     if (!Number.isFinite(areaM2) || areaM2 <= 0) return;
 
     setRows((prev) => [
@@ -1490,6 +2675,10 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     setAreaValue("");
   };
 
+  const handleClearRows = () => {
+    setRows([]);
+  };
+
   const handleDeleteRow = (id: number) => {
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
@@ -1500,47 +2689,40 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     <section className="tool-detail tool-detail--energy">
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
 
-      <div className="energy-hero">
-        <img src="/img/panel-17-front.jpg" alt={tool.title} loading="eager" decoding="async" />
-        <div className="energy-hero__overlay">
-          <h1>Enerji ve Diger Yatirimlar Icin Orman Izni Bedel Hesaplama Araci</h1>
-        </div>
-      </div>
-
       <div className="tool-detail__layout tool-detail__layout--energy">
         <article className="tool-detail__content tool-detail__content--energy">
-          <h2>Orman Izin Bedelleri Hesaplama Araci Hakkinda</h2>
+          <h2>Orman İzin Bedelleri Hesaplama Aracı Hakkında</h2>
           <p>
-            Bu hesaplama araci, 17/3 kapsamindaki enerji ve altyapi izinlerinde tahmini bedellerin hizli
-            analiz edilmesi icin hazirlandi. Uygulama yili birim bedeli, il katsayisi, izin turu ve kapalilik
-            secimleriyle tahakkuk edecek kalemleri tek panelde gormenizi saglar.
+            Bu hesaplama aracı, 17/3 kapsamındaki enerji ve altyapı izinlerinde tahmini bedellerin hızlı
+            analiz edilmesi için hazırlandı. Uygulama yılı birim bedeli, il katsayısı, izin türü ve kapalılık
+            seçimleriyle tahakkuk edecek kalemleri tek panelde görmenizi sağlar.
           </p>
 
-          <h3>Hangi Kalemleri Kapsar?</h3>
+          <h3>Hangi Kalemleri Kapsar</h3>
           <ol>
             <li>
-              <strong>Arazi Izin Bedeli:</strong> yil birim bedeli, izin turu katsayisi, kapalilik katsayisi ve il
-              katsayisi carpimi ile hesaplanir.
+              <strong>Arazi İzin Bedeli:</strong> yıl birim bedeli, izin türü katsayısı, kapalılık katsayısı ve il
+              katsayısı çarpımı ile hesaplanır.
             </li>
             <li>
-              <strong>Agaclandirma Bedeli:</strong> izin verilen alan icin mÂ² bazli tek seferlik agaclandirma
-              bedeli uzerinden hesaplanir.
+              <strong>Ağaçlandırma Bedeli:</strong> izin verilen alan için m² bazlı tek seferlik ağaçlandırma
+              bedeli üzerinden hesaplanır.
             </li>
             <li>
-              <strong>Toplam Bedel:</strong> arazi ve agaclandirma kalemlerinin toplam tutari birlikte izlenir.
+              <strong>Toplam Bedel:</strong> arazi ve ağaçlandırma kalemlerinin toplam tutarı birlikte izlenir.
             </li>
           </ol>
         </article>
 
         <aside className="tool-calc energy-calc">
           <div className="tool-calc__head energy-calc__head">
-            <h2>Enerji ve Diger Yatirimlar Icin Orman Izni Bedel Hesaplama Araci</h2>
-            <p>Genisletilmis tarih secenekli mevzuat analizli hesaplama paneli.</p>
+            <h2>Enerji ve Diğer Yatırımlar İçin Orman İzni Bedel Hesaplama Aracı</h2>
+            <p>Genişletilmiş tarih seçenekli mevzuat analizli hesaplama paneli.</p>
           </div>
 
           <div className="tool-calc__controls energy-calc__controls">
             <label>
-              Uygulama Yili (hektar bedeli)
+              Uygulama Yılı (hektar bedeli)
               <select
                 value={applicationYear}
                 onChange={(event) => setApplicationYear(Number.parseInt(event.target.value, 10))}
@@ -1553,7 +2735,7 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
             <label>
-              Il Katsayisi
+              İl Katsayısı
               <select value={province} onChange={(event) => setProvince(event.target.value)}>
                 {ENERGY_PROVINCES.map((option) => (
                   <option key={option.name} value={option.name}>
@@ -1566,7 +2748,7 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
           <div className="tool-calc__row-input energy-calc__row-input">
             <label>
-              Izin Turu
+              İzin Türü
               <select value={permitId} onChange={(event) => setPermitId(event.target.value)}>
                 {ENERGY_PERMIT_TYPES.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -1576,17 +2758,23 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
             <label>
-              Alan (mÂ²)
+              Alan (m²)
               <input
                 type="text"
                 inputMode="decimal"
                 placeholder="0,00"
                 value={areaValue}
                 onChange={(event) => setAreaValue(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && canAddRow) {
+                    event.preventDefault();
+                    handleAddRow();
+                  }
+                }}
               />
             </label>
             <label>
-              Kapalilik
+              Kapalılık
               <select value={closureId} onChange={(event) => setClosureId(event.target.value)}>
                 {ENERGY_CLOSURE_LEVELS.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -1595,24 +2783,24 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 ))}
               </select>
             </label>
-            <button type="button" onClick={handleAddRow}>EKLE</button>
+            <button type="button" onClick={handleAddRow} disabled={!canAddRow}>EKLE</button>
           </div>
 
           <div className="tool-calc__table-wrap">
             <table className="tool-calc__table energy-calc__table">
               <thead>
                 <tr>
-                  <th>Izin Turu</th>
-                  <th>Alan (mÂ²)</th>
+                  <th>İzin Türü</th>
+                  <th>Alan (m²)</th>
                   <th>Arazi Bedeli</th>
-                  <th>Agaclandirma</th>
+                  <th>Ağaçlandırma</th>
                   <th>Sil</th>
                 </tr>
               </thead>
               <tbody>
                 {calculatedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={5}>Henuz izin eklenmedi.</td>
+                    <td colSpan={5}>Henüz izin eklenmedi.</td>
                   </tr>
                 ) : (
                   calculatedRows.map((row) => (
@@ -1620,11 +2808,11 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                       <td>
                         <strong>{row.permitLabel}</strong>
                         <small>
-                          Katsayi: {formatNumber(row.permitCoefficient)} | Kapalilik:{" "}
+                          Katsayı: {formatNumber(row.permitCoefficient)} | Kapalılık:{" "}
                           {formatNumber(row.closureCoefficient)}
                         </small>
                       </td>
-                      <td>{formatAreaM2(row.areaM2)} mÂ²</td>
+                      <td>{formatAreaM2(row.areaM2)} m²</td>
                       <td>{formatTry(row.landAmount)}</td>
                       <td>{formatTry(row.afforestationAmount)}</td>
                       <td>
@@ -1638,10 +2826,19 @@ const EnergyToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </div>
 
           <div className="energy-calc__totals">
-            <span>Toplam Alan: {formatAreaM2(totals.areaM2)} mÂ²</span>
-            <span>Arazi Bedeli Toplami: {formatTry(totals.landAmount)}</span>
-            <span>Agaclandirma Toplami: {formatTry(totals.afforestationAmount)}</span>
+            <span>Kalem Sayısı: {calculatedRows.length}</span>
+            <span>Toplam Alan: {formatAreaM2(totals.areaM2)} m²</span>
+            <span>Arazi Bedeli Toplamı: {formatTry(totals.landAmount)}</span>
+            <span>Ağaçlandırma Toplamı: {formatTry(totals.afforestationAmount)}</span>
             <span>Genel Toplam: {formatTry(grandTotal)}</span>
+            <button
+              type="button"
+              className="calc-action-btn calc-action-btn--muted"
+              onClick={handleClearRows}
+              disabled={calculatedRows.length === 0}
+            >
+              Tümünü Temizle
+            </button>
           </div>
         </aside>
       </div>
@@ -1701,32 +2898,32 @@ const CoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       <div className="coord-tool">
         <div className="coord-tool__layout">
           <article className="coord-content">
-            <h1>ED50&apos;den KML&apos;ye Donusturucu Neler Yapar?</h1>
+            <h1>ED50&apos;den KML&apos;ye Dönüştürücü Neler Yapar?</h1>
             <p>
-              Bu arac, Turkiye&apos;de yaygin kullanilan ED50 datumundaki verileri WGS84 tabanli harita
-              sistemlerine hizli bicimde donusturur. Lacivert Ormancılık saha-planlama sureclerinde
-              koordinat uyumlulugunu bu panelle kolaylastirir.
+              Bu araç, Türkiye&apos;de yaygın kullanılan ED50 datumundaki verileri WGS84 tabanlı harita
+              sistemlerine hızlı biçimde dönüştürür. Lacivert Ormancılık saha planlama süreçlerinde
+              koordinat uyumluluğunu bu panelle kolaylaştırır.
             </p>
             <ul>
               <li>
-                <strong>Toplu Donusum:</strong> Excel veya metin listelerindeki satirlari tek seferde isler.
+                <strong>Toplu Dönüşüm:</strong> Excel veya metin listelerindeki satırları tek seferde işler.
               </li>
               <li>
-                <strong>Otomatik Alan Olusturma:</strong> girdiginiz noktalardan poligon ve alan hesabi uretir.
+                <strong>Otomatik Alan Oluşturma:</strong> girdiğiniz noktalardan poligon ve alan hesabı üretir.
               </li>
               <li>
-                <strong>Nokta Isaretleme:</strong> her nokta icin haritada dogrulama imkani sunar.
+                <strong>Nokta İşaretleme:</strong> her nokta için haritada doğrulama imkanı sunar.
               </li>
               <li>
-                <strong>Hassas Datum Donusumu:</strong> orman izin dosyalari icin tutarli koordinat ciktilari verir.
+                <strong>Hassas Datum Dönüşümü:</strong> orman izin dosyaları için tutarlı koordinat çıktıları verir.
               </li>
             </ul>
           </article>
 
           <aside className="coord-panel">
             <div className="coord-panel__head">
-              <h2>Gelismis ED50 6Â° Donusum ve KML Indirme Araci</h2>
-              <p>Calisma alaninizi haritada secin ve ilgili UTM bolgesinde parselleri olusturun.</p>
+              <h2>Gelişmiş ED50 6° Dönüşüm ve KML İndirme Aracı</h2>
+              <p>Çalışma alanınızı haritada seçin ve ilgili UTM bölgesinde parselleri oluşturun.</p>
             </div>
 
             <div className="coord-map">
@@ -1741,19 +2938,19 @@ const CoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             <div className="coord-card">
               <label>
-                Secili Bolge (UTM Zone):
+                Seçili Bölge (UTM Zone):
                 <select value={zone} onChange={(event) => setZone(event.target.value)}>
                   <option value="35">Zone 35 (Marmara / Ege)</option>
-                  <option value="36">Zone 36 (Ic Anadolu / Akdeniz)</option>
-                  <option value="37">Zone 37 (Karadeniz / Dogu)</option>
+                  <option value="36">Zone 36 (İç Anadolu / Akdeniz)</option>
+                  <option value="37">Zone 37 (Karadeniz / Doğu)</option>
                 </select>
               </label>
               <label>
                 Koordinat Sistemi:
                 <select value={coordinateSystem} onChange={(event) => setCoordinateSystem(event.target.value)}>
-                  <option>ED50 6Â° UTM (Zone)</option>
-                  <option>ITRF96 6Â° UTM (Zone)</option>
-                  <option>WGS84 6Â° UTM (Zone)</option>
+                  <option>ED50 6° UTM (Zone)</option>
+                  <option>ITRF96 6° UTM (Zone)</option>
+                  <option>WGS84 6° UTM (Zone)</option>
                 </select>
               </label>
             </div>
@@ -1775,15 +2972,15 @@ const CoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               <textarea
                 value={activePolygon.text}
                 onChange={(event) => updateActivePolygonText(event.target.value)}
-                placeholder={"Koordinatlari buraya yapistirin...\nOrn: 500123.56 4400567.80"}
+                placeholder={"Koordinatları buraya yapıştırın...\nÖrn: 500123.56 4400567.80"}
               />
 
               <button type="button" className="coord-add" onClick={addPolygon}>+ Yeni Parsel Ekle</button>
             </div>
 
             <div className="coord-actions">
-              <button type="button" className="coord-btn coord-btn--blue">HARITADA GOR</button>
-              <button type="button" className="coord-btn coord-btn--dark">KML OLARAK INDIR</button>
+              <button type="button" className="coord-btn coord-btn--blue">HARİTADA GÖR</button>
+              <button type="button" className="coord-btn coord-btn--dark">KML OLARAK İNDİR</button>
               <button
                 type="button"
                 className="coord-btn coord-btn--muted"
@@ -1792,12 +2989,12 @@ const CoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                   setActivePolygonId(1);
                 }}
               >
-                TEMIZLE
+                TEMİZLE
               </button>
             </div>
 
             <div className="coord-card coord-card--area">
-              <strong>Toplam Parsel Alani (mÂ²)</strong>
+              <strong>Toplam Parsel Alanı (m²)</strong>
               <span>{formatAreaM2(totalArea)}</span>
             </div>
           </aside>
@@ -1808,11 +3005,11 @@ const CoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 };
 
 const CadConversionToolDetailPage = ({ tool }: ToolDetailPageProps) => {
-  const [selectedFileName, setSelectedFileName] = useState<string>("Dosya secilmedi");
+  const [selectedFileName, setSelectedFileName] = useState<string>("Dosya seçilmedi");
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] ?? null;
-    setSelectedFileName(file ? file.name : "Dosya secilmedi");
+    setSelectedFileName(file ? file.name : "Dosya seçilmedi");
   };
 
   return (
@@ -1820,56 +3017,56 @@ const CadConversionToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
       <div className="tool-detail__layout tool-detail__layout--cad">
         <article className="tool-detail__content cad-content">
-          <h1>Orman Izinleri ve Teknik Veri Donusumu</h1>
+          <h1>Orman İzinleri ve Teknik Veri Dönüşümü</h1>
           <p>
-            Lacivert Ormancılık olarak, orman izin sureclerinde kullandiginiz teknik dosyalarin hizli ve
-            tutarli bicimde donusturulmesi icin CAD-GIS donusum panelini bu sisteme entegre ettik.
+            Lacivert Ormancılık olarak, orman izin süreçlerinde kullandığınız teknik dosyaların hızlı ve
+            tutarlı biçimde dönüştürülmesi için CAD-GIS dönüşüm panelini bu sisteme entegre ettik.
           </p>
           <p>
-            Bu ekran ile DXF ve KML/KMZ formatlari arasinda gecisleri kolaylastirabilir, saha-plani
-            uyumlulugunu kontrol ederek izin dosyalarinizi daha hizli hazirlayabilirsiniz.
+            Bu ekran ile DXF ve KML/KMZ formatları arasında geçişleri kolaylaştırabilir, saha planı
+            uyumluluğunu kontrol ederek izin dosyalarınızı daha hızlı hazırlayabilirsiniz.
           </p>
 
-          <h2>Teknik Ozellikler ve Hizmetlerimiz</h2>
+          <h2>Teknik Özellikler ve Hizmetlerimiz</h2>
           <ul>
             <li>
-              <strong>DXF'den KML'ye Donusum:</strong> teknik cizimlerinizi saha goruntulemeye uygun ciktija
-              cevirir.
+              <strong>DXF&apos;den KML&apos;ye Dönüşüm:</strong> teknik çizimlerinizi saha görüntülemeye uygun çıktıya
+              çevirir.
             </li>
             <li>
-              <strong>KML'den DXF'ye Donusum:</strong> saha verilerini proje cizim akisina dahil eder.
+              <strong>KML&apos;den DXF&apos;ye Dönüşüm:</strong> saha verilerini proje çizim akışına dahil eder.
             </li>
             <li>
-              <strong>Otomatik PDF Ciktisi:</strong> donusen teknik icerigi raporlama akisina hazirlar.
+              <strong>Otomatik PDF çıktısı:</strong> dönüşen teknik içeriği raporlama akışına hazırlar.
             </li>
             <li>
-              <strong>Web Tabanli Hiz:</strong> ek kurulum olmadan tarayici uzerinden donusum islemi saglar.
+              <strong>Web Tabanlı Hız:</strong> ek kurulum olmadan tarayıcı üzerinden dönüşüm işlemi sağlar.
             </li>
           </ul>
         </article>
 
         <aside className="cad-panel">
           <div className="tool-calc__head cad-panel__head">
-            <h2>Dosya Donusturme Araci</h2>
-            <p>CAD ve GIS Veri Donusum Merkezi: DXF ↔ KML</p>
+            <h2>Dosya Dönüştürme Aracı</h2>
+            <p>CAD ve GIS Veri Dönüşüm Merkezi: DXF ↔ KML</p>
           </div>
 
           <div className="cad-map">
             <iframe
-              title={`${tool.title} harita onizleme`}
+              title={`${tool.title} harita önizleme`}
               src="https://www.openstreetmap.org/export/embed.html?bbox=24.7%2C35.6%2C45.2%2C42.5&layer=mapnik"
               loading="lazy"
             />
           </div>
 
           <div className="cad-upload">
-            <span>DOSYA SEC (.DXF, .KML, .KMZ)</span>
+            <span>DOSYA SEÇ (.DXF, .KML, .KMZ)</span>
             <label className="cad-upload__field">
               <input type="file" accept=".dxf,.kml,.kmz" onChange={handleFileChange} />
-              <strong>Dosya Sec</strong>
+              <strong>Dosya Seç</strong>
               <em>{selectedFileName}</em>
             </label>
-            <button type="button">DOSYAYI ANALIZ ET VE GOSTER</button>
+            <button type="button">DOSYAYI ANALİZ ET VE GÖSTER</button>
           </div>
         </aside>
       </div>
@@ -1893,12 +3090,12 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const handleCalculate = () => {
     const annualFee = parseLocaleNumber(annualValue);
     if (!Number.isFinite(annualFee) || annualFee <= 0) {
-      setError("Yillik arazi izin bedeli gecerli bir tutar olmalidir.");
+      setError("Yıllık arazi izin bedeli geçerli bir tutar olmalıdır.");
       setResult(null);
       return;
     }
     if (!startDate || !endDate) {
-      setError("Lutfen vade ve bitis tarihlerini secin.");
+      setError("Lütfen vade ve bitiş tarihlerini seçin.");
       setResult(null);
       return;
     }
@@ -1906,12 +3103,12 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
-      setError("Tarih alanlari gecersiz.");
+      setError("Tarih alanları geçersiz.");
       setResult(null);
       return;
     }
     if (end < start) {
-      setError("Izin bitis tarihi, vade tarihinden once olamaz.");
+      setError("İzin bitiş tarihi, vade tarihinden önce olamaz.");
       setResult(null);
       return;
     }
@@ -1932,24 +3129,24 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
       <div className="tool-detail__layout tool-detail__layout--kist">
         <article className="tool-detail__content kist-content">
-          <h1>Kistelyevm Hesaplamasi Nasil Yapilir?</h1>
+          <h1>Kıstelyevm Hesaplaması Nasıl Yapılır?</h1>
           <p>
-            Bu hesap araci, guncel mevzuata uygun olarak 360 gun esasi ile kist bedel tahmini uretir.
-            Baslangic ve bitis tarihleri arasindaki net gun farkina gore arazi izin bedelini prorata olarak
+            Bu hesap aracı, güncel mevzuata uygun olarak 360 gün esası ile kıst bedel tahmini üretir.
+            Başlangıç ve bitiş tarihleri arasındaki net gün farkına göre arazi izin bedelini prorata olarak
             hesaplar.
           </p>
           <ul>
             <li>
-              <strong>360 Gun Esasi:</strong> yillik bedel 360&apos;a bolunerek gunluk birim tutar uretilir.
+              <strong>360 Gün Esası:</strong> yıllık bedel 360&apos;a bölünerek günlük birim tutar üretilir.
             </li>
             <li>
-              <strong>Net Gun Farki:</strong> baslangic ve bitis tarihleri arasinda gun sayisi otomatik hesaplanir.
+              <strong>Net Gün Farkı:</strong> başlangıç ve bitiş tarihleri arasında gün sayısı otomatik hesaplanır.
             </li>
             <li>
               <strong>KDV Entegrasyonu:</strong> hesaplanan ana tutara %20 KDV otomatik eklenir.
             </li>
             <li>
-              <strong>Kontrol:</strong> sahaya ait rakamlarin kurum kayitlariyla teyit edilmesi onerilir.
+              <strong>Kontrol:</strong> sahaya ait rakamların kurum kayıtlarıyla teyit edilmesi önerilir.
             </li>
           </ul>
         </article>
@@ -1957,7 +3154,7 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         <aside className="tool-calc kist-calc">
           <div className="tool-calc__head">
             <h2>{tool.title}</h2>
-            <p>Kistelyevm hesap adimlarini tek formda tamamlayin.</p>
+            <p>Kıstelyevm hesap adımlarını tek formda tamamlayın.</p>
           </div>
 
           <div className="kist-calc__body">
@@ -1967,12 +3164,12 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
 
             <label>
-              Izin Bitis Tarihi
+              İzin Bitiş Tarihi
               <input type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
             </label>
 
             <label>
-              Yillik Arazi Izin Bedeli (TL)
+              Yıllık Arazi İzin Bedeli (TL)
               <input
                 type="text"
                 inputMode="decimal"
@@ -1988,9 +3185,9 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             {result ? (
               <div className="kist-calc__result">
-                <span>Net Gun: {result.dayCount}</span>
-                <span>Gunluk Bedel: {formatTry(result.dailyAmount)}</span>
-                <span>Kist Ana Tutar: {formatTry(result.principal)}</span>
+                <span>Net Gün: {result.dayCount}</span>
+                <span>Günlük Bedel: {formatTry(result.dailyAmount)}</span>
+                <span>Kıst Ana Tutar: {formatTry(result.principal)}</span>
                 <span>KDV (%20): {formatTry(result.vat)}</span>
                 <span>Genel Toplam: {formatTry(result.total)}</span>
               </div>
@@ -2002,7 +3199,7 @@ const KistelyevmToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   );
 };
 
-const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+const CarbonAnalysisToolDetailPage = (_props: ToolDetailPageProps) => {
   const [areaHectareValue, setAreaHectareValue] = useState<string>("10,00");
   const [standingVolumeValue, setStandingVolumeValue] = useState<string>("1500,00");
   const [speciesGroup, setSpeciesGroup] = useState<string>("needleleaf");
@@ -2021,12 +3218,12 @@ const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const standingVolume = parseLocaleNumber(standingVolumeValue);
 
     if (!Number.isFinite(areaHectare) || areaHectare <= 0) {
-      setError("Saha alani 0'dan buyuk olmalidir.");
+      setError("Saha alanı 0'dan büyük olmalıdır.");
       setResult(null);
       return;
     }
     if (!Number.isFinite(standingVolume) || standingVolume <= 0) {
-      setError("Dikili servet degeri 0'dan buyuk olmalidir.");
+      setError("Dikili servet değeri 0'dan büyük olmalıdır.");
       setResult(null);
       return;
     }
@@ -2066,50 +3263,46 @@ const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     <section className="tool-detail tool-detail--carbon">
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
 
-      <div className="carbon-stock-hero">
-        <img src="/img/surdurulebilir-orman.jpg" alt={tool.title} loading="eager" decoding="async" />
-      </div>
-
       <div className="carbon-stock-layout">
         <article className="carbon-stock-info">
           <h1>Orman Ekosistemlerinde Karbon Stok Analizi</h1>
           <p>
-            Bu arac, orman izin sureclerinde talep edilen karbon stok analizini hizli bir on degerlendirme
-            olarak sunar. Amenajman plani (Plan Ozet No: 8) temelli yaklasimla hesaplama adimlari
+            Bu araç, orman izin süreçlerinde talep edilen karbon stok analizini hızlı bir ön değerlendirme
+            olarak sunar. Amenajman planı (Plan Özet No: 8) temelli yaklaşımla hesaplama adımları
             sadeleştirilmiştir.
           </p>
 
-          <h2>Karbon Hesaplamasi Neden Gereklidir?</h2>
+          <h2>Karbon Hesaplaması Neden Gereklidir?</h2>
           <p>
-            Orman alanlarinda yapilacak faaliyetlerin iklim etkisini ortaya koymak, iznin teknik
-            fizibilitesini dogru okumak icin gereklidir. Hesaplama; yalnizca agaclari degil, olu ortu ve
-            toprak organik karbonunu da dikkate alir.
+            Orman alanlarında yapılacak faaliyetlerin iklim etkisini ortaya koymak, iznin teknik
+            fizibilitesini doğru okumak için gereklidir. Hesaplama; yalnızca ağaçları değil, ölü örtü ve
+            toprak organik karbonunu da dikkate alır.
           </p>
 
-          <h2>Hesaplamada Kullanilan Temel Havuzlar</h2>
+          <h2>Hesaplamada Kullanılan Temel Havuzlar</h2>
           <ul>
             <li>
-              <strong>Canli Biyokutle:</strong> govde, dal, yaprak ve kok sistemleri.
+              <strong>Canlı Biyokütle:</strong> gövde, dal, yaprak ve kök sistemleri.
             </li>
             <li>
-              <strong>Olu Organik Madde:</strong> olu odun ve olu ortu tabakasi.
+              <strong>Ölü Organik Madde:</strong> ölü odun ve ölü örtü tabakası.
             </li>
             <li>
-              <strong>Toprak Karbonu:</strong> ekosistemdeki en buyuk karbon havuzlarindan biri.
+              <strong>Toprak Karbonu:</strong> ekosistemdeki en büyük karbon havuzlarından biri.
             </li>
           </ul>
         </article>
 
         <aside className="carbon-stock-panel">
           <div className="carbon-stock-panel__head">
-            <h2>Orman Karbon Stok Hesaplama Araci</h2>
+            <h2>Orman Karbon Stok Hesaplama Aracı</h2>
             <p>IPCC ve Ulusal Orman Envanteri Metodolojisi</p>
           </div>
 
           <div className="carbon-stock-panel__body">
             <div className="carbon-stock-panel__grid">
               <label>
-                Saha Alani (Hektar)
+                Saha Alanı (Hektar)
                 <input
                   type="text"
                   inputMode="decimal"
@@ -2119,7 +3312,7 @@ const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </label>
 
               <label>
-                Dikili Servet (mÂ³)
+                Dikili Servet (m³)
                 <input
                   type="text"
                   inputMode="decimal"
@@ -2129,19 +3322,19 @@ const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </label>
 
               <label>
-                Agac Turu Grubu
+                Ağaç Türü Grubu
                 <select value={speciesGroup} onChange={(event) => setSpeciesGroup(event.target.value)}>
-                  <option value="needleleaf">Ibreli Orman</option>
-                  <option value="broadleaf">Yaprakli Orman</option>
-                  <option value="mixed">Karisik Orman</option>
+                  <option value="needleleaf">İbreli Orman</option>
+                  <option value="broadleaf">Yapraklı Orman</option>
+                  <option value="mixed">Karışık Orman</option>
                 </select>
               </label>
 
               <label>
-                Kapalilik Durumu
+                Kapalılık Durumu
                 <select value={closureClass} onChange={(event) => setClosureClass(event.target.value)}>
                   <option value="normal">Normal (%11-100)</option>
-                  <option value="sparse">Bosluklu Kapali (%1-10)</option>
+                  <option value="sparse">Boşluklu Kapalı (%1-10)</option>
                 </select>
               </label>
             </div>
@@ -2154,23 +3347,23 @@ const CarbonAnalysisToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             {result ? (
               <div className="carbon-stock-result">
-                <span>Canli Biyokutle Karbonu: {formatNumber(result.livingCarbon)} ton C</span>
-                <span>Olu Odun Karbonu: {formatNumber(result.deadWoodCarbon)} ton C</span>
-                <span>Olu Ortu Karbonu: {formatNumber(result.litterCarbon)} ton C</span>
+                <span>Canlı Biyokütle Karbonu: {formatNumber(result.livingCarbon)} ton C</span>
+                <span>Ölü Odun Karbonu: {formatNumber(result.deadWoodCarbon)} ton C</span>
+                <span>Ölü Örtü Karbonu: {formatNumber(result.litterCarbon)} ton C</span>
                 <span>Toprak Karbonu: {formatNumber(result.soilCarbon)} ton C</span>
-                <span>Toplam Karbon Stogu: {formatNumber(result.totalCarbon)} ton C</span>
+                <span>Toplam Karbon Stoku: {formatNumber(result.totalCarbon)} ton C</span>
               </div>
             ) : null}
 
             <div className="carbon-stock-note">
-              <h3>Hesaplama Aracinin Bilimsel Temeli</h3>
+              <h3>Hesaplama Aracının Bilimsel Temeli</h3>
               <ul>
-                <li>Toprak ustu canli biyokutle = DGH x hacim agirligi x genisletme katsayisi</li>
-                <li>Toprak alti canli biyokutle = Toprak ustu biyokutle x kok/govde orani</li>
-                <li>Olu odun = Toprak ustu canli biyokutlenin %1&apos;i x 0.47</li>
-                <li>Olu ortu ve toprak karbonu tur grubuna gore hektar bazli katsayiyla hesaplanir</li>
+                <li>Toprak üstü canlı biyokütle = DGH x hacim ağırlığı x genişletme katsayısı</li>
+                <li>Toprak altı canlı biyokütle = Toprak üstü biyokütle x kök/gövde oranı</li>
+                <li>Ölü odun = Toprak üstü canlı biyokütlenin %1&apos;i x 0.47</li>
+                <li>Ölü örtü ve toprak karbonu tür grubuna göre hektar bazlı katsayıyla hesaplanır</li>
               </ul>
-              <p>Not: Bosluklu kapali alanlarda (%1-10) olu ortu ve toprak karbonu 1/4 oraninda alinmistir.</p>
+              <p>Not: Boşluklu kapalı alanlarda (%1-10) ölü örtü ve toprak karbonu 1/4 oranında alınmıştır.</p>
             </div>
           </div>
         </aside>
@@ -2196,12 +3389,12 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const handleCalculate = () => {
     const paidAmount = parseLocaleNumber(paidAmountValue);
     if (!Number.isFinite(paidAmount) || paidAmount <= 0) {
-      setError("Odenen bedel gecerli bir tutar olmalidir.");
+      setError("Ödenen bedel geçerli bir tutar olmalıdır.");
       setResult(null);
       return;
     }
     if (!dueDate || !newStartDate) {
-      setError("Lutfen vade tarihi ve yeni izin baslangic tarihini secin.");
+      setError("Lütfen vade tarihi ve yeni izin başlangıç tarihini seçin.");
       setResult(null);
       return;
     }
@@ -2209,14 +3402,14 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const due = new Date(dueDate);
     const start = new Date(newStartDate);
     if (Number.isNaN(due.getTime()) || Number.isNaN(start.getTime())) {
-      setError("Tarih alanlari gecersiz.");
+      setError("Tarih alanları geçersiz.");
       setResult(null);
       return;
     }
 
     const parsedTermDays = manualTerm ? Number.parseInt(termDaysValue, 10) : 365;
     if (!Number.isFinite(parsedTermDays) || parsedTermDays <= 0) {
-      setError("Vade gun sayisi 1 veya daha buyuk olmalidir.");
+      setError("Vade gün sayısı 1 veya daha büyük olmalıdır.");
       setResult(null);
       return;
     }
@@ -2242,55 +3435,55 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
       <div className="temdit-layout">
         <article className="temdit-info">
-          <h1>Orman Izin Mahsup Islemleri Hakkinda Bilgilendirme</h1>
+          <h1>Orman İzin Mahsup İşlemleri Hakkında Bilgilendirme</h1>
           <p>
-            Hazirladigimiz <strong>Orman Izin Mukerrer Odeme Hesaplayici</strong>, temdit (sure uzatimi),
-            donusum veya devir sureclerinde olusabilecek mukerrer odemeleri onceden analiz etmeniz icin
-            tasarlandi.
+            Hazırladığımız <strong>Orman İzin Mükerrer Ödeme Hesaplayıcı</strong>, temdit (süre uzatımı),
+            dönüşüm veya devir süreçlerinde oluşabilecek mükerrer ödemeleri önceden analiz etmeniz için
+            tasarlandı.
           </p>
 
-          <h2>Onemli Notlar</h2>
+          <h2>Önemli Notlar</h2>
           <ul>
             <li>
-              <strong>Tahmini Sonuclar:</strong> bu arac matematiksel bir modelleme sunar ve tahmini sonuc uretir.
+              <strong>Tahmini Sonuçlar:</strong> bu araç matematiksel bir modelleme sunar ve tahmini sonuç üretir.
             </li>
             <li>
-              <strong>Degisken Parametreler:</strong> birim bedel, YI-UFE, il katsayisi ve bolge uygulamalari
-              nihai tutari degistirebilir.
+              <strong>Değişken Parametreler:</strong> birim bedel, Yİ-ÜFE, il katsayısı ve bölge uygulamaları
+              nihai tutarı değiştirebilir.
             </li>
             <li>
-              <strong>Resmi Gecerlilik:</strong> ciktilar resmi tahakkuk belgesi degildir; kesin tutar kurum
-              kararlarina gore netlesir.
+              <strong>Resmi Geçerlilik:</strong> çıktılar resmi tahakkuk belgesi değildir; kesin tutar kurum
+              kararlarına göre netleşir.
             </li>
           </ul>
 
           <blockquote>
-            Tavsiye: Mahsup islemlerine baslamadan once bagli bulundugunuz orman idaresi birimlerinden guncel
-            uygulama talimatlarini dogrulayin.
+            Tavsiye: Mahsup işlemlerine başlamadan önce bağlı bulunduğunuz orman idaresi birimlerinden güncel
+            uygulama talimatlarını doğrulayın.
           </blockquote>
         </article>
 
         <aside className="temdit-panel">
           <div className="temdit-panel__head">
             <h2>{tool.title}</h2>
-            <p>Mukerrer Gun ve Odeme Hesaplama</p>
+            <p>Mükerrer Gün ve Ödeme Hesaplama</p>
           </div>
 
           <div className="temdit-form">
             <div className="temdit-form__grid">
               <label>
-                1. Izin Vade Tarihi
+                1. İzin Vade Tarihi
                 <input type="date" value={dueDate} onChange={(event) => setDueDate(event.target.value)} />
               </label>
 
               <label>
-                Odenen Bedel (TL)
+                Ödenen Bedel (TL)
                 <input
                   type="text"
                   inputMode="decimal"
                   value={paidAmountValue}
                   onChange={(event) => setPaidAmountValue(event.target.value)}
-                  placeholder="Orn: 50.000"
+                  placeholder="Örn: 50.000"
                 />
               </label>
             </div>
@@ -2301,12 +3494,12 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 checked={manualTerm}
                 onChange={(event) => setManualTerm(event.target.checked)}
               />
-              <span>Vade suresi 1 yildan farkli (manuel gun gir)</span>
+              <span>Vade süresi 1 yıldan farklı (manuel gün gir)</span>
             </label>
 
             {manualTerm ? (
               <label>
-                Vade Gun Sayisi
+                Vade Gün Sayısı
                 <input
                   type="number"
                   min={1}
@@ -2318,7 +3511,7 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             ) : null}
 
             <label>
-              2. (Yeni) Izin Baslangic Tarihi
+              2. (Yeni) İzin Başlangıç Tarihi
               <input type="date" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)} />
             </label>
 
@@ -2328,10 +3521,10 @@ const TemditMahsupToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             {result ? (
               <div className="temdit-result">
-                <span>Vade Gun Sayisi: {result.termDays}</span>
-                <span>Kalan Gun: {result.remainingDays}</span>
-                <span>Gunluk Bedel: {formatTry(result.dailyAmount)}</span>
-                <span>Mahsup Tutari: {formatTry(result.mahsupAmount)}</span>
+                <span>Vade Gün Sayısı: {result.termDays}</span>
+                <span>Kalan Gün: {result.remainingDays}</span>
+                <span>Günlük Bedel: {formatTry(result.dailyAmount)}</span>
+                <span>Mahsup Tutarı: {formatTry(result.mahsupAmount)}</span>
               </div>
             ) : null}
           </div>
@@ -2347,11 +3540,17 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const [pageCountValue, setPageCountValue] = useState<string>("4");
   const [copyCountValue, setCopyCountValue] = useState<string>("2");
   const [annualFeeValue, setAnnualFeeValue] = useState<string>("10000");
+  const [damgaRatePerThousandValue, setDamgaRatePerThousandValue] = useState<string>("9,48");
+  const [noterRatePerThousandValue, setNoterRatePerThousandValue] = useState<string>("");
+  const [pageUnitFeeValue, setPageUnitFeeValue] = useState<string>("");
+  const [copyUnitFeeValue, setCopyUnitFeeValue] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [result, setResult] = useState<{
     dayCount: number;
     yearRatio: number;
     matrah: number;
+    damgaRatePerThousand: number;
+    noterRatePerThousand: number;
     damgaTax: number;
     noterFee: number;
     maktuCost: number;
@@ -2363,19 +3562,38 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const annualFee = parseLocaleNumber(annualFeeValue);
     const pageCount = Number.parseInt(pageCountValue, 10);
     const copyCount = Number.parseInt(copyCountValue, 10);
+    const damgaRatePerThousand = parseLocaleNumber(damgaRatePerThousandValue);
+    const noterRatePerThousand = parseLocaleNumber(noterRatePerThousandValue);
+    const pageUnitFee = parseLocaleNumber(pageUnitFeeValue);
+    const copyUnitFee = parseLocaleNumber(copyUnitFeeValue);
 
     if (!startDate || !endDate) {
-      setError("Lutfen izin baslangic ve bitis tarihlerini secin.");
+      setError("Lütfen izin başlangıç ve bitiş tarihlerini seçin.");
       setResult(null);
       return;
     }
     if (!Number.isFinite(annualFee) || annualFee <= 0) {
-      setError("Yillik arazi izin bedeli gecerli bir tutar olmalidir.");
+      setError("Yıllık arazi izin bedeli geçerli bir tutar olmalıdır.");
       setResult(null);
       return;
     }
     if (!Number.isFinite(pageCount) || pageCount <= 0 || !Number.isFinite(copyCount) || copyCount <= 0) {
-      setError("Sayfa ve suret sayilari 1 veya daha buyuk olmalidir.");
+      setError("Sayfa ve suret sayıları 1 veya daha büyük olmalıdır.");
+      setResult(null);
+      return;
+    }
+    if (
+      !Number.isFinite(damgaRatePerThousand) ||
+      !Number.isFinite(noterRatePerThousand) ||
+      !Number.isFinite(pageUnitFee) ||
+      !Number.isFinite(copyUnitFee)
+    ) {
+      setError("Damga/noter oranları ile maktu birim tutarları geçerli sayı olmalıdır.");
+      setResult(null);
+      return;
+    }
+    if (damgaRatePerThousand < 0 || noterRatePerThousand < 0 || pageUnitFee < 0 || copyUnitFee < 0) {
+      setError("Oran ve birim tutar değerleri negatif olamaz.");
       setResult(null);
       return;
     }
@@ -2383,12 +3601,12 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
-      setError("Tarih alanlari gecersiz.");
+      setError("Tarih alanları geçersiz.");
       setResult(null);
       return;
     }
     if (end < start) {
-      setError("Izin bitis tarihi, izin baslangic tarihinden once olamaz.");
+      setError("İzin bitiş tarihi, izin başlangıç tarihinden önce olamaz.");
       setResult(null);
       return;
     }
@@ -2397,9 +3615,9 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     const dayCount = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
     const yearRatio = dayCount / 365;
     const matrah = annualFee * yearRatio;
-    const damgaTax = matrah * 0.00948;
-    const noterFee = matrah * 0.0113;
-    const maktuCost = pageCount * 12 + copyCount * 8;
+    const damgaTax = matrah * (damgaRatePerThousand / 1000);
+    const noterFee = matrah * (noterRatePerThousand / 1000);
+    const maktuCost = pageCount * pageUnitFee + copyCount * copyUnitFee;
     const vat = (noterFee + maktuCost) * 0.2;
     const total = damgaTax + noterFee + maktuCost + vat;
 
@@ -2408,6 +3626,8 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       dayCount,
       yearRatio,
       matrah,
+      damgaRatePerThousand,
+      noterRatePerThousand,
       damgaTax,
       noterFee,
       maktuCost,
@@ -2422,53 +3642,58 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
       <div className="noter-layout">
         <article className="noter-info">
-          <h1>Orman Izinlerinde Taahhut Senedi Noter Masraflari ve Damga Vergisi Rehberi</h1>
+          <h1>Orman İzinlerinde Taahhüt Senedi Noter Masrafları ve Damga Vergisi Rehberi</h1>
           <p>
-            Orman Genel Mudurlugu&apos;nden alinan izinlerin kesinlesmesi surecinde noter onayli taahhut
-            senedi duzenlenir. Bu adimda olusan noter masraflari ve damga vergisi, proje maliyetini dogrudan
+            Orman Genel Müdürlüğü&apos;nden alınan izinlerin kesinleşmesi sürecinde noter onaylı taahhüt
+            senedi düzenlenir. Bu adımda oluşan noter masrafları ve damga vergisi, proje maliyetini doğrudan
             etkileyen kalemlerdendir.
           </p>
 
-          <h2>Taahhut Senedi Masraflari Nasil Hesaplanir?</h2>
-          <p>Hesaplama su ana kalemler uzerinden tahmini olarak modellenir:</p>
+          <h2>Taahhüt Senedi Masrafları Nasıl Hesaplanır?</h2>
+          <p>Hesaplama aşağıdaki kalemler üzerinden yapılır:</p>
           <ol>
             <li>
-              <strong>Nispi Damga Vergisi:</strong> toplam taahhut bedeli (matrah) uzerinden binde 9.48
-              oraninda hesaplanir.
+              <strong>Nispi Damga Vergisi:</strong> toplam taahhüt bedeli (matrah) üzerinden binde oran ile
+              hesaplanır.
             </li>
             <li>
-              <strong>Noter Harci:</strong> matrah uzerinden nispi noterlilik harci oraniyla belirlenir.
+              <strong>Noter Harcı:</strong> matrah üzerinden nispi noterlik harcı oranı ile belirlenir.
             </li>
             <li>
-              <strong>Maktu Giderler:</strong> sayfa sayisi ve suret sayisina bagli sabit giderleri icerir.
+              <strong>Maktu Giderler:</strong> sayfa ve suret başına güncel tarifeden alınan birim tutarlarla
+              hesaplanır.
             </li>
             <li>
-              <strong>KDV:</strong> noterlik hizmet kalemlerine %20 KDV uygulanir.
+              <strong>KDV:</strong> noterlik hizmet kalemlerine %20 KDV uygulanır.
             </li>
           </ol>
+          <p>
+            Not: Noterlik harç oranı ve maktu birim tutarlar yıl içinde güncellenebildiği için, formdaki ilgili
+            alanlara güncel resmi tarife değerlerini girmeniz gerekir.
+          </p>
         </article>
 
         <aside className="noter-panel">
           <div className="noter-panel__head">
             <h2>{tool.title}</h2>
-            <p>Dinamik Sayfa ve Suret Hesaplama</p>
+            <p>Güncel tarife girdileri ile dinamik hesaplama</p>
           </div>
 
           <div className="noter-form">
             <div className="noter-form__grid">
               <label>
-                Izin Baslangic
+                İzin Başlangıç
                 <input type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} />
               </label>
               <label>
-                Izin Bitis
+                İzin Bitiş
                 <input type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} />
               </label>
             </div>
 
             <div className="noter-form__grid">
               <label>
-                Sayfa Sayisi
+                Sayfa Sayısı
                 <input
                   type="number"
                   min={1}
@@ -2478,7 +3703,7 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 />
               </label>
               <label>
-                Suret Sayisi
+                Suret Sayısı
                 <input
                   type="number"
                   min={1}
@@ -2490,7 +3715,7 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </div>
 
             <label>
-              Yillik Arazi Izin Bedeli (TL)
+              Yıllık Arazi İzin Bedeli (TL)
               <input
                 type="text"
                 inputMode="decimal"
@@ -2500,16 +3725,62 @@ const DamgaNoterToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               />
             </label>
 
+            <div className="noter-form__grid">
+              <label>
+                Damga Vergisi Oranı (binde)
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={damgaRatePerThousandValue}
+                  onChange={(event) => setDamgaRatePerThousandValue(event.target.value)}
+                  placeholder="9,48"
+                />
+              </label>
+              <label>
+                Noter Harç Oranı (binde)
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={noterRatePerThousandValue}
+                  onChange={(event) => setNoterRatePerThousandValue(event.target.value)}
+                  placeholder="Güncel oranı girin"
+                />
+              </label>
+            </div>
+
+            <div className="noter-form__grid">
+              <label>
+                Sayfa Başına Maktu (TL)
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={pageUnitFeeValue}
+                  onChange={(event) => setPageUnitFeeValue(event.target.value)}
+                  placeholder="Güncel tarifeden"
+                />
+              </label>
+              <label>
+                Suret Başına Maktu (TL)
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={copyUnitFeeValue}
+                  onChange={(event) => setCopyUnitFeeValue(event.target.value)}
+                  placeholder="Güncel tarifeden"
+                />
+              </label>
+            </div>
+
             <button type="button" onClick={handleCalculate}>HESAPLA</button>
 
             {error ? <p className="noter-error">{error}</p> : null}
 
             {result ? (
               <div className="noter-result">
-                <span>Sure: {result.dayCount} gun ({formatNumber(result.yearRatio)} yil)</span>
+                <span>Süre: {result.dayCount} gün ({formatNumber(result.yearRatio)} yıl)</span>
                 <span>Matrah: {formatTry(result.matrah)}</span>
-                <span>Damga Vergisi: {formatTry(result.damgaTax)}</span>
-                <span>Noter Harci: {formatTry(result.noterFee)}</span>
+                <span>Damga Vergisi (‰{formatNumber(result.damgaRatePerThousand)}): {formatTry(result.damgaTax)}</span>
+                <span>Noter Harcı (‰{formatNumber(result.noterRatePerThousand)}): {formatTry(result.noterFee)}</span>
                 <span>Maktu Giderler: {formatTry(result.maktuCost)}</span>
                 <span>KDV: {formatTry(result.vat)}</span>
                 <span>Toplam Tahmini Tutar: {formatTry(result.total)}</span>
@@ -2564,9 +3835,16 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     () => calculatedRows.reduce((sum, row) => sum + row.amount, 0),
     [calculatedRows],
   );
+  const totalAreaM2 = useMemo(
+    () => calculatedRows.reduce((sum, row) => sum + row.areaM2, 0),
+    [calculatedRows],
+  );
+
+  const parsedAreaInput = parseLocaleNumber(areaValue);
+  const canAddRow = Number.isFinite(parsedAreaInput) && parsedAreaInput > 0;
 
   const handleAddRow = () => {
-    const areaM2 = parseLocaleNumber(areaValue);
+    const areaM2 = parsedAreaInput;
     if (!Number.isFinite(areaM2) || areaM2 <= 0) return;
 
     setRows((prev) => [
@@ -2585,48 +3863,45 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
 
+  const handleClearRows = () => {
+    setRows([]);
+  };
+
   return (
     <section className="tool-detail tool-detail--pano">
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
 
-      <div className="pano-hero">
-        <img src="/img/panel-other-front.jpg" alt={tool.title} loading="eager" decoding="async" />
-        <div className="pano-hero__overlay">
-          <h1>Iletisim Panosu (Reklam / Ilan) Izin Bedeli Hesaplama Araci</h1>
-        </div>
-      </div>
-
       <div className="pano-layout">
         <article className="pano-info">
-          <h2>Orman Alanlarinda Iletisim Panosu Izin Surecleri</h2>
+          <h2>Orman Alanlarında İletişim Panosu İzin Süreçleri</h2>
           <p>
-            6831 sayili Kanun kapsaminda reklam ve ilan panolari icin izin sureci; uygulama yili birim
-            bedeli, il katsayisi, pano turu artirim katsayisi ve kapalilik (K.EKO) parametreleriyle birlikte
-            degerlendirilir.
+            6831 sayılı Kanun kapsamında reklam ve ilan panoları için izin süreci; uygulama yılı birim
+            bedeli, il katsayısı, pano türü artırım katsayısı ve kapalılık (K.EKO) parametreleriyle birlikte
+            değerlendirilir.
           </p>
 
-          <h3>Bedel Hesaplama ve Guncel Katsayilar</h3>
+          <h3>Bedel Hesaplama ve Güncel Katsayılar</h3>
           <p>
-            Hesaplama aracinda once uygulama yili/hektar bedeli secilir. Ardindan il katsayisi ve pano turu
-            katsayisi secilerek m2 bazli tutar hesaplanir.
+            Hesaplama aracında önce uygulama yılı/hektar bedeli seçilir. Ardından il katsayısı ve pano türü
+            katsayısı seçilerek m² bazlı tutar hesaplanır.
           </p>
 
-          <h3>Izin Turu Katsayisi</h3>
+          <h3>İzin Türü Katsayısı</h3>
           <p>
-            Reklam ve ilan amacli pano izinlerinde baz katsayi 0.875 alinmis, pano teknik ozelliklerine gore
-            artirimli katsayi secenekleri eklenmistir.
+            Reklam ve ilan amaçlı pano izinlerinde baz katsayı 0.875 alınmış, pano teknik özelliklerine göre
+            artırımlı katsayı seçenekleri eklenmiştir.
           </p>
         </article>
 
         <aside className="pano-panel">
           <div className="pano-panel__head">
             <h2>{tool.title}</h2>
-            <p>OGM Mevzuati ve Guncel Katsayi</p>
+            <p>OGM Mevzuatı ve Güncel Katsayı</p>
           </div>
 
           <div className="pano-panel__controls">
             <label>
-              Uygulama Yili (Hektar Bedeli)
+              Uygulama Yılı (Hektar Bedeli)
               <select
                 value={applicationYear}
                 onChange={(event) => setApplicationYear(Number.parseInt(event.target.value, 10))}
@@ -2640,7 +3915,7 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
 
             <label>
-              Il Katsayisi
+              İl Katsayısı
               <select value={province} onChange={(event) => setProvince(event.target.value)}>
                 {MINING_PROVINCES.map((option) => (
                   <option key={option.name} value={option.name}>
@@ -2653,7 +3928,7 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
           <div className="pano-panel__row-input">
             <label>
-              Pano Turu (Artirimli)
+              Pano Türü (Artırımlı)
               <select value={permitId} onChange={(event) => setPermitId(event.target.value)}>
                 {PANO_PERMIT_TYPES.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -2664,18 +3939,24 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
 
             <label>
-              Yuzey Alani (mÂ²)
+              Yüzey Alanı (m²)
               <input
                 type="text"
                 inputMode="decimal"
                 value={areaValue}
                 onChange={(event) => setAreaValue(event.target.value)}
                 placeholder="0,00"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && canAddRow) {
+                    event.preventDefault();
+                    handleAddRow();
+                  }
+                }}
               />
             </label>
 
             <label>
-              Kapalilik (K.EKO)
+              Kapalılık (K.EKO)
               <select value={closureId} onChange={(event) => setClosureId(event.target.value)}>
                 {MINING_CLOSURE_LEVELS.map((option) => (
                   <option key={option.id} value={option.id}>
@@ -2685,15 +3966,15 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </select>
             </label>
 
-            <button type="button" onClick={handleAddRow}>EKLE</button>
+            <button type="button" onClick={handleAddRow} disabled={!canAddRow}>EKLE</button>
           </div>
 
           <div className="pano-table-wrap">
             <table className="pano-table">
               <thead>
                 <tr>
-                  <th>Pano Tanimi</th>
-                  <th>Alan (mÂ²)</th>
+                  <th>Pano Tanımı</th>
+                  <th>Alan (m²)</th>
                   <th>K.Eko</th>
                   <th>Bedel</th>
                   <th>Sil</th>
@@ -2702,7 +3983,7 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               <tbody>
                 {calculatedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={5}>Veri girisi yapilmadi.</td>
+                    <td colSpan={5}>Henüz veri girilmedi.</td>
                   </tr>
                 ) : (
                   calculatedRows.map((row) => (
@@ -2722,7 +4003,17 @@ const IletisimPanosuToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </div>
 
           <div className="pano-summary">
+            <span>Kalem Sayısı: {calculatedRows.length}</span>
+            <span>Toplam Alan: {formatAreaM2(totalAreaM2)} m²</span>
             <span>Toplam Tahmini Bedel: {formatTry(totalAmount)}</span>
+            <button
+              type="button"
+              className="calc-action-btn calc-action-btn--muted"
+              onClick={handleClearRows}
+              disabled={calculatedRows.length === 0}
+            >
+              Tümünü Temizle
+            </button>
           </div>
         </aside>
       </div>
@@ -2750,12 +4041,12 @@ const YdoBakToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const handleCalculate = () => {
     const principal = parseLocaleNumber(amountValue);
     if (!Number.isFinite(principal) || principal <= 0) {
-      setError("Tutar alani gecerli bir deger olmalidir.");
+      setError("Tutar alanı geçerli bir değer olmalıdır.");
       setResult(null);
       return;
     }
     if (startYear > targetYear) {
-      setError("Baslangic yili hedef yildan buyuk olamaz.");
+      setError("Başlangıç yılı hedef yıldan büyük olamaz.");
       setResult(null);
       return;
     }
@@ -2766,7 +4057,7 @@ const YdoBakToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     for (let year = startYear + 1; year <= targetYear; year += 1) {
       const rate = YDO_RATE_INDEX.get(year);
       if (typeof rate !== "number") {
-        setError(`${year} yili icin YDO verisi bulunamadi.`);
+        setError(`${year} yılı için YDO verisi bulunamadı.`);
         setResult(null);
         return;
       }
@@ -2788,28 +4079,30 @@ const YdoBakToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
       <div className="ydo-layout">
         <article className="ydo-info">
-          <h1>Yeniden Degerleme Orani Bedel Hesaplama Rehberi</h1>
+          <h1>Yeniden Değerleme Oranı Bedel Hesaplama Rehberi</h1>
           <p>
-            Ormancilik, maden ve enerji sureclerinde eski bedellerin bugunku karsiligini gormek icin
-            Yeniden Degerleme Orani (YDO) katsayisi kullanilir. Bu arac, secilen baslangic yilindan
-            {` ${targetYear} `}yilina kadar olan kümülatif carpanla guncel bedeli hesaplar.
+            Ormancılık, maden ve enerji süreçlerinde eski bedellerin bugünkü karşılığını görmek için
+            Yeniden Değerleme Oranı (YDO) katsayısı kullanılır. Bu araç, seçilen başlangıç yılından
+            {` ${targetYear} `}yılına kadar olan kümülatif çarpanla güncel bedeli hesaplar.
           </p>
           <p>
-            YDO; Vergi Usul Kanunu kapsaminda YI-UFE ortalama fiyat artisini yansitir ve bircok vergi/harc
-            kaleminin yillik guncellenmesinde referans olarak kullanilir.
+            YDO; Vergi Usul Kanunu kapsamında Yİ-ÜFE ortalama fiyat artışını yansıtır ve birçok vergi/harç
+            kaleminin yıllık güncellenmesinde referans olarak kullanılır.
           </p>
 
-          <h2>Yeniden Degerleme Orani Nedir?</h2>
+          <h2>Yeniden Değerleme Oranı Nedir?</h2>
           <p>
-            YDO, bir onceki yil ortalamalarina gore ilan edilen resmi artistir. Gececek yillarin bedel
-            projeksiyonunda her yil icin ilan edilen oranlar ardisk katsayi olarak carpilir.
+            YDO, bir önceki yıl ortalamalarına göre ilan edilen resmi artıştır. Gelecek yılların bedel
+            projeksiyonunda her yıl için ilan edilen oranlar ardışık katsayı olarak çarpılır.
           </p>
         </article>
 
         <aside className="ydo-panel">
           <div className="ydo-panel__head">
             <h2>{tool.title}</h2>
-            <p>Hedef Yil: {targetYear}</p>
+            <p>
+              Hedef Yıl: {targetYear} | Veri Aralığı: {earliestStartYear}-{targetYear}
+            </p>
           </div>
 
           <div className="ydo-form">
@@ -2826,7 +4119,7 @@ const YdoBakToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               </label>
 
               <label>
-                Baslangic Yili
+                Başlangıç Yılı
                 <select value={startYear} onChange={(event) => setStartYear(Number.parseInt(event.target.value, 10))}>
                   {startYearOptions.map((year) => (
                     <option key={year} value={year}>
@@ -2843,11 +4136,12 @@ const YdoBakToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             {result ? (
               <div className="ydo-result">
-                <span>Kümülatif Katsayi: {formatNumber(result.coefficient)}</span>
-                <span>Guncel Bedel ({targetYear}): {formatTry(result.updatedAmount)}</span>
+                <span>Kümülatif Katsayı: {formatNumber(result.coefficient)}</span>
+                <span>Güncel Bedel ({targetYear}): {formatTry(result.updatedAmount)}</span>
+                <span>Uygulanan Yıl Sayısı: {result.appliedRates.length}</span>
                 <div className="ydo-rates">
                   {result.appliedRates.length === 0 ? (
-                    <small>Baslangic yili hedef yil ile ayni oldugu icin carpan uygulanmadi.</small>
+                    <small>Başlangıç yılı hedef yıl ile aynı olduğu için çarpan uygulanmadı.</small>
                   ) : (
                     result.appliedRates.map((entry) => (
                       <small key={entry.year}>
@@ -2914,16 +4208,16 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         <article className="finance-note">
           <h1>Finansal Hesaplama Rehberi</h1>
           <p>
-            Bu panel ile KDV ayirma/ekleme islemlerini anlik yapabilir, ayni ekranda iki farkli deger
-            arasindaki yuzde degisimi hesaplayabilirsiniz. Finansal teklif, fatura ve maliyet analizlerinde
-            hizli on kontrol saglar.
+            Bu panel ile KDV ayırma/ekleme işlemlerini anlık yapabilir, aynı ekranda iki farklı değer
+            arasındaki yüzde değişimi hesaplayabilirsiniz. Finansal teklif, fatura ve maliyet analizlerinde
+            hızlı ön kontrol sağlar.
           </p>
         </article>
 
         <aside className="finance-kdv">
           <div className="finance-kdv__head">
             <h2>{tool.title}</h2>
-            <p>Hizli ve Hassas Finansal Analiz</p>
+            <p>Hızlı ve Hassas Finansal Analiz</p>
           </div>
 
           <div className="finance-kdv__tabs">
@@ -2932,7 +4226,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               className={mode === "ayirma" ? "is-active" : ""}
               onClick={() => setMode("ayirma")}
             >
-              KDV Ayirma
+              KDV Ayırma
             </button>
             <button
               type="button"
@@ -2955,7 +4249,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
 
             <div className="finance-kdv__rates">
-              <span>KDV Orani (%)</span>
+              <span>KDV Oranı (%)</span>
               <div className="finance-kdv__rate-buttons">
                 <button
                   type="button"
@@ -2983,7 +4277,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                   className={ratePreset === "other" ? "is-active" : ""}
                   onClick={() => setRatePreset("other")}
                 >
-                  Diger
+                  Diğer
                 </button>
               </div>
               {ratePreset === "other" ? (
@@ -2992,7 +4286,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                   inputMode="decimal"
                   value={customRateValue}
                   onChange={(event) => setCustomRateValue(event.target.value)}
-                  placeholder="KDV oranini girin"
+                  placeholder="KDV oranını girin"
                 />
               ) : null}
             </div>
@@ -3013,13 +4307,13 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
         <aside className="finance-percent">
           <div className="finance-percent__head">
-            <h2>Yuzde Degisim Hesaplama</h2>
-            <p>Eski ve Yeni Deger Arasindaki Fark Analizi</p>
+            <h2>Yüzde Değişim Hesaplama</h2>
+            <p>Eski ve Yeni Değer Arasındaki Fark Analizi</p>
           </div>
           <div className="finance-percent__body">
             <div className="finance-percent__grid">
               <label>
-                Eski Deger
+                Eski Değer
                 <input
                   type="text"
                   inputMode="decimal"
@@ -3028,7 +4322,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 />
               </label>
               <label>
-                Yeni Deger
+                Yeni Değer
                 <input
                   type="text"
                   inputMode="decimal"
@@ -3039,7 +4333,7 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </div>
 
             <div className="finance-percent__result">
-              <small>Hesaplanan Degisim Orani</small>
+              <small>Hesaplanan Değişim Oranı</small>
               <strong className={percentResult.valid && percentResult.percent < 0 ? "is-negative" : "is-positive"}>
                 {percentResult.valid ? `%${formatNumber(percentResult.percent)}` : "- %0,00"}
               </strong>
@@ -3051,10 +4345,10 @@ const KdvYuzdeToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         </aside>
 
         <article className="finance-note finance-note--quick">
-          <h2>Hizli Analiz Rehberi</h2>
+          <h2>Hızlı Analiz Rehberi</h2>
           <p>
-            KDV ayirma/ekleme islemiyle yuzde degisim panelini birlikte kullanarak teklif revizyonu, fatura
-            kontrolu, maliyet artisi veya indirim etkisini ayni ekranda gorebilirsiniz.
+            KDV ayırma/ekleme işlemiyle yüzde değişim panelini birlikte kullanarak teklif revizyonu, fatura
+            kontrolü, maliyet artışı veya indirim etkisini aynı ekranda görebilirsiniz.
           </p>
         </article>
       </div>
@@ -3074,9 +4368,9 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
   const [inputText, setInputText] = useState<string>(
     [
-      "BagimsizAlan1\tOngorulen Santral Sahasi\t1\t355962.818\t4328976.270\t39",
-      "BagimsizAlan1\tOngorulen Santral Sahasi\t2\t355806.903\t4328040.746\t39",
-      "BagimsizAlan1\tOngorulen Santral Sahasi\t3\t355332.082\t4328285.586\t39",
+      "BagimsizAlan1\tÖngörülen Santral Sahası\t1\t355962.818\t4328976.270\t39",
+      "BagimsizAlan1\tÖngörülen Santral Sahası\t2\t355806.903\t4328040.746\t39",
+      "BagimsizAlan1\tÖngörülen Santral Sahası\t3\t355332.082\t4328285.586\t39",
     ].join("\n"),
   );
   const [showPoints, setShowPoints] = useState<boolean>(false);
@@ -3164,15 +4458,15 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
   const handlePreview = () => {
     if (parsedRows.length === 0) {
-      setStatus("Gecerli formatta satir bulunamadi. Sutun sirasini kontrol edin.");
+      setStatus("Geçerli formatta satır bulunamadı. Sütun sırasını kontrol edin.");
       return;
     }
-    setStatus(`${areaCount} alan icin ${parsedRows.length} nokta hazirlandi.`);
+    setStatus(`${areaCount} alan için ${parsedRows.length} nokta hazırlandı.`);
   };
 
   const handleDownloadKml = () => {
     if (parsedRows.length === 0) {
-      setStatus("KML olusturmak icin once gecerli satirlar girin.");
+      setStatus("KML oluşturmak için önce geçerli satırlar girin.");
       return;
     }
 
@@ -3198,7 +4492,7 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         placemarks.push(`
           <Placemark>
             <name>${areaName}</name>
-            <description>Tur: ${orderedRows[0]?.itemType ?? "-"}</description>
+            <description>Tür: ${orderedRows[0]?.itemType ?? "-"}</description>
             <Polygon>
               <outerBoundaryIs>
                 <LinearRing>
@@ -3257,7 +4551,7 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     link.remove();
     URL.revokeObjectURL(url);
 
-    setStatus(`${areaCount} alan icin KML dosyasi indirildi.`);
+    setStatus(`${areaCount} alan için KML dosyası indirildi.`);
   };
 
   const handleClear = () => {
@@ -3271,22 +4565,22 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
       <div className="epdk-layout">
         <article className="epdk-content">
-          <h1>Nasil Kullanilir?</h1>
+          <h1>Nasıl Kullanılır?</h1>
           <ol>
-            <li>Verileri Hazirlayin: Alan Adi, Tur, Sira No, Y(E), X(N), DOM sirasiyla kopyalayin.</li>
-            <li>Yapistirin: Satirlari paneldeki metin alanina ekleyin.</li>
-            <li>Haritada Kontrol Edin: Haritada Goster ile satirlarin islenmesini dogrulayin.</li>
-            <li>Opsiyonel Noktalar: Nokta placemarklarini dahil etmek icin secenegi acin.</li>
-            <li>KML Olarak Indir: KML dosyasini indirip kurum dosyasina ekleyin.</li>
+            <li>Verileri Hazırlayın: Alan Adi, Tür, Sıra No, Y(E), X(N), DOM sırasıyla kopyalayın.</li>
+            <li>Yapıştırın: Satırları paneldeki metin alanına ekleyin.</li>
+            <li>Haritada Kontrol Edin: Haritada Göster ile satırların işlenmesini doğrulayın.</li>
+            <li>Opsiyonel Noktalar: Nokta placemarklarını dahil etmek için seçeneği açın.</li>
+            <li>KML Olarak İndir: KML dosyasını indirip kurum dosyasına ekleyin.</li>
           </ol>
 
-          <h2>Onemli Notlar</h2>
+          <h2>Önemli Notlar</h2>
           <ul>
             <li>
-              <strong>Sutun Sirasi:</strong> Alan Adi | Tur | No | Y | X | DOM
+              <strong>Sütun Sırası:</strong> Alan Adi | Tür | No | Y | X | DOM
             </li>
             <li>
-              <strong>DOM:</strong> Donusum icin bolge degeri (Orn: 27, 30, 33, 36, 39, 42, 45) gerekli.
+              <strong>DOM:</strong> Dönüşüm için bölge değeri (Örn: 27, 30, 33, 36, 39, 42, 45) gerekli.
             </li>
           </ul>
         </article>
@@ -3306,36 +4600,36 @@ const EpdkKmlToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </div>
 
           <div className="epdk-info-row">
-            <span>Sutun Sirasi: Alan Adi | Tur | No | Y (E) | X (N) | DOM</span>
+            <span>Sütun Sırası: Alan Adi | Tur | No | Y (E) | X (N) | DOM</span>
             <label>
               <input
                 type="checkbox"
                 checked={showPoints}
                 onChange={(event) => setShowPoints(event.target.checked)}
               />
-              KML&apos;de Noktalari Goster
+              KML&apos;de Noktalari Göster
             </label>
           </div>
 
           <textarea
             value={inputText}
             onChange={(event) => setInputText(event.target.value)}
-            placeholder="Ornek format (her satir: AlanAdi Tur No Y X DOM)"
+            placeholder="Örnek format (her satır: AlanAdi Tür No Y X DOM)"
           />
 
           <div className="epdk-actions">
             <button type="button" className="epdk-btn epdk-btn--blue" onClick={handlePreview}>
-              HARITADA GOSTER
+              HARİTADA GÖSTER
             </button>
             <button type="button" className="epdk-btn epdk-btn--green" onClick={handleDownloadKml}>
-              KML OLARAK INDIR
+              KML OLARAK İNDİR
             </button>
             <button type="button" className="epdk-btn epdk-btn--gray" onClick={handleClear}>
-              TEMIZLE
+              TEMİZLE
             </button>
           </div>
 
-          <p className="epdk-status">{status || "Hazir."}</p>
+          <p className="epdk-status">{status || "Hazır."}</p>
         </aside>
       </div>
     </section>
@@ -3494,13 +4788,13 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const handleAddRow = () => {
     const parsed = parseFirstCoordinate(coordinateText);
     if (!parsed) {
-      setStatus("Gecerli koordinat bulunamadi. Ornek: 464801 4334415");
+      setStatus("Geçerli koordinat bulunamadı. Örnek: 464801 4334415");
       return;
     }
 
     const converted = utmToLatLon(parsed.easting, parsed.northing, dom);
     if (!Number.isFinite(converted.lat) || !Number.isFinite(converted.lon)) {
-      setStatus("Koordinat donusumu basarisiz. DOM degerini kontrol edin.");
+      setStatus("Koordinat dönüşümü başarısız. DOM değerini kontrol edin.");
       return;
     }
 
@@ -3509,7 +4803,7 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         ? photoNo.trim()
         : photoFile?.name
           ? photoFile.name
-          : `Fotograf-${rows.length + 1}`;
+          : `Fotoğraf-${rows.length + 1}`;
 
     const row: PhotoCoordRow = {
       id: Date.now() + Math.floor(Math.random() * 1000),
@@ -3530,12 +4824,12 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-    setStatus(`Kayit eklendi. Toplam ${rows.length + 1} satir.`);
+    setStatus(`Kayıt eklendi. Toplam ${rows.length + 1} satır.`);
   };
 
   const handleDownloadRow = (row: PhotoCoordRow) => {
     if (!row.file) {
-      setStatus("Indirme icin bu satira bir fotograf dosyasi eklenmemis.");
+      setStatus("İndirme için bu satıra bir fotoğraf dosyası eklenmemiş.");
       return;
     }
 
@@ -3551,7 +4845,7 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
   const handleDeleteRow = (id: number) => {
     setRows((prev) => prev.filter((row) => row.id !== id));
-    setStatus("Kayit listeden silindi.");
+    setStatus("Kayıt listeden silindi.");
   };
 
   return (
@@ -3568,7 +4862,7 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
         <div className="photo-coord-grid">
           <article className="photo-coord-card">
-            <h2>1. Sistem &amp; DOM Secimi</h2>
+            <h2>1. Sistem &amp; DOM Seçimi</h2>
             <label>
               Koordinat Sistemi
               <select value={coordSystem} onChange={(event) => setCoordSystem(event.target.value)}>
@@ -3577,7 +4871,7 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
 
             <div className="photo-coord-dom">
-              <span>Secili DOM:</span>
+              <span>Seçili DOM:</span>
               <input
                 type="number"
                 min={27}
@@ -3586,7 +4880,7 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 value={dom}
                 onChange={(event) => handleDomChange(event.target.value)}
               />
-              <small>(Haritaya tiklayarak degisir)</small>
+              <small>(Haritaya tiklayarak değişir)</small>
             </div>
 
             <h2>2. Koordinat Yapistir (Y X)</h2>
@@ -3599,17 +4893,17 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </article>
 
           <article className="photo-coord-card">
-            <h2>3. Fotograf Girisi</h2>
+            <h2>3. Fotoğraf Girisi</h2>
             <label className="photo-coord-file">
               <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileChange} />
-              <span>{photoFile ? photoFile.name : "Dosya secilmedi"}</span>
+              <span>{photoFile ? photoFile.name : "Dosya seçilmedi"}</span>
             </label>
 
             <input
               type="text"
               value={photoNo}
               onChange={(event) => setPhotoNo(event.target.value)}
-              placeholder="Fotograf No"
+              placeholder="Fotoğraf No"
             />
 
             <textarea
@@ -3625,21 +4919,21 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         </div>
 
         <section className="photo-coord-list">
-          <h2>Saha Kayit Listesi</h2>
+          <h2>Saha Kayıt Listesi</h2>
           <div className="photo-coord-table-wrap">
             <table className="photo-coord-table">
               <thead>
                 <tr>
-                  <th>Fotograf</th>
+                  <th>Fotoğraf</th>
                   <th>Koordinat (Y/X)</th>
-                  <th>Indir</th>
+                  <th>İndir</th>
                   <th>Sil</th>
                 </tr>
               </thead>
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
-                    <td colSpan={4}>Henuz kayit bulunmuyor.</td>
+                    <td colSpan={4}>Henüz kayit bulunmuyor.</td>
                   </tr>
                 ) : (
                   rows.map((row) => (
@@ -3657,12 +4951,12 @@ const PhotoCoordinateToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                       </td>
                       <td>
                         <button type="button" onClick={() => handleDownloadRow(row)} disabled={!row.file}>
-                          INDIR
+                          İNDİR
                         </button>
                       </td>
                       <td>
                         <button type="button" onClick={() => handleDeleteRow(row.id)}>
-                          SIL
+                          SİL
                         </button>
                       </td>
                     </tr>
@@ -3919,7 +5213,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const [zoom, setZoom] = useState<number>(1);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [loadedImage, setLoadedImage] = useState<HTMLImageElement | null>(null);
-  const [status, setStatus] = useState<string>("Fotograf secilmedi.");
+  const [status, setStatus] = useState<string>("Fotoğraf seçilmedi.");
   const [dragOver, setDragOver] = useState<boolean>(false);
 
   const presets = useMemo(
@@ -3951,7 +5245,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     };
     img.onerror = () => {
       setLoadedImage(null);
-      setStatus("Gorsel yuklenemedi. Lutfen farkli bir dosya deneyin.");
+      setStatus("Görsel yüklenemedi. Lütfen farklı bir dosya deneyin.");
     };
     img.src = imageUrl;
   }, [imageUrl]);
@@ -4045,7 +5339,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       ctx.font = "500 28px Inter";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("Onizleme Alani", previewWidth / 2, previewHeight / 2);
+      ctx.fillText("Onizleme Alanı", previewWidth / 2, previewHeight / 2);
     }
 
     ctx.strokeStyle = "#ffffff";
@@ -4056,7 +5350,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   const applyFiles = (incoming: File[]) => {
     const selected = incoming.find((file) => file.type.startsWith("image/"));
     if (!selected) {
-      setStatus("Lutfen gecerli bir fotograf dosyasi secin.");
+      setStatus("Lütfen geçerli bir fotoğraf dosyası seçin.");
       return;
     }
 
@@ -4082,7 +5376,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
   const handleDownload = () => {
     if (!loadedImage) {
-      setStatus("Indirme icin once bir fotograf secin.");
+      setStatus("İndirme için önce bir fotoğraf seçin.");
       return;
     }
 
@@ -4093,7 +5387,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     output.height = Math.max(1, Math.round(target.height));
     const outCtx = output.getContext("2d");
     if (!outCtx) {
-      setStatus("Cikti olusturulamadi.");
+      setStatus("Çıktı oluşturulamadı.");
       return;
     }
 
@@ -4111,7 +5405,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
     output.toBlob((blob) => {
       if (!blob) {
-        setStatus("Dosya olusturulamadi.");
+        setStatus("Dosya oluşturulamadı.");
         return;
       }
       const url = URL.createObjectURL(blob);
@@ -4122,7 +5416,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
-      setStatus("Kirpilmis gorsel indirildi.");
+      setStatus("Kırpılmış görsel indirildi.");
     }, "image/png");
   };
 
@@ -4134,7 +5428,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         <header className="photocrop-head">
           <span>✂</span>
           <h1>{tool.title}</h1>
-          <p>Hizli, optimize edilmis ve merkezleme asistanli duzenleyici.</p>
+          <p>Hızlı, optimize edilmiş ve merkezleme asistanlı düzenleyici.</p>
         </header>
 
         <div className="photocrop-body">
@@ -4148,13 +5442,13 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               onDragLeave={() => setDragOver(false)}
               onDrop={handleDrop}
             >
-              1. Fotograf Yukle
+              1. Fotoğraf Yükle
               <input type="file" accept="image/*" onChange={handleFileChange} />
-              <span>Fotograf Sec veya Surukle Birak</span>
+              <span>Fotoğraf Seç veya Sürükle Bırak</span>
             </label>
 
             <label>
-              2. Boyut Sablonu
+              2. Boyut Şablonu
               <select value={presetId} onChange={(event) => setPresetId(event.target.value)}>
                 {presets.map((preset) => (
                   <option key={preset.id} value={preset.id}>
@@ -4166,7 +5460,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
             <div className="photocrop-dims">
               <label>
-                Genislik
+                Genişlik
                 <input
                   type="text"
                   inputMode="decimal"
@@ -4175,7 +5469,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 />
               </label>
               <label>
-                Yukseklik
+                Yükseklik
                 <input
                   type="text"
                   inputMode="decimal"
@@ -4186,7 +5480,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </div>
 
             <label className="photocrop-zoom">
-              3. Yakinlastir <strong>{Math.round(zoom * 100)}%</strong>
+              3. Yakınlaştır <strong>{Math.round(zoom * 100)}%</strong>
               <input
                 type="range"
                 min="1"
@@ -4197,7 +5491,7 @@ const PhotoCropToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               />
             </label>
 
-            <button type="button" onClick={handleDownload}>Gorseli Indir</button>
+            <button type="button" onClick={handleDownload}>Görseli İndir</button>
             <p className="photocrop-status">{status}</p>
           </aside>
 
@@ -4294,25 +5588,25 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
 
       <div className="fidan-grid">
         <article className="fidan-note">
-          <h2>Fidan Dikim Adedi ve Arazi Planlamasi Hakkinda</h2>
+          <h2>Fidan Dikim Adedi ve Arazi Planlaması Hakkında</h2>
           <p>
-            Fidan dikim planinda toplam alan, sinir payi, sira arasi ve sira uzeri mesafeler birlikte
-            degerlendirilmelidir. Arac, bu parametrelere gore yaklasik fidan ihtiyacini hizli hesaplar.
+            Fidan dikim planında toplam alan, sınır payı, sıra arası ve sıra üzeri mesafeler birlikte
+            değerlendirilmelidir. Araç, bu parametrelere göre yaklaşık fidan ihtiyacını hızlı hesaplar.
           </p>
           <p>
-            Sinir payi, parselin kenar bolgesindeki emniyet seridini temsil eder. Bu bosluk fidan dikim
-            alanindan dusulur.
+            Sınır payı, parselin kenar bölgesindeki emniyet şeridini temsil eder. Bu boşluk fidan dikim
+            alanından düşülür.
           </p>
         </article>
 
-        <aside className="fidan-card">
+        <aside className="fidan-card fidan-card--seedling">
           <div className="fidan-card__head">
             <h2>{tool.title}</h2>
-            <p>Sinir Boslugu ve Alan Analizi</p>
+            <p>Sınır Boşluğu ve Alan Analizi</p>
           </div>
           <div className="fidan-card__body">
             <label>
-              Toplam Arazi Alani (mÂ²)
+              Toplam Arazi Alanı (m²)
               <input
                 type="text"
                 inputMode="decimal"
@@ -4321,7 +5615,7 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               />
             </label>
             <label>
-              Sinir Payi / Kenar Boslugu (metre)
+              Sınır Payı / Kenar Boşluğu (metre)
               <input
                 type="text"
                 inputMode="decimal"
@@ -4331,7 +5625,7 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             </label>
             <div className="fidan-card__grid">
               <label>
-                Sira Arasi (m)
+                Sıra Arası (m)
                 <input
                   type="text"
                   inputMode="decimal"
@@ -4340,7 +5634,7 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 />
               </label>
               <label>
-                Sira Uzeri (m)
+                Sıra Üzeri (m)
                 <input
                   type="text"
                   inputMode="decimal"
@@ -4352,21 +5646,21 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             <button type="button" onClick={handleFidanCalculate}>HESAPLA</button>
             {fidanResult ? (
               <div className="fidan-card__result">
-                <span>Net Dikim Alani: {formatAreaM2(fidanResult.effectiveArea)} mÂ²</span>
+                <span>Net Dikim Alanı: {formatAreaM2(fidanResult.effectiveArea)} m²</span>
                 <span>Tahmini Fidan Adedi: {fidanResult.seedlingCount.toLocaleString("tr-TR")}</span>
               </div>
             ) : null}
           </div>
         </aside>
 
-        <aside className="fidan-card">
+        <aside className="fidan-card fidan-card--fence">
           <div className="fidan-card__head">
-            <h2>Cit ve Kazik Hesaplama Araci</h2>
-            <p>Arazi Cevreleme ve Malzeme Analizi</p>
+            <h2>Çit ve Kazık Hesaplama Aracı</h2>
+            <p>Arazi Çevreleme ve Malzeme Analizi</p>
           </div>
           <div className="fidan-card__body">
             <label>
-              Toplam Cevre veya Tel Uzunlugu (Metre)
+              Toplam Çevre veya Tel Uzunluğu (Metre)
               <input
                 type="text"
                 inputMode="decimal"
@@ -4375,7 +5669,7 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               />
             </label>
             <label>
-              Kazik Aralik Mesafesi (Metre)
+              Kazık Aralık Mesafesi (Metre)
               <input
                 type="text"
                 inputMode="decimal"
@@ -4384,7 +5678,7 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
               />
             </label>
             <label>
-              Cekilecek Tel Sira Sayisi
+              Çekilecek Tel Sıra Sayısı
               <input
                 type="text"
                 inputMode="decimal"
@@ -4395,19 +5689,19 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
             <button type="button" onClick={handleFenceCalculate}>HESAPLA</button>
             {fenceResult ? (
               <div className="fidan-card__result">
-                <span>Gerekli Kazik Adedi: {fenceResult.postCount.toLocaleString("tr-TR")}</span>
-                <span>Toplam Tel Uzunlugu: {formatAreaM2(fenceResult.wireLength)} m</span>
-                <span>+%10 Payli Tel: {formatAreaM2(fenceResult.suggestedWireLength)} m</span>
+                <span>Gerekli Kazık Adedi: {fenceResult.postCount.toLocaleString("tr-TR")}</span>
+                <span>Toplam Tel Uzunluğu: {formatAreaM2(fenceResult.wireLength)} m</span>
+                <span>+%10 Paylı Tel: {formatAreaM2(fenceResult.suggestedWireLength)} m</span>
               </div>
             ) : null}
           </div>
         </aside>
 
         <article className="fidan-note">
-          <h2>Cit Kurulumu ve Malzeme Planlamasi Hakkinda</h2>
+          <h2>Çit Kurulumu ve Malzeme Planlaması Hakkında</h2>
           <p>
-            Cevreleme analizinde toplam uzunluk, kazik araligi ve tel sira sayisi birlikte ele alinmalidir.
-            Arazi egimi ve kapi gecisleri gibi sahaya ozel detaylar, uygulama oncesi ayrica kontrol edilmelidir.
+            Çevreleme analizinde toplam uzunluk, kazık aralığı ve tel sıra sayısı birlikte ele alınmalıdır.
+            Arazi eğimi ve kapı geçişleri gibi sahaya özel detaylar, uygulama öncesi ayrıca kontrol edilmelidir.
           </p>
         </article>
       </div>
@@ -4415,24 +5709,878 @@ const FidanCitToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   );
 };
 
+const AgaclandirmaButceToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+  const [areaHectareValue, setAreaHectareValue] = useState<string>("10");
+  const [seedlingsPerHectareValue, setSeedlingsPerHectareValue] = useState<string>("1666");
+  const [lossRatePercentValue, setLossRatePercentValue] = useState<string>("10");
+  const [seedlingUnitPriceValue, setSeedlingUnitPriceValue] = useState<string>("");
+  const [plantingLaborPerSeedlingValue, setPlantingLaborPerSeedlingValue] = useState<string>("");
+  const [maintenanceYearsValue, setMaintenanceYearsValue] = useState<string>("3");
+  const [maintenancePerHectarePerYearValue, setMaintenancePerHectarePerYearValue] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [result, setResult] = useState<{
+    totalSeedlings: number;
+    seedlingCost: number;
+    plantingLaborCost: number;
+    maintenanceCost: number;
+    subtotal: number;
+    vat: number;
+    total: number;
+  } | null>(null);
+
+  const handleReset = () => {
+    setAreaHectareValue("10");
+    setSeedlingsPerHectareValue("1666");
+    setLossRatePercentValue("10");
+    setSeedlingUnitPriceValue("");
+    setPlantingLaborPerSeedlingValue("");
+    setMaintenanceYearsValue("3");
+    setMaintenancePerHectarePerYearValue("");
+    setError("");
+    setResult(null);
+  };
+
+  const handleCalculate = () => {
+    const areaHectare = parseLocaleNumber(areaHectareValue);
+    const seedlingsPerHectare = parseLocaleNumber(seedlingsPerHectareValue);
+    const lossRatePercent = parseLocaleNumber(lossRatePercentValue);
+    const seedlingUnitPrice = parseLocaleNumber(seedlingUnitPriceValue);
+    const plantingLaborPerSeedling = parseLocaleNumber(plantingLaborPerSeedlingValue);
+    const maintenanceYears = Number.parseInt(maintenanceYearsValue, 10);
+    const maintenancePerHectarePerYear = parseLocaleNumber(maintenancePerHectarePerYearValue);
+
+    if (
+      !Number.isFinite(areaHectare) ||
+      !Number.isFinite(seedlingsPerHectare) ||
+      !Number.isFinite(lossRatePercent) ||
+      !Number.isFinite(seedlingUnitPrice) ||
+      !Number.isFinite(plantingLaborPerSeedling) ||
+      !Number.isFinite(maintenanceYears) ||
+      !Number.isFinite(maintenancePerHectarePerYear)
+    ) {
+      setError("Lütfen tüm alanlara geçerli sayısal değer girin.");
+      setResult(null);
+      return;
+    }
+
+    if (
+      areaHectare <= 0 ||
+      seedlingsPerHectare <= 0 ||
+      seedlingUnitPrice <= 0 ||
+      plantingLaborPerSeedling <= 0 ||
+      maintenanceYears <= 0 ||
+      maintenancePerHectarePerYear <= 0
+    ) {
+      setError("Alan, adet, birim fiyat ve yıl değerleri sıfırdan büyük olmalıdır.");
+      setResult(null);
+      return;
+    }
+
+    if (lossRatePercent < 0 || lossRatePercent > 90) {
+      setError("Kayıp oranı %0 ile %90 arasında olmalıdır.");
+      setResult(null);
+      return;
+    }
+
+    const totalSeedlings = Math.ceil(areaHectare * seedlingsPerHectare * (1 + lossRatePercent / 100));
+    const seedlingCost = totalSeedlings * seedlingUnitPrice;
+    const plantingLaborCost = totalSeedlings * plantingLaborPerSeedling;
+    const maintenanceCost = areaHectare * maintenancePerHectarePerYear * maintenanceYears;
+    const subtotal = seedlingCost + plantingLaborCost + maintenanceCost;
+    const vat = subtotal * 0.2;
+    const total = subtotal + vat;
+
+    setError("");
+    setResult({
+      totalSeedlings,
+      seedlingCost,
+      plantingLaborCost,
+      maintenanceCost,
+      subtotal,
+      vat,
+      total,
+    });
+  };
+
+  return (
+    <section className="tool-detail tool-detail--afforestation-budget">
+      <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
+      <div className="tool-detail__layout">
+        <article className="tool-detail__content">
+          <h1>Ağaçlandırma Bütçe Planlaması Nasıl Yapılır?</h1>
+          <p>
+            Ağaçlandırma projelerinde toplam maliyet; fidan adedi, dikim işçiliği ve çok yıllı bakım giderlerinden
+            oluşur. Bu panel, tüm kalemleri tek akışta hesaplayarak teklif ve uygulama bütçesini hızlandırır.
+          </p>
+          <p>
+            Birim fiyat alanları varsayılan sabit değer içermez. Resmi kurum fiyatları, ihale birim fiyatları veya
+            güncel sözleşme bedellerinizi doğrudan girerek hesaplama yapın.
+          </p>
+
+          <h2>Hesaplama Kapsamı</h2>
+          <ol>
+            <li>
+              <strong>Fidan Adedi:</strong> hektar alan, hektar başı dikim yoğunluğu ve kayıp oranı dikkate alınır.
+            </li>
+            <li>
+              <strong>Dikim Maliyeti:</strong> toplam fidan adedi üzerinden birim fidan + birim işçilik tutarı
+              çarpılır.
+            </li>
+            <li>
+              <strong>Bakım Maliyeti:</strong> yıllık bakım bedeli, alan ve bakım yılı ile projelendirilir.
+            </li>
+            <li>
+              <strong>Genel Toplam:</strong> ara toplam + KDV ile nihai bütçe görülür.
+            </li>
+          </ol>
+        </article>
+
+        <aside className="tool-calc aff-budget-calc">
+          <div className="tool-calc__head">
+            <h2>{tool.title}</h2>
+            <p>Fidan + işçilik + bakım bütçesini güncel resmi birim fiyatlarla hesaplayın.</p>
+          </div>
+
+          <div className="tool-calc__controls aff-budget-calc__controls">
+            <label>
+              Proje Alanı (ha)
+              <input type="text" inputMode="decimal" value={areaHectareValue} onChange={(event) => setAreaHectareValue(event.target.value)} />
+            </label>
+            <label>
+              Hektar Başına Fidan (adet)
+              <input type="text" inputMode="decimal" value={seedlingsPerHectareValue} onChange={(event) => setSeedlingsPerHectareValue(event.target.value)} />
+            </label>
+            <label>
+              Kayıp Oranı (%)
+              <input type="text" inputMode="decimal" value={lossRatePercentValue} onChange={(event) => setLossRatePercentValue(event.target.value)} />
+            </label>
+            <label>
+              Birim Fidan Bedeli (TL/adet)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={seedlingUnitPriceValue}
+                onChange={(event) => setSeedlingUnitPriceValue(event.target.value)}
+                placeholder="Güncel resmi birim fiyat"
+              />
+            </label>
+            <label>
+              Dikim İşçilik Bedeli (TL/adet)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={plantingLaborPerSeedlingValue}
+                onChange={(event) => setPlantingLaborPerSeedlingValue(event.target.value)}
+                placeholder="Güncel ihale/birim fiyat"
+              />
+            </label>
+            <label>
+              Bakım Süresi (yıl)
+              <input type="number" min={1} step={1} value={maintenanceYearsValue} onChange={(event) => setMaintenanceYearsValue(event.target.value)} />
+            </label>
+            <label>
+              Yıllık Bakım Bedeli (TL/ha)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={maintenancePerHectarePerYearValue}
+                onChange={(event) => setMaintenancePerHectarePerYearValue(event.target.value)}
+                placeholder="Güncel resmi birim fiyat"
+              />
+            </label>
+          </div>
+
+          <div className="tool-calc__summary aff-budget-calc__actions">
+            <button type="button" onClick={handleCalculate}>HESAPLA</button>
+            <button type="button" className="calc-action-btn calc-action-btn--muted" onClick={handleReset}>
+              SIFIRLA
+            </button>
+          </div>
+
+          {error ? <p className="kist-calc__error">{error}</p> : null}
+
+          {result ? (
+            <div className="tool-calc__summary aff-budget-calc__summary">
+              <span>Toplam Fidan: {result.totalSeedlings.toLocaleString("tr-TR")} adet</span>
+              <span>Fidan Bedeli: {formatTry(result.seedlingCost)}</span>
+              <span>Dikim İşçiliği: {formatTry(result.plantingLaborCost)}</span>
+              <span>Bakım Bedeli: {formatTry(result.maintenanceCost)}</span>
+              <span>Ara Toplam: {formatTry(result.subtotal)}</span>
+              <span>KDV (%20): {formatTry(result.vat)}</span>
+              <span>Genel Toplam: {formatTry(result.total)}</span>
+            </div>
+          ) : null}
+        </aside>
+      </div>
+    </section>
+  );
+};
+
+const OrmanYoluMetrajToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+  const [roadLengthKmValue, setRoadLengthKmValue] = useState<string>("3,5");
+  const [platformWidthValue, setPlatformWidthValue] = useState<string>("6");
+  const [cutDepthValue, setCutDepthValue] = useState<string>("0,8");
+  const [fillDepthValue, setFillDepthValue] = useState<string>("0,5");
+  const [stabilizeThicknessCmValue, setStabilizeThicknessCmValue] = useState<string>("15");
+  const [cutUnitCostValue, setCutUnitCostValue] = useState<string>("");
+  const [fillUnitCostValue, setFillUnitCostValue] = useState<string>("");
+  const [stabilizeUnitCostValue, setStabilizeUnitCostValue] = useState<string>("");
+  const [overheadPercentValue, setOverheadPercentValue] = useState<string>("0");
+  const [error, setError] = useState<string>("");
+  const [result, setResult] = useState<{
+    planAreaM2: number;
+    cutVolumeM3: number;
+    fillVolumeM3: number;
+    stabilizeVolumeM3: number;
+    cutCost: number;
+    fillCost: number;
+    stabilizeCost: number;
+    overheadCost: number;
+    totalCost: number;
+  } | null>(null);
+
+  const handleReset = () => {
+    setRoadLengthKmValue("3,5");
+    setPlatformWidthValue("6");
+    setCutDepthValue("0,8");
+    setFillDepthValue("0,5");
+    setStabilizeThicknessCmValue("15");
+    setCutUnitCostValue("");
+    setFillUnitCostValue("");
+    setStabilizeUnitCostValue("");
+    setOverheadPercentValue("0");
+    setError("");
+    setResult(null);
+  };
+
+  const handleCalculate = () => {
+    const roadLengthKm = parseLocaleNumber(roadLengthKmValue);
+    const platformWidth = parseLocaleNumber(platformWidthValue);
+    const cutDepth = parseLocaleNumber(cutDepthValue);
+    const fillDepth = parseLocaleNumber(fillDepthValue);
+    const stabilizeThicknessCm = parseLocaleNumber(stabilizeThicknessCmValue);
+    const cutUnitCost = parseLocaleNumber(cutUnitCostValue);
+    const fillUnitCost = parseLocaleNumber(fillUnitCostValue);
+    const stabilizeUnitCost = parseLocaleNumber(stabilizeUnitCostValue);
+    const overheadPercent = parseLocaleNumber(overheadPercentValue);
+
+    if (
+      !Number.isFinite(roadLengthKm) ||
+      !Number.isFinite(platformWidth) ||
+      !Number.isFinite(cutDepth) ||
+      !Number.isFinite(fillDepth) ||
+      !Number.isFinite(stabilizeThicknessCm) ||
+      !Number.isFinite(cutUnitCost) ||
+      !Number.isFinite(fillUnitCost) ||
+      !Number.isFinite(stabilizeUnitCost) ||
+      !Number.isFinite(overheadPercent)
+    ) {
+      setError("Lütfen tüm alanlara geçerli sayısal değer girin.");
+      setResult(null);
+      return;
+    }
+
+    if (
+      roadLengthKm <= 0 ||
+      platformWidth <= 0 ||
+      cutDepth < 0 ||
+      fillDepth < 0 ||
+      stabilizeThicknessCm <= 0 ||
+      cutUnitCost < 0 ||
+      fillUnitCost < 0 ||
+      stabilizeUnitCost < 0 ||
+      overheadPercent < 0 ||
+      overheadPercent > 100
+    ) {
+      setError("Uzunluk/genişlik/kalınlık pozitif; ek pay oranı %0-%100 arasında olmalıdır.");
+      setResult(null);
+      return;
+    }
+
+    const roadLengthM = roadLengthKm * 1000;
+    const planAreaM2 = roadLengthM * platformWidth;
+    const cutVolumeM3 = planAreaM2 * cutDepth;
+    const fillVolumeM3 = planAreaM2 * fillDepth;
+    const stabilizeVolumeM3 = planAreaM2 * (stabilizeThicknessCm / 100);
+
+    const cutCost = cutVolumeM3 * cutUnitCost;
+    const fillCost = fillVolumeM3 * fillUnitCost;
+    const stabilizeCost = stabilizeVolumeM3 * stabilizeUnitCost;
+    const baseCost = cutCost + fillCost + stabilizeCost;
+    const overheadCost = baseCost * (overheadPercent / 100);
+    const totalCost = baseCost + overheadCost;
+
+    setError("");
+    setResult({
+      planAreaM2,
+      cutVolumeM3,
+      fillVolumeM3,
+      stabilizeVolumeM3,
+      cutCost,
+      fillCost,
+      stabilizeCost,
+      overheadCost,
+      totalCost,
+    });
+  };
+
+  return (
+    <section className="tool-detail tool-detail--forest-road">
+      <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
+      <div className="tool-detail__layout">
+        <article className="tool-detail__content">
+          <h1>Orman Yolu Metraj ve Keşif Hesabı</h1>
+          <p>
+            Yol platformu için kazı, dolgu ve stabilize kalemlerini aynı modelde görmek; saha üretim planı,
+            makine ekipman kapasitesi ve yaklaşık maliyet hesapları için kritik önem taşır.
+          </p>
+          <p>
+            Birim fiyat alanlarına resmi poz numarası karşılığı güncel maliyetleri girerek keşif oluşturun.
+            Hesaplama modeli sabittir, birim maliyet verisi kullanıcı tarafından belirlenir.
+          </p>
+
+          <h2>Hesaplama Modeli</h2>
+          <ol>
+            <li>
+              <strong>Plan Alanı:</strong> yol uzunluğu (m) x platform genişliği (m)
+            </li>
+            <li>
+              <strong>Kazı / Dolgu Hacmi:</strong> plan alanı x ortalama derinlik
+            </li>
+            <li>
+              <strong>Stabilize Hacmi:</strong> plan alanı x stabilize kalınlığı
+            </li>
+            <li>
+              <strong>Toplam Keşif:</strong> birim fiyatlı kalemlerin toplamı + yardımcı işler payı
+            </li>
+          </ol>
+        </article>
+
+        <aside className="tool-calc forest-road-calc">
+          <div className="tool-calc__head">
+            <h2>{tool.title}</h2>
+            <p>Kazı, dolgu ve stabilize metrajını güncel birim fiyatlarla maliyete dönüştürün.</p>
+          </div>
+
+          <div className="tool-calc__controls forest-road-calc__controls">
+            <label>
+              Yol Uzunluğu (km)
+              <input type="text" inputMode="decimal" value={roadLengthKmValue} onChange={(event) => setRoadLengthKmValue(event.target.value)} />
+            </label>
+            <label>
+              Platform Genişliği (m)
+              <input type="text" inputMode="decimal" value={platformWidthValue} onChange={(event) => setPlatformWidthValue(event.target.value)} />
+            </label>
+            <label>
+              Ortalama Kazı Derinliği (m)
+              <input type="text" inputMode="decimal" value={cutDepthValue} onChange={(event) => setCutDepthValue(event.target.value)} />
+            </label>
+            <label>
+              Ortalama Dolgu Derinliği (m)
+              <input type="text" inputMode="decimal" value={fillDepthValue} onChange={(event) => setFillDepthValue(event.target.value)} />
+            </label>
+            <label>
+              Stabilize Kalınlığı (cm)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={stabilizeThicknessCmValue}
+                onChange={(event) => setStabilizeThicknessCmValue(event.target.value)}
+              />
+            </label>
+            <label>
+              Kazı Birim Fiyatı (TL/m³)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={cutUnitCostValue}
+                onChange={(event) => setCutUnitCostValue(event.target.value)}
+                placeholder="Güncel resmi birim fiyat"
+              />
+            </label>
+            <label>
+              Dolgu Birim Fiyatı (TL/m³)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={fillUnitCostValue}
+                onChange={(event) => setFillUnitCostValue(event.target.value)}
+                placeholder="Güncel resmi birim fiyat"
+              />
+            </label>
+            <label>
+              Stabilize Birim Fiyatı (TL/m³)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={stabilizeUnitCostValue}
+                onChange={(event) => setStabilizeUnitCostValue(event.target.value)}
+                placeholder="Güncel resmi birim fiyat"
+              />
+            </label>
+            <label>
+              Yardımcı İşler Ek Payı (%)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={overheadPercentValue}
+                onChange={(event) => setOverheadPercentValue(event.target.value)}
+                placeholder="0"
+              />
+            </label>
+          </div>
+
+          <div className="tool-calc__summary forest-road-calc__actions">
+            <button type="button" onClick={handleCalculate}>HESAPLA</button>
+            <button type="button" className="calc-action-btn calc-action-btn--muted" onClick={handleReset}>
+              SIFIRLA
+            </button>
+          </div>
+
+          {error ? <p className="kist-calc__error">{error}</p> : null}
+
+          {result ? (
+            <div className="tool-calc__summary forest-road-calc__summary">
+              <span>Plan Alanı: {formatAreaM2(result.planAreaM2)} m²</span>
+              <span>Kazı Hacmi: {formatAreaM2(result.cutVolumeM3)} m³</span>
+              <span>Dolgu Hacmi: {formatAreaM2(result.fillVolumeM3)} m³</span>
+              <span>Stabilize Hacmi: {formatAreaM2(result.stabilizeVolumeM3)} m³</span>
+              <span>Kazı Maliyeti: {formatTry(result.cutCost)}</span>
+              <span>Dolgu Maliyeti: {formatTry(result.fillCost)}</span>
+              <span>Stabilize Maliyeti: {formatTry(result.stabilizeCost)}</span>
+              <span>Yardımcı İşler Payı: {formatTry(result.overheadCost)}</span>
+              <span>Genel Toplam: {formatTry(result.totalCost)}</span>
+            </div>
+          ) : null}
+        </aside>
+      </div>
+    </section>
+  );
+};
+
+const IlKatsayiKarsilastirmaToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+  const [applicationYear, setApplicationYear] = useState<number>(MINING_APPLICATION_YEARS[0].year);
+  const [permitId, setPermitId] = useState<string>(MINING_PERMIT_TYPES[1].id);
+  const [closureId, setClosureId] = useState<string>(MINING_CLOSURE_LEVELS[2].id);
+  const [provinceA, setProvinceA] = useState<string>(MINING_PROVINCES[0]?.name ?? "Ankara");
+  const [provinceB, setProvinceB] = useState<string>(
+    MINING_PROVINCES.find((item) => item.name === "İstanbul")?.name ?? MINING_PROVINCES[1]?.name ?? "İzmir",
+  );
+  const [areaValue, setAreaValue] = useState<string>("10000");
+  const [error, setError] = useState<string>("");
+  const [result, setResult] = useState<{
+    areaM2: number;
+    permitLabel: string;
+    closureLabel: string;
+    unitPricePerM2: number;
+    landAmountA: number;
+    landAmountB: number;
+    afforestationAmount: number;
+    totalAmountA: number;
+    totalAmountB: number;
+    deltaAmount: number;
+    deltaPercent: number;
+  } | null>(null);
+
+  const handleCalculate = () => {
+    const areaM2 = parseLocaleNumber(areaValue);
+    if (!Number.isFinite(areaM2) || areaM2 <= 0) {
+      setError("Alan (m²) değeri sıfırdan büyük olmalıdır.");
+      setResult(null);
+      return;
+    }
+
+    const selectedYear = MINING_YEAR_INDEX.get(applicationYear) ?? MINING_APPLICATION_YEARS[0];
+    const permit = MINING_PERMIT_INDEX.get(permitId) ?? MINING_PERMIT_TYPES[0];
+    const closure = MINING_CLOSURE_INDEX.get(closureId) ?? MINING_CLOSURE_LEVELS[0];
+    const provinceCoefficientA = MINING_PROVINCE_INDEX.get(provinceA);
+    const provinceCoefficientB = MINING_PROVINCE_INDEX.get(provinceB);
+
+    if (typeof provinceCoefficientA !== "number" || typeof provinceCoefficientB !== "number") {
+      setError("Seçilen il katsayıları bulunamadı.");
+      setResult(null);
+      return;
+    }
+
+    const unitPricePerM2 = selectedYear.afforestationPerHectare / M2_PER_HECTARE;
+    const afforestationAmount = areaM2 * unitPricePerM2;
+
+    const landAmountA = areaM2 * unitPricePerM2 * permit.coefficient * closure.coefficient * provinceCoefficientA;
+    const landAmountB = areaM2 * unitPricePerM2 * permit.coefficient * closure.coefficient * provinceCoefficientB;
+
+    const totalAmountA = landAmountA + afforestationAmount;
+    const totalAmountB = landAmountB + afforestationAmount;
+
+    const deltaAmount = totalAmountB - totalAmountA;
+    const denominator = totalAmountA === 0 ? 1 : totalAmountA;
+    const deltaPercent = (deltaAmount / denominator) * 100;
+
+    setError("");
+    setResult({
+      areaM2,
+      permitLabel: permit.label,
+      closureLabel: closure.label,
+      unitPricePerM2,
+      landAmountA,
+      landAmountB,
+      afforestationAmount,
+      totalAmountA,
+      totalAmountB,
+      deltaAmount,
+      deltaPercent,
+    });
+  };
+
+  const handleReset = () => {
+    setApplicationYear(MINING_APPLICATION_YEARS[0].year);
+    setPermitId(MINING_PERMIT_TYPES[1].id);
+    setClosureId(MINING_CLOSURE_LEVELS[2].id);
+    setProvinceA(MINING_PROVINCES[0]?.name ?? "Ankara");
+    setProvinceB(MINING_PROVINCES.find((item) => item.name === "İstanbul")?.name ?? MINING_PROVINCES[1]?.name ?? "İzmir");
+    setAreaValue("10000");
+    setError("");
+    setResult(null);
+  };
+
+  return (
+    <section className="tool-detail tool-detail--province-compare">
+      <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
+      <div className="tool-detail__layout">
+        <article className="tool-detail__content">
+          <h1>İl Katsayısı Karşılaştırması</h1>
+          <p>
+            Ek-3 il katsayıları aynı izin senaryosunda önemli tutar farkı oluşturur. Bu araçta aynı alan, yıl,
+            izin türü ve kapalılık için iki il doğrudan kıyaslanır.
+          </p>
+
+          <h2>Model</h2>
+          <ol>
+            <li>
+              <strong>Arazi İzin Bedeli:</strong> alan x yıl birim bedeli x izin katsayısı x kapalılık x il katsayısı
+            </li>
+            <li>
+              <strong>Ağaçlandırma Bedeli:</strong> alan x yıl birim bedeli
+            </li>
+            <li>
+              <strong>Genel Toplam:</strong> arazi izin bedeli + ağaçlandırma bedeli
+            </li>
+          </ol>
+        </article>
+
+        <aside className="tool-calc province-compare-calc">
+          <div className="tool-calc__head">
+            <h2>{tool.title}</h2>
+            <p>Ek-3 il katsayılarının toplam bedel etkisini resmi verilerle karşılaştırın.</p>
+          </div>
+
+          <div className="tool-calc__controls">
+            <label>
+              Uygulama Yılı
+              <select
+                value={applicationYear}
+                onChange={(event) => setApplicationYear(Number.parseInt(event.target.value, 10))}
+              >
+                {MINING_APPLICATION_YEARS.map((option) => (
+                  <option key={option.year} value={option.year}>
+                    {option.year} ({formatTry(option.afforestationPerHectare)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              İzin Türü
+              <select value={permitId} onChange={(event) => setPermitId(event.target.value)}>
+                {MINING_PERMIT_TYPES.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Kapalılık
+              <select value={closureId} onChange={(event) => setClosureId(event.target.value)}>
+                {MINING_CLOSURE_LEVELS.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Alan (m²)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={areaValue}
+                onChange={(event) => setAreaValue(event.target.value)}
+                placeholder="10.000"
+              />
+            </label>
+
+            <label>
+              İl 1
+              <select value={provinceA} onChange={(event) => setProvinceA(event.target.value)}>
+                {MINING_PROVINCES.map((option) => (
+                  <option key={option.name} value={option.name}>
+                    {option.name} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              İl 2
+              <select value={provinceB} onChange={(event) => setProvinceB(event.target.value)}>
+                {MINING_PROVINCES.map((option) => (
+                  <option key={option.name} value={option.name}>
+                    {option.name} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="tool-calc__summary">
+            <button type="button" onClick={handleCalculate}>HESAPLA</button>
+            <button type="button" className="calc-action-btn calc-action-btn--muted" onClick={handleReset}>
+              SIFIRLA
+            </button>
+          </div>
+
+          {error ? <p className="kist-calc__error">{error}</p> : null}
+
+          {result ? (
+            <div className="tool-calc__summary province-compare-calc__summary">
+              <span>Birim Bedel (m²): {formatTry(result.unitPricePerM2)}</span>
+              <span>Seçilen İzin Türü: {result.permitLabel}</span>
+              <span>Seçilen Kapalılık: {result.closureLabel}</span>
+              <span>{provinceA} Toplam: {formatTry(result.totalAmountA)}</span>
+              <span>{provinceB} Toplam: {formatTry(result.totalAmountB)}</span>
+              <span>Fark ({provinceB} - {provinceA}): {formatTry(result.deltaAmount)}</span>
+              <span>Fark Oranı: %{formatNumber(result.deltaPercent)}</span>
+              <small>
+                Karşılaştırma alanı: {formatAreaM2(result.areaM2)} m² | Ağaçlandırma bedeli her iki il için
+                aynıdır ({formatTry(result.afforestationAmount)}).
+              </small>
+            </div>
+          ) : null}
+        </aside>
+      </div>
+    </section>
+  );
+};
+
+const IzinKatsayiKarsilastirmaToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+  const [applicationYear, setApplicationYear] = useState<number>(MINING_APPLICATION_YEARS[0].year);
+  const [province, setProvince] = useState<string>(MINING_PROVINCES[0]?.name ?? "Ankara");
+  const [closureId, setClosureId] = useState<string>(MINING_CLOSURE_LEVELS[2].id);
+  const [areaValue, setAreaValue] = useState<string>("10000");
+  const [error, setError] = useState<string>("");
+  const [rows, setRows] = useState<
+    Array<{ id: string; permitLabel: string; permitCoefficient: number; landAmount: number; totalAmount: number }>
+  >([]);
+
+  const handleCalculate = () => {
+    const areaM2 = parseLocaleNumber(areaValue);
+    if (!Number.isFinite(areaM2) || areaM2 <= 0) {
+      setError("Alan (m²) değeri sıfırdan büyük olmalıdır.");
+      setRows([]);
+      return;
+    }
+
+    const selectedYear = MINING_YEAR_INDEX.get(applicationYear) ?? MINING_APPLICATION_YEARS[0];
+    const closure = MINING_CLOSURE_INDEX.get(closureId) ?? MINING_CLOSURE_LEVELS[0];
+    const provinceCoefficient = MINING_PROVINCE_INDEX.get(province);
+
+    if (typeof provinceCoefficient !== "number") {
+      setError("Seçilen il katsayısı bulunamadı.");
+      setRows([]);
+      return;
+    }
+
+    const unitPricePerM2 = selectedYear.afforestationPerHectare / M2_PER_HECTARE;
+    const afforestationAmount = areaM2 * unitPricePerM2;
+
+    const calculated = MINING_PERMIT_TYPES.map((permit) => {
+      const landAmount = areaM2 * unitPricePerM2 * permit.coefficient * closure.coefficient * provinceCoefficient;
+      return {
+        id: permit.id,
+        permitLabel: permit.label,
+        permitCoefficient: permit.coefficient,
+        landAmount,
+        totalAmount: landAmount + afforestationAmount,
+      };
+    }).sort((a, b) => a.totalAmount - b.totalAmount);
+
+    setError("");
+    setRows(calculated);
+  };
+
+  const handleReset = () => {
+    setApplicationYear(MINING_APPLICATION_YEARS[0].year);
+    setProvince(MINING_PROVINCES[0]?.name ?? "Ankara");
+    setClosureId(MINING_CLOSURE_LEVELS[2].id);
+    setAreaValue("10000");
+    setError("");
+    setRows([]);
+  };
+
+  const bestOption = rows[0];
+  const highestOption = rows[rows.length - 1];
+
+  return (
+    <section className="tool-detail tool-detail--permit-compare">
+      <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
+      <div className="tool-detail__layout">
+        <article className="tool-detail__content">
+          <h1>İzin Türü Katsayı Karşılaştırması</h1>
+          <p>
+            Ek-1 izin türü katsayıları aynı alan için farklı tahakkuk bedelleri oluşturur. Bu araç, seçilen yıl ve
+            ilde tüm izin türlerini tek tabloda karşılaştırır.
+          </p>
+
+          <h2>Hesaplama Parametreleri</h2>
+          <ul>
+            <li>Uygulama yılına ait OGM birim bedeli (TL/ha)</li>
+            <li>İl katsayısı (Ek-3)</li>
+            <li>Kapalılık/ekolojik denge katsayısı (Ek-2)</li>
+            <li>İzin türü katsayısı (Ek-1)</li>
+          </ul>
+        </article>
+
+        <aside className="tool-calc permit-compare-calc">
+          <div className="tool-calc__head">
+            <h2>{tool.title}</h2>
+            <p>Ek-1 katsayılarına göre izin türü bazlı toplam bedel sıralaması üretin.</p>
+          </div>
+
+          <div className="tool-calc__controls">
+            <label>
+              Uygulama Yılı
+              <select
+                value={applicationYear}
+                onChange={(event) => setApplicationYear(Number.parseInt(event.target.value, 10))}
+              >
+                {MINING_APPLICATION_YEARS.map((option) => (
+                  <option key={option.year} value={option.year}>
+                    {option.year} ({formatTry(option.afforestationPerHectare)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              İl
+              <select value={province} onChange={(event) => setProvince(event.target.value)}>
+                {MINING_PROVINCES.map((option) => (
+                  <option key={option.name} value={option.name}>
+                    {option.name} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Kapalılık
+              <select value={closureId} onChange={(event) => setClosureId(event.target.value)}>
+                {MINING_CLOSURE_LEVELS.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label} ({formatNumber(option.coefficient)})
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Alan (m²)
+              <input
+                type="text"
+                inputMode="decimal"
+                value={areaValue}
+                onChange={(event) => setAreaValue(event.target.value)}
+                placeholder="10.000"
+              />
+            </label>
+          </div>
+
+          <div className="tool-calc__summary">
+            <button type="button" onClick={handleCalculate}>HESAPLA</button>
+            <button type="button" className="calc-action-btn calc-action-btn--muted" onClick={handleReset}>
+              SIFIRLA
+            </button>
+          </div>
+
+          {error ? <p className="kist-calc__error">{error}</p> : null}
+
+          <div className="tool-calc__table-wrap">
+            <table className="tool-calc__table">
+              <thead>
+                <tr>
+                  <th>İzin Türü</th>
+                  <th>Katsayı</th>
+                  <th>Arazi Bedeli</th>
+                  <th>Toplam (Arazi + Ağaçlandırma)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.length === 0 ? (
+                  <tr>
+                    <td colSpan={4}>Hesaplama için parametre girip HESAPLA butonuna basın.</td>
+                  </tr>
+                ) : (
+                  rows.map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.permitLabel}</td>
+                      <td>{formatNumber(row.permitCoefficient)}</td>
+                      <td>{formatTry(row.landAmount)}</td>
+                      <td>{formatTry(row.totalAmount)}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {rows.length > 0 && bestOption && highestOption ? (
+            <div className="tool-calc__summary permit-compare-calc__summary">
+              <span>En Düşük Toplam: {bestOption.permitLabel} ({formatTry(bestOption.totalAmount)})</span>
+              <span>En Yüksek Toplam: {highestOption.permitLabel} ({formatTry(highestOption.totalAmount)})</span>
+              <span>Fark: {formatTry(highestOption.totalAmount - bestOption.totalAmount)}</span>
+            </div>
+          ) : null}
+        </aside>
+      </div>
+    </section>
+  );
+};
+
 const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
-  const [permitType, setPermitType] = useState<string>("Maden Isletme");
-  const [applicationYear, setApplicationYear] = useState<string>("2026");
-  const [province, setProvince] = useState<string>("Ankara");
+  const [permitType, setPermitType] = useState<string>("Maden İşletme");
+  const [applicationYear, setApplicationYear] = useState<string>(
+    String(MINING_APPLICATION_YEARS[0]?.year ?? 2026),
+  );
+  const [province, setProvince] = useState<string>(MINING_PROVINCES[0]?.name ?? "Ankara");
   const [closure, setClosure] = useState<string>("1.4");
   const [areaValue, setAreaValue] = useState<string>("");
   const [rows, setRows] = useState<GenericCalcRow[]>([]);
 
   const totalArea = useMemo(() => rows.reduce((sum, row) => sum + row.area, 0), [rows]);
 
+  const parsedAreaInput = parseLocaleNumber(areaValue);
+  const canAddRow = Number.isFinite(parsedAreaInput) && parsedAreaInput > 0;
+
   const handleAddRow = () => {
-    const area = Number.parseFloat(areaValue);
+    const area = parsedAreaInput;
     if (!Number.isFinite(area) || area <= 0) return;
 
     setRows((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id: Date.now() + Math.floor(Math.random() * 1000),
         permitType,
         area,
         closure: Number.parseFloat(closure),
@@ -4446,6 +6594,10 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
     setRows((prev) => prev.filter((row) => row.id !== id));
   };
 
+  const handleClearRows = () => {
+    setRows([]);
+  };
+
   return (
     <section className="tool-detail">
       <a className="tool-detail__back" href="/hesap-araclari">Hesap Araçları menüsü</a>
@@ -4454,7 +6606,7 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           <h1>{tool.sectionTitle}</h1>
           <p>{tool.sectionText}</p>
 
-          <h2>Izin Bedellerini Belirleyen Temel Kriterler</h2>
+          <h2>İzin Bedellerini Belirleyen Temel Kriterler</h2>
           <ul>
             {tool.bullets.map((bullet) => (
               <li key={bullet}>{bullet}</li>
@@ -4465,49 +6617,59 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
         <aside className="tool-calc">
           <div className="tool-calc__head">
             <h2>{tool.title}</h2>
-            <p>Degerleri girip kalemleri ekleyin; toplam alani anlik takip edin.</p>
+            <p>Değerleri girip kalemleri ekleyin; toplam alanı anlık takip edin.</p>
           </div>
 
           <div className="tool-calc__controls">
             <label>
-              Islem Turu
+              İşlem Türü
               <select value={permitType} onChange={(event) => setPermitType(event.target.value)}>
-                <option>Maden Isletme</option>
-                <option>Yeni Izin / Ilav</option>
+                <option>Maden İşletme</option>
+                <option>Yeni İzin / İlave</option>
                 <option>Rehabilitasyon</option>
               </select>
             </label>
             <label>
-              Uygulama Yili
+              Uygulama Yılı
               <select value={applicationYear} onChange={(event) => setApplicationYear(event.target.value)}>
-                <option>2026</option>
-                <option>2025</option>
-                <option>2024</option>
+                {MINING_APPLICATION_YEARS.slice(0, 15).map((yearOption) => (
+                  <option key={yearOption.year} value={String(yearOption.year)}>
+                    {yearOption.year}
+                  </option>
+                ))}
               </select>
             </label>
             <label>
-              Il Katsayisi
+              İl Katsayısı
               <select value={province} onChange={(event) => setProvince(event.target.value)}>
-                <option>Ankara</option>
-                <option>Kocaeli</option>
-                <option>Istanbul</option>
+                {MINING_PROVINCES.map((provinceOption) => (
+                  <option key={provinceOption.name} value={provinceOption.name}>
+                    {provinceOption.name}
+                  </option>
+                ))}
               </select>
             </label>
           </div>
 
           <div className="tool-calc__row-input">
             <label>
-              Alan (mÂ²)
+              Alan (m²)
               <input
-                type="number"
-                min="0"
-                step="0.1"
+                type="text"
+                inputMode="decimal"
+                placeholder="0,00"
                 value={areaValue}
                 onChange={(event) => setAreaValue(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && canAddRow) {
+                    event.preventDefault();
+                    handleAddRow();
+                  }
+                }}
               />
             </label>
             <label>
-              Kapalilik
+              Kapalılık
               <select value={closure} onChange={(event) => setClosure(event.target.value)}>
                 <option value="1.0">1.0</option>
                 <option value="1.2">1.2</option>
@@ -4515,7 +6677,7 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 <option value="1.6">1.6</option>
               </select>
             </label>
-            <button type="button" onClick={handleAddRow}>EKLE</button>
+            <button type="button" onClick={handleAddRow} disabled={!canAddRow}>EKLE</button>
           </div>
 
           <div className="tool-calc__table-wrap">
@@ -4524,20 +6686,20 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
                 <tr>
                   <th>Kalem</th>
                   <th>Alan</th>
-                  <th>Kapalilik</th>
+                  <th>Kapalılık</th>
                   <th>Sil</th>
                 </tr>
               </thead>
               <tbody>
                 {rows.length === 0 ? (
                   <tr>
-                    <td colSpan={4}>Henuz kalem eklenmedi.</td>
+                    <td colSpan={4}>Henüz kalem eklenmedi.</td>
                   </tr>
                 ) : (
                   rows.map((row) => (
                     <tr key={row.id}>
                       <td>{row.permitType}</td>
-                      <td>{row.area.toFixed(1)} mÂ²</td>
+                      <td>{row.area.toFixed(1)} m²</td>
                       <td>{row.closure.toFixed(1)}</td>
                       <td>
                         <button type="button" onClick={() => handleDeleteRow(row.id)}>Sil</button>
@@ -4550,9 +6712,18 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
           </div>
 
           <div className="tool-calc__summary">
-            <span>Yil: {applicationYear}</span>
-            <span>Il: {province}</span>
-            <span>Toplam Alan: {totalArea.toFixed(1)} mÂ²</span>
+            <span>Kalem Sayısı: {rows.length}</span>
+            <span>Yıl: {applicationYear}</span>
+            <span>İl: {province}</span>
+            <span>Toplam Alan: {formatAreaM2(totalArea)} m²</span>
+            <button
+              type="button"
+              className="calc-action-btn calc-action-btn--muted"
+              onClick={handleClearRows}
+              disabled={rows.length === 0}
+            >
+              Tümünü Temizle
+            </button>
           </div>
         </aside>
       </div>
@@ -4560,72 +6731,106 @@ const GenericToolDetailPage = ({ tool }: ToolDetailPageProps) => {
   );
 };
 
+const ToolDetailLead = ({ tool }: ToolDetailPageProps) => {
+  const sourceLinks = TOOL_SOURCE_LINKS[tool.slug] ?? [];
+
+  return (
+    <section className="calc-lead" aria-label={`${tool.title} özeti`}>
+      <div className="calc-lead__main">
+        <span className="calc-lead__eyebrow">Lacivert Ormancılık Hesaplama Merkezi</span>
+        <h1>{tool.title}</h1>
+        <p>{tool.sectionText}</p>
+        <div className="calc-lead__tags">
+          {tool.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <aside className="calc-lead__panel">
+        <h2>{tool.sectionTitle}</h2>
+        <ul>
+          {tool.bullets.slice(0, 3).map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        {sourceLinks.length > 0 ? (
+          <div className="calc-lead__sources">
+            <h3>Veri Kaynakları</h3>
+            <ul>
+              {sourceLinks.map((source) => (
+                <li key={`${source.label}-${source.url}`}>
+                  <a href={source.url} target="_blank" rel="noopener">
+                    {source.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </aside>
+    </section>
+  );
+};
+
 const ToolDetailPage = ({ tool }: ToolDetailPageProps) => {
+  let detailContent: ReactNode;
+
   if (tool.slug === MINING_TOOL_SLUG) {
-    return <MiningToolDetailPage tool={tool} />;
+    detailContent = <MiningToolDetailPage tool={tool} />;
+  } else if (tool.slug === ENERGY_TOOL_SLUG) {
+    detailContent = <EnergyToolDetailPage tool={tool} />;
+  } else if (tool.slug === COORD_TOOL_SLUG || tool.slug === ADVANCED_ED50_TOOL_SLUG) {
+    detailContent = <CoordinateToolDetailPage tool={tool} />;
+  } else if (tool.slug === CAD_TOOL_SLUG) {
+    detailContent = <CadConversionToolDetailPage tool={tool} />;
+  } else if (tool.slug === KIST_TOOL_SLUG) {
+    detailContent = <KistelyevmToolDetailPage tool={tool} />;
+  } else if (tool.slug === CARBON_TOOL_SLUG) {
+    detailContent = <CarbonAnalysisToolDetailPage tool={tool} />;
+  } else if (tool.slug === TEMDIT_MAHSUP_TOOL_SLUG) {
+    detailContent = <TemditMahsupToolDetailPage tool={tool} />;
+  } else if (tool.slug === DAMGA_NOTER_TOOL_SLUG) {
+    detailContent = <DamgaNoterToolDetailPage tool={tool} />;
+  } else if (tool.slug === ILETISIM_PANO_TOOL_SLUG) {
+    detailContent = <IletisimPanosuToolDetailPage tool={tool} />;
+  } else if (tool.slug === YDO_BAK_TOOL_SLUG) {
+    detailContent = <YdoBakToolDetailPage tool={tool} />;
+  } else if (tool.slug === EPDK_KML_TOOL_SLUG) {
+    detailContent = <EpdkKmlToolDetailPage tool={tool} />;
+  } else if (tool.slug === KDV_YUZDE_TOOL_SLUG) {
+    detailContent = <KdvYuzdeToolDetailPage tool={tool} />;
+  } else if (tool.slug === PDF_TOOL_SLUG) {
+    detailContent = <PdfToolkitToolDetailPage tool={tool} />;
+  } else if (tool.slug === FIDAN_CIT_TOOL_SLUG) {
+    detailContent = <FidanCitToolDetailPage tool={tool} />;
+  } else if (tool.slug === AGACLANDIRMA_BAKIM_BUTCE_TOOL_SLUG) {
+    detailContent = <AgaclandirmaButceToolDetailPage tool={tool} />;
+  } else if (tool.slug === ORMAN_YOLU_METRAJ_TOOL_SLUG) {
+    detailContent = <OrmanYoluMetrajToolDetailPage tool={tool} />;
+  } else if (tool.slug === IL_KATSAYI_KARSILASTIRMA_TOOL_SLUG) {
+    detailContent = <IlKatsayiKarsilastirmaToolDetailPage tool={tool} />;
+  } else if (tool.slug === IZIN_KATSAYI_KARSILASTIRMA_TOOL_SLUG) {
+    detailContent = <IzinKatsayiKarsilastirmaToolDetailPage tool={tool} />;
+  } else if (tool.slug === PHOTO_CROP_TOOL_SLUG) {
+    detailContent = <PhotoCropToolDetailPage tool={tool} />;
+  } else if (tool.slug === PHOTO_COORD_TOOL_SLUG) {
+    detailContent = <PhotoCoordinateToolDetailPage tool={tool} />;
+  } else {
+    detailContent = <GenericToolDetailPage tool={tool} />;
   }
 
-  if (tool.slug === ENERGY_TOOL_SLUG) {
-    return <EnergyToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === COORD_TOOL_SLUG || tool.slug === ADVANCED_ED50_TOOL_SLUG) {
-    return <CoordinateToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === CAD_TOOL_SLUG) {
-    return <CadConversionToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === KIST_TOOL_SLUG) {
-    return <KistelyevmToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === CARBON_TOOL_SLUG) {
-    return <CarbonAnalysisToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === TEMDIT_MAHSUP_TOOL_SLUG) {
-    return <TemditMahsupToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === DAMGA_NOTER_TOOL_SLUG) {
-    return <DamgaNoterToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === ILETISIM_PANO_TOOL_SLUG) {
-    return <IletisimPanosuToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === YDO_BAK_TOOL_SLUG) {
-    return <YdoBakToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === EPDK_KML_TOOL_SLUG) {
-    return <EpdkKmlToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === KDV_YUZDE_TOOL_SLUG) {
-    return <KdvYuzdeToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === PDF_TOOL_SLUG) {
-    return <PdfToolkitToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === FIDAN_CIT_TOOL_SLUG) {
-    return <FidanCitToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === PHOTO_CROP_TOOL_SLUG) {
-    return <PhotoCropToolDetailPage tool={tool} />;
-  }
-
-  if (tool.slug === PHOTO_COORD_TOOL_SLUG) {
-    return <PhotoCoordinateToolDetailPage tool={tool} />;
-  }
-
-  return <GenericToolDetailPage tool={tool} />;
+  return (
+    <>
+      <div className="tool-detail-globalnav">
+        <a className="tool-detail__back tool-detail__back--global" href="/hesap-araclari">
+          Hesap Araçları menüsü
+        </a>
+      </div>
+      <ToolDetailLead tool={tool} />
+      {detailContent}
+    </>
+  );
 };
 
 const App = () => {
@@ -4688,7 +6893,7 @@ const App = () => {
 
     if (pageId === null) {
       setLazyPage(null);
-      setLoadError("Sayfa bulunamadi");
+      setLoadError("Sayfa bulunamadı");
       setLoading(false);
       return;
     }
@@ -4705,6 +6910,16 @@ const App = () => {
         }
 
         const payload = (await response.json()) as LazyPagePayload;
+        const redirectPath = resolveLegacyRedirectPath(payload);
+
+        if (redirectPath && !cancelled) {
+          const currentPath = canonicalizeBrowserPath();
+          if (redirectPath !== currentPath) {
+            window.history.replaceState(null, "", `${redirectPath}${window.location.search}${window.location.hash}`);
+            setPathname(canonicalizeBrowserPath());
+            return;
+          }
+        }
 
         if (!cancelled) {
           setHeadReady(false);
@@ -4716,7 +6931,7 @@ const App = () => {
         setLazyPage(null);
         setLoading(false);
         setHeadReady(true);
-        setLoadError(error instanceof Error ? error.message : "Sayfa yuklenemedi");
+        setLoadError(error instanceof Error ? error.message : "Sayfa yüklenemedi");
       }
     };
 
@@ -4731,60 +6946,58 @@ const App = () => {
     if (!lazyPage) return null;
 
     try {
-      return parsePage(lazyPage.html);
+      return parsePage(lazyPage.html, lazyPage.route);
     } catch {
       return null;
     }
   }, [lazyPage]);
 
   useEffect(() => {
-    document.querySelectorAll(`[${MANAGED_HEAD_ATTR}]`).forEach((node) => node.remove());
+    document.querySelectorAll(`[${MANAGED_HEAD_ATTR}]`).forEach((node) => {
+      if (node instanceof HTMLLinkElement && node.rel.toLowerCase().includes("stylesheet")) return;
+      node.remove();
+    });
     setHeadReady(false);
 
     if (customRoute) {
-      if (customRoute.kind === "list") {
-        document.title = "Hesap Araçları | Lacivert Ormancılık";
-      } else {
-        document.title = activeTool ? `${activeTool.title} | Lacivert Ormancılık` : "Hesap Araci Bulunamadi";
-      }
+      const seoConfig = buildCustomRouteSeoConfig(customRoute, activeTool);
+      document.title = seoConfig.title;
 
       const mountedNodes: Element[] = [];
       const stylesheetWaiters: Array<Promise<void>> = [];
       let cancelled = false;
 
-      CUSTOM_ROUTE_HEAD_NODES.forEach((headHtml) => {
+      seoConfig.headNodes.forEach((headHtml) => {
         const node = createElementFromHtml(headHtml);
         if (!node) return;
+
+        if (node instanceof HTMLLinkElement && node.rel.toLowerCase().includes("stylesheet")) {
+          const href = node.getAttribute("href") || "";
+          if (!href || hasStylesheetInHead(href)) return;
+
+          node.setAttribute(MANAGED_HEAD_ATTR, "1");
+          document.head.appendChild(node);
+
+          if (isLocalStylesheetHref(href)) {
+            stylesheetWaiters.push(waitForStylesheet(node));
+          }
+          return;
+        }
 
         node.setAttribute(MANAGED_HEAD_ATTR, "1");
         document.head.appendChild(node);
         mountedNodes.push(node);
-
-        if (!(node instanceof HTMLLinkElement)) return;
-        if (!node.rel.toLowerCase().includes("stylesheet")) return;
-
-        const href = node.getAttribute("href") || "";
-        if (!isLocalStylesheetHref(href)) return;
-
-        stylesheetWaiters.push(
-          new Promise((resolve) => {
-            if (node.sheet) {
-              resolve();
-              return;
-            }
-
-            const done = () => resolve();
-            node.addEventListener("load", done, { once: true });
-            node.addEventListener("error", done, { once: true });
-          }),
-        );
       });
 
       if (stylesheetWaiters.length === 0) {
-        setHeadReady(true);
+        runAfterNextPaint(() => {
+          if (!cancelled) setHeadReady(true);
+        });
       } else {
         void Promise.allSettled(stylesheetWaiters).then(() => {
-          if (!cancelled) setHeadReady(true);
+          runAfterNextPaint(() => {
+            if (!cancelled) setHeadReady(true);
+          });
         });
       }
 
@@ -4795,7 +7008,7 @@ const App = () => {
     }
 
     if (!parsedPage) {
-      document.title = "Sayfa Bulunamadi | Lacivert Ormancılık";
+      document.title = "Sayfa Bulunamadı | Lacivert Ormancılık";
       return;
     }
 
@@ -4809,35 +7022,33 @@ const App = () => {
       const node = createElementFromHtml(headHtml);
       if (!node) return;
 
+      if (node instanceof HTMLLinkElement && node.rel.toLowerCase().includes("stylesheet")) {
+        const href = node.getAttribute("href") || "";
+        if (!href || hasStylesheetInHead(href)) return;
+
+        node.setAttribute(MANAGED_HEAD_ATTR, "1");
+        document.head.appendChild(node);
+
+        if (isLocalStylesheetHref(href)) {
+          stylesheetWaiters.push(waitForStylesheet(node));
+        }
+        return;
+      }
+
       node.setAttribute(MANAGED_HEAD_ATTR, "1");
       document.head.appendChild(node);
       mountedNodes.push(node);
-
-      if (!(node instanceof HTMLLinkElement)) return;
-      if (!node.rel.toLowerCase().includes("stylesheet")) return;
-
-      const href = node.getAttribute("href") || "";
-      if (!isLocalStylesheetHref(href)) return;
-
-      stylesheetWaiters.push(
-        new Promise((resolve) => {
-          if (node.sheet) {
-            resolve();
-            return;
-          }
-
-          const done = () => resolve();
-          node.addEventListener("load", done, { once: true });
-          node.addEventListener("error", done, { once: true });
-        }),
-      );
     });
 
     if (stylesheetWaiters.length === 0) {
-      setHeadReady(true);
+      runAfterNextPaint(() => {
+        if (!cancelled) setHeadReady(true);
+      });
     } else {
       void Promise.allSettled(stylesheetWaiters).then(() => {
-        if (!cancelled) setHeadReady(true);
+        runAfterNextPaint(() => {
+          if (!cancelled) setHeadReady(true);
+        });
       });
     }
 
@@ -4849,20 +7060,15 @@ const App = () => {
 
   useEffect(() => {
     if (customRoute || !parsedPage) return;
-
-    const fallbackTimer = window.setTimeout(revealFadeElements, 600);
-
-    return () => {
-      window.clearTimeout(fallbackTimer);
-    };
-  }, [customRoute, parsedPage]);
+    return setupLegacyMobileNavigation();
+  }, [customRoute, parsedPage, pathname]);
 
   if (customRoute && !headReady) {
     return (
       <main className="legacy-not-found">
         <section className="legacy-not-found__card">
-          <h1>Yukleniyor</h1>
-          <p>Sayfa icerigi hazirlaniyor...</p>
+          <h1>Yükleniyor</h1>
+          <p>Sayfa içeriği hazırlanıyor...</p>
         </section>
       </main>
     );
@@ -4878,10 +7084,10 @@ const App = () => {
         ) : (
           <main className="legacy-not-found">
             <section className="legacy-not-found__card">
-              <h1>Arac bulunamadi</h1>
-              <p>Bu hesap araci tasinmis veya kaldirilmis olabilir.</p>
+              <h1>Araç bulunamadı</h1>
+              <p>Bu hesap aracı taşınmış veya kaldırılmış olabilir.</p>
               <p>
-                <a href="/hesap-araclari">Tum hesap araclarina don</a>
+                <a href="/hesap-araclari">Tüm hesap araçlarına dön</a>
               </p>
             </section>
           </main>
@@ -4890,12 +7096,12 @@ const App = () => {
     );
   }
 
-  if (loading || (parsedPage !== null && !headReady)) {
+  if (loading) {
     return (
       <main className="legacy-not-found">
         <section className="legacy-not-found__card">
-          <h1>Yukleniyor</h1>
-          <p>Sayfa icerigi hazirlaniyor...</p>
+          <h1>Yükleniyor</h1>
+          <p>Sayfa içeriği hazırlanıyor...</p>
         </section>
       </main>
     );
@@ -4905,17 +7111,17 @@ const App = () => {
     return (
       <main className="legacy-not-found">
         <section className="legacy-not-found__card">
-          <h1>Sayfa bulunamadi</h1>
-          <p>{loadError || "Aradiginiz icerik tasinmis veya silinmis olabilir."}</p>
+          <h1>Sayfa bulunamadı</h1>
+          <p>{loadError || "Aradığınız içerik taşınmış veya silinmiş olabilir."}</p>
           <p>
-            <a href="/">Anasayfaya don</a>
+            <a href="/">Anasayfaya dön</a>
           </p>
         </section>
       </main>
     );
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: parsedPage.bodyHtml }} />;
+  return <div className="legacy-page-content" dangerouslySetInnerHTML={{ __html: parsedPage.bodyHtml }} />;
 };
 
 export default App;
