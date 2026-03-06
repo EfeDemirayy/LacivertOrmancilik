@@ -1681,10 +1681,51 @@ const ensureToolsMenuLink = (doc: Document): void => {
   });
 };
 
+const ensureHomeMenuLink = (doc: Document, routePath: string): void => {
+  const normalizedRoute = normalizePath(routePath);
+
+  doc.querySelectorAll("#navLinks").forEach((node) => {
+    if (!(node instanceof HTMLElement)) return;
+
+    const directItems = () =>
+      Array.from(node.querySelectorAll(":scope > li")).filter((item): item is HTMLLIElement => item instanceof HTMLLIElement);
+
+    let homeItem = directItems().find((item) => {
+      const link = item.querySelector(":scope > a");
+      if (!(link instanceof HTMLAnchorElement)) return false;
+      const href = normalizePath(link.getAttribute("href") || "");
+      return href === "/" || href === "/index.html";
+    }) ?? null;
+
+    if (!homeItem) {
+      homeItem = doc.createElement("li");
+      const link = doc.createElement("a");
+      link.href = "/";
+      link.className = "nav__link";
+      link.textContent = "Anasayfa";
+      homeItem.appendChild(link);
+      node.insertBefore(homeItem, node.firstElementChild);
+    }
+
+    const homeLink = homeItem.querySelector(":scope > a");
+    if (homeLink instanceof HTMLAnchorElement) {
+      homeLink.href = "/";
+      if (normalizedRoute === "/") {
+        homeLink.classList.add("is-current");
+        homeLink.setAttribute("aria-current", "page");
+      } else {
+        homeLink.classList.remove("is-current");
+        homeLink.removeAttribute("aria-current");
+      }
+    }
+  });
+};
+
 const parsePage = (rawHtml: string, routePath: string): ParsedPage => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHtml, "text/html");
 
+  ensureHomeMenuLink(doc, routePath);
   ensureToolsMenuLink(doc);
 
   const title = doc.title || "Lacivert Ormancılık";
@@ -1855,6 +1896,25 @@ const runAfterNextPaint = (callback: () => void): void => {
   });
 };
 
+const syncSiteHeaderOffsets = (): void => {
+  const root = document.documentElement;
+  const topbar = document.querySelector<HTMLElement>(".topbar");
+  const nav = document.querySelector<HTMLElement>("header.nav");
+  if (!nav) return;
+
+  const topbarHeight = Math.max(0, Math.floor(topbar?.getBoundingClientRect().height ?? 0));
+  const navRect = nav.getBoundingClientRect();
+  const navBottom = Math.max(0, Math.floor(navRect.bottom));
+  const headerOffset = Math.max(navBottom, topbarHeight + Math.floor(navRect.height));
+
+  if (topbarHeight > 0) {
+    root.style.setProperty("--site-topbar-offset", `${topbarHeight}px`);
+  }
+  if (headerOffset > 0) {
+    root.style.setProperty("--site-header-offset", `${headerOffset}px`);
+  }
+};
+
 const isInternalNavigableLink = (anchor: HTMLAnchorElement): boolean => {
   const href = anchor.getAttribute("href");
   if (!href || href.startsWith("#")) return false;
@@ -1872,32 +1932,43 @@ const isInternalNavigableLink = (anchor: HTMLAnchorElement): boolean => {
 };
 
 const setupLegacyMobileNavigation = (): (() => void) => {
-  const nav = document.querySelector<HTMLElement>("header.nav");
-  const burger = document.getElementById("burger");
-  const navLinks = document.getElementById("navLinks");
+  const isMobileViewport = () => window.matchMedia("(max-width: 900px)").matches;
 
-  if (!(burger instanceof HTMLButtonElement) || !(navLinks instanceof HTMLElement) || !nav) {
-    return () => undefined;
-  }
+  const getNavElements = () => {
+    const nav = document.querySelector<HTMLElement>("header.nav");
+    if (!nav) return null;
 
-  const dropdownItems = Array.from(navLinks.querySelectorAll<HTMLElement>(".nav__dropdown"));
-  const dropdownTriggers: HTMLAnchorElement[] = [];
+    const burger = nav.querySelector<HTMLElement>("#burger");
+    const navLinks = nav.querySelector<HTMLElement>("#navLinks");
+    if (!burger || !navLinks) return null;
 
-  const isMobileViewport = () => window.matchMedia("(max-width: 768px)").matches;
+    return { nav, burger, navLinks };
+  };
 
-  dropdownItems.forEach((item) => {
-    const trigger = item.querySelector<HTMLAnchorElement>(":scope > a");
-    const panel = item.querySelector<HTMLElement>(":scope > .dropdown");
-    if (!trigger || !panel) return;
+  const initDropdownAria = () => {
+    const elements = getNavElements();
+    if (!elements) return;
 
-    trigger.setAttribute("aria-haspopup", "true");
-    trigger.setAttribute("aria-expanded", "false");
-    panel.setAttribute("aria-hidden", "true");
-    dropdownTriggers.push(trigger);
-  });
+    const { navLinks } = elements;
+    navLinks.querySelectorAll<HTMLElement>(".nav__dropdown").forEach((item) => {
+      const trigger = item.querySelector<HTMLAnchorElement>(":scope > a");
+      const panel = item.querySelector<HTMLElement>(":scope > .dropdown");
+      if (!trigger || !panel) return;
+
+      trigger.setAttribute("aria-haspopup", "true");
+      if (!trigger.hasAttribute("aria-expanded")) {
+        trigger.setAttribute("aria-expanded", "false");
+      }
+      panel.setAttribute("aria-hidden", item.classList.contains("is-open") ? "false" : "true");
+    });
+  };
 
   const closeDropdowns = () => {
-    dropdownItems.forEach((item) => {
+    const elements = getNavElements();
+    if (!elements) return;
+
+    const { navLinks } = elements;
+    navLinks.querySelectorAll<HTMLElement>(".nav__dropdown").forEach((item) => {
       item.classList.remove("is-open");
       const trigger = item.querySelector<HTMLAnchorElement>(":scope > a");
       const panel = item.querySelector<HTMLElement>(":scope > .dropdown");
@@ -1907,56 +1978,70 @@ const setupLegacyMobileNavigation = (): (() => void) => {
   };
 
   const closeMenu = () => {
+    const elements = getNavElements();
+    if (!elements) return;
+
+    const { burger, navLinks } = elements;
     navLinks.classList.remove("show");
     burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-controls", navLinks.id || "navLinks");
     document.body.classList.remove("legacy-menu-open");
     closeDropdowns();
   };
 
   const openMenu = () => {
+    const elements = getNavElements();
+    if (!elements) return;
+
+    const { burger, navLinks } = elements;
     navLinks.classList.add("show");
     burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-controls", navLinks.id || "navLinks");
     if (isMobileViewport()) {
       document.body.classList.add("legacy-menu-open");
     }
   };
 
-  const handleBurgerClick = (event: MouseEvent) => {
-    event.preventDefault();
-    if (navLinks.classList.contains("show")) {
-      closeMenu();
-      return;
-    }
-    openMenu();
-  };
-
-  const handleDropdownTriggerClick = (event: MouseEvent) => {
-    if (!isMobileViewport()) return;
-
-    const trigger = event.currentTarget;
-    if (!(trigger instanceof HTMLAnchorElement)) return;
-
-    const parent = trigger.closest<HTMLElement>(".nav__dropdown");
-    const panel = parent?.querySelector<HTMLElement>(":scope > .dropdown");
-    if (!parent || !panel) return;
-
-    event.preventDefault();
-
-    const shouldOpen = !parent.classList.contains("is-open");
-    closeDropdowns();
-
-    if (shouldOpen) {
-      parent.classList.add("is-open");
-      trigger.setAttribute("aria-expanded", "true");
-      panel.setAttribute("aria-hidden", "false");
-    }
-  };
-
   const handleDocumentClick = (event: MouseEvent) => {
-    if (!isMobileViewport()) return;
-
     const target = event.target as Element | null;
     if (!target) return;
+
+    const elements = getNavElements();
+    if (!elements) return;
+
+    const { nav } = elements;
+
+    const burger = target.closest("#burger");
+    if (burger && nav.contains(burger)) {
+      event.preventDefault();
+      if (elements.navLinks.classList.contains("show")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+      return;
+    }
+
+    const dropdownTrigger = target.closest<HTMLAnchorElement>(".nav__dropdown > a");
+    if (dropdownTrigger && nav.contains(dropdownTrigger) && isMobileViewport()) {
+      const parent = dropdownTrigger.closest<HTMLElement>(".nav__dropdown");
+      const panel = parent?.querySelector<HTMLElement>(":scope > .dropdown");
+      if (!parent || !panel) return;
+
+      event.preventDefault();
+
+      const shouldOpen = !parent.classList.contains("is-open");
+      closeDropdowns();
+
+      if (shouldOpen) {
+        parent.classList.add("is-open");
+        dropdownTrigger.setAttribute("aria-expanded", "true");
+        panel.setAttribute("aria-hidden", "false");
+      }
+      return;
+    }
+
+    if (!isMobileViewport()) return;
 
     if (!nav.contains(target)) {
       closeMenu();
@@ -1984,22 +2069,13 @@ const setupLegacyMobileNavigation = (): (() => void) => {
     }
   };
 
-  burger.setAttribute("aria-expanded", "false");
-  burger.setAttribute("aria-controls", navLinks.id || "navLinks");
+  initDropdownAria();
   closeMenu();
-  burger.addEventListener("click", handleBurgerClick);
-  dropdownTriggers.forEach((trigger) => {
-    trigger.addEventListener("click", handleDropdownTriggerClick);
-  });
   document.addEventListener("click", handleDocumentClick);
   document.addEventListener("keydown", handleEscape);
   window.addEventListener("resize", handleResize);
 
   return () => {
-    burger.removeEventListener("click", handleBurgerClick);
-    dropdownTriggers.forEach((trigger) => {
-      trigger.removeEventListener("click", handleDropdownTriggerClick);
-    });
     document.removeEventListener("click", handleDocumentClick);
     document.removeEventListener("keydown", handleEscape);
     window.removeEventListener("resize", handleResize);
@@ -2095,6 +2171,11 @@ const ToolsShell = ({ currentPath, children }: ToolsShellProps) => {
           </a>
           <nav aria-label="Ana Menü">
             <ul id="navLinks" className={`nav__links${menuOpen ? " show" : ""}`}>
+              <li>
+                <a className={navClass(isActive("/"))} href="/" onClick={closeMenu}>
+                  Anasayfa
+                </a>
+              </li>
               <li className={`nav__dropdown${openDropdown === "kurumsal" ? " is-open" : ""}`}>
                 <a
                   href="/hakkimizda.html"
@@ -6951,6 +7032,24 @@ const App = () => {
       return null;
     }
   }, [lazyPage]);
+
+  useEffect(() => {
+    const sync = () => syncSiteHeaderOffsets();
+
+    runAfterNextPaint(sync);
+    const quickTimer = window.setTimeout(sync, 120);
+    const lateTimer = window.setTimeout(sync, 420);
+
+    window.addEventListener("resize", sync);
+    window.addEventListener("orientationchange", sync);
+
+    return () => {
+      window.clearTimeout(quickTimer);
+      window.clearTimeout(lateTimer);
+      window.removeEventListener("resize", sync);
+      window.removeEventListener("orientationchange", sync);
+    };
+  }, [pathname, customRoute, parsedPage, headReady]);
 
   useEffect(() => {
     document.querySelectorAll(`[${MANAGED_HEAD_ATTR}]`).forEach((node) => {
